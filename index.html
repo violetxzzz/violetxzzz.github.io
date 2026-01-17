@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    
     <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })</script>
     <meta charset="UTF-8">
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
@@ -93,11 +92,14 @@
         }
 
         .debris {
+            cursor: pointer;
+            --tap-highlight-color: transparent;
             scale: 2 2;
-            filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4));
+            /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
             background-image: url(./debris.png);
             background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"));
             background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"));
+            filter: brightness(1.25);
         }
 
         .asteroid1 {
@@ -106,16 +108,89 @@
             background-position: -1px -224px;
         }
 
-        .asteroid2,
-        .asteroid5 {
+        .planet {
+            cursor: unset;
+            z-index: 1 !important;
+            scale: 2 2;
+            filter: brightness(0.5) opacity(90%);
+        }
+
+        .planet1 {
+            --width: 64px;
+            --height: 64px;
+            background-position: 0px 0px;
+        }
+
+        .planet2 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -64px 0px;
+        }
+
+        .planet3 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -128px 0px;
+        }
+
+        .planet4 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -192px 0px;
+        }
+
+        .planet5 {
+            --width: 64px;
+            --height: 64px;
+            background-position: 0px -64px;
+        }
+
+        .planet6 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -64px -64px;
+        }
+
+        .planet7 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -128px -64px;
+        }
+
+        .planet8 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -192px -64px;
+        }
+
+        .planet9 {
+            --width: 64px;
+            --height: 64px;
+            background-position: 0px -128px;
+        }
+
+        .planet10 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -64px -128px;
+        }
+
+        .planet11 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -128px -128px;
+        }
+
+        .planet12 {
+            --width: 64px;
+            --height: 64px;
+            background-position: -192px -128px;
+        }
+
+        .asteroid2 {
             --width: 60px;
             --height: 30px;
             background-position: -34px -226px;
-        }
-
-        .asteroid5 {
-            scale: 4 4;
-
         }
 
         .asteroid3 {
@@ -139,9 +214,10 @@
             --user-select: none;
             position: fixed;
             width: 100vw;
+            z-index: 1;
             height: 100vh;
             background-size: cover, 100vw;
-            animation: drift 60s ease-in-out alternate infinite;
+            animation: drift 120s ease-in-out alternate infinite;
             background-image: url(galaxy.png);
             background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"));
             background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"));
@@ -157,8 +233,15 @@
             }
 
             100% {
-                background-position-x: -706px;
+                background-position-x: -1500px;
             }
+        }
+
+        .boom {
+            --frames: 4 !important;
+            scale: 2.5 2.5;
+            transform: translateX(4px);
+            animation: slideshow 400ms steps(var(--frames), end)
         }
 
         .obj {
@@ -166,6 +249,7 @@
             image-rendering: pixelated;
             width: calc(var(--width) / var(--frames, 1));
             height: var(--height);
+            z-index: 2;
             background-repeat: no-repeat;
         }
 
@@ -225,6 +309,7 @@
 
         main {
             width: 700px;
+            z-index: 10;
             /* border-radius: 10px; */
             -webkit-box-shadow: 5px 9px 15px 5px #000000;
             box-shadow: 5px 9px 15px 5px #000000;
@@ -394,7 +479,7 @@
             }
 
             100% {
-                translate: calc(100vw * 1.5) 0;
+                translate: calc(100vw + var(--width) * 1.5) 0;
             }
         }
 
@@ -441,12 +526,25 @@
 
         .hoopa_unbound {
             transform: translate(1.7px, 8.75px);
+        }
 
+        .jirachi {
+            transform: translate(10px, 15px);
+        }
+
+        .necrozma {
+            filter: brightness(1.5)
         }
 
         .hoopa_unbound,
         .hoopa_unbound_intro {
-            scale: 2.3 2.3;
+            z-index: 1;
+            scale: 1.9 1.9;
+        }
+
+        .jirachi,
+        .jirachi_intro {
+            scale: 1.6 1.6
         }
     </style>
 </head>
@@ -467,15 +565,12 @@
                 <p>Yes i know it looks ugly right now but it's not done don't worry!
                     I mainly just worked on the background today
                 </p>
-                <!-- <script>document.write('hello\n'.big().repeat(6000))</script> -->
             </section>
         </div>
         <div id="controls" role="tablist">
             <button role="tab" aria-controls="frame" aria-selected="false">Background</button>
             <script>
-                document.currentScript.previousElementSibling.onclick = () => {
-                    document.querySelector('main').remove()
-                }
+                document.currentScript.previousElementSibling.onclick = () => { document.querySelector('main').remove() }
             </script>
         </div>
     </main>
@@ -490,6 +585,23 @@
         function shiny(odds = 1000) {
             return Math.random() * odds > odds - 1 ? ' shiny' : ''
         }
+        async function spawnJirachi() {
+            setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
+            if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
+            let jirachi = $`<div style="top:${randomY()};left:${randomX()};" class="jirachi_intro obj slideshowOnce${shiny()}"></div>`
+                .setParent(background)
+            await jirachi.until('!animationend')
+            jirachi.classList.remove('jirachi_intro', 'slideshowOnce')
+            jirachi.classList.add('jirachi', 'slideshow')
+            jirachi.animate([{ translate: `0 100vh` }], {
+                duration: 20000,
+                delay: 200,
+                // composite:'accumulate',
+                iterations: 1,
+                easing: 'linear'
+            }).onfinish = () => jirachi.purge()
+        }
+        setTimeout(spawnJirachi, 10000 + Math.random() * 20000)
         async function spawnHoopaUnbound() {
             setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
             if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
@@ -508,7 +620,7 @@
             }).onfinish = () => hoopaUnbound.purge()
         }
         // spawnHoopaUnbound()
-        setTimeout(spawnHoopaUnbound, Math.random() * 20000)
+        setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
         function doImages(key, val) {
             let i = new Image
             let src = i.src = `data:image/png;base64,${val}`
@@ -519,7 +631,7 @@
                     css.registerCSSRaw(`.${k} {background-image: url(${src})}`)
                 }
                 else {
-                    mons.push(k)
+                    if (!k.startsWith('boom')) mons.push(k)
                     css.registerCSSRaw(`.${k} {--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${src}); --frames: ${key.endsWith('sleep') ? 6 : frames};}`)
                 }
             }
@@ -529,8 +641,27 @@
         background.delegate({
             animationend() {
                 this.remove()
-            }
+            },
         })
+        background.delegate({
+            pointerdown() {
+                let t = +this.dataset.type
+                switch (t) {
+                    case 1: case 3: t = 2
+                        break
+                    case 2: t = 3
+                        break
+                    case 4: t = 1
+                        break
+                }
+                let rect = this.getBoundingClientRect()
+                , translate = `${rect.left}px 0`
+                this.className = `boom${t} boom obj`
+                this.style.translate = translate
+                this.style.animation = ''
+                delete this.dataset.type
+            }
+        }, o => !isNaN(o.dataset.type))
         function spawnSpaceShip() {
             setTimeout(spawnSpaceShip, 60 * 1000 * (Math.random() * 2))
             if (isHidden()) return
@@ -543,17 +674,25 @@
         function remove(e) {
             this.purge()
         }
-        spawnSpaceShip()
+        // spawnSpaceShip()
         function spawnAsteroid() {
             setTimeout(spawnAsteroid, 2000 + (Math.random() * 1000))
             if (isHidden()) return
             let i = Math.floor(Math.random() * 4) + 1
-            let asteroid = $`<div class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 15}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+            let asteroid = $`<div data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
                 .setParent(background)
             // .onanimationend = remove
-            if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
+            // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
         }
         spawnAsteroid()
+        function spawnPlanet() {
+            setTimeout(spawnPlanet, 30000 + (Math.random() * 1000))
+            if (isHidden()) return
+            let i = Math.floor(Math.random() * 12) + 1
+            let asteroid = $`<div class="planet planet${i} obj debris" style="top:${randomY()};animation:float ${700 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${600 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+                .setParent(background)
+        }
+        // setTimeout(spawnPlanet, 10000 + Math.random() * 10000)
         function randomY() {
             return `${Math.random() * innerHeight}px`
         }
@@ -568,32 +707,56 @@
             $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
                 .setParent(background)
         }*/
-        let special = new Set(`hoopa_unbound hoopa_unbound_intro`.split(' '))
+        let special = new Set(`hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
+        let legendary = new Set(`arceus lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
         // spawnSleepingPokemon()
-        function spawnPokemon() {
-            setTimeout(spawnPokemon, 4500 + (Math.random() * 1000))
+        function spawnLegendaryPokemon() {
+            setTimeout(spawnLegendaryPokemon, 2500 + (Math.random() * 100))
             let regular = mons.filter(o => !o.endsWith('sleep') && !special.has(o))
             let pkm = regular[Math.floor(Math.random() * regular.length)]
-            if (!pkm || isHidden() || document.querySelector(`.${pkm}`)) return
+            let a = 10
+            if (!pkm || isHidden()) return
+            while (legendary.has(pkm) && document.querySelector(`.${pkm}`) && a--) pkm = regular[Math.floor(Math.random() * regular.length)]
             let i = Math.random() > .5 ? 1 : -1
-            let scale = i
+            let scale = .7
             switch (pkm) {
+                case 'beheeyem':
+                case 'elgyem':
+                    scale *= 2.3
+                    break
+                case 'minior_meteor':
+                    scale *= 2
+                    break
+                case 'deoxys_speed':
+                case 'deoxys_attack':
+                case 'deoxys_defense':
+                case 'deoxys':
+                    scale *= 2.7
+                    break
+                case 'necrozma_ultra':
+                    scale *= 5
+                    break
                 case 'rayquaza':
-                    scale = 2.2
+                    scale *= 2.4
                     break
                 case 'lunala':
-                    scale = 1.7
+                case 'necrozma':
+                    scale *= 2.3
                     break
                 case 'arceus':
-                    scale = 2
+                    scale *= 2.5
                     break
             }
             scale *= i
             $`<div class="${pkm} obj${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()}; animation: ${slideshow}, toRight ${40 + Math.random() * 10}s linear${i === 1 ? '' : ' reverse'}"></div>`
                 .setParent(background)
         }
-        setTimeout(spawnPokemon, 4000)
+        setTimeout(spawnLegendaryPokemon, 4000)
+
     </script>
 </body>
+<script>
+    console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
+</script>
 
 </html>
