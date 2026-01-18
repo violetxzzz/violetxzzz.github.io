@@ -600,7 +600,9 @@
         </div>
     </main>
     <script type="module">
-        const data = ["arceus_idle.shiny-72","hoopa_unbound_intro-268","uxie_idle-72","lunala_idle.shiny-52","minior_meteor_idle-96","beheeyem-48","deoxys_defense-48","beheeyem_idle-80","elgyem-56","mew-48","jirachi_idle-40","necrozma_idle.shiny-142","lunatone-48","giritina2-96","deoxys_attack_idle-57","necrozma_idle-142","arceus_idle-72","jirachi_intro-180","elgyem_idle-72","deoxys_attack-80","necrozma.shiny","naganadel_idle-60","jirachi.shiny-54","mesprit-56","elgyem.shiny-56","pokeball_catch-57","uxie-56","deoxys_defense_idle-56","solrock-60","minior_meteor-96","hoopa_unbound-71","deoxys_idle-96","azelf_idle-72","elgyem_idle.shiny-72","boom3-4","rayquaza_idle-48","rayquaza-74","jirachi_intro.shiny-180","hoopa_unbound_intro.shiny","pokeball_throw-8","deoxys-64","jirachi-54","giritina2_idle-96","necrozma-71","naganadel-32","boom1-4","azelf-56","lunatone_idle-64","mew_idle-40","hoopa_unbound_idle-71","boom2-4","hoopa_unbound_idle.shiny-71","deoxys_speed-28","solrock_idle-48","hoopa_unbound.shiny-71","jirachi_idle.shiny-40","rayquaza.shiny-74","lunala-40","lunala_idle-52","mesprit_idle-72","deoxys_speed_idle-28","rayquaza_idle.shiny-48","lunala.shiny"]
+        /*:
+        `const data = ` + JSON.stringify(dir('./sprites/').map(o=>o.replace('.png','')))
+        */
         import *as v from 'https://addsoupbase.github.io/v4.js'
         const { background } = v.id
         const $ = v.esc
