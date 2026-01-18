@@ -14,14 +14,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=yes, viewport-fit=cover, interactive-widget=resizes-visual">
-    <meta name="description" content="YOUR DESC HERE">
+    <meta name="description" content="Violet's space themed page">
     <meta property="og:image:width" content="256">
     <meta property="og:image:height" content="256">
-    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:type" content="image/avif">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://addsoupbase.github.io/media/avatars/Violet.webp">
+    <meta property="og:image" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta property="og:url" content="https://violetxzzz.github.io">
-    <meta property="og:description" content="YOUR DESC HERE">
+    <meta property="og:description" content="Violet's space themed page">
     <meta property="og:title" content="Violet's Page">
     <meta property="og:site_name" content="Violet's Page">
     <meta name="twitter:title" content="Violet's Page">
@@ -35,33 +35,37 @@
     <meta name="twitter:site:id" content="1799269566834454528">
     <meta name="creator" content="addsoupbase">
     <meta name="designer" content="addsoupbase">
-    <meta name="twitter:image" content="https://addsoupbase.github.io/media/avatars/Violet.webp">
+    <meta name="twitter:image" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta name="twitter:image:width" content="256">
     <meta name="twitter:image:height" content="256">
-    <meta name="msapplication-navbutton-color" content="YOUR COLOR HERE">
-    <meta name="msapplication-TileColor" content="YOUR COLOR HERE">
+    <meta name="msapplication-navbutton-color" content="#726cff">
+    <meta name="msapplication-TileColor" content="#726cff">
     <meta name="msapplication-square150x150logo" content="./apple-touch-icon-152x152.png">
     <meta name="msapplication-square310x310logo" content="./apple-touch-icon-180x180.png">
     <meta name="msapplication-square70x70logo" content="./apple-touch-icon-72x72.png">
     <meta name="msapplication-wide310x150logo" content="./apple-touch-icon-180x180.png">
     <meta name="msapplication-TileImage" content="./apple-touch-icon-180x180.png">
     <meta name="msapplication-starturl" content="https://violetxzzz.github.io">
+    <link rel="apple-touch-icon" sizes="180x180" href=".//apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href=".//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href=".//favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
     <meta name="origin" content="https://violetxzzz.github.io">
     <meta name="msapplication-tooltip" content="Violet's Page">
     <meta name="prism:alternateTitle" content="Violet's Page">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="thumbnail" content="https://addsoupbase.github.io/media/avatars/Violet.webp">
+    <meta name="twitter:card" content="summary">
+    <meta name="thumbnail" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta property="profile:username" content="addsoupbase">
     <!--summary_large_image,summary,app,or player -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="shortcut icon" href="favicon.ico">
     <meta name="robots" content="index">
-    <meta name="theme-color" content="YOUR COLOR HERE">
+    <meta name="theme-color" content="#726cff">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="author" content="addsoupbase">
     <link rel="canonical" href="https://violetxzzz.github.io">
     <script
-        type="application/ld+json">{"@context":"https://schema.org","@type": "WebSite","name":"addsoupbase","url":"https://violetxzzz.github.io","description":"YOUR DESC HERE","author":{"@type": "Person","name":"addsoupbase","sameAs":["https://twitter.com/addsoupbase"]},"mainEntityOfPage":{"@type":"WebPage","@id":"https://violetxzzz.github.io"},"image":{"@type":"ImageObject","url":"https://addsoupbase.github.io/media/avatars/Violet.webp","width":256,"height":256}}</script>
+        type="application/ld+json">{"@context":"https://schema.org","@type": "WebSite","name":"addsoupbase","url":"https://violetxzzz.github.io","description":"Violet's space themed page","author":{"@type": "Person","name":"addsoupbase","sameAs":["https://twitter.com/addsoupbase"]},"mainEntityOfPage":{"@type":"WebPage","@id":"https://violetxzzz.github.io"},"image":{"@type":"ImageObject","url":"https://addsoupbase.github.io/media/avatars/Violet.avif","width":256,"height":256}}</script>
     <link rel="apple-touch-icon" sizes="57x57" href="./apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="./apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="./apple-touch-icon-72x72.png">
@@ -210,6 +214,11 @@
             font-size: 1.2em
         }
 
+        #background,
+        #background * {
+            touch-action: pinch-zoom !important;
+        }
+
         #background {
             --user-select: none;
             position: fixed;
@@ -238,9 +247,10 @@
         }
 
         .boom {
+            pointer-events: none;
             --frames: 4 !important;
             scale: 2.5 2.5;
-            transform: translateX(4px);
+            transform: translate(4px, -2px);
             animation: slideshow 400ms steps(var(--frames), end)
         }
 
@@ -374,7 +384,6 @@
         button {
             font-size: 1.2em;
             text-transform: capitalize;
-
         }
 
         button[role=tab] {
@@ -513,15 +522,13 @@
             background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAACEUlEQVR4nO2WL5faQBTFf+nZD5FVYV3ikEHFIqmrY10sVXyFRaWyq1jHulSubBSRceCaKPgWryLkLzMhYfd0K7jnjGBm3n333swkwA2fC6PnPrmi5p+gjxiRIATg+OuN++h5SG0fvCucSwW5eNeuZuL9RxrRhdObV7epTEW2O/WOppFrTGjDAXoHpFqUzdzCNeFhlVFvYkycxu8rTVwOZwD3F9VkkmbER9jMLYzvXyHe56OF12TB79EbS68prEv8Zm7xZ2mVIgsYE6fZw7UxZ1MOnt/JfadbSNKMBT4STHMTwNkjB1wTXNMCMlYRwoUnkaQZYJXhFHegjdef03w/WTGl5FYZMFYRsvTAnE3BtasmLfF1jEcWRJl2/dxEHsiAcJRQHqGTiYrQtbXi42M+ClF0HyWjELLAL8NRia9jPLK03DoDonu0dXwb/yBJM5K0SuhUd9GEOcuPyJBwVPdBZwBcG2Pi8DJx9FJcm6dZyCpCe5a7arvQDkeCkPvo+Swg7SUG9WvOmDisgcdirX5HhiDe83I6/4+q16lr80TYedF1kPqQIJTN3JI1iGx31QhCke1ONnNLJAgFkIPnF3WD+Ou8a1D2Kvb26VEWFZslCEuSYiw9SgM10l7fgjb/umm+wb/0qrWeAeVNDp5/JrrduCV+CHrxt9eH9lEVKRsPFP+h/Ff9CXtn/Wfz33DDDf8T/gKEpr8ZNmOcwAAAAABJRU5ErkJggg==)
         }
 
-
-
-        .solrock_sleep,
-        .lunatone_sleep {
-            scale: 2 2
+        .catchable {
+            cursor: pointer;
+            --tap-highlight-color: transparent;
         }
 
-        .minior_sleep {
-            scale: 1.7 1.7
+        .mew.shiny {
+            filter: hue-rotate(236deg)
         }
 
         .hoopa_unbound {
@@ -530,6 +537,10 @@
 
         .jirachi {
             transform: translate(10px, 15px);
+        }
+
+        .pokeball_catch {
+            z-index: 1;
         }
 
         .necrozma {
@@ -550,7 +561,7 @@
 </head>
 
 <body>
-    <div id="background"></div>
+    <div id="background" role="img" aria-label="Pokémon in space"></div>
     <main class="center_screen">
         <div id="frame" role="tablist">
             <section class="sect">
@@ -586,13 +597,13 @@
             return Math.random() * odds > odds - 1 ? ' shiny' : ''
         }
         async function spawnJirachi() {
-            setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
+            // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
             if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
-            let jirachi = $`<div style="top:${randomY()};left:${randomX()};" class="jirachi_intro obj slideshowOnce${shiny()}"></div>`
+            let jirachi = $`<div aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro obj slideshowOnce${shiny()}"></div>`
                 .setParent(background)
             await jirachi.until('!animationend')
             jirachi.classList.remove('jirachi_intro', 'slideshowOnce')
-            jirachi.classList.add('jirachi', 'slideshow')
+            jirachi.classList.add('jirachi', 'slideshow', 'catchable')
             jirachi.animate([{ translate: `0 100vh` }], {
                 duration: 20000,
                 delay: 200,
@@ -601,15 +612,20 @@
                 easing: 'linear'
             }).onfinish = () => jirachi.purge()
         }
-        setTimeout(spawnJirachi, 10000 + Math.random() * 20000)
+        function spawnExoticPokemon() {
+            setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
+            if (isHidden()) return
+            Math.random() > .5 ? spawnHoopaUnbound() : spawnJirachi()
+        }
+        setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
         async function spawnHoopaUnbound() {
-            setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
+            // setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
             if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-            let hoopaUnbound = $`<div style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro obj slideshowOnce${shiny()}"></div>`
+            let hoopaUnbound = $`<div aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro obj slideshowOnce${shiny()}"></div>`
                 .setParent(background)
             await hoopaUnbound.until('!animationend')
             hoopaUnbound.classList.remove('hoopa_unbound_intro', 'slideshowOnce')
-            hoopaUnbound.classList.add('hoopa_unbound', 'slideshow')
+            hoopaUnbound.classList.add('hoopa_unbound', 'slideshow', 'catchable')
             // hoopaUnbound.style.animation = `${slideshow}`
             hoopaUnbound.animate([{ translate: `0 100vh` }], {
                 duration: 15000,
@@ -620,7 +636,7 @@
             }).onfinish = () => hoopaUnbound.purge()
         }
         // spawnHoopaUnbound()
-        setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
+        // setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
         function doImages(key, val) {
             let i = new Image
             let src = i.src = `data:image/png;base64,${val}`
@@ -631,7 +647,7 @@
                     css.registerCSSRaw(`.${k} {background-image: url(${src})}`)
                 }
                 else {
-                    if (!k.startsWith('boom')) mons.push(k)
+                    if (!k.startsWith('boom') && !k.startsWith('pokeball')) mons.push(k)
                     css.registerCSSRaw(`.${k} {--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${src}); --frames: ${key.endsWith('sleep') ? 6 : frames};}`)
                 }
             }
@@ -644,6 +660,56 @@
             },
         })
         background.delegate({
+            async click(e) {
+                this.classList.remove('catchable')
+                let rect = this.getBoundingClientRect()
+                this.getAnimations().forEach(o => o.pause())
+
+                // Use pokemon's center, not click position
+                let pokemonCenterX = rect.left + rect.width / 2
+                let pokemonCenterY = rect.top + rect.height / 2
+                let n = $`<div aria-hidden="true" class="obj pokeball_throw slideshow pokeball"></div>`
+                    .setParent(background)
+                await n.animate([
+                    {
+                        transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
+                    },
+                    {
+                        transform: `translate(${pokemonCenterX - 20}px, ${pokemonCenterY - 20}px) scale(0.5, 0.5)`,
+                    }
+                ], {
+                    duration: 1200 - pokemonCenterY,
+                    iterations: 1,
+                    fill: 'forwards',
+                    easing: 'linear'
+                }).finished
+                n.classList.remove('slideshow')
+                n.classList.replace('pokeball_throw', 'pokeball_catch')
+                n.clientHeight
+                let pokeballRect = n.getBoundingClientRect()
+                let pokballCenterX = pokeballRect.left + pokeballRect.width / 2
+                let pokballCenterY = pokeballRect.top + pokeballRect.height / 2
+                let offsetX = pokballCenterX - pokemonCenterX
+                let offsetY = pokballCenterY - pokemonCenterY
+                this.animate([
+                    { transform: `translate(0, 0) scale(1, 1)` },
+                    {
+                        transform: `translate(${offsetX}px, ${offsetY}px) scale(0, 0)`,
+                        filter: 'opacity(0%) brightness(1000%) saturate(0%) contrast(100%)',
+                    }], {
+                    duration: 1000,
+                    iterations: 1,
+                    delay: 400,
+                    composite: 'accumulate',
+                    easing: 'ease'
+                }).finished.then(() => this.purge())
+                n.style.animation = `slideshow 4s steps(var(--frames), end)`
+                await n.until('!animationend')
+                n.fadeOut().finished.then(()=>n.purge())
+            }
+        }, o => o.matches('.catchable'))
+        spawnJirachi()
+        background.delegate({
             pointerdown() {
                 let t = +this.dataset.type
                 switch (t) {
@@ -655,7 +721,7 @@
                         break
                 }
                 let rect = this.getBoundingClientRect()
-                , translate = `${rect.left}px 0`
+                    , translate = `${rect.left}px 0`
                 this.className = `boom${t} boom obj`
                 this.style.translate = translate
                 this.style.animation = ''
@@ -679,7 +745,7 @@
             setTimeout(spawnAsteroid, 2000 + (Math.random() * 1000))
             if (isHidden()) return
             let i = Math.floor(Math.random() * 4) + 1
-            let asteroid = $`<div data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+            let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${20 + (i * 5) + (Math.random() * 20)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
                 .setParent(background)
             // .onanimationend = remove
             // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
@@ -708,10 +774,10 @@
                 .setParent(background)
         }*/
         let special = new Set(`hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
-        let legendary = new Set(`arceus lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
+        let legendary = new Set(`arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
         // spawnSleepingPokemon()
-        function spawnLegendaryPokemon() {
-            setTimeout(spawnLegendaryPokemon, 2500 + (Math.random() * 100))
+        function spawnPokemon() {
+            setTimeout(spawnPokemon, 2500 + (Math.random() * 100))
             let regular = mons.filter(o => !o.endsWith('sleep') && !special.has(o))
             let pkm = regular[Math.floor(Math.random() * regular.length)]
             let a = 10
@@ -723,6 +789,12 @@
                 case 'beheeyem':
                 case 'elgyem':
                     scale *= 2.3
+                    break
+                case 'mew':
+                case 'uxie':
+                case 'azelf':
+                case 'mesprit':
+                    scale *= 2
                     break
                 case 'minior_meteor':
                     scale *= 2
@@ -748,10 +820,10 @@
                     break
             }
             scale *= i
-            $`<div class="${pkm} obj${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()}; animation: ${slideshow}, toRight ${40 + Math.random() * 10}s linear${i === 1 ? '' : ' reverse'}"></div>`
+            $`<diva aria-hidden="true" class="${pkm} catchable obj${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()}; animation: ${slideshow}, toRight ${40 + Math.random() * 10}s linear${i === 1 ? '' : ' reverse'}"></div>`
                 .setParent(background)
         }
-        setTimeout(spawnLegendaryPokemon, 4000)
+        setTimeout(spawnPokemon, 300)
 
     </script>
 </body>
