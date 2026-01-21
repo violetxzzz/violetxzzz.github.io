@@ -654,6 +654,7 @@
         function doImages(key) {
             let i = new Image
             let src = i.src = `./sprites/${key}.png`
+            i.decoding = 'async'
             i.onload = async () => {
                 let { 0: k, 1: frames } = key.split('-')
                 let blob = await (await fetch(src)).blob()
@@ -673,7 +674,7 @@
         function isHidden() { return document.hidden }
         background.delegate({
             animationend() {
-                this.remove()
+                this.purge()
             },
         })
         function preload(url) {
@@ -683,6 +684,7 @@
             async pointerdown(e) {
                 e.stopImmediatePropagation()
                 this.classList.remove('catchable')
+                this.style.pointerEvents = 'none'
                 let rect = this.getBoundingClientRect()
                 this.getAnimations().forEach(o => {
                     o.animationName !== 'slideshow' && o.pause()
@@ -726,7 +728,7 @@
                     composite: 'add',
                     easing: 'ease'
                 }).finished.then(() => this.purge())
-                n.style.animation = `slideshow 4s steps(var(--frames), end)`
+                n.style.animation = 'slideshow 4s steps(var(--frames), end)'
                 await n.until('!animationend')
                 n.fadeOut().finished.then(() => n.purge())
             }
@@ -850,7 +852,7 @@
                     scale *= 5
                     break
                 case 'giritina2':
-                    scale *= 4
+                    scale *= 3.6
                     break
                 case 'rayquaza':
                     scale *= 2.4
@@ -868,7 +870,6 @@
                 .setParent(background)
         }
         setTimeout(spawnPokemon, 300)
-
     </script>
 </body>
 <script>
