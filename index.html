@@ -95,6 +95,22 @@
             font-display: swap;
         }
 
+        #message {
+            font-size: 1.1em;
+            display: block;
+            width: min(95vw, 730px);
+            height: min(120px, 30vh);
+            position: fixed;
+            z-index: 3;
+            bottom: 0;
+            place-self: center;
+            margin: 10px;
+            /* overflow: auto; */
+            scale: 1 0;
+            display: none;
+            transition: scale .2s linear;
+        }
+
         .debris {
             cursor: pointer;
             --tap-highlight-color: transparent;
@@ -201,6 +217,15 @@
             --width: 25px;
             --height: 18px;
             background-position: -100px -232px;
+        }
+
+        @media screen and (width <=345px) {
+            #messagepic {
+                display: none;
+            }
+            #message {
+                text-align: center;
+            }
         }
 
         .asteroid4 {
@@ -393,6 +418,7 @@
         }
 
         #frame,
+        .menu,
         #controls {
             background-color: var(--color1);
         }
@@ -403,17 +429,20 @@
 
         }
 
-        #frame {
+        .menu {
             border: 5px solid var(--color2);
+            --scrollbar-width: 12px;
+            --scrollbar-thumb-color: var(--color3);
+            --scrollbar-color: var(--color2);
+            border-style: groove;
+        }
+
+        #frame {
             flex: 1;
             overflow-y: auto;
             width: 100%;
             scrollbar-width: thin;
-            --scrollbar-width: 12px;
-            --scrollbar-thumb-color: var(--color3);
-            --scrollbar-color: var(--color2);
             margin-bottom: 5px;
-            border-style: groove;
         }
 
         .avatar {
@@ -484,11 +513,11 @@
 
         @keyframes toRight {
             0% {
-                translate: calc((var(--width) / var(--frames, 1)) * -1.5) 0;
+                translate: calc(0vw - 200%) 0;
             }
 
             100% {
-                translate: calc(100vw + (var(--width) / var(--frames, 1)) * 1.5) 0;
+                translate: calc(100vw + 200%) 0;
             }
         }
 
@@ -526,6 +555,10 @@
             background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAACEUlEQVR4nO2WL5faQBTFf+nZD5FVYV3ikEHFIqmrY10sVXyFRaWyq1jHulSubBSRceCaKPgWryLkLzMhYfd0K7jnjGBm3n333swkwA2fC6PnPrmi5p+gjxiRIATg+OuN++h5SG0fvCucSwW5eNeuZuL9RxrRhdObV7epTEW2O/WOppFrTGjDAXoHpFqUzdzCNeFhlVFvYkycxu8rTVwOZwD3F9VkkmbER9jMLYzvXyHe56OF12TB79EbS68prEv8Zm7xZ2mVIgsYE6fZw7UxZ1MOnt/JfadbSNKMBT4STHMTwNkjB1wTXNMCMlYRwoUnkaQZYJXhFHegjdef03w/WTGl5FYZMFYRsvTAnE3BtasmLfF1jEcWRJl2/dxEHsiAcJRQHqGTiYrQtbXi42M+ClF0HyWjELLAL8NRia9jPLK03DoDonu0dXwb/yBJM5K0SuhUd9GEOcuPyJBwVPdBZwBcG2Pi8DJx9FJcm6dZyCpCe5a7arvQDkeCkPvo+Swg7SUG9WvOmDisgcdirX5HhiDe83I6/4+q16lr80TYedF1kPqQIJTN3JI1iGx31QhCke1ONnNLJAgFkIPnF3WD+Ou8a1D2Kvb26VEWFZslCEuSYiw9SgM10l7fgjb/umm+wb/0qrWeAeVNDp5/JrrduCV+CHrxt9eH9lEVKRsPFP+h/Ff9CXtn/Wfz33DDDf8T/gKEpr8ZNmOcwAAAAABJRU5ErkJggg==)
         }
 
+        cel-runner {
+            position: fixed;
+        }
+
         .catchable {
             cursor: pointer;
             --tap-highlight-color: transparent;
@@ -536,15 +569,6 @@
             filter: hue-rotate(236deg)
         }
 
-        .hoopa_unbound,
-        .hoopa_unbound_idle {
-            transform: translate(1.7px, 8.75px);
-        }
-
-        .jirachi,
-        .jirachi_idle {
-            transform: translate(10px, 15px);
-        }
 
         .pokeball_catch {
             z-index: 1;
@@ -577,7 +601,7 @@
 <body>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <main class="center_screen">
-        <div id="frame" role="tablist">
+        <div id="frame" class="menu" role="tablist">
             <section class="sect">
                 <picture>
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
@@ -602,22 +626,26 @@
     <script type="module">
         const data = ["arceus_idle.shiny-72","hoopa_unbound_intro-268","uxie_idle-72","lunala_idle.shiny-52","minior_meteor_idle-96","beheeyem-48","deoxys_defense-48","beheeyem_idle-80","elgyem-56","mew-48","jirachi_idle-40","necrozma_idle.shiny-142","lunatone-48","giritina2-96","deoxys_attack_idle-57","necrozma_idle-142","arceus_idle-72","jirachi_intro-180","elgyem_idle-72","deoxys_attack-80","necrozma.shiny","naganadel_idle-60","jirachi.shiny-54","mesprit-56","elgyem.shiny-56","pokeball_catch-57","uxie-56","deoxys_defense_idle-56","solrock-60","minior_meteor-96","hoopa_unbound-71","deoxys_idle-96","azelf_idle-72","elgyem_idle.shiny-72","boom3-4","rayquaza_idle-48","rayquaza-74","jirachi_intro.shiny-180","hoopa_unbound_intro.shiny","pokeball_throw-8","deoxys-64","jirachi-54","giritina2_idle-96","necrozma-71","naganadel-32","boom1-4","azelf-56","lunatone_idle-64","mew_idle-40","hoopa_unbound_idle-71","boom2-4","hoopa_unbound_idle.shiny-71","deoxys_speed-28","solrock_idle-48","hoopa_unbound.shiny-71","jirachi_idle.shiny-40","rayquaza.shiny-74","lunala-40","lunala_idle-52","mesprit_idle-72","deoxys_speed_idle-28","rayquaza_idle.shiny-48","lunala.shiny"]
         import *as v from 'https://addsoupbase.github.io/v4.js'
+        import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
         const { background } = v.id
         const $ = v.esc
         const { css } = v
         const slideshow = `slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite`
         let mons = []
+        let sprites = {}
         function shiny(odds = 4000) {
             return Math.random() * odds > odds - 1 ? ' shiny' : ''
         }
         async function spawnJirachi() {
             // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
             if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
-            let jirachi = $`<div data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};--local-dura: 2;" class="jirachi_intro obj slideshowOnce${shiny()}"></div>`
+            let jirachi = $`<cel-runner dura="40ms" src="${sprites.jirachi_intro}" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};--local-dura: 2;" class="jirachi_intro ${shiny()}"></cel-runner>`
                 .setParent(background)
-            await jirachi.until('!animationend')
-            jirachi.classList.remove('jirachi_intro', 'slideshowOnce')
-            jirachi.classList.add('jirachi', 'slideshow', 'catchable')
+            await jirachi.until('spriteended')
+            jirachi.classList.remove('jirachi_intro')
+            jirachi.classList.add('jirachi', 'catchable')
+            jirachi.src = sprites.jirachi
+            jirachi.dura = '18ms'
             jirachi.animate([{ translate: `0 100vh` }], {
                 duration: 20000,
                 delay: 200,
@@ -635,11 +663,12 @@
         async function spawnHoopaUnbound() {
             // setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
             if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-            let hoopaUnbound = $`<div data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro obj slideshowOnce${shiny()}"></div>`
+            let hoopaUnbound = $`<cel-runner dura="18ms" data-name="hoopa_unbound" aria-hidden="true" src="${sprites.hoopa_unbound_intro}" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></cel-runner>`
                 .setParent(background)
-            await hoopaUnbound.until('!animationend')
+            await hoopaUnbound.until('spriteended')
             hoopaUnbound.classList.remove('hoopa_unbound_intro', 'slideshowOnce')
-            hoopaUnbound.classList.add('hoopa_unbound', 'slideshow', 'catchable')
+            hoopaUnbound.classList.add('hoopa_unbound', 'catchable')
+            hoopaUnbound.src = sprites.hoopa_unbound
             // hoopaUnbound.style.animation = `${slideshow}`
             hoopaUnbound.animate([{ translate: `0 100vh` }], {
                 duration: 15000,
@@ -659,14 +688,20 @@
                 let { 0: k, 1: frames } = key.split('-')
                 let blob = await (await fetch(src)).blob()
                 let url = URL.createObjectURL(blob)
-                preload(url)
+                // preload(url)
                 // $`<div class="${k} obj"></div>`.setParent(document.body)
                 if (k.endsWith('.shiny')) {
-                    css.registerCSSRaw(`.${k} {background-image: url(${url})}`)
+                    css.registerCSSRaw(`.${k} {background-image: url(${url}) !important}`)
+                    preload(url)
                 }
                 else {
-                    if (!k.startsWith('boom') && !k.startsWith('pokeball') && !k.endsWith('_idle')) mons.push(k)
-                    css.registerCSSRaw(`.${k} {--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${url}); --frames: ${key.endsWith('sleep') ? 6 : frames};}`)
+                    if (!k.startsWith('boom') && !k.startsWith('pokeball')) {
+                        mons.push({ src: url, name: k })
+                        loadsprite({ src: url, x: frames, y: 1 })
+                        sprites[k] = url
+                        preload(url)
+                    }
+                    else css.registerCSSRaw(`.${k} {--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${url}); --frames: ${frames};}`)
                 }
             }
         }
@@ -680,19 +715,20 @@
         function preload(url) {
             $`<link rel="preload" as="image" href="${url}">`.setParent(document.head)
         }
+        let showedMessage = false
         background.delegate({
             async pointerdown(e) {
                 e.stopImmediatePropagation()
                 this.classList.remove('catchable')
+                let shiny = this.classList.contains('shiny')
                 this.style.pointerEvents = 'none'
-                let rect = this.getBoundingClientRect()
-                this.getAnimations().forEach(o => {
-                    o.animationName !== 'slideshow' && o.pause()
-                })
-                let pokemonCenterX = rect.left + rect.width / 2
-                let pokemonCenterY = rect.top + rect.height / 2
+                this.pauseOtherAnims()
                 let { name } = this.dataset
                 this.classList.replace(name, name + '_idle')
+                this.src = sprites[name + '_idle']
+                let rect = this.getBoundingClientRect()
+                let pokemonCenterX = (rect.left - 10.75) + (rect.width / 2) - 10.5
+                let pokemonCenterY = (rect.top - 10.5) + (rect.height / 2) - 10.5
                 let n = $`<div aria-hidden="true" class="obj pokeball_throw slideshow pokeball"></div>`
                     .setParent(background)
                 await n.animate([
@@ -700,7 +736,7 @@
                         transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
                     },
                     {
-                        transform: `translate(${pokemonCenterX - 20}px, ${pokemonCenterY - 20}px) scale(0.5, 0.5)`,
+                        transform: `translate(${pokemonCenterX}px, ${pokemonCenterY}px) scale(0.5, 0.5)`,
                     }
                 ], {
                     duration: 1400 - pokemonCenterY,
@@ -711,26 +747,25 @@
                 n.classList.remove('slideshow')
                 n.classList.replace('pokeball_throw', 'pokeball_catch')
                 n.clientHeight
-                let pokeballRect = n.getBoundingClientRect()
-                let pokballCenterX = pokeballRect.left + pokeballRect.width / 2
-                let pokballCenterY = pokeballRect.top + pokeballRect.height / 2
-                let offsetX = pokballCenterX - pokemonCenterX
-                let offsetY = pokballCenterY - pokemonCenterY
-                this.animate([
-                    { transform: `translate(0, 0) scale(1, 1)` },
-                    {
-                        transform: `translate(${offsetX}px, ${offsetY}px) scale(0, 0)`,
-                        filter: 'opacity(0%) brightness(1000%) saturate(0%) contrast(100%)',
-                    }], {
-                    duration: 1000,
-                    iterations: 1,
-                    delay: 400,
-                    composite: 'add',
-                    easing: 'ease'
-                }).finished.then(() => this.purge())
                 n.style.animation = 'slideshow 4s steps(var(--frames), end)'
+                this.animate([{
+                    transform: 'scale(1,1)', filter: 'brightness(0%) invert(1) opacity(90%)'
+                }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
+                    transform: 'scale(0.25,0.25)', filter: 'opacity(0%) brightness(0%) invert(1)'
+                }], {
+                    duration: 400,
+                    iterations: 1,
+                    delay: 500,
+                    composite: 'add',
+                    easing: 'ease-in'
+                }).finished.then(() => this.purge(true))
                 await n.until('!animationend')
-                n.fadeOut().finished.then(() => n.purge())
+                n.fadeOut().finished.then(() => {
+                    n.purge(true)
+                    if (name === 'lunala') {
+                    showMessageBox(shiny)
+                    }
+                })
             }
         }, o => o.matches('.catchable'), false, new AbortController)
         background.delegate({
@@ -765,6 +800,26 @@
         }
         function remove(e) {
             this.purge()
+        }
+        let { message, lunalapreview } = v.id
+        function showMessageBox(shiny) {
+            if (shiny) 
+                lunalapreview.src = './lunalasleepshiny.gif'
+            if (!showedMessage) {
+                showedMessage = true
+                message.style.display = 'block'
+                setTimeout(() => {
+                    message.style.scale = '1 1'
+                    setTimeout(()=>{
+                        message.style.scale = '1 0'
+                        message.on({
+                            _transitionend() {
+                                message.style.display = 'none'
+                            }
+                        })
+                    },4100)
+                })
+            }
         }
         // spawnSpaceShip()
         function spawnAsteroid() {
@@ -804,15 +859,19 @@
         // spawnSleepingPokemon()
         function spawnPokemon() {
             setTimeout(spawnPokemon, 1600 + (Math.random() * 100))
-            let regular = mons.filter(o => !o.endsWith('sleep') && !special.has(o))
+            let regular = mons.filter(o => !special.has(o.name) && !o.name.endsWith('_idle'))
             let pkm = regular[Math.floor(Math.random() * regular.length)]
             let a = 10
             if (!pkm || isHidden()) return
-            while (legendary.has(pkm) && document.querySelector(`.${pkm}`) && a--) pkm = regular[Math.floor(Math.random() * regular.length)]
+            let { name } = pkm
+            while (legendary.has(name) && document.querySelector(`.${name}`) && a--) {
+                pkm = regular[Math.floor(Math.random() * regular.length)]
+                name = pkm.name
+            }
             let i = Math.random() > .5 ? 1 : -1
             let scale = .7
             let speed = 1.2
-            switch (pkm) {
+            switch (name) {
                 case 'beheeyem':
                 case 'elgyem':
                     scale *= 2.3
@@ -866,11 +925,37 @@
                     break
             }
             scale *= i
-            $`<div data-name="${pkm}" aria-hidden="true" class="${pkm} catchable obj${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()}; animation: ${slideshow}, toRight ${(40 + Math.random() * 40) / speed}s linear${i === 1 ? '' : ' reverse'}"></div>`
-                .setParent(background)
+            let s = $`<cel-runner dura="18ms" data-name="${name}" src="${pkm.src}" aria-hidden="true" class="${pkm.name} catchable${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></cel-runner>`
+            s.setParent(background)
+                .animFrom('toRight', {
+                    duration: ((40 + Math.random() * 40) / speed) * 1000 * i,
+                    easing: 'linear',
+                    iterations: 1,
+                    direction: i === 1 ? 'normal' : 'reverse'
+                })
         }
         setTimeout(spawnPokemon, 300)
     </script>
+    <div role="alert" id="message" class="menu" style="display: none;">
+            <picture>
+                <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
+                <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
+                <img id="messagepic" style="
+    border-radius: 10px;
+margin:10px;
+height:-webkit-fill-available;
+width:auto;
+float:left;
+max-width: fit-content;
+    border-color: #ffc4ff;            
+    --user-select:none;
+                border-style:solid;
+    border-width: medium;" alt="violet" width="256" height="256"
+                    src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
+            </picture>
+            <p style="word-wrap: break-word;">Congratulations, you just caught my favourite Pokémon!</p>
+            <img id="lunalapreview" alt="lunala" src="lunalasleep.gif" style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
+    </div>
 </body>
 <script>
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
