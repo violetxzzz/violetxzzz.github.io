@@ -741,7 +741,7 @@
                         transform: `translate(${pokemonCenterX}px, ${pokemonCenterY}px) scale(0.5, 0.5)`,
                     }
                 ], {
-                    duration: 1400 - pokemonCenterY,
+                    duration: Math.max(1400 - pokemonCenterY, 500),
                     iterations: 1,
                     fill: 'forwards',
                     easing: 'linear'
