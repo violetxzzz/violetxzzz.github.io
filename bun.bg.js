@@ -1,0 +1,318 @@
+ /*:
+    `const data = ` + JSON.stringify(dir('./sprites/').map(o=>o.replace('.png','')))
+    */
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        throw Error('Reduced motion enabled')
+    }
+    import *as v from 'https://addsoupbase.github.io/v4.js'
+    import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
+    const { background } = v.id
+    const $ = v.esc
+    const { css } = v
+    const slideshow = `slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite`
+    let mons = []
+    let sprites = {}
+    function shiny(odds = 4000) {
+        return Math.random() * odds > odds - 1 ? ' shiny' : ''
+    }
+    async function spawnJirachi() {
+        // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
+        if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
+        let jirachi = $`<cel-runner dura="40ms" src="${sprites.jirachi_intro}" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};--local-dura: 2;" class="jirachi_intro ${shiny()}"></cel-runner>`
+            .setParent(background)
+        await jirachi.until('spriteended')
+        jirachi.classList.remove('jirachi_intro')
+        jirachi.classList.add('jirachi', 'catchable')
+        jirachi.src = sprites.jirachi
+        jirachi.dura = '18ms'
+        jirachi.animate([{ translate: `0 100vh` }], {
+            duration: 20000,
+            delay: 200,
+            // composite:'accumulate',
+            iterations: 1,
+            easing: 'linear'
+        }).onfinish = () => jirachi.purge()
+    }
+    function spawnExoticPokemon() {
+        setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
+        if (isHidden()) return
+        Math.random() > .5 ? spawnHoopaUnbound() : spawnJirachi()
+    }
+    setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
+    async function spawnHoopaUnbound() {
+        // setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
+        if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
+        let hoopaUnbound = $`<cel-runner dura="18ms" data-name="hoopa_unbound" aria-hidden="true" src="${sprites.hoopa_unbound_intro}" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></cel-runner>`
+            .setParent(background)
+        await hoopaUnbound.until('spriteended')
+        hoopaUnbound.classList.remove('hoopa_unbound_intro', 'slideshowOnce')
+        hoopaUnbound.classList.add('hoopa_unbound', 'catchable')
+        hoopaUnbound.src = sprites.hoopa_unbound
+        // hoopaUnbound.style.animation = `${slideshow}`
+        hoopaUnbound.animate([{ translate: `0 100vh` }], {
+            duration: 15000,
+            delay: 600,
+            // composite:'accumulate',
+            iterations: 1,
+            easing: 'linear'
+        }).onfinish = () => hoopaUnbound.purge()
+    }
+    // spawnHoopaUnbound()
+    // setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
+    function doImages(key) {
+        let i = new Image
+        let src = i.src = `./sprites/${key}.png`
+        i.decoding = 'async'
+        i.onload = async () => {
+            let { 0: k, 1: frames } = key.split('-')
+            let blob = await (await fetch(src)).blob()
+            let url = URL.createObjectURL(blob)
+            // preload(url)
+            // $`<div class="${k} obj"></div>`.setParent(document.body)
+            if (k.endsWith('.shiny')) {
+                css.registerCSSRaw(`.${k} {background-image: url(${url}) !important}`)
+                preload(url)
+            }
+            else {
+                if (!k.startsWith('boom') && !k.startsWith('pokeball')) {
+                    mons.push({ src: url, name: k })
+                    loadsprite({ src: url, x: frames, y: 1 })
+                    sprites[k] = url
+                    preload(url)
+                }
+                else css.write(`.${k}{--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${url}); --frames: ${frames};}`)
+            }
+        }
+    }
+    data.forEach(doImages)
+    function isHidden() { return document.hidden }
+    background.delegate({
+        animationend() {
+            this.purge()
+        },
+    })
+    function preload(url) {
+        $`<link rel="preload" as="image" href="${url}">`.setParent(document.head)
+    }
+    let showedMessage = false
+    background.delegate({
+        async pointerdown(e) {
+            e.stopImmediatePropagation()
+            this.classList.remove('catchable')
+            let shiny = this.classList.contains('shiny')
+            this.style.pointerEvents = 'none'
+            this.pauseOtherAnims()
+            let { name } = this.dataset
+            this.classList.replace(name, name + '_idle')
+            this.src = sprites[name + '_idle']
+            let rect = this.getBoundingClientRect()
+            let pokemonCenterX = (rect.left - 10.75) + (rect.width / 2) - 10.5
+            let pokemonCenterY = (rect.top - 10.5) + (rect.height / 2) - 10.5
+            let n = $`<div aria-hidden="true" class="obj pokeball_throw slideshow pokeball"></div>`
+                .setParent(background)
+            await n.animate([
+                {
+                    transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
+                },
+                {
+                    transform: `translate(${pokemonCenterX}px, ${pokemonCenterY}px) scale(0.5, 0.5)`,
+                }
+            ], {
+                duration: Math.max(1400 - pokemonCenterY, 500),
+                iterations: 1,
+                fill: 'forwards',
+                easing: 'linear'
+            }).finished
+            n.classList.remove('slideshow')
+            n.classList.replace('pokeball_throw', 'pokeball_catch')
+            n.clientHeight
+            n.style.animation = 'slideshow 4s steps(var(--frames), end)'
+            this.animate([{
+                transform: 'scale(1,1)', filter: 'brightness(0%) invert(1) opacity(90%)'
+            }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
+                transform: 'scale(0.25,0.25)', filter: 'opacity(0%) brightness(0%) invert(1)'
+            }], {
+                duration: 400,
+                iterations: 1,
+                delay: 500,
+                composite: 'add',
+                easing: 'ease-in'
+            }).finished.then(() => this.purge(true))
+            await n.until('!animationend')
+            n.fadeOut().finished.then(() => {
+                n.purge(true)
+                if (name === 'lunala') {
+                    showMessageBox(shiny)
+                }
+            })
+        }
+    }, o => o.matches('.catchable'), false, new AbortController)
+    background.delegate({
+        pointerdown(e) {
+            e.stopImmediatePropagation()
+            let t = +this.dataset.type
+            switch (t) {
+                case 1: case 3: t = 2
+                    break
+                case 2: t = 3
+                    break
+                case 4: t = 1
+                    break
+            }
+            let rect = this.getBoundingClientRect()
+                , translate = `${rect.left}px 0`
+            this.className = `boom${t} boom obj`
+            this.style.translate = translate
+            this.style.animation = ''
+            delete this.dataset.type
+        }
+    }, o => !isNaN(o.dataset.type))
+    //@devwindow.mons = mons
+    function spawnSpaceShip() {
+        setTimeout(spawnSpaceShip, 60 * 1000 * (Math.random() * 2))
+        if (isHidden()) return
+        let scale = Math.random()
+        let dir = Math.random() > .5
+        let o = $`<div class="spaceship spacething obj" style="${dir ? 'scale: -.8 .8;' : ''}top: ${randomY()}; animation: toRight ${40 + (Math.random() * 20)}s linear${dir ? '' : ' reverse'}"></div>`
+            .setParent(background)
+        // .onanimationend = remove
+    }
+    function remove(e) {
+        this.purge()
+    }
+    let { message, lunalapreview } = v.id
+    function showMessageBox(shiny) {
+        if (shiny)
+            lunalapreview.src = './lunalasleepshiny.gif'
+        if (!showedMessage) {
+            showedMessage = true
+            message.style.display = 'block'
+            setTimeout(() => {
+                message.style.scale = '1 1'
+                setTimeout(() => {
+                    message.style.scale = '1 0'
+                    message.on({
+                        _transitionend() {
+                            message.style.display = 'none'
+                        }
+                    })
+                }, 4100)
+            })
+        }
+    }
+    // spawnSpaceShip()
+    function spawnAsteroid() {
+        setTimeout(spawnAsteroid, 3000 + (Math.random() * 1000))
+        if (isHidden()) return
+        let i = Math.floor(Math.random() * 4) + 1
+        let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${20 + (i * 5) + (Math.random() * 20)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+            .setParent(background)
+        // .onanimationend = remove
+        // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
+    }
+    spawnAsteroid()
+    function spawnPlanet() {
+        setTimeout(spawnPlanet, 30000 + (Math.random() * 1000))
+        if (isHidden()) return
+        let i = Math.floor(Math.random() * 12) + 1
+        let asteroid = $`<div class="planet planet${i} obj debris" style="top:${randomY()};animation:float ${700 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${600 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+            .setParent(background)
+    }
+    // setTimeout(spawnPlanet, 10000 + Math.random() * 10000)
+    function randomY() {
+        return `${Math.random() * innerHeight}px`
+    }
+    function randomX() {
+        return `${Math.random() * innerWidth}px`
+    }
+    /*function spawnSleepingPokemon() {
+        setTimeout(spawnSleepingPokemon, 3500 + (Math.random() * 1000))
+        let sleeping = mons.filter(o => o.endsWith('sleep'))
+        let pkm = sleeping[Math.floor(Math.random() * sleeping.length)]
+        if (!pkm || isHidden()) return
+        $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
+            .setParent(background)
+    }*/
+    let special = new Set(`hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
+    let legendary = new Set(`giritina2 arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
+    // spawnSleepingPokemon()
+    function spawnPokemon() {
+        setTimeout(spawnPokemon, 1600 + (Math.random() * 100))
+        let regular = mons.filter(o => !special.has(o.name) && !o.name.endsWith('_idle'))
+        let pkm = regular[Math.floor(Math.random() * regular.length)]
+        let a = 10
+        if (!pkm || isHidden()) return
+        let { name } = pkm
+        while (legendary.has(name) && document.querySelector(`.${name}`) && a--) {
+            pkm = regular[Math.floor(Math.random() * regular.length)]
+            name = pkm.name
+        }
+        let i = Math.random() > .5 ? 1 : -1
+        let scale = .7
+        let speed = 1.2
+        switch (name) {
+            case 'beheeyem':
+            case 'elgyem':
+                scale *= 2.3
+                speed *= 1.5
+                break
+            case 'azelf':
+                scale *= 1.1
+            case 'mew':
+            case 'uxie':
+            case 'mesprit':
+                scale *= 2.2
+                speed *= 1.5
+                break
+            case 'minior_meteor':
+                case 'poipole':
+                scale *= 2
+                break
+            case 'deoxys_speed':
+                speed *= 3
+            case 'deoxys_attack':
+            case 'deoxys_defense':
+            case 'deoxys':
+                speed *= 3
+                scale *= 2.7
+                break
+            case 'lunala':
+                scale *= 3
+                break
+            case 'lunatone':
+            case 'solrock':
+                scale *= 2.6
+                break
+            case 'naganadel':
+                scale *= 3
+                speed *= 2.5
+                break
+            case 'necrozma_ultra':
+                scale *= 5
+                break
+            case 'giritina2':
+                scale *= 3.6
+                break
+            case 'rayquaza':
+                scale *= 2.4
+                speed *= 2
+                break
+            case 'necrozma':
+                scale *= 2.3
+                break
+            case 'arceus':
+                scale *= 2.5
+                break
+        }
+        scale *= i
+        let s = $`<cel-runner dura="18ms" data-name="${name}" src="${pkm.src}" aria-hidden="true" class="${pkm.name} catchable${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></cel-runner>`
+        s.setParent(background)
+            .animFrom('toRight', {
+                duration: ((40 + Math.random() * 40) / speed) * 1000 * i,
+                easing: 'linear',
+                iterations: 1,
+                direction: i === 1 ? 'normal' : 'reverse'
+            })
+    }
+    setTimeout(spawnPokemon, 300)
+    // showMessageBox()

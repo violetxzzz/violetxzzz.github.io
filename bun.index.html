@@ -4,9 +4,11 @@
 <head>
     <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })</script>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://addsoupbase.github.io">
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
+    <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <meta http-equiv="content-language" content="en">
     <meta property="og:locale" content="en_US">
@@ -80,10 +82,9 @@
     <meta name="apple-mobile-web-app-title" content="Violet's Page">
     <link rel="apple-touch-startup-image" href="favicon.ico">
     <link rel="preload" as="image" href="galaxy.avif" type="image/avif">
+    <script src="https://addsoupbase.github.io/h.js"></script>
     <title>Violet's Page</title>
-    <!--
-    this is absolutely sick: https://deep-fold.itch.io/
-    -->
+    <!-- this is absolutely sick: https://deep-fold.itch.io/ -->
     <noscript>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
@@ -117,8 +118,8 @@
             scale: 2 2;
             /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
             background-image: url(./debris.png);
-            background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"));
-            background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"));
+            background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
+            background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
             filter: brightness(1.25);
         }
 
@@ -223,6 +224,7 @@
             #messagepic {
                 display: none;
             }
+
             #message {
                 text-align: center;
             }
@@ -253,22 +255,34 @@
             background-size: cover, 100vw;
             animation: drift 120s ease-in-out alternate infinite;
             background-image: url(galaxy.png);
-            background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"));
-            background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"));
+            background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
+            background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
             /* background: var(--color4); */
             background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
             /* background: var(--color4); */
             background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
         }
 
-        @keyframes drift {
-            0% {
-                background-position-x: 0px;
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes drift {
+                0% {
+                    background-position-x: 0px;
+                }
+
+                100% {
+                    background-position-x: 100%;
+                }
             }
 
-            100% {
-                background-position-x: -1500px;
+            ::view-transition-old(sect) {
+                animation: pulseOut 0.5s ease-out .5s;
+
             }
+
+            ::view-transition-new(sect) {
+                animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
+            }
+
         }
 
         .boom {
@@ -323,15 +337,17 @@
         }
 
         #controls {
-            height: 40px;
+            height: 45px;
             width: 100%;
             border: 1px solid black;
             display: flex;
             place-content: space-evenly;
             padding: 5px;
+            gap: 10px;
             overflow-x: auto;
             scrollbar-width: none;
             flex-shrink: 0;
+            justify-content: center;
         }
 
         :root {
@@ -339,6 +355,8 @@
             --color2: #908df7;
             --color3: #BC6CFF;
             --color4: #3a3880;
+            --color5: #F9FF6C;
+            --color6: #F7FF39;
             --animspeed: .1s;
         }
 
@@ -346,15 +364,14 @@
             width: 700px;
             z-index: 10;
             /* border-radius: 10px; */
-            -webkit-box-shadow: 5px 9px 15px 5px #000000;
-            box-shadow: 5px 9px 15px 5px #000000;
-            height: 700px;
-            max-height: 70vh;
+            /* outline: 2px solid var(--color2); */
+            height: 705px;
+            max-height: 74vh;
             max-width: min(90vw, 700px);
             display: flex;
             flex-direction: column;
             place-items: center;
-            overflow: hidden;
+            /* overflow: hidden; */
         }
 
         /*
@@ -406,47 +423,121 @@
             position: absolute;
         }
 
-        button {
-            font-size: 1.2em;
-            text-transform: capitalize;
-        }
 
-        button[role=tab] {
+
+        [role=tab] {
             width: var(--stretch);
             margin: 0 2px 0 2px;
             max-width: 100px;
         }
 
+        button[role=tab]:hover {}
+
         #frame,
         .menu,
         #controls {
-            background-color: var(--color1);
+            background: #9553e0;
+            background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+        }
+
+        #frame {
+            position: relative;
+        }
+
+        #frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .button {
+            color: black;
+            background: #53e0e0;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.2em;
+            text-decoration: none;
+            text-transform: capitalize;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(83, 224, 224, 0.3);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            background: #2ecfd0;
+            box-shadow: 0 6px 20px rgba(46, 207, 208, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .button:active {
+            background: #1db5b6;
+            box-shadow: 0 2px 8px rgba(29, 181, 182, 0.4);
+            transform: translateY(-1px);
         }
 
         .sect {
             text-align: center;
             padding: 15px;
-
-        }
-
-        .menu {
-            border: 5px solid var(--color2);
-            --scrollbar-width: 12px;
-            --scrollbar-thumb-color: var(--color3);
-            --scrollbar-color: var(--color2);
-            border-style: groove;
+            width: 100%;
+            height: 100%;
+            overscroll-behavior-x: contain;
+            overflow: auto;
+            scroll-behavior: smooth;
+            scroll-snap-align: start;
+            scrollbar-width: thin;
         }
 
         #frame {
             flex: 1;
-            overflow-y: auto;
+            overflow-x: scroll;
+            scrollbar-width: none;
+            --scrollbar-width: 0;
             width: 100%;
-            scrollbar-width: thin;
             margin-bottom: 5px;
+            font-size: 1.1em;
+            scroll-behavior: smooth;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column-reverse;
+            scroll-snap-type: both mandatory;
+        }
+
+
+
+        .menu,
+        .sect {
+            /* border: 5px solid var(--color2); */
+            --scrollbar-width: 12px;
+            --scrollbar-thumb-color: var(--color3);
+            --scrollbar-color: var(--color2);
+            /* border-style: solid; */
         }
 
         .avatar {
             border-radius: 100%;
+            isolation: isolate;
+            corner-shape: squircle;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
         }
 
         .float {
@@ -543,17 +634,6 @@
             }
         }
 
-        .cleffa {
-            position: relative;
-            --height: 24px;
-            --frames: 2;
-            scale: .5 .5;
-            left: 23%;
-            top: -3%;
-            animation: slideshow 1s steps(2, end) infinite;
-            --width: 48px;
-            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAYCAYAAAC8/X7cAAACEUlEQVR4nO2WL5faQBTFf+nZD5FVYV3ikEHFIqmrY10sVXyFRaWyq1jHulSubBSRceCaKPgWryLkLzMhYfd0K7jnjGBm3n333swkwA2fC6PnPrmi5p+gjxiRIATg+OuN++h5SG0fvCucSwW5eNeuZuL9RxrRhdObV7epTEW2O/WOppFrTGjDAXoHpFqUzdzCNeFhlVFvYkycxu8rTVwOZwD3F9VkkmbER9jMLYzvXyHe56OF12TB79EbS68prEv8Zm7xZ2mVIgsYE6fZw7UxZ1MOnt/JfadbSNKMBT4STHMTwNkjB1wTXNMCMlYRwoUnkaQZYJXhFHegjdef03w/WTGl5FYZMFYRsvTAnE3BtasmLfF1jEcWRJl2/dxEHsiAcJRQHqGTiYrQtbXi42M+ClF0HyWjELLAL8NRia9jPLK03DoDonu0dXwb/yBJM5K0SuhUd9GEOcuPyJBwVPdBZwBcG2Pi8DJx9FJcm6dZyCpCe5a7arvQDkeCkPvo+Swg7SUG9WvOmDisgcdirX5HhiDe83I6/4+q16lr80TYedF1kPqQIJTN3JI1iGx31QhCke1ONnNLJAgFkIPnF3WD+Ou8a1D2Kvb26VEWFZslCEuSYiw9SgM10l7fgjb/umm+wb/0qrWeAeVNDp5/JrrduCV+CHrxt9eH9lEVKRsPFP+h/Ff9CXtn/Wfz33DDDf8T/gKEpr8ZNmOcwAAAAABJRU5ErkJggg==)
-        }
 
         cel-runner {
             position: fixed;
@@ -595,18 +675,78 @@
         .jirachi_idle {
             scale: 1.6 1.6
         }
+
+        #close {
+            border-radius: 0;
+        }
+
+        body,
+        html {
+            view-transition-name: none;
+        }
+
+
+        @keyframes pulseOut {
+            0% {
+                opacity: .3;
+                transform: scale(1);
+                filter: brightness(1);
+            }
+
+
+            100% {
+                transform: scale(1.08);
+                opacity: 0;
+                filter: brightness(2);
+            }
+
+        }
+
+        @keyframes pulseIn {
+            0% {
+                filter: blur(1px)
+            }
+
+            100% {
+                filter: blur(0)
+            }
+        }
+
+        .artist {
+            width: 100px;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            /* margin: 10px */
+        }
+
+        .msc {
+            display: inline-grid;
+            width: fit-content;
+        }
+
+        .capt {
+            text-transform: capitalize;
+            font-size: 1.2em;
+            display: inline;
+        }
+
+        @media (width <=406px) {
+            .capt {
+                font-size: .9em;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <main class="center_screen">
-        <div id="frame" class="menu" role="tablist">
-            <section class="sect">
+        <div id="frame" class="menu" style="view-transition-name: sect;">
+            <section class="sect" id="home">
                 <picture>
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
-                    <img alt="violet" width="256" height="256" class="avatar" id="lcp"
+                    <img fetchpriority="high" alt="violet" width="256" height="256" class="avatar" id="lcp"
                         src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
                 </picture>
                 <h1 style="place-self: center;font-size:2.5em">Violet</h1>
@@ -615,352 +755,77 @@
                     I mainly just worked on the background today
                 </p>
             </section>
+            <section class="sect">
+                <h1 id="artists">Favorite Artists</h1>
+                <div style="  display: grid;
+                justify-items: center;
+  grid-template-columns: repeat(2, 1fr);">
+                    [:dir('./artists/')
+                    .filter(o=>o.endsWith('.avif')).map(o=>o.split('.avif')[0])
+                    .map(o=>`
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/${o}.avif" type="image/avif">
+                            <source srcset="./artists/${o}.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/${o}.jpg" alt="${o.split('_').join(' ')}">
+                        </picture>
+                        <figcaption class="capt">${o.split('_').join(' ')}</figcaption>
+                    </figure>
+                    `)
+                    .join('')
+                    :]
+                </div>
+            </section>
         </div>
-        <div id="controls" role="tablist">
-            <button role="tab" aria-controls="frame" aria-selected="false">Background</button>
+        <nav id="controls" role="tablist">
+            <a role="tab" class="button" href="#home">Home</a>
+            <a role="tab" class="button" href="#artists">Artists</a>
+            <button role="tab" aria-controls="frame" class="button" title="View background">Background</button>
             <script>
                 document.currentScript.previousElementSibling.onclick = () => { document.querySelector('main').remove() }
             </script>
-        </div>
+        </nav>
     </main>
-    <script type="module">
-        /*:
-        `const data = ` + JSON.stringify(dir('./sprites/').map(o=>o.replace('.png','')))
-        */
-        import *as v from 'https://addsoupbase.github.io/v4.js'
-        import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
-        const { background } = v.id
-        const $ = v.esc
-        const { css } = v
-        const slideshow = `slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite`
-        let mons = []
-        let sprites = {}
-        function shiny(odds = 4000) {
-            return Math.random() * odds > odds - 1 ? ' shiny' : ''
-        }
-        async function spawnJirachi() {
-            // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
-            if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
-            let jirachi = $`<cel-runner dura="40ms" src="${sprites.jirachi_intro}" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};--local-dura: 2;" class="jirachi_intro ${shiny()}"></cel-runner>`
-                .setParent(background)
-            await jirachi.until('spriteended')
-            jirachi.classList.remove('jirachi_intro')
-            jirachi.classList.add('jirachi', 'catchable')
-            jirachi.src = sprites.jirachi
-            jirachi.dura = '18ms'
-            jirachi.animate([{ translate: `0 100vh` }], {
-                duration: 20000,
-                delay: 200,
-                // composite:'accumulate',
-                iterations: 1,
-                easing: 'linear'
-            }).onfinish = () => jirachi.purge()
-        }
-        function spawnExoticPokemon() {
-            setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
-            if (isHidden()) return
-            Math.random() > .5 ? spawnHoopaUnbound() : spawnJirachi()
-        }
-        setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
-        async function spawnHoopaUnbound() {
-            // setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
-            if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-            let hoopaUnbound = $`<cel-runner dura="18ms" data-name="hoopa_unbound" aria-hidden="true" src="${sprites.hoopa_unbound_intro}" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></cel-runner>`
-                .setParent(background)
-            await hoopaUnbound.until('spriteended')
-            hoopaUnbound.classList.remove('hoopa_unbound_intro', 'slideshowOnce')
-            hoopaUnbound.classList.add('hoopa_unbound', 'catchable')
-            hoopaUnbound.src = sprites.hoopa_unbound
-            // hoopaUnbound.style.animation = `${slideshow}`
-            hoopaUnbound.animate([{ translate: `0 100vh` }], {
-                duration: 15000,
-                delay: 600,
-                // composite:'accumulate',
-                iterations: 1,
-                easing: 'linear'
-            }).onfinish = () => hoopaUnbound.purge()
-        }
-        // spawnHoopaUnbound()
-        // setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
-        function doImages(key) {
-            let i = new Image
-            let src = i.src = `./sprites/${key}.png`
-            i.decoding = 'async'
-            i.onload = async () => {
-                let { 0: k, 1: frames } = key.split('-')
-                let blob = await (await fetch(src)).blob()
-                let url = URL.createObjectURL(blob)
-                // preload(url)
-                // $`<div class="${k} obj"></div>`.setParent(document.body)
-                if (k.endsWith('.shiny')) {
-                    css.registerCSSRaw(`.${k} {background-image: url(${url}) !important}`)
-                    preload(url)
-                }
-                else {
-                    if (!k.startsWith('boom') && !k.startsWith('pokeball')) {
-                        mons.push({ src: url, name: k })
-                        loadsprite({ src: url, x: frames, y: 1 })
-                        sprites[k] = url
-                        preload(url)
-                    }
-                    else css.registerCSSRaw(`.${k} {--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${url}); --frames: ${frames};}`)
-                }
-            }
-        }
-        data.forEach(doImages)
-        function isHidden() { return document.hidden }
-        background.delegate({
-            animationend() {
-                this.purge()
-            },
-        })
-        function preload(url) {
-            $`<link rel="preload" as="image" href="${url}">`.setParent(document.head)
-        }
-        let showedMessage = false
-        background.delegate({
-            async pointerdown(e) {
-                e.stopImmediatePropagation()
-                this.classList.remove('catchable')
-                let shiny = this.classList.contains('shiny')
-                this.style.pointerEvents = 'none'
-                this.pauseOtherAnims()
-                let { name } = this.dataset
-                this.classList.replace(name, name + '_idle')
-                this.src = sprites[name + '_idle']
-                let rect = this.getBoundingClientRect()
-                let pokemonCenterX = (rect.left - 10.75) + (rect.width / 2) - 10.5
-                let pokemonCenterY = (rect.top - 10.5) + (rect.height / 2) - 10.5
-                let n = $`<div aria-hidden="true" class="obj pokeball_throw slideshow pokeball"></div>`
-                    .setParent(background)
-                await n.animate([
-                    {
-                        transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
-                    },
-                    {
-                        transform: `translate(${pokemonCenterX}px, ${pokemonCenterY}px) scale(0.5, 0.5)`,
-                    }
-                ], {
-                    duration: Math.max(1400 - pokemonCenterY, 500),
-                    iterations: 1,
-                    fill: 'forwards',
-                    easing: 'linear'
-                }).finished
-                n.classList.remove('slideshow')
-                n.classList.replace('pokeball_throw', 'pokeball_catch')
-                n.clientHeight
-                n.style.animation = 'slideshow 4s steps(var(--frames), end)'
-                this.animate([{
-                    transform: 'scale(1,1)', filter: 'brightness(0%) invert(1) opacity(90%)'
-                }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
-                    transform: 'scale(0.25,0.25)', filter: 'opacity(0%) brightness(0%) invert(1)'
-                }], {
-                    duration: 400,
-                    iterations: 1,
-                    delay: 500,
-                    composite: 'add',
-                    easing: 'ease-in'
-                }).finished.then(() => this.purge(true))
-                await n.until('!animationend')
-                n.fadeOut().finished.then(() => {
-                    n.purge(true)
-                    if (name === 'lunala') {
-                    showMessageBox(shiny)
-                    }
-                })
-            }
-        }, o => o.matches('.catchable'), false, new AbortController)
-        background.delegate({
-            pointerdown(e) {
-                e.stopImmediatePropagation()
-                let t = +this.dataset.type
-                switch (t) {
-                    case 1: case 3: t = 2
-                        break
-                    case 2: t = 3
-                        break
-                    case 4: t = 1
-                        break
-                }
-                let rect = this.getBoundingClientRect()
-                    , translate = `${rect.left}px 0`
-                this.className = `boom${t} boom obj`
-                this.style.translate = translate
-                this.style.animation = ''
-                delete this.dataset.type
-            }
-        }, o => !isNaN(o.dataset.type))
-        //@devwindow.mons = mons
-        function spawnSpaceShip() {
-            setTimeout(spawnSpaceShip, 60 * 1000 * (Math.random() * 2))
-            if (isHidden()) return
-            let scale = Math.random()
-            let dir = Math.random() > .5
-            let o = $`<div class="spaceship spacething obj" style="${dir ? 'scale: -.8 .8;' : ''}top: ${randomY()}; animation: toRight ${40 + (Math.random() * 20)}s linear${dir ? '' : ' reverse'}"></div>`
-                .setParent(background)
-            // .onanimationend = remove
-        }
-        function remove(e) {
-            this.purge()
-        }
-        let { message, lunalapreview } = v.id
-        function showMessageBox(shiny) {
-            if (shiny) 
-                lunalapreview.src = './lunalasleepshiny.gif'
-            if (!showedMessage) {
-                showedMessage = true
-                message.style.display = 'block'
-                setTimeout(() => {
-                    message.style.scale = '1 1'
-                    setTimeout(()=>{
-                        message.style.scale = '1 0'
-                        message.on({
-                            _transitionend() {
-                                message.style.display = 'none'
-                            }
-                        })
-                    },4100)
-                })
-            }
-        }
-        // spawnSpaceShip()
-        function spawnAsteroid() {
-            setTimeout(spawnAsteroid, 3000 + (Math.random() * 1000))
-            if (isHidden()) return
-            let i = Math.floor(Math.random() * 4) + 1
-            let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${20 + (i * 5) + (Math.random() * 20)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
-                .setParent(background)
-            // .onanimationend = remove
-            // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
-        }
-        spawnAsteroid()
-        function spawnPlanet() {
-            setTimeout(spawnPlanet, 30000 + (Math.random() * 1000))
-            if (isHidden()) return
-            let i = Math.floor(Math.random() * 12) + 1
-            let asteroid = $`<div class="planet planet${i} obj debris" style="top:${randomY()};animation:float ${700 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${600 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
-                .setParent(background)
-        }
-        // setTimeout(spawnPlanet, 10000 + Math.random() * 10000)
-        function randomY() {
-            return `${Math.random() * innerHeight}px`
-        }
-        function randomX() {
-            return `${Math.random() * innerWidth}px`
-        }
-        /*function spawnSleepingPokemon() {
-            setTimeout(spawnSleepingPokemon, 3500 + (Math.random() * 1000))
-            let sleeping = mons.filter(o => o.endsWith('sleep'))
-            let pkm = sleeping[Math.floor(Math.random() * sleeping.length)]
-            if (!pkm || isHidden()) return
-            $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
-                .setParent(background)
-        }*/
-        let special = new Set(`hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
-        let legendary = new Set(`giritina2 arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
-        // spawnSleepingPokemon()
-        function spawnPokemon() {
-            setTimeout(spawnPokemon, 1600 + (Math.random() * 100))
-            let regular = mons.filter(o => !special.has(o.name) && !o.name.endsWith('_idle'))
-            let pkm = regular[Math.floor(Math.random() * regular.length)]
-            let a = 10
-            if (!pkm || isHidden()) return
-            let { name } = pkm
-            while (legendary.has(name) && document.querySelector(`.${name}`) && a--) {
-                pkm = regular[Math.floor(Math.random() * regular.length)]
-                name = pkm.name
-            }
-            let i = Math.random() > .5 ? 1 : -1
-            let scale = .7
-            let speed = 1.2
-            switch (name) {
-                case 'beheeyem':
-                case 'elgyem':
-                    scale *= 2.3
-                    speed *= 1.5
-                    break
-                case 'azelf':
-                    scale *= 1.1
-                case 'mew':
-                case 'uxie':
-                case 'mesprit':
-                    scale *= 2.2
-                    speed *= 1.5
-                    break
-                case 'minior_meteor':
-                    scale *= 2
-                    break
-                case 'deoxys_speed':
-                    speed *= 3
-                case 'deoxys_attack':
-                case 'deoxys_defense':
-                case 'deoxys':
-                    speed *= 3
-                    scale *= 2.7
-                    break
-                case 'lunala':
-                    scale *= 3
-                    break
-                case 'lunatone':
-                case 'solrock':
-                    scale *= 2.6
-                    break
-                case 'naganadel':
-                    scale *= 3
-                    speed *= 2.5
-                    break
-                case 'necrozma_ultra':
-                    scale *= 5
-                    break
-                case 'giritina2':
-                    scale *= 3.6
-                    break
-                case 'rayquaza':
-                    scale *= 2.4
-                    speed *= 2
-                    break
-                case 'necrozma':
-                    scale *= 2.3
-                    break
-                case 'arceus':
-                    scale *= 2.5
-                    break
-            }
-            scale *= i
-            let s = $`<cel-runner dura="18ms" data-name="${name}" src="${pkm.src}" aria-hidden="true" class="${pkm.name} catchable${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></cel-runner>`
-            s.setParent(background)
-                .animFrom('toRight', {
-                    duration: ((40 + Math.random() * 40) / speed) * 1000 * i,
-                    easing: 'linear',
-                    iterations: 1,
-                    direction: i === 1 ? 'normal' : 'reverse'
-                })
-        }
-        setTimeout(spawnPokemon, 300)
-    </script>
+
     <div role="alert" id="message" class="menu" style="display: none;">
-            <picture>
-                <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
-                <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
-                <img id="messagepic" style="
-    border-radius: 10px;
-margin:10px;
-height:-webkit-fill-available;
-width:auto;
-float:left;
-max-width: fit-content;
-    border-color: #ffc4ff;            
-    --user-select:none;
-                border-style:solid;
-    border-width: medium;" alt="violet" width="256" height="256"
-                    src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
-            </picture>
-            <p style="word-wrap: break-word;">Congratulations, you just caught my favourite Pokémon!</p>
-            <img id="lunalapreview" alt="lunala" src="lunalasleep.gif" style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
+        <picture>
+            <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
+            <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
+            <img id="messagepic"
+                style="border-radius: 10px;margin:10px;height:90px;width:auto;float:left;max-width: fit-content;border-color: #ffc4ff;            --user-select:none;border-style:solid;border-width: medium;"
+                alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
+        </picture>
+        <p style="word-wrap: break-word;">Congratulations, you just caught my favourite Pokémon!</p>
+        <img id="lunalapreview" alt="lunala" src="lunalasleep.gif"
+            style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
 </body>
+
 <script>
+    !function (D, h) {
+        'use strict'
+        var controls = D.getElementById('controls')
+        var startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : function (e) { setTimeout(e, 3) }
+        h.delegate(controls, {
+            click: function (e) {
+                switch (this.textContent) {
+                    case 'Background':
+                        break
+                    default:
+                        if (location.hash !== this.getAttribute('href')) {
+                            startViewTransition(function () {
+
+                            })
+                        }
+                        break
+                }
+            }
+        })
+    }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
+</script>
+<script>
+    addEventListener('load', () => import('./bg.js'))
 </script>
 
 </html>
