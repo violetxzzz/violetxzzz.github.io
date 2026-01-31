@@ -81,7 +81,7 @@
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-title" content="Violet's Page">
     <link rel="apple-touch-startup-image" href="favicon.ico">
-    <link rel="preload" as="image" href="galaxy.avif" type="image/avif">
+    <link rel="preload" as="image" href="galaxy.avif" type="image/avif" blocking="render">
     <script src="https://addsoupbase.github.io/h.js"></script>
     <title>Violet's Page</title>
     <!-- this is absolutely sick: https://deep-fold.itch.io/ -->
@@ -94,6 +94,15 @@
             font-family: HalfTerm;
             src: url('./font.woff2') format('woff2'), url('./font.woff') format('woff'), url('./font.ttf') format('ttf');
             font-display: swap;
+        }
+
+        .magnezone {
+            filter: drop-shadow(5px 5px 10px #000000) brightness(70%) blur(2px)
+        }
+
+        .magnezone,
+        .magnezone_idle {
+            transition: filter .5s ease
         }
 
         #message {
@@ -114,6 +123,7 @@
 
         .debris {
             cursor: pointer;
+            z-index: 1;
             --tap-highlight-color: transparent;
             scale: 2 2;
             /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
@@ -253,7 +263,7 @@
             z-index: 1;
             height: 100vh;
             background-size: cover, 100vw;
-            animation: drift 120s ease-in-out alternate infinite;
+            animation: drift 150s ease-in-out alternate infinite;
             background-image: url(galaxy.png);
             background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
             background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
@@ -457,11 +467,13 @@
             background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
-
         .button {
             color: black;
             background: #53e0e0;
             border-radius: 8px;
+            padding: 0 6px 0 6px;
+            justify-content: flex-start;
+            line-height: 30px;
             border: none;
             font-size: 1.2em;
             text-decoration: none;
@@ -488,18 +500,17 @@
             transform: translateY(-1px);
         }
 
-        .sect {
-            text-align: center;
-            padding: 15px;
-            width: 100%;
-            height: 100%;
-            overscroll-behavior-x: contain;
-            overflow: auto;
-            scroll-behavior: smooth;
-            scroll-snap-align: start;
-            scrollbar-width: thin;
-        }
-
+ .sect {
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    /* overscroll-behavior-x: contain; */
+    overflow: auto !important;
+    scroll-behavior: smooth;
+    scroll-snap-align: start;
+    scrollbar-width: thin;
+}
         #frame {
             flex: 1;
             overflow-x: scroll;
@@ -641,6 +652,7 @@
 
         .catchable {
             cursor: pointer;
+            z-index: 2;
             --tap-highlight-color: transparent;
         }
 
@@ -772,6 +784,15 @@
                     
                     <figure class="msc">
                         <picture>
+                            <source srcset="./artists/daniel_caeser.avif" type="image/avif">
+                            <source srcset="./artists/daniel_caeser.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/daniel_caeser.jpg" alt="daniel caeser">
+                        </picture>
+                        <figcaption class="capt">daniel caeser</figcaption>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
                             <source srcset="./artists/kanye_west.avif" type="image/avif">
                             <source srcset="./artists/kanye_west.webp" type="image/webp">
                             <img class="artist avatar" src="./artists/kanye_west.jpg" alt="kanye west">
@@ -781,11 +802,29 @@
                     
                     <figure class="msc">
                         <picture>
-                            <source srcset="./artists/frankocean.avif" type="image/avif">
-                            <source srcset="./artists/frankocean.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/frankocean.jpg" alt="frankocean">
+                            <source srcset="./artists/tyler_the_creator.avif" type="image/avif">
+                            <source srcset="./artists/tyler_the_creator.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/tyler_the_creator.jpg" alt="tyler the creator">
                         </picture>
-                        <figcaption class="capt">frankocean</figcaption>
+                        <figcaption class="capt">tyler the creator</figcaption>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/frank_ocean.avif" type="image/avif">
+                            <source srcset="./artists/frank_ocean.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/frank_ocean.jpg" alt="frank ocean">
+                        </picture>
+                        <figcaption class="capt">frank ocean</figcaption>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/brent_faiyaz.avif" type="image/avif">
+                            <source srcset="./artists/brent_faiyaz.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
+                        </picture>
+                        <figcaption class="capt">brent faiyaz</figcaption>
                     </figure>
                     
                     <figure class="msc">
@@ -799,15 +838,6 @@
                     
                     <figure class="msc">
                         <picture>
-                            <source srcset="./artists/sza.avif" type="image/avif">
-                            <source srcset="./artists/sza.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/sza.jpg" alt="sza">
-                        </picture>
-                        <figcaption class="capt">sza</figcaption>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
                             <source srcset="./artists/kendrick_lamar.avif" type="image/avif">
                             <source srcset="./artists/kendrick_lamar.webp" type="image/webp">
                             <img class="artist avatar" src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
@@ -817,38 +847,20 @@
                     
                     <figure class="msc">
                         <picture>
-                            <source srcset="./artists/daniel_ceaser.avif" type="image/avif">
-                            <source srcset="./artists/daniel_ceaser.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/daniel_ceaser.jpg" alt="daniel ceaser">
+                            <source srcset="./artists/SZA.avif" type="image/avif">
+                            <source srcset="./artists/SZA.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/SZA.jpg" alt="SZA">
                         </picture>
-                        <figcaption class="capt">daniel ceaser</figcaption>
+                        <figcaption class="capt">SZA</figcaption>
                     </figure>
                     
                     <figure class="msc">
                         <picture>
-                            <source srcset="./artists/beabobdeo.avif" type="image/avif">
-                            <source srcset="./artists/beabobdeo.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/beabobdeo.jpg" alt="beabobdeo">
+                            <source srcset="./artists/beabadoobee.avif" type="image/avif">
+                            <source srcset="./artists/beabadoobee.webp" type="image/webp">
+                            <img class="artist avatar" src="./artists/beabadoobee.jpg" alt="beabadoobee">
                         </picture>
-                        <figcaption class="capt">beabobdeo</figcaption>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/brent_fraiyaz.avif" type="image/avif">
-                            <source srcset="./artists/brent_fraiyaz.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/brent_fraiyaz.jpg" alt="brent fraiyaz">
-                        </picture>
-                        <figcaption class="capt">brent fraiyaz</figcaption>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/tyler.avif" type="image/avif">
-                            <source srcset="./artists/tyler.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/tyler.jpg" alt="tyler">
-                        </picture>
-                        <figcaption class="capt">tyler</figcaption>
+                        <figcaption class="capt">beabadoobee</figcaption>
                     </figure>
                     
                 </div>
@@ -902,7 +914,13 @@
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
 <script>
-    addEventListener('load', () => import('./bg.js'))
+    addEventListener('load', () => {
+        if (location.hash && location.hash !== '#') {
+            document.getElementById(location.hash.substring(1)).scrollIntoView({ behavior: 'smooth' })
+        }
+        import('./bg.js')
+    })
+
 </script>
 
 </html>
