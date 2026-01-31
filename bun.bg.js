@@ -177,8 +177,8 @@
             .setParent(background)
         // .onanimationend = remove
     }
-    function remove(e) {
-        this.purge()
+    function remove() {
+        v.Proxify(this).purge()
     }
     let { message, lunalapreview } = v.id
     function showMessageBox(shiny) {
@@ -207,7 +207,7 @@
         let i = Math.floor(Math.random() * 4) + 1
         let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${20 + (i * 5) + (Math.random() * 20)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
             .setParent(background)
-        // .onanimationend = remove
+        .onanimationend = remove
         // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
     }
     spawnAsteroid()
@@ -313,6 +313,7 @@
                 iterations: 1,
                 direction: i === 1 ? 'normal' : 'reverse'
             })
+            .onfinish = () => s.purge()
     }
     setTimeout(spawnPokemon, 300)
     // showMessageBox()
