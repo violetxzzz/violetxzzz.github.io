@@ -46,8 +46,8 @@ async function spawnHoopaUnbound() {
     hoopaUnbound.classList.add('hoopa_unbound', 'catchable')
     hoopaUnbound.src = sprites.hoopa_unbound
     // hoopaUnbound.style.animation = `${slideshow}`
-    hoopaUnbound.animate([{ translate: `0 100vh` }], {
-        duration: 15000,
+    hoopaUnbound.animate([{ translate: `0 140vh` }], {
+        duration: 16000,
         delay: 600,
         // composite:'accumulate',
         iterations: 1,
@@ -70,7 +70,7 @@ function doImages(key) {
             preload(url)
         }
         else {
-            if (!k.startsWith('boom') && !k.startsWith('pokeball')) {
+            if (!k.startsWith('boom') && !k.startsWith('pokeball') && k !== 'shootingstar') {
                 let t = { src: url, name: k }
                 mons.push(t)
                 let y = 1
@@ -363,3 +363,17 @@ function spawnPokemon() {
 }
 setTimeout(spawnPokemon, 300)
 // showMessageBox()
+async function spawnShootingStar() {
+    setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
+    if (isHidden()) return
+    let a =
+        $`<cel-runner class="shootingstar obj" src="./shootingstar-11.png" frames-x="9" frames-y="1" dura="100ms"></cel-runner>`
+    a.style.left = randomX()
+    a.style.top = randomY()
+    a.style.rotate = `${Math.random() * 360}deg`
+    a.style.zoom =  Math.random() * 1
+    a.setParent(background)
+    await a.until('spriteended')
+    a.purge()
+}
+setTimeout(spawnShootingStar, 10000)
