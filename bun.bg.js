@@ -1,9 +1,6 @@
 /*:
    `const data = ` + JSON.stringify(dir('./sprites/').map(o=>o.replace('.png','')))
-   */
-if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    throw Error('Reduced motion enabled')
-}
+*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
 const { background } = v.id
@@ -62,7 +59,6 @@ async function spawnHoopaUnbound() {
 function doImages(key) {
     let i = new Image
     let src = i.src = `./sprites/${key}.png`
-    i.decoding = 'async'
     i.onload = async () => {
         let { 0: k, 1: frames } = key.split('-')
         let blob = await (await fetch(src)).blob()

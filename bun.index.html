@@ -2,9 +2,12 @@
 <html lang="en">
 
 <head>
-    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })</script>
+    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
+        document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
+    </script>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://addsoupbase.github.io">
+    <link rel="preconnect" href="https://www.dropbox.com">
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
@@ -86,6 +89,11 @@
     <title>Violet's Page</title>
     <!-- this is absolutely sick: https://deep-fold.itch.io/ -->
     <noscript>
+        <style>
+            audio {
+                display: revert !important;
+            }
+        </style>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
     <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2">
@@ -467,6 +475,7 @@
             background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
+
         .button {
             color: black;
             background: #53e0e0;
@@ -500,17 +509,18 @@
             transform: translateY(-1px);
         }
 
- .sect {
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-    height: 100%;
-    /* overscroll-behavior-x: contain; */
-    overflow: auto !important;
-    scroll-behavior: smooth;
-    scroll-snap-align: start;
-    scrollbar-width: thin;
-}
+        .sect {
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            height: 100%;
+            /* overscroll-behavior-x: contain; */
+            overflow: auto !important;
+            scroll-behavior: smooth;
+            scroll-snap-align: start;
+            scrollbar-width: thin;
+        }
+
         #frame {
             flex: 1;
             overflow-x: scroll;
@@ -714,6 +724,24 @@
 
         }
 
+        /* [role="marquee"] {
+            animation: marquee 7s linear infinite;
+            overflow: hidden;
+            min-width: 0;
+            white-space: nowrap;
+            will-change: transform;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(400%);
+            }
+
+            100% {
+                transform: translateX(-400%);
+            }
+        } */
+
         @keyframes pulseIn {
             0% {
                 filter: blur(1px)
@@ -728,18 +756,28 @@
             width: 100px;
             height: auto;
             aspect-ratio: 1 / 1;
+            cursor: pointer;
             /* margin: 10px */
         }
 
         .msc {
             display: inline-grid;
             width: fit-content;
+            margin: 0
         }
 
+        /* h1,h2,h3,h4,h5,h6 {
+            display: inline;
+        } */
         .capt {
             text-transform: capitalize;
-            font-size: 1.2em;
+            /* font-size: 1.2em; */
             display: inline;
+        }
+
+        audio {
+            width: 200px;
+            max-width: 100%;
         }
 
         @media (width <=406px) {
@@ -747,7 +785,26 @@
                 font-size: .9em;
             }
         }
+
+        audio {
+            display: none;
+        }
+        cite {
+            font-style: normal;
+        }
+
+        .artist[aria-pressed="true"] {
+            -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
+            box-shadow: 0px 0px 15px 5px var(--color3);
+        }
+        figcaption {
+            transition: text-shadow .3s ease;
+        }
+        picture:has(.artist[aria-pressed="true"]) ~ figcaption {
+            text-shadow: 0px 4px 4px var(--color3);
+        }
     </style>
+
 </head>
 
 <body>
@@ -768,22 +825,88 @@
                 </p>
             </section>
             <section class="sect">
-                <h1 id="artists">Favorite Artists</h1>
-                <div style="  display: grid;
-                justify-items: center;
-  grid-template-columns: repeat(2, 1fr);">
-                    [:dir('./artists/')
+                <h1 id="artists" style="display: inline;">Favorite Music Artists</h1>
+                <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
+                <div id="musics" style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
+                    [:
+                    function n(a){
+                    let link
+                    let title = 'unknown'
+                    switch(a) {
+                    case 'kendrick_lamar':
+                    title = 'Backseat Freestyle'
+                    link =
+                    'l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a'
+                    break
+                    case 'frank_ocean':
+                    title = 'American Wedding'
+                    link =
+                    `i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8`
+                    break
+                    case 'daniel_caeser':
+                    title = 'Japanese Denim'
+                    link = `pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc`
+                    break
+                    case 'brent_faiyaz':
+                    title = 'Best Time'
+                    link =
+                    `3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56`
+                    break
+                    case 'tyler,_the_creator':
+                    title = 'Where This Flower Blooms'
+                    link =
+                    `0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk`
+                    break
+                    case 'childish_gambino':
+                    title = '3005'
+                    link = `jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy`
+                    break
+                    case 'beabadoobee':
+                    title = 'Apple Cider'
+                    link = `52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4`
+                    break
+                    case 'laufey':
+                    title = 'Lover Girl'
+                    link = 'fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2'
+                    break
+                    case 'SZA':
+                    title = '30 for 30'
+                    link = 'qtuxfwvy2zy7bfen7wi3o/30-for-30.m4a?rlkey=rp4tpocfpsohv9zbi0w89s84y&st=udpjhng4'
+                    break
+                    case 'kanye_west':
+                    title = 'Bound 2'
+                    link = `a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6`
+                    break
+                    case 'A$AP_rocky':
+                    title = 'Fashion Killa'
+                    link = `giufeufznk8c8w2ptn3tn/Fashion-Killa.m4a?rlkey=4yvs2suimfekzq3w25g4ex70o&st=u9kuuzzo`
+                    break
+                    case 'J._cole':
+                    title = 'Wet Dreamz'
+                    link = '3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k'
+                    break
+                    }
+                    return {src: 'https://www.dropbox.com/scl/fi/' + link + '&dl=1', title}
+                    }
+                    dir('./artists/')
                     .filter(o=>o.endsWith('.avif')).map(o=>o.split('.avif')[0])
-                    .map(o=>`
+                    .map(o=>{
+                    let {title, src} = n(o)
+                    let artist = o.split('_').join(' ')
+                    return`
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/${o}.avif" type="image/avif">
                             <source srcset="./artists/${o}.webp" type="image/webp">
-                            <img class="artist avatar" src="./artists/${o}.jpg" alt="${o.split('_').join(' ')}">
+                            <img aria-pressed="false" data-plays="${title}" draggable="false" role="button"
+                                title="Click to play ${title} by ${artist}" class="artist avatar"
+                                src="./artists/${o}.jpg" alt="${artist}">
                         </picture>
-                        <figcaption class="capt">${o.split('_').join(' ')}</figcaption>
+                        <figcaption class="capt"><cite>${artist}</cite></figcaption>
+                        <noscript><small><cite>${title}</cite></small></noscript>
+                        <audio controls src="${src}" preload="none" title="${title}"></audio>
                     </figure>
-                    `)
+                    `})
                     .join('')
                     :]
                 </div>
@@ -807,7 +930,7 @@
                 style="border-radius: 10px;margin:10px;height:90px;width:auto;float:left;max-width: fit-content;border-color: #ffc4ff;            --user-select:none;border-style:solid;border-width: medium;"
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
-        <p style="word-wrap: break-word;">Congratulations, you just caught my favourite Pokémon!</p>
+        <p style="word-wrap: break-word;">Congratulations, you just caught my favorite Pokémon!</p>
         <img id="lunalapreview" alt="lunala" src="lunalasleep.gif"
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
@@ -817,6 +940,10 @@
     !function (D, h) {
         'use strict'
         var controls = D.getElementById('controls')
+        var nowplaying = D.getElementById('nowplaying')
+        var musics = D.getElementById('musics')
+        var musicButtons = [].slice.call(musics.getElementsByTagName('img'))
+        var audios = [].slice.call(musics.getElementsByTagName('audio'))
         var startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : function (e) { setTimeout(e, 3) }
         h.delegate(controls, {
             click: function (e) {
@@ -824,26 +951,48 @@
                     case 'Background':
                         break
                     default:
-                        if (location.hash !== this.getAttribute('href')) {
-                            startViewTransition(function () {
-
-                            })
-                        }
+                        if (location.hash !== this.getAttribute('href'))
+                            startViewTransition()
                         break
                 }
             }
         })
+        h.delegate(musics, {
+            click: function () {
+                var current = this.dataset.plays
+                var alt = this.alt
+                var that = this
+                musicButtons.forEach(function (e) {
+                    e.setAttribute('aria-pressed', e === that)
+                })
+                audios.forEach(function (e) {
+                    if (e.title === current) {
+                        if (e.paused) {
+                            e.currentTime = 0
+                            e.load()
+                            e.play()
+                            nowplaying.textContent = 'Now playing: ' + e.title
+                            return
+                        }
+                        nowplaying.textContent = 'Click to play!'
+                        that.setAttribute('aria-pressed', false)
+                    }
+                    e.pause()
+                })
+            }
+        }, function (o) { return o.matches('.artist') })
     }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
 <script>
     addEventListener('load', () => {
-        if (location.hash && location.hash !== '#') {
-            document.getElementById(location.hash.substring(1)).scrollIntoView({ behavior: 'smooth' })
-        }
-        import('./bg.js')
+        'use strict'
+        let reduced = document.documentElement.dataset.reducedMotion === 'true',
+            { hash } = location
+        if (hash && hash !== '#')
+            document.getElementById(hash.substring(1)).scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' })
+        reduced || import('./bg.js')
     })
-
 </script>
 
 </html>
