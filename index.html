@@ -8,9 +8,6 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://addsoupbase.github.io">
     <link rel="preconnect" href="https://www.dropbox.com">
-    <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
-    <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
-    <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <meta http-equiv="content-language" content="en">
@@ -96,7 +93,10 @@
         </style>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
-    <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2">
+    <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
+    <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
+    <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
+    <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <style>
         @font-face {
             font-family: HalfTerm;
@@ -265,6 +265,7 @@
         }
 
         #background {
+            will-change: background-position-x;
             --user-select: none;
             position: fixed;
             width: 100vw;
@@ -291,16 +292,36 @@
                     background-position-x: 100%;
                 }
             }
+            @keyframes pulseIn {
+                0% {
+                    filter: blur(1px)
+                }
 
+                100% {
+                    filter: blur(0)
+                }
+            }
+            @keyframes pulseOut {
+                0% {
+                    opacity: .3;
+                    transform: scale(1);
+                    filter: brightness(1);
+                }
+
+                100% {
+                    transform: scale(1.08);
+                    opacity: 0;
+                    filter: brightness(2);
+                }
+
+            }
             ::view-transition-old(sect) {
                 animation: pulseOut 0.5s ease-out .5s;
 
             }
-
             ::view-transition-new(sect) {
                 animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
             }
-
         }
 
         .boom {
@@ -376,6 +397,8 @@
             --color5: #F9FF6C;
             --color6: #F7FF39;
             --animspeed: .1s;
+            --global-frame-dura: 22ms;
+            --tap-highlight-color: rgba(189, 108, 255, 0.18);
         }
 
         main {
@@ -392,48 +415,6 @@
             /* overflow: hidden; */
         }
 
-        /*
-        .hooparing {
-            --size: 60px;
-            width: var(--size);
-            height: var(--size);
-            background-size: contain;
-            filter: brightness(1.2) hue-rotate(285deg);
-            border: 3px solid #00ff2a;
-            background-color: black;
-            background-image: url(./hoopabg.png);
-            background-image: -webkit-image-set(url("hoopabg.avif") type("image/avif"), url("hoopabg.webp") type("image/webp"));
-            background-image: image-set(url("hoopabg.avif") type("image/avif"), url("hoopabg.webp") type("image/webp"));
-            border-radius: 50%;
-            position: absolute;
-            left: calc(var(--size) * -.5);
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 0;
-        }
-        .clipped {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .hoopa {
-            position: absolute;
-            font-size: 3em;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: through-portal 4s linear infinite;
-        }*/
-        @keyframes through-portal {
-            0% {
-                left: -100px;
-            }
-
-            100% {
-                left: 100%;
-            }
-        }
-
         .container {
             width: 500px;
             height: 500px;
@@ -448,8 +429,6 @@
             margin: 0 2px 0 2px;
             max-width: 100px;
         }
-
-        button[role=tab]:hover {}
 
         #frame,
         .menu,
@@ -536,8 +515,6 @@
             scroll-snap-type: both mandatory;
         }
 
-
-
         .menu,
         .sect {
             /* border: 5px solid var(--color2); */
@@ -551,7 +528,7 @@
             border-radius: 100%;
             isolation: isolate;
             corner-shape: squircle;
-            aspect-ratio: 1;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
             border: 3px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -641,9 +618,6 @@
             animation: slideshow calc(var(--frames) * var(--global-frame-dura) * var(--local-dura, 1)) steps(var(--frames), end);
         }
 
-        :root {
-            --global-frame-dura: 22ms
-        }
 
         @keyframes glide {
             0% {
@@ -666,8 +640,7 @@
             --tap-highlight-color: transparent;
         }
 
-        .mew.shiny,
-        .mew_idle.shiny {
+        :is(.mew, .mew_idle).shiny {
             filter: hue-rotate(236deg)
         }
 
@@ -689,7 +662,7 @@
         .hoopa_unbound_intro,
         .hoopa_unbound_idle {
             z-index: 1;
-            scale: 1.9 1.9;
+            scale: 4 4;
         }
 
         .jirachi,
@@ -708,21 +681,7 @@
         }
 
 
-        @keyframes pulseOut {
-            0% {
-                opacity: .3;
-                transform: scale(1);
-                filter: brightness(1);
-            }
 
-
-            100% {
-                transform: scale(1.08);
-                opacity: 0;
-                filter: brightness(2);
-            }
-
-        }
 
         /* [role="marquee"] {
             animation: marquee 7s linear infinite;
@@ -742,15 +701,6 @@
             }
         } */
 
-        @keyframes pulseIn {
-            0% {
-                filter: blur(1px)
-            }
-
-            100% {
-                filter: blur(0)
-            }
-        }
 
         .artist {
             width: 100px;
@@ -778,6 +728,7 @@
         audio {
             width: 200px;
             max-width: 100%;
+            display: none;
         }
 
         @media (width <=406px) {
@@ -786,9 +737,6 @@
             }
         }
 
-        audio {
-            display: none;
-        }
         cite {
             font-style: normal;
         }
@@ -797,10 +745,12 @@
             -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
             box-shadow: 0px 0px 15px 5px var(--color3);
         }
+
         figcaption {
             transition: text-shadow .3s ease;
         }
-        picture:has(.artist[aria-pressed="true"]) ~ figcaption {
+
+        picture:has(.artist[aria-pressed="true"])~figcaption {
             text-shadow: 0px 4px 4px var(--color3);
         }
     </style>
@@ -827,15 +777,16 @@
             <section class="sect">
                 <h1 id="artists" style="display: inline;">Favorite Music Artists</h1>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
-                <div id="musics" style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
+                <div id="musics"
+                    style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
                     
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/childish_gambino.avif" type="image/avif">
                             <source srcset="./artists/childish_gambino.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="3005" draggable="false" role="button"
-                                title="Click to play 3005 by childish gambino" class="artist avatar"
-                                src="./artists/childish_gambino.jpg" alt="childish gambino">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="3005"
+                                draggable="false" role="button" title="Click to play 3005 by childish gambino"
+                                class="artist avatar" src="./artists/childish_gambino.jpg" alt="childish gambino">
                         </picture>
                         <figcaption class="capt"><cite>childish gambino</cite></figcaption>
                         <noscript><small><cite>3005</cite></small></noscript>
@@ -846,9 +797,9 @@
                         <picture>
                             <source srcset="./artists/daniel_caeser.avif" type="image/avif">
                             <source srcset="./artists/daniel_caeser.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Japanese Denim" draggable="false" role="button"
-                                title="Click to play Japanese Denim by daniel caeser" class="artist avatar"
-                                src="./artists/daniel_caeser.jpg" alt="daniel caeser">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Japanese Denim"
+                                draggable="false" role="button" title="Click to play Japanese Denim by daniel caeser"
+                                class="artist avatar" src="./artists/daniel_caeser.jpg" alt="daniel caeser">
                         </picture>
                         <figcaption class="capt"><cite>daniel caeser</cite></figcaption>
                         <noscript><small><cite>Japanese Denim</cite></small></noscript>
@@ -859,9 +810,9 @@
                         <picture>
                             <source srcset="./artists/A$AP_rocky.avif" type="image/avif">
                             <source srcset="./artists/A$AP_rocky.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Fashion Killa" draggable="false" role="button"
-                                title="Click to play Fashion Killa by A$AP rocky" class="artist avatar"
-                                src="./artists/A$AP_rocky.jpg" alt="A$AP rocky">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Fashion Killa"
+                                draggable="false" role="button" title="Click to play Fashion Killa by A$AP rocky"
+                                class="artist avatar" src="./artists/A$AP_rocky.jpg" alt="A$AP rocky">
                         </picture>
                         <figcaption class="capt"><cite>A$AP rocky</cite></figcaption>
                         <noscript><small><cite>Fashion Killa</cite></small></noscript>
@@ -872,9 +823,9 @@
                         <picture>
                             <source srcset="./artists/J._cole.avif" type="image/avif">
                             <source srcset="./artists/J._cole.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Wet Dreamz" draggable="false" role="button"
-                                title="Click to play Wet Dreamz by J. cole" class="artist avatar"
-                                src="./artists/J._cole.jpg" alt="J. cole">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Wet Dreamz"
+                                draggable="false" role="button" title="Click to play Wet Dreamz by J. cole"
+                                class="artist avatar" src="./artists/J._cole.jpg" alt="J. cole">
                         </picture>
                         <figcaption class="capt"><cite>J. cole</cite></figcaption>
                         <noscript><small><cite>Wet Dreamz</cite></small></noscript>
@@ -885,9 +836,9 @@
                         <picture>
                             <source srcset="./artists/kanye_west.avif" type="image/avif">
                             <source srcset="./artists/kanye_west.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Bound 2" draggable="false" role="button"
-                                title="Click to play Bound 2 by kanye west" class="artist avatar"
-                                src="./artists/kanye_west.jpg" alt="kanye west">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Bound 2"
+                                draggable="false" role="button" title="Click to play Bound 2 by kanye west"
+                                class="artist avatar" src="./artists/kanye_west.jpg" alt="kanye west">
                         </picture>
                         <figcaption class="capt"><cite>kanye west</cite></figcaption>
                         <noscript><small><cite>Bound 2</cite></small></noscript>
@@ -898,9 +849,9 @@
                         <picture>
                             <source srcset="./artists/tyler,_the_creator.avif" type="image/avif">
                             <source srcset="./artists/tyler,_the_creator.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Where This Flower Blooms" draggable="false" role="button"
-                                title="Click to play Where This Flower Blooms by tyler, the creator" class="artist avatar"
-                                src="./artists/tyler,_the_creator.jpg" alt="tyler, the creator">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Where This Flower Blooms"
+                                draggable="false" role="button" title="Click to play Where This Flower Blooms by tyler, the creator"
+                                class="artist avatar" src="./artists/tyler,_the_creator.jpg" alt="tyler, the creator">
                         </picture>
                         <figcaption class="capt"><cite>tyler, the creator</cite></figcaption>
                         <noscript><small><cite>Where This Flower Blooms</cite></small></noscript>
@@ -911,9 +862,9 @@
                         <picture>
                             <source srcset="./artists/frank_ocean.avif" type="image/avif">
                             <source srcset="./artists/frank_ocean.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="American Wedding" draggable="false" role="button"
-                                title="Click to play American Wedding by frank ocean" class="artist avatar"
-                                src="./artists/frank_ocean.jpg" alt="frank ocean">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="American Wedding"
+                                draggable="false" role="button" title="Click to play American Wedding by frank ocean"
+                                class="artist avatar" src="./artists/frank_ocean.jpg" alt="frank ocean">
                         </picture>
                         <figcaption class="capt"><cite>frank ocean</cite></figcaption>
                         <noscript><small><cite>American Wedding</cite></small></noscript>
@@ -924,9 +875,9 @@
                         <picture>
                             <source srcset="./artists/brent_faiyaz.avif" type="image/avif">
                             <source srcset="./artists/brent_faiyaz.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Best Time" draggable="false" role="button"
-                                title="Click to play Best Time by brent faiyaz" class="artist avatar"
-                                src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Best Time"
+                                draggable="false" role="button" title="Click to play Best Time by brent faiyaz"
+                                class="artist avatar" src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
                         </picture>
                         <figcaption class="capt"><cite>brent faiyaz</cite></figcaption>
                         <noscript><small><cite>Best Time</cite></small></noscript>
@@ -937,9 +888,9 @@
                         <picture>
                             <source srcset="./artists/laufey.avif" type="image/avif">
                             <source srcset="./artists/laufey.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Lover Girl" draggable="false" role="button"
-                                title="Click to play Lover Girl by laufey" class="artist avatar"
-                                src="./artists/laufey.jpg" alt="laufey">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Lover Girl"
+                                draggable="false" role="button" title="Click to play Lover Girl by laufey"
+                                class="artist avatar" src="./artists/laufey.jpg" alt="laufey">
                         </picture>
                         <figcaption class="capt"><cite>laufey</cite></figcaption>
                         <noscript><small><cite>Lover Girl</cite></small></noscript>
@@ -950,9 +901,9 @@
                         <picture>
                             <source srcset="./artists/kendrick_lamar.avif" type="image/avif">
                             <source srcset="./artists/kendrick_lamar.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Backseat Freestyle" draggable="false" role="button"
-                                title="Click to play Backseat Freestyle by kendrick lamar" class="artist avatar"
-                                src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Backseat Freestyle"
+                                draggable="false" role="button" title="Click to play Backseat Freestyle by kendrick lamar"
+                                class="artist avatar" src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
                         </picture>
                         <figcaption class="capt"><cite>kendrick lamar</cite></figcaption>
                         <noscript><small><cite>Backseat Freestyle</cite></small></noscript>
@@ -963,9 +914,9 @@
                         <picture>
                             <source srcset="./artists/SZA.avif" type="image/avif">
                             <source srcset="./artists/SZA.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="30 for 30" draggable="false" role="button"
-                                title="Click to play 30 for 30 by SZA" class="artist avatar"
-                                src="./artists/SZA.jpg" alt="SZA">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="30 for 30"
+                                draggable="false" role="button" title="Click to play 30 for 30 by SZA"
+                                class="artist avatar" src="./artists/SZA.jpg" alt="SZA">
                         </picture>
                         <figcaption class="capt"><cite>SZA</cite></figcaption>
                         <noscript><small><cite>30 for 30</cite></small></noscript>
@@ -976,9 +927,9 @@
                         <picture>
                             <source srcset="./artists/beabadoobee.avif" type="image/avif">
                             <source srcset="./artists/beabadoobee.webp" type="image/webp">
-                            <img aria-pressed="false" data-plays="Apple Cider" draggable="false" role="button"
-                                title="Click to play Apple Cider by beabadoobee" class="artist avatar"
-                                src="./artists/beabadoobee.jpg" alt="beabadoobee">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Apple Cider"
+                                draggable="false" role="button" title="Click to play Apple Cider by beabadoobee"
+                                class="artist avatar" src="./artists/beabadoobee.jpg" alt="beabadoobee">
                         </picture>
                         <figcaption class="capt"><cite>beabadoobee</cite></figcaption>
                         <noscript><small><cite>Apple Cider</cite></small></noscript>

@@ -21,7 +21,7 @@ async function spawnJirachi() {
     jirachi.classList.remove('jirachi_intro')
     jirachi.classList.add('jirachi', 'catchable')
     jirachi.src = sprites.jirachi
-    jirachi.dura = '18ms'
+    jirachi.dura = '15ms'
     jirachi.animate([{ translate: `0 100vh` }], {
         duration: 20000,
         delay: 200,
@@ -39,7 +39,7 @@ setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 async function spawnHoopaUnbound() {
     // setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-    let hoopaUnbound = $`<cel-runner dura="18ms" data-name="hoopa_unbound" aria-hidden="true" src="${sprites.hoopa_unbound_intro}" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></cel-runner>`
+    let hoopaUnbound = $`<cel-runner dura="15ms" data-name="hoopa_unbound" aria-hidden="true" src="${sprites.hoopa_unbound_intro}" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></cel-runner>`
         .setParent(background)
     await hoopaUnbound.until('spriteended')
     hoopaUnbound.classList.remove('hoopa_unbound_intro', 'slideshowOnce')
@@ -249,7 +249,7 @@ function spawnPokemon() {
     let a = 10
     if (!pkm || isHidden()) return
     let { name } = pkm
-    while (legendary.has(name) && document.querySelector(`.${name}`) && a--) {
+    while (a-- && legendary.has(name) && document.querySelector(`.${name}`)) {
         pkm = regular[Math.floor(Math.random() * regular.length)]
         name = pkm.name
     }
@@ -257,10 +257,20 @@ function spawnPokemon() {
     let scale = .7
     let index = 0
     let speed = 1.2
+    let dur = 15
     switch (name) {
+        case 'duosion':
+            scale *= 2.3
+            break
+        case 'reuniclus':
+            scale *= 2.5
+            break
         case 'kartana':
+            scale *= 3
+            break
+        case 'solosis':
         case 'duskull':
-            scale *= 1.9
+            scale *= 2.2
             break
         case 'beheeyem':
         case 'elgyem':
@@ -282,10 +292,12 @@ function spawnPokemon() {
             index = Math.floor(Math.random() * 8)
         case 'minior_meteor':
         case 'poipole':
+            scale *= 2.5
+            break
         case 'celesteela':
         case 'nihilego':
         case 'dusknoir':
-            scale *= 2
+            scale *= 3
             break
         case 'deoxys_speed':
             speed *= 3
@@ -296,10 +308,14 @@ function spawnPokemon() {
             speed *= 3
             scale *= 2.7
             break
+        case 'eternatus':
+            scale *= 11
+            speed *= .2
+            dur = 30
+            break
         case 'lunala':
         case 'reshiram':
         case 'zekrom':
-        case 'eternatus':
             scale *= 3
             break
         case 'buzzwole':
@@ -310,7 +326,7 @@ function spawnPokemon() {
             scale *= 2.6
             break
         case 'naganadel':
-            scale *= 3
+            scale *= 3.5
             speed *= 2.5
             break
         case 'necrozma_ultra':
@@ -330,12 +346,12 @@ function spawnPokemon() {
             scale *= 3.4
             break
         case 'unown':
-            scale *= 2
+            scale *= 2.3
             index = Math.floor(Math.random() * 29)
             break
     }
     scale *= i
-    let s = $`<cel-runner index="${index}" dura="18ms" data-name="${name}" src="${pkm.src}" aria-hidden="true" class="${pkm.name} catchable${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></cel-runner>`
+    let s = $`<cel-runner index="${index}" dura="${dur}ms" data-name="${name}" src="${pkm.src}" aria-hidden="true" class="${pkm.name} catchable${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></cel-runner>`
     s.setParent(background)
         .animFrom('toRight', {
             duration: ((40 + Math.random() * 40) / speed) * 1000 * i,
