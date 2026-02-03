@@ -262,10 +262,14 @@ function spawnPokemon() {
         case 'duosion':
             scale *= 2.3
             break
+        case 'claydol':
+            scale *= 2.8
+            break
         case 'reuniclus':
             scale *= 2.5
             break
         case 'kartana':
+        case 'orbeetle':
             scale *= 3
             break
         case 'solosis':
@@ -292,6 +296,7 @@ function spawnPokemon() {
             index = Math.floor(Math.random() * 8)
         case 'minior_meteor':
         case 'poipole':
+        case 'beldum':
             scale *= 2.5
             break
         case 'celesteela':
@@ -323,7 +328,9 @@ function spawnPokemon() {
             break
         case 'lunatone':
         case 'solrock':
-            scale *= 2.6
+        case 'bronzong':
+        case 'metang':
+            scale *= 2.8
             break
         case 'naganadel':
             scale *= 3.5
@@ -336,7 +343,7 @@ function spawnPokemon() {
             scale *= 3.6
             break
         case 'rayquaza':
-            scale *= 2.4
+            scale *= 2.77
             speed *= 2
             break
         case 'necrozma':
@@ -348,6 +355,10 @@ function spawnPokemon() {
         case 'unown':
             scale *= 2.3
             index = Math.floor(Math.random() * 29)
+            break
+        case 'bronzor':
+        case 'baltoy':
+            scale *= 1.8
             break
     }
     scale *= i
@@ -371,7 +382,7 @@ async function spawnShootingStar() {
     a.style.left = randomX()
     a.style.top = randomY()
     a.style.rotate = `${Math.random() * 360}deg`
-    a.style.zoom =  Math.random() * 1
+    a.style.zoom = Math.random() * 1
     a.setParent(background)
     await a.until('spriteended')
     a.purge()

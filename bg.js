@@ -1,4 +1,4 @@
-const data = ["arceus_idle.shiny-72","minior_core_idle-96","hoopa_unbound_intro-268","uxie_idle-72","dusknoir-48","lunala_idle.shiny-52","minior_meteor_idle-96","nihilego_idle-62","beheeyem-48","cosmoem-56","poipole_idle-36","deoxys_defense-48","beheeyem_idle-80","elgyem-56","mew-48","jirachi_idle-40","reshiram-36","necrozma_idle.shiny-142","lunatone-48","giritina2-96","deoxys_attack_idle-57","necrozma_idle-142","arceus_idle-72","mewtwo-48","duosion-60","jirachi_intro-180","elgyem_idle-72","deoxys_attack-80","necrozma.shiny","naganadel_idle-60","jirachi.shiny-54","minior_core-96","mesprit-56","elgyem.shiny-56","pokeball_catch-57","duosion_idle-48","arceus-72","uxie-56","deoxys_defense_idle-56","solrock-60","minior_meteor-96","hoopa_idle-88","hoopa-62","hoopa_unbound-71","deoxys_idle-96","azelf_idle-72","elgyem_idle.shiny-72","solosis-56","zekrom_idle-102","boom3-4","rayquaza_idle-48","kartana-32","unown_idle-56","rayquaza-74","jirachi_intro.shiny-180","hoopa_unbound_intro.shiny","celesteela-96","pokeball_throw-8","kartana_idle-64","reuniclus-64","reshiram_idle-118","deoxys-64","eternatus_idle-40","jirachi-54","buzzwole-36","giritina2_idle-96","poipole-40","necrozma-71","cosmoem_idle-56","dusknoir_idle-116","celesteela_idle-162","buzzwole_idle-336","naganadel-32","mewtwo_idle-72","boom1-4","azelf-56","reuniclus_idle-96","lunatone_idle-64","solosis_idle-46","mew_idle-40","duskull_idle-80","hoopa_unbound_idle-71","boom2-4","hoopa_unbound_idle.shiny-71","deoxys_speed-28","solrock_idle-48","unown-56","hoopa_unbound.shiny-71","zekrom-80","jirachi_idle.shiny-40","nihilego-62","rayquaza.shiny-74","lunala-40","lunala_idle-52","mesprit_idle-72","arceus.shiny-72","duskull-48","deoxys_speed_idle-28","rayquaza_idle.shiny-48","lunala.shiny","eternatus-48"]
+const data = ["arceus_idle.shiny-72","beldum-64","minior_core_idle-96","hoopa_unbound_intro-268","uxie_idle-72","dusknoir-48","lunala_idle.shiny-52","minior_meteor_idle-96","nihilego_idle-62","beheeyem-48","cosmoem-56","poipole_idle-36","deoxys_defense-48","beheeyem_idle-80","elgyem-56","mew-48","baltoy_idle-48","jirachi_idle-40","reshiram-36","necrozma_idle.shiny-142","lunatone-48","giritina2-96","deoxys_attack_idle-57","necrozma_idle-142","arceus_idle-72","mewtwo-48","duosion-60","jirachi_intro-180","metang-64","elgyem_idle-72","deoxys_attack-80","necrozma.shiny","naganadel_idle-60","jirachi.shiny-54","minior_core-96","mesprit-56","elgyem.shiny-56","pokeball_catch-57","duosion_idle-48","arceus-72","uxie-56","deoxys_defense_idle-56","solrock-60","minior_meteor-96","hoopa_idle-88","hoopa-62","hoopa_unbound-71","deoxys_idle-96","azelf_idle-72","elgyem_idle.shiny-72","solosis-56","zekrom_idle-102","boom3-4","rayquaza_idle-48","unown_idle-56","rayquaza-74","jirachi_intro.shiny-180","hoopa_unbound_intro.shiny","celesteela-96","pokeball_throw-8","reuniclus-64","reshiram_idle-118","deoxys-64","metang_idle-96","orbeetle_idle-62","eternatus_idle-40","jirachi-54","buzzwole-36","giritina2_idle-96","poipole-40","necrozma-71","claydol-64","cosmoem_idle-56","dusknoir_idle-116","celesteela_idle-162","buzzwole_idle-336","naganadel-32","baltoy-80","mewtwo_idle-72","boom1-4","azelf-56","reuniclus_idle-96","lunatone_idle-64","solosis_idle-46","beldum_idle-80","mew_idle-40","duskull_idle-80","hoopa_unbound_idle-71","orbeetle-40","boom2-4","hoopa_unbound_idle.shiny-71","deoxys_speed-28","solrock_idle-48","unown-56","hoopa_unbound.shiny-71","zekrom-80","claydol_idle-16","jirachi_idle.shiny-40","nihilego-62","rayquaza.shiny-74","lunala-40","lunala_idle-52","mesprit_idle-72","arceus.shiny-72","duskull-48","deoxys_speed_idle-28","rayquaza_idle.shiny-48","lunala.shiny","eternatus-48"]
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
 const { background } = v.id
@@ -260,10 +260,14 @@ function spawnPokemon() {
         case 'duosion':
             scale *= 2.3
             break
+        case 'claydol':
+            scale *= 2.8
+            break
         case 'reuniclus':
             scale *= 2.5
             break
         case 'kartana':
+        case 'orbeetle':
             scale *= 3
             break
         case 'solosis':
@@ -290,6 +294,7 @@ function spawnPokemon() {
             index = Math.floor(Math.random() * 8)
         case 'minior_meteor':
         case 'poipole':
+        case 'beldum':
             scale *= 2.5
             break
         case 'celesteela':
@@ -321,7 +326,9 @@ function spawnPokemon() {
             break
         case 'lunatone':
         case 'solrock':
-            scale *= 2.6
+        case 'bronzong':
+        case 'metang':
+            scale *= 2.8
             break
         case 'naganadel':
             scale *= 3.5
@@ -334,7 +341,7 @@ function spawnPokemon() {
             scale *= 3.6
             break
         case 'rayquaza':
-            scale *= 2.4
+            scale *= 2.77
             speed *= 2
             break
         case 'necrozma':
@@ -346,6 +353,10 @@ function spawnPokemon() {
         case 'unown':
             scale *= 2.3
             index = Math.floor(Math.random() * 29)
+            break
+        case 'bronzor':
+        case 'baltoy':
+            scale *= 1.8
             break
     }
     scale *= i
@@ -369,7 +380,7 @@ async function spawnShootingStar() {
     a.style.left = randomX()
     a.style.top = randomY()
     a.style.rotate = `${Math.random() * 360}deg`
-    a.style.zoom =  Math.random() * 1
+    a.style.zoom = Math.random() * 1
     a.setParent(background)
     await a.until('spriteended')
     a.purge()

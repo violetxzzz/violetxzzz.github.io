@@ -89,8 +89,21 @@
         <style>
             audio {
                 display: revert !important;
+                margin-block: 10px;
             }
-        </style>
+
+            #hide {
+                display: none;
+            }
+ 
+            audio::-webkit-media-controls-panel {
+                background-color: var(--color2);
+            }
+            audio::-webkit-media-controls-enclosure {
+                border-radius: 0;
+            }
+
+         </style>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
     <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
@@ -390,6 +403,10 @@
             background-repeat: no-repeat;
         }
 
+        .shootingstar {
+            z-index: 0 !important;
+        }
+
         .spacething {
             background-image: url(./space.png);
         }
@@ -481,6 +498,7 @@
 
         #frame,
         .menu,
+        audio,
         #controls {
             background: #9553e0;
             background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
@@ -615,6 +633,7 @@
         #intro {
             text-align: right;
         }
+
         @media screen and (width < 440px) {
             #lcp {
                 float: none;
@@ -721,7 +740,7 @@
         .hoopa_unbound_intro,
         .hoopa_unbound_idle {
             z-index: 1;
-            scale: 3 3;
+            scale: 3.3 3.3;
         }
 
         .jirachi,
@@ -793,9 +812,11 @@
                 font-size: .9em;
             }
         }
+
         cite {
             font-style: normal;
         }
+
         .artist[aria-pressed="true"] {
             -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
             box-shadow: 0px 0px 15px 5px var(--color3);
@@ -805,14 +826,16 @@
             transition: text-shadow .3s ease;
         }
 
-        picture:has(.artist[aria-pressed="true"])~figcaption {
+        picture:has(:where(.artist[aria-pressed="true"], audio:playing))+figcaption {
             text-shadow: 0px 4px 4px var(--color3);
         }
-        a:not(.button) {
-            filter:hue-rotate(-30deg) 
+
+        a[target] {
+            filter: hue-rotate(-30deg)
         }
     </style>
 </head>
+
 <body>
     <main class="center_screen">
         <div id="frame" class="menu" style="view-transition-name: sect;">
@@ -828,7 +851,8 @@
                         <h1 style="place-self: center;font-size:2.5em;display: inline;">Violet</h1>
                     </div>
                     <p style="margin: 10px;place-self:end;" id="intro">Hii, I’m Violet!!
-                        Welcome to my amazing website, made by Missy (<cite><a target="_blank" rel="author" href="https://addsoupbase.github.io">addsoupbase</a></cite>) ✨</p>
+                        Welcome to my amazing website, made by Missy (<cite><a target="_blank" rel="author"
+                                href="https://addsoupbase.github.io">addsoupbase</a></cite>) ✨</p>
                     <h2>Here’s some general info about me:</h2>
                     <ul>
                         <li>Name: Violet</li>
@@ -866,7 +890,8 @@
                     <h2>My favorite manga:</h2>
                     <cite
                         style="display: block; font-size: xx-large;margin-block: 10px;"><strong>Vagabond</strong></cite>
-                    <p><cite>Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his journey of self-discovery. It
+                    <p><cite>Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his journey of
+                        self-discovery. It
                         focuses more on inner struggles, personal growth, and what it truly means to be strong rather
                         than
                         just fighting. It’s my favorite because it feels deep, raw, and philosophical—it makes you think
@@ -886,8 +911,10 @@
                         themselves—and that’s why they turn into fucking bastards.</p>
                     <hr>
                     <h2>🌙 Something You Might Not Know About Me</h2>
-                    <p>My actual name isn’t Violet. I got inspired by the name after watching my favorite anime, <cite>Violet
-                        Evergarden</cite>. After that, I started using the name Violet everywhere online.</p>
+                    <p>My actual name isn’t Violet. I got inspired by the name after watching my favorite anime,
+                        <cite>Violet
+                            Evergarden</cite>. After that, I started using the name Violet everywhere online.
+                    </p>
                     <h3>My actual name:</h3>
                     <p>It’s <strong>Narin</strong>, but people around me call me Nala, so I don’t really get to hear my
                         actual name often 😭</p>
@@ -1061,10 +1088,7 @@
         <nav id="controls" role="tablist">
             <a role="tab" class="button" href="#home">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
-            <button role="tab" aria-controls="frame" class="button" title="View background">Background</button>
-            <script>
-                document.currentScript.previousElementSibling.onclick = function () { document.querySelector('main').remove() }
-            </script>
+            <button aria-controls="frame" class="button" title="View background" id="hide">Background</button>
         </nav>
     </main>
     <div role="alert" id="message" class="menu" style="display: none;">
@@ -1080,8 +1104,10 @@
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
+    <button class="button"
+        style="translate: 0 100px;position: fixed;left:30px;bottom:30px;z-index: 9;scale:1.3 1.3;visibility: hidden;"
+        id="show">Show</button>
 </body>
-
 <script>
     !function (D, h) {
         'use strict'
@@ -1091,7 +1117,30 @@
             , musics = D.getElementById('musics')
             , musicButtons = [].slice.call(musics.getElementsByTagName('img'))
             , audios = [].slice.call(musics.getElementsByTagName('audio'))
-            , startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : function (e) { setTimeout(e, 3) }
+            , startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : Function.prototype
+            , show = D.getElementById('show')
+            , hide = D.getElementById('hide')
+            , main = D.querySelector('main')
+        h.debounce(hide, {
+            click: function () {
+                show.style.visibility = 'visible'
+                show.style.translate = '0 0'
+                main.style.display = 'none'
+                hide.toggleAttribute('inert', true)
+                show.toggleAttribute('inert', false)
+            }
+        }, 1000)
+        h.debounce(show, {
+            click: function () {
+                main.style.display = ''
+                show.style.translate = '0 100px'
+                show.toggleAttribute('inert', true)
+                hide.toggleAttribute('inert', false)
+                setTimeout(function () {
+                    show.style.visibility = 'hidden'
+                }, 300)
+            }
+        }, 1000)
         h.delegate(controls, {
             click: function (e) {
                 switch (this.textContent) {
