@@ -115,7 +115,8 @@
 
         li {
             width: fit-content;
-            list-style: heart
+            list-style: heart;
+            text-align: left;
         }
 
         li::marker {
@@ -127,7 +128,7 @@
             color: var(--color3)
         }
 
-        ::-moz-list-bullet {
+        li::-moz-list-bullet {
             color: var(--color2)
         }
 
@@ -137,7 +138,7 @@
 
         ul {
             text-align: center;
-            place-items: center;
+            /* place-items: center; */
             width: fit-content;
             margin: auto;
         }
@@ -455,7 +456,7 @@
             /* border-radius: 10px; */
             /* outline: 2px solid var(--color2); */
             height: 705px;
-            max-height: 74vh;
+            max-height: max(74vh, 280px);
             max-width: min(90vw, 700px);
             display: flex;
             flex-direction: column;
@@ -544,8 +545,9 @@
             /* overscroll-behavior-x: contain; */
             overflow: auto !important;
             scroll-behavior: smooth;
-            scroll-snap-align: start;
+            scroll-snap-align: end;
             scrollbar-width: thin;
+             scroll-snap-stop: always
         }
 
         #frame {
@@ -560,13 +562,13 @@
             display: flex;
             flex-wrap: wrap;
             flex-direction: column-reverse;
-            scroll-snap-type: both mandatory;
+            scroll-snap-type: x mandatory;
         }
 
         .menu,
         .sect {
             /* border: 5px solid var(--color2); */
-            --scrollbar-width: 12px;
+            --scrollbar-width: 4px;
             --scrollbar-thumb-color: var(--color3);
             --scrollbar-color: var(--color2);
             /* border-style: solid; */
@@ -834,13 +836,13 @@
                     <hr>
                     <h2>💜 Things I Love / My Interests:</h2>
                     <ul>
-                        <li>Talking about random topics like politics, philosophy, <br>or just random stuff overall</li>
                         <li>Music!!!!!</li>
                         <li>Movies, series, and anime</li>
                         <li>Reading books and manga</li>
                         <li>Photography</li>
                         <li>History</li>
                         <li>Anime and manga</li>
+                        <li>Talking about topics like politics, philosophy, <br>or just random stuff overall</li>
                     </ul>
                     <hr>
                     <h2>My top animes:</h2>
@@ -1050,7 +1052,7 @@
         </div>
         <nav id="controls" role="tablist">
             <a role="tab" class="button" href="#home">Home</a>
-            <a role="tab" class="button" href="#artists">Artists</a>
+            <a role="tab" class="button" href="#artists">Music</a>
             <button role="tab" aria-controls="frame" class="button" title="View background">Background</button>
             <script>
                 document.currentScript.previousElementSibling.onclick = () => { document.querySelector('main').remove() }
@@ -1128,11 +1130,6 @@
                     }
                     else e.ariaHidden = 'true'
                 })
-            }
-        })
-        h.on(D, {
-            scrollsnapchanging: function (e) {
-                console.warn(e)
             }
         })
     }(document, window[Symbol.for('[[HModule]]')])
