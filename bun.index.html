@@ -547,7 +547,7 @@
             scroll-behavior: smooth;
             scroll-snap-align: end;
             scrollbar-width: thin;
-             scroll-snap-stop: always
+            scroll-snap-stop: always
         }
 
         #frame {
@@ -612,14 +612,23 @@
             shape-outside: circle(48%);
         }
 
+        #intro {
+            text-align: right;
+        }
         @media screen and (width < 440px) {
             #lcp {
                 float: none;
                 display: flex;
                 place-self: center;
-                margin: auto
+                margin: auto;
+                width: 50%
+            }
+
+            #intro {
+                text-align: center;
             }
         }
+
 
         h1,
         h2,
@@ -727,11 +736,9 @@
 
         body,
         html {
+            background-color: #0a0019;
             view-transition-name: none;
         }
-
-
-
 
         /* [role="marquee"] {
             animation: marquee 7s linear infinite;
@@ -786,11 +793,9 @@
                 font-size: .9em;
             }
         }
-
         cite {
             font-style: normal;
         }
-
         .artist[aria-pressed="true"] {
             -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
             box-shadow: 0px 0px 15px 5px var(--color3);
@@ -803,10 +808,11 @@
         picture:has(.artist[aria-pressed="true"])~figcaption {
             text-shadow: 0px 4px 4px var(--color3);
         }
+        a {
+            filter:hue-rotate(-30deg) 
+        }
     </style>
-
 </head>
-
 <body>
     <main class="center_screen">
         <div id="frame" class="menu" style="view-transition-name: sect;">
@@ -818,9 +824,11 @@
                         src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
                 </picture>
                 <article>
-                    <h1 style="place-self: center;font-size:2.5em">Violet</h1>
-                    <p style="margin: 10px;place-self:end">Hii, I’m Violet!!
-                        Welcome to my amazing website, made by Missy (addsoupbase) ✨</p>
+                    <div>
+                        <h1 style="place-self: center;font-size:2.5em;display: inline;">Violet</h1>
+                    </div>
+                    <p style="margin: 10px;place-self:end;" id="intro">Hii, I’m Violet!!
+                        Welcome to my amazing website, made by Missy (<cite><a target="_blank" rel="author" href="https://addsoupbase.github.io">addsoupbase</a></cite>) ✨</p>
                     <h2>Here’s some general info about me:</h2>
                     <ul>
                         <li>Name: Violet</li>
@@ -847,18 +855,18 @@
                     <hr>
                     <h2>My top animes:</h2>
                     <ul>
-                        <li>One Piece</li>
-                        <li>Bleach</li>
-                        <li>Berserk</li>
-                        <li>Vinland Saga</li>
-                        <li>Violet Evergarden</li>
-                        <li>JoJo’s Bizarre Adventure</li>
+                        <li><cite>One Piece</cite></li>
+                        <li><cite>Bleach</cite></li>
+                        <li><cite>Berserk</cite></li>
+                        <li><cite>Vinland Saga</cite></li>
+                        <li><cite>Violet Evergarden</cite></li>
+                        <li><cite>JoJo’s Bizarre Adventure</cite></li>
                     </ul>
                     <hr>
                     <h2>My favorite manga:</h2>
                     <cite
                         style="display: block; font-size: xx-large;margin-block: 10px;"><strong>Vagabond</strong></cite>
-                    <p>Vagabond is about Miyamoto Musashi, a legendary swordsman, and his journey of self-discovery. It
+                    <p><cite>Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his journey of self-discovery. It
                         focuses more on inner struggles, personal growth, and what it truly means to be strong rather
                         than
                         just fighting. It’s my favorite because it feels deep, raw, and philosophical—it makes you think
@@ -878,8 +886,8 @@
                         themselves—and that’s why they turn into fucking bastards.</p>
                     <hr>
                     <h2>🌙 Something You Might Not Know About Me</h2>
-                    <p>My actual name isn’t Violet. I got inspired by the name after watching my favorite anime, Violet
-                        Evergarden. After that, I started using the name Violet everywhere online.</p>
+                    <p>My actual name isn’t Violet. I got inspired by the name after watching my favorite anime, <cite>Violet
+                        Evergarden</cite>. After that, I started using the name Violet everywhere online.</p>
                     <h3>My actual name:</h3>
                     <p>It’s <strong>Narin</strong>, but people around me call me Nala, so I don’t really get to hear my
                         actual name often 😭</p>
@@ -979,7 +987,7 @@
             <a role="tab" class="button" href="#artists">Music</a>
             <button role="tab" aria-controls="frame" class="button" title="View background">Background</button>
             <script>
-                document.currentScript.previousElementSibling.onclick = () => { document.querySelector('main').remove() }
+                document.currentScript.previousElementSibling.onclick = function () { document.querySelector('main').remove() }
             </script>
         </nav>
     </main>
@@ -1002,12 +1010,12 @@
     !function (D, h) {
         'use strict'
         var sects = [].slice.call(D.getElementsByClassName('sect'))
-        var controls = D.getElementById('controls')
-        var nowplaying = D.getElementById('nowplaying')
-        var musics = D.getElementById('musics')
-        var musicButtons = [].slice.call(musics.getElementsByTagName('img'))
-        var audios = [].slice.call(musics.getElementsByTagName('audio'))
-        var startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : function (e) { setTimeout(e, 3) }
+            , controls = D.getElementById('controls')
+            , nowplaying = D.getElementById('nowplaying')
+            , musics = D.getElementById('musics')
+            , musicButtons = [].slice.call(musics.getElementsByTagName('img'))
+            , audios = [].slice.call(musics.getElementsByTagName('audio'))
+            , startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : function (e) { setTimeout(e, 3) }
         h.delegate(controls, {
             click: function (e) {
                 switch (this.textContent) {
