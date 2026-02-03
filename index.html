@@ -2,12 +2,6 @@
 <html lang="en">
 
 <head>
-    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
-        document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
-    </script>
-    <meta charset="UTF-8">
-    <link rel="preconnect" href="https://addsoupbase.github.io">
-    <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <meta http-equiv="content-language" content="en">
@@ -81,10 +75,14 @@
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-title" content="Violet's Page">
     <link rel="apple-touch-startup-image" href="favicon.ico">
+    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
+        document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
+    </script>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://addsoupbase.github.io">
+    <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="preload" as="image" href="galaxy.avif" type="image/avif" blocking="render">
-    <script src="https://addsoupbase.github.io/h.js"></script>
     <title>Violet's Page</title>
-    <!-- this is absolutely sick: https://deep-fold.itch.io/ -->
     <noscript>
         <style>
             audio {
@@ -95,20 +93,40 @@
             #hide {
                 display: none;
             }
-/*  
+
+            /*  
             audio::-webkit-media-controls-panel {
                 background-color: var(--color2);
             }
             audio::-webkit-media-controls-enclosure {
                 border-radius: 0;
             } */
-
-         </style>
+            audio::-webkit-time-remaining-display,
+            audio::-webkit-media-controls-current-time-display,
+            /* audio::-webkit-media-controls-timeline, */
+            /* audio::-webkit-media-controls-mute-button, */
+            audio::-webkit-media-controls-time-remaining-display {
+                display: none;
+            }
+            .artist {
+                cursor:default !important;
+            }
+            audio::-webkit-media-controls-panel {
+                place-content: space-between;
+                background-color: cyan;
+            }
+            @media screen and (width < 560px) {
+                audio::-webkit-media-controls-timeline {
+                    display: none;
+                }
+            }
+        </style>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
     <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
+    <script src="https://addsoupbase.github.io/h.js"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <style>
         @counter-style heart {
@@ -329,7 +347,7 @@
             width: 100vw;
             z-index: 1;
             height: 100vh;
-            background-size: cover, 100vw;
+            background-size: cover;
             animation: drift 150s ease-in-out alternate infinite;
             background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
             background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
@@ -441,12 +459,19 @@
             box-sizing: border-box;
         }
 
+        #controls>:where(a, button) {
+
+            flex: 1;
+        }
+
         #controls {
             height: 45px;
             width: 100%;
             border: 1px solid black;
             display: flex;
+            align-items: flex-start;
             place-content: space-evenly;
+            text-align: center;
             padding: 5px;
             gap: 10px;
             overflow-x: auto;
@@ -473,6 +498,7 @@
             /* border-radius: 10px; */
             /* outline: 2px solid var(--color2); */
             height: 705px;
+            max-height: 80vh;
             max-height: max(74vh, 280px);
             max-width: min(90vw, 700px);
             display: flex;
@@ -529,6 +555,7 @@
             justify-content: flex-start;
             line-height: 30px;
             border: none;
+            max-width: 100px;
             font-size: 1.2em;
             text-decoration: none;
             text-transform: capitalize;
@@ -935,7 +962,8 @@
                         </picture>
                         <figcaption class="capt"><cite>childish gambino</cite></figcaption>
                         <noscript><small><cite>3005</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy&dl=1" preload="none" title="3005"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy&dl=1" preload="none" title="3005"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -948,7 +976,8 @@
                         </picture>
                         <figcaption class="capt"><cite>daniel caeser</cite></figcaption>
                         <noscript><small><cite>Japanese Denim</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc&dl=1" preload="none" title="Japanese Denim"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc&dl=1" preload="none" title="Japanese Denim"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -961,7 +990,8 @@
                         </picture>
                         <figcaption class="capt"><cite>A$AP rocky</cite></figcaption>
                         <noscript><small><cite>Fashion Killa</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/giufeufznk8c8w2ptn3tn/Fashion-Killa.m4a?rlkey=4yvs2suimfekzq3w25g4ex70o&st=u9kuuzzo&dl=1" preload="none" title="Fashion Killa"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/giufeufznk8c8w2ptn3tn/Fashion-Killa.m4a?rlkey=4yvs2suimfekzq3w25g4ex70o&st=u9kuuzzo&dl=1" preload="none" title="Fashion Killa"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -974,7 +1004,8 @@
                         </picture>
                         <figcaption class="capt"><cite>J. cole</cite></figcaption>
                         <noscript><small><cite>Wet Dreamz</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k&dl=1" preload="none" title="Wet Dreamz"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k&dl=1" preload="none" title="Wet Dreamz"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -987,7 +1018,8 @@
                         </picture>
                         <figcaption class="capt"><cite>kanye west</cite></figcaption>
                         <noscript><small><cite>Bound 2</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6&dl=1" preload="none" title="Bound 2"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6&dl=1" preload="none" title="Bound 2"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1000,7 +1032,8 @@
                         </picture>
                         <figcaption class="capt"><cite>tyler, the creator</cite></figcaption>
                         <noscript><small><cite>Where This Flower Blooms</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk&dl=1" preload="none" title="Where This Flower Blooms"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk&dl=1" preload="none" title="Where This Flower Blooms"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1013,7 +1046,8 @@
                         </picture>
                         <figcaption class="capt"><cite>frank ocean</cite></figcaption>
                         <noscript><small><cite>American Wedding</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8&dl=1" preload="none" title="American Wedding"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8&dl=1" preload="none" title="American Wedding"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1026,7 +1060,8 @@
                         </picture>
                         <figcaption class="capt"><cite>brent faiyaz</cite></figcaption>
                         <noscript><small><cite>Best Time</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56&dl=1" preload="none" title="Best Time"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56&dl=1" preload="none" title="Best Time"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1039,7 +1074,8 @@
                         </picture>
                         <figcaption class="capt"><cite>laufey</cite></figcaption>
                         <noscript><small><cite>Lover Girl</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2&dl=1" preload="none" title="Lover Girl"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2&dl=1" preload="none" title="Lover Girl"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1052,7 +1088,8 @@
                         </picture>
                         <figcaption class="capt"><cite>kendrick lamar</cite></figcaption>
                         <noscript><small><cite>Backseat Freestyle</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a&dl=1" preload="none" title="Backseat Freestyle"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a&dl=1" preload="none" title="Backseat Freestyle"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1065,7 +1102,8 @@
                         </picture>
                         <figcaption class="capt"><cite>SZA</cite></figcaption>
                         <noscript><small><cite>30 for 30</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/qtuxfwvy2zy7bfen7wi3o/30-for-30.m4a?rlkey=rp4tpocfpsohv9zbi0w89s84y&st=udpjhng4&dl=1" preload="none" title="30 for 30"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/qtuxfwvy2zy7bfen7wi3o/30-for-30.m4a?rlkey=rp4tpocfpsohv9zbi0w89s84y&st=udpjhng4&dl=1" preload="none" title="30 for 30"></audio>
                     </figure>
                     
                     <figure class="msc">
@@ -1078,7 +1116,8 @@
                         </picture>
                         <figcaption class="capt"><cite>beabadoobee</cite></figcaption>
                         <noscript><small><cite>Apple Cider</cite></small></noscript>
-                        <audio controls src="https://www.dropbox.com/scl/fi/52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4&dl=1" preload="none" title="Apple Cider"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4&dl=1" preload="none" title="Apple Cider"></audio>
                     </figure>
                     
                 </div>
@@ -1087,7 +1126,7 @@
         <nav id="controls" role="tablist">
             <a role="tab" class="button" href="#home">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
-            <button aria-controls="frame" class="button" title="View background" id="hide">Background</button>
+            <button aria-controls="frame" class="button" title="View background" id="hide">Hide</button>
         </nav>
     </main>
     <div role="alert" id="message" class="menu" style="display: none;">
@@ -1175,7 +1214,7 @@
                     e.pause()
                 })
             }
-        }, function (o) { return o.matches('.artist') })
+        }, function (o) { return o.classList.contains('.artist') })
         h.on(window, {
             hashchange: function () {
                 var hash = location.hash

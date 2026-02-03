@@ -345,7 +345,7 @@ function spawnPokemon() {
             speed *= 2
             break
         case 'necrozma':
-            scale *= 2.3
+            scale *= 5.7
             break
         case 'arceus':
             scale *= 3.4

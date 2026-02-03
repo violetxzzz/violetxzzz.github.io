@@ -2,12 +2,6 @@
 <html lang="en">
 
 <head>
-    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
-        document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
-    </script>
-    <meta charset="UTF-8">
-    <link rel="preconnect" href="https://addsoupbase.github.io">
-    <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <meta http-equiv="content-language" content="en">
@@ -81,10 +75,14 @@
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-title" content="Violet's Page">
     <link rel="apple-touch-startup-image" href="favicon.ico">
+    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
+        document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
+    </script>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://addsoupbase.github.io">
+    <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="preload" as="image" href="galaxy.avif" type="image/avif" blocking="render">
-    <script src="https://addsoupbase.github.io/h.js"></script>
     <title>Violet's Page</title>
-    <!-- this is absolutely sick: https://deep-fold.itch.io/ -->
     <noscript>
         <style>
             audio {
@@ -95,20 +93,40 @@
             #hide {
                 display: none;
             }
-/*  
+
+            /*  
             audio::-webkit-media-controls-panel {
                 background-color: var(--color2);
             }
             audio::-webkit-media-controls-enclosure {
                 border-radius: 0;
             } */
-
-         </style>
+            audio::-webkit-time-remaining-display,
+            audio::-webkit-media-controls-current-time-display,
+            /* audio::-webkit-media-controls-timeline, */
+            /* audio::-webkit-media-controls-mute-button, */
+            audio::-webkit-media-controls-time-remaining-display {
+                display: none;
+            }
+            .artist {
+                cursor:default !important;
+            }
+            audio::-webkit-media-controls-panel {
+                place-content: space-between;
+                background-color: cyan;
+            }
+            @media screen and (width < 560px) {
+                audio::-webkit-media-controls-timeline {
+                    display: none;
+                }
+            }
+        </style>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
     <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
+    <script src="https://addsoupbase.github.io/h.js"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <style>
         @counter-style heart {
@@ -329,7 +347,7 @@
             width: 100vw;
             z-index: 1;
             height: 100vh;
-            background-size: cover, 100vw;
+            background-size: cover;
             animation: drift 150s ease-in-out alternate infinite;
             background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
             background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
@@ -441,12 +459,19 @@
             box-sizing: border-box;
         }
 
+        #controls>:where(a, button) {
+
+            flex: 1;
+        }
+
         #controls {
             height: 45px;
             width: 100%;
             border: 1px solid black;
             display: flex;
+            align-items: flex-start;
             place-content: space-evenly;
+            text-align: center;
             padding: 5px;
             gap: 10px;
             overflow-x: auto;
@@ -473,6 +498,7 @@
             /* border-radius: 10px; */
             /* outline: 2px solid var(--color2); */
             height: 705px;
+            max-height: 80vh;
             max-height: max(74vh, 280px);
             max-width: min(90vw, 700px);
             display: flex;
@@ -529,6 +555,7 @@
             justify-content: flex-start;
             line-height: 30px;
             border: none;
+            max-width: 100px;
             font-size: 1.2em;
             text-decoration: none;
             text-transform: capitalize;
@@ -1000,7 +1027,8 @@
                         </picture>
                         <figcaption class="capt"><cite>${artist}</cite></figcaption>
                         <noscript><small><cite>${title}</cite></small></noscript>
-                        <audio controls src="${src}" preload="none" title="${title}"></audio>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="${src}" preload="none" title="${title}"></audio>
                     </figure>
                     `})
                     .join('')
@@ -1011,7 +1039,7 @@
         <nav id="controls" role="tablist">
             <a role="tab" class="button" href="#home">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
-            <button aria-controls="frame" class="button" title="View background" id="hide">Background</button>
+            <button aria-controls="frame" class="button" title="View background" id="hide">Hide</button>
         </nav>
     </main>
     <div role="alert" id="message" class="menu" style="display: none;">
@@ -1099,7 +1127,7 @@
                     e.pause()
                 })
             }
-        }, function (o) { return o.matches('.artist') })
+        }, function (o) { return o.classList.contains('.artist') })
         h.on(window, {
             hashchange: function () {
                 var hash = location.hash
