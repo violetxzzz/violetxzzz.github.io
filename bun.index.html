@@ -98,6 +98,50 @@
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <style>
+        @counter-style heart {
+            system: cyclic;
+            symbols: "❥";
+            suffix: " ";
+        }
+
+        hr {
+            border: none;
+        }
+
+        p {
+            max-width: 90%;
+            margin: auto
+        }
+
+        li {
+            width: fit-content;
+            list-style: heart
+        }
+
+        li::marker {
+            color: var(--color2);
+            content: "❥ "
+        }
+
+        li:nth-child(odd)::marker {
+            color: var(--color3)
+        }
+
+        ::-moz-list-bullet {
+            color: var(--color2)
+        }
+
+        li:nth-child(odd)::-moz-list-bullet {
+            color: var(--color3)
+        }
+
+        ul {
+            text-align: center;
+            place-items: center;
+            width: fit-content;
+            margin: auto;
+        }
+
         @font-face {
             font-family: HalfTerm;
             src: url('./font.woff2') format('woff2'), url('./font.woff') format('woff'), url('./font.ttf') format('ttf');
@@ -273,13 +317,13 @@
             height: 100vh;
             background-size: cover, 100vw;
             animation: drift 150s ease-in-out alternate infinite;
+            background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
+            background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
             background-image: url(galaxy.png);
             background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
             background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
             /* background: var(--color4); */
-            background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
             /* background: var(--color4); */
-            background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
         }
 
         @media (prefers-reduced-motion: no-preference) {
@@ -292,6 +336,7 @@
                     background-position-x: 100%;
                 }
             }
+
             @keyframes pulseIn {
                 0% {
                     filter: blur(1px)
@@ -301,6 +346,7 @@
                     filter: blur(0)
                 }
             }
+
             @keyframes pulseOut {
                 0% {
                     opacity: .3;
@@ -315,10 +361,12 @@
                 }
 
             }
+
             ::view-transition-old(sect) {
                 animation: pulseOut 0.5s ease-out .5s;
 
             }
+
             ::view-transition-new(sect) {
                 animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
             }
@@ -662,7 +710,7 @@
         .hoopa_unbound_intro,
         .hoopa_unbound_idle {
             z-index: 1;
-            scale: 4 4;
+            scale: 3 3;
         }
 
         .jirachi,
@@ -758,25 +806,85 @@
 </head>
 
 <body>
-    <div id="background" role="img" aria-label="Pokémon in space"></div>
     <main class="center_screen">
         <div id="frame" class="menu" style="view-transition-name: sect;">
-            <section class="sect" id="home">
+            <section class="sect" id="home" aria-hidden="false">
                 <picture>
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
                     <img fetchpriority="high" alt="violet" width="256" height="256" class="avatar" id="lcp"
                         src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
                 </picture>
-                <h1 style="place-self: center;font-size:2.5em">Violet</h1>
-                <p>(Some stuff about the amazing violet here)</p>
-                <p>Yes i know it looks ugly right now but it's not done don't worry!
-                    I mainly just worked on the background today
-                </p>
-               
+                <article>
+                    <h1 style="place-self: center;font-size:2.5em">Violet</h1>
+                    <p style="margin: 10px;place-self:end">Hii, I’m Violet!!
+                        Welcome to my amazing website, made by Missy (addsoupbase) ✨</p>
+                    <h2>Here’s some general info about me:</h2>
+                    <ul>
+                        <li>Name: Violet</li>
+                        <li>Age: 17</li>
+                        <li>Birthday: <time datetime="07-31">July 31st</time></li>
+                        <li>Height: 160 cm</li>
+                        <li>Favorite color: <span
+                                style="text-decoration: underline;text-decoration-color:var(--color2);">Purple</span>
+                        </li>
+                        <li>Hobbies: Talking about music, writing, and photography!!!</li>
+                        <li>Nationality: Kurdish</li>
+                    </ul>
+                    <hr>
+                    <h2>💜 Things I Love / My Interests:</h2>
+                    <ul>
+                        <li>Talking about random topics like politics, philosophy, <br>or just random stuff overall</li>
+                        <li>Music!!!!!</li>
+                        <li>Movies, series, and anime</li>
+                        <li>Reading books and manga</li>
+                        <li>Photography</li>
+                        <li>History</li>
+                        <li>Anime and manga</li>
+                    </ul>
+                    <hr>
+                    <h2>My top animes:</h2>
+                    <ul>
+                        <li>One Piece</li>
+                        <li>Bleach</li>
+                        <li>Berserk</li>
+                        <li>Vinland Saga</li>
+                        <li>Violet Evergarden</li>
+                        <li>JoJo’s Bizarre Adventure</li>
+                    </ul>
+                    <hr>
+                    <h2>My favorite manga:</h2>
+                    <cite
+                        style="display: block; font-size: xx-large;margin-block: 10px;"><strong>Vagabond</strong></cite>
+                    <p>Vagabond is about Miyamoto Musashi, a legendary swordsman, and his journey of self-discovery. It
+                        focuses more on inner struggles, personal growth, and what it truly means to be strong rather
+                        than
+                        just fighting. It’s my favorite because it feels deep, raw, and philosophical—it makes you think
+                        about life, purpose, and yourself.</p>
+                    <hr>
+                    <h2>📜 History Topics I’m Interested In:</h2>
+                    <ul>
+                        <li>World Wars</li>
+                        <li>Ancient Egypt</li>
+                        <li>The French Revolution</li>
+                        <li>The Renaissance era</li>
+                    </ul>
+                    <hr>
+                    <h2>💭 Thoughts</h2>
+                    <p>I believe that there is good in every single person, but the way they show it will always be
+                        different. At the same time, I think that some people never manage to find that good within
+                        themselves—and that’s why they turn into fucking bastards.</p>
+                    <hr>
+                    <h2>🌙 Something You Might Not Know About Me</h2>
+                    <p>My actual name isn’t Violet. I got inspired by the name after watching my favorite anime, Violet
+                        Evergarden. After that, I started using the name Violet everywhere online.</p>
+                    <h3>My actual name:</h3>
+                    <p>It’s <strong>Narin</strong>, but people around me call me Nala, so I don’t really get to hear my
+                        actual name often 😭</p>
+                </article>
             </section>
-            <section class="sect">
-                <h1 id="artists" style="display: inline;">Favorite Music Artists</h1>
+            <section class="sect" id="artists" aria-hidden="true">
+                <h1 style="display: inline;">Favorite Music Artists</h1>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
                 <div id="musics"
                     style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
@@ -873,7 +981,6 @@
             </script>
         </nav>
     </main>
-
     <div role="alert" id="message" class="menu" style="display: none;">
         <picture>
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
@@ -886,11 +993,13 @@
         <img id="lunalapreview" alt="lunala" src="lunalasleep.gif"
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
+    <div id="background" role="img" aria-label="Pokémon in space"></div>
 </body>
 
 <script>
     !function (D, h) {
         'use strict'
+        var sects = [].slice.call(D.getElementsByClassName('sect'))
         var controls = D.getElementById('controls')
         var nowplaying = D.getElementById('nowplaying')
         var musics = D.getElementById('musics')
@@ -933,6 +1042,23 @@
                 })
             }
         }, function (o) { return o.matches('.artist') })
+        h.on(window, {
+            hashchange: function () {
+                var hash = location.hash
+                var d = D.getElementById(hash.substring(1))
+                sects.forEach(function (e) {
+                    if (e === d) {
+                        if (d) d.ariaHidden = 'false'
+                    }
+                    else e.ariaHidden = 'true'
+                })
+            }
+        })
+        h.on(D, {
+            scrollsnapchanging: function (e) {
+                console.warn(e)
+            }
+        })
     }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
@@ -941,8 +1067,10 @@
         'use strict'
         let reduced = document.documentElement.dataset.reducedMotion === 'true',
             { hash } = location
-        if (hash && hash !== '#')
+        if (hash && hash !== '#') {
             document.getElementById(hash.substring(1)).scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' })
+            dispatchEvent(new Event('hashchange'))
+        }
         reduced || import('./bg.js')
     })
 </script>
