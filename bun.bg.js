@@ -1,5 +1,5 @@
 /*:
-   `const data = ` + JSON.stringify(dir('./sprites/').map(o=>o.replace('.png','')))
+   return `const data = ` + JSON.stringify((await dir('./sprites/')).map(o=>o.replace('.png','')))
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
@@ -315,7 +315,7 @@ function spawnPokemon() {
             break
         case 'eternatus':
             scale *= 11
-            speed *= .2
+            // speed *= .2
             dur = 30
             break
         case 'lunala':

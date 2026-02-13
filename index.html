@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <head>
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
@@ -18,10 +20,10 @@
     <meta property="og:image" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta property="og:url" content="https://violetxzzz.github.io">
     <meta property="og:description" content="Violet's space themed page">
-    <meta property="og:title" content="Violet's Page">
-    <meta property="og:site_name" content="Violet's Page">
-    <meta name="twitter:title" content="Violet's Page">
-    <meta name="application-name" content="Violet's Page">
+    <meta property="og:title" content="Violet's Galaxy">
+    <meta property="og:site_name" content="Violet's Galaxy">
+    <meta name="twitter:title" content="Violet's Galaxy">
+    <meta name="application-name" content="Violet's Galaxy">
     <meta name="application-url" content="https://violetxzzz.github.io">
     <meta name="twitter:url" content="https://violetxzzz.github.io">
     <meta name="web_author" content="addsoupbase">
@@ -47,8 +49,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href=".//favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
     <meta name="origin" content="https://violetxzzz.github.io">
-    <meta name="msapplication-tooltip" content="Violet's Page">
-    <meta name="prism:alternateTitle" content="Violet's Page">
+    <meta name="msapplication-tooltip" content="Violet's Galaxy">
+    <meta name="prism:alternateTitle" content="Violet's Galaxy">
     <meta name="twitter:card" content="summary">
     <meta name="thumbnail" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta property="profile:username" content="addsoupbase">
@@ -73,18 +75,22 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
     <meta name="mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-capable" content="no">
-    <meta name="apple-mobile-web-app-title" content="Violet's Page">
+    <meta name="apple-mobile-web-app-title" content="Violet's Galaxy">
     <link rel="apple-touch-startup-image" href="favicon.ico">
     <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
         document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
     </script>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://addsoupbase.github.io">
+    <link rel="preconnect" href="https://images.weserv.nl">
     <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="preload" as="image" href="galaxy.avif" type="image/avif" blocking="render">
-    <title>Violet's Page</title>
+    <title>Violet's Galaxy</title>
     <noscript>
         <style>
+            .needsjs {
+                display: none;
+            }
             audio {
                 display: revert !important;
                 margin-block: 10px;
@@ -108,13 +114,16 @@
             audio::-webkit-media-controls-time-remaining-display {
                 display: none;
             }
+
             .artist {
-                cursor:default !important;
+                cursor: default !important;
             }
+
             audio::-webkit-media-controls-panel {
                 place-content: space-between;
                 background-color: cyan;
             }
+
             @media screen and (width < 560px) {
                 audio::-webkit-media-controls-timeline {
                     display: none;
@@ -128,664 +137,737 @@
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/h.js"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
-    <style>
-        @counter-style heart {
-            system: cyclic;
-            symbols: "❥";
-            suffix: " ";
-        }
-
-        hr {
-            border: none;
-        }
-
-        p {
-            max-width: 90%;
-            margin: auto
-        }
-
-        li {
-            width: fit-content;
-            list-style: heart;
-            text-align: left;
-        }
-
-        li::marker {
-            color: var(--color2);
-            content: "❥ "
-        }
-
-        li:nth-child(odd)::marker {
-            color: var(--color3)
-        }
-
-        li::-moz-list-bullet {
-            color: var(--color2)
-        }
-
-        li:nth-child(odd)::-moz-list-bullet {
-            color: var(--color3)
-        }
-
-        ul {
-            text-align: center;
-            /* place-items: center; */
-            width: fit-content;
-            margin: auto;
-        }
-
-        @font-face {
-            font-family: HalfTerm;
-            src: url('./font.woff2') format('woff2'), url('./font.woff') format('woff'), url('./font.ttf') format('ttf');
-            font-display: swap;
-        }
-
-        .magnezone {
-            filter: drop-shadow(5px 5px 10px #000000) brightness(70%) blur(2px)
-        }
-
-        .magnezone,
-        .magnezone_idle {
-            transition: filter .5s ease
-        }
-
-        #message {
-            font-size: 1.1em;
-            display: block;
-            width: min(95vw, 730px);
-            height: min(120px, 30vh);
-            position: fixed;
-            z-index: 9;
-            bottom: 0;
-            place-self: center;
-            margin: 10px;
-            /* overflow: auto; */
-            scale: 1 0;
-            display: none;
-            transition: scale .2s linear;
-        }
-
-        .debris {
-            cursor: pointer;
-            z-index: 1;
-            --tap-highlight-color: transparent;
-            scale: 2 2;
-            /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
-            background-image: url(./debris.png);
-            background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
-            background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
-            filter: brightness(1.25);
-        }
-
-        .asteroid1 {
-            --width: 31px;
-            --height: 31px;
-            background-position: -1px -224px;
-        }
-
-        .planet {
-            cursor: unset;
-            z-index: 1 !important;
-            scale: 2 2;
-            filter: brightness(0.5) opacity(90%);
-        }
-
-        .planet1 {
-            --width: 64px;
-            --height: 64px;
-            background-position: 0px 0px;
-        }
-
-        .planet2 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -64px 0px;
-        }
-
-        .planet3 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -128px 0px;
-        }
-
-        .planet4 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -192px 0px;
-        }
-
-        .planet5 {
-            --width: 64px;
-            --height: 64px;
-            background-position: 0px -64px;
-        }
-
-        .planet6 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -64px -64px;
-        }
-
-        .planet7 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -128px -64px;
-        }
-
-        .planet8 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -192px -64px;
-        }
-
-        .planet9 {
-            --width: 64px;
-            --height: 64px;
-            background-position: 0px -128px;
-        }
-
-        .planet10 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -64px -128px;
-        }
-
-        .planet11 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -128px -128px;
-        }
-
-        .planet12 {
-            --width: 64px;
-            --height: 64px;
-            background-position: -192px -128px;
-        }
-
-        .asteroid2 {
-            --width: 60px;
-            --height: 30px;
-            background-position: -34px -226px;
-        }
-
-        .asteroid3 {
-            --width: 25px;
-            --height: 18px;
-            background-position: -100px -232px;
-        }
-
-        @media screen and (width <=345px) {
-            #messagepic {
-                display: none;
-            }
-
-            #message {
-                text-align: center;
-            }
-        }
-
-        .asteroid4 {
-            --width: 13px;
-            --height: 11px;
-            background-position: -137px -235px;
-        }
-
-        html {
-            font-family: HalfTerm, monospace;
-            font-size: 1.2em
-        }
-
-        #background,
-        #background * {
-            touch-action: pinch-zoom !important;
-        }
-
-        #background {
-            will-change: background-position-x;
-            --user-select: none;
-            position: fixed;
-            width: 100vw;
-            z-index: 1;
-            height: 100vh;
-            background-size: cover;
-            animation: drift 150s ease-in-out alternate infinite;
-            background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
-            background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
-            background-image: url(galaxy.png);
-            background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
-            background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
-            /* background: var(--color4); */
-            /* background: var(--color4); */
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-            @keyframes drift {
-                0% {
-                    background-position-x: 0px;
-                }
-
-                100% {
-                    background-position-x: 100%;
-                }
-            }
-
-            @keyframes pulseIn {
-                0% {
-                    filter: blur(1px)
-                }
-
-                100% {
-                    filter: blur(0)
-                }
-            }
-
-            @keyframes pulseOut {
-                0% {
-                    opacity: .3;
-                    transform: scale(1);
-                    filter: brightness(1);
-                }
-
-                100% {
-                    transform: scale(1.08);
-                    opacity: 0;
-                    filter: brightness(2);
-                }
-
-            }
-
-            ::view-transition-old(sect) {
-                animation: pulseOut 0.5s ease-out .5s;
-
-            }
-
-            ::view-transition-new(sect) {
-                animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
-            }
-        }
-
-        .boom {
-            pointer-events: none;
-            --frames: 4 !important;
-            scale: 2.5 2.5;
-            transform: translate(4px, -2px);
-            animation: slideshow 400ms steps(var(--frames), end)
-        }
-
-        .obj {
-            position: absolute;
-            image-rendering: pixelated;
-            width: calc(var(--width) / var(--frames, 1));
-            height: var(--height);
-            z-index: 2;
-            background-repeat: no-repeat;
-        }
-
-        .shootingstar {
-            z-index: 0 !important;
-        }
-
-        .spacething {
-            background-image: url(./space.png);
-        }
-
-        .spaceship::before {
-            content: '';
-            background-image: url(./flare.gif);
-            width: 266px;
-            height: 91px;
-            display: block;
-            /* position: fixed; */
-            background-size: contain;
-            transform: rotateZ(180deg) scale(0.6) translateY(-16px);
-            background-repeat: no-repeat;
-            background-position: -40px, center;
-        }
-
-        .spaceship {
-            --width: 164px;
-            --height: 96px;
-            filter: drop-shadow(0px 0px 8px #ef0101);
-        }
-
-        body {
-            margin: 0;
-            padding: 0
-        }
-
-        *,
-        ::before,
-        ::after {
-            box-sizing: border-box;
-        }
-
-        #controls>:where(a, button) {
-
-            flex: 1;
-        }
-
-        #controls {
-            height: 45px;
-            width: 100%;
-            border: 1px solid black;
-            display: flex;
-            align-items: flex-start;
-            place-content: space-evenly;
-            text-align: center;
-            padding: 5px;
-            gap: 10px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            flex-shrink: 0;
-            justify-content: center;
-        }
-
-        :root {
-            --color1: #726cff;
-            --color2: #908df7;
-            --color3: #BC6CFF;
-            --color4: #3a3880;
-            --color5: #F9FF6C;
-            --color6: #F7FF39;
-            --animspeed: .1s;
-            --global-frame-dura: 22ms;
-            --tap-highlight-color: rgba(189, 108, 255, 0.18);
-        }
-
-        main {
-            width: 700px;
-            z-index: 10;
-            /* border-radius: 10px; */
-            /* outline: 2px solid var(--color2); */
-            height: 705px;
-            max-height: 80vh;
-            max-height: max(74vh, 280px);
-            max-width: min(90vw, 700px);
-            display: flex;
-            flex-direction: column;
-            place-items: center;
-            /* overflow: hidden; */
-        }
-
-        .container {
-            width: 500px;
-            height: 500px;
-            left: 500px;
-            position: absolute;
-        }
-
-
-
-        [role=tab] {
-            width: var(--stretch);
-            margin: 0 2px 0 2px;
-            max-width: 100px;
-        }
-
-        #frame,
-        .menu,
-        #controls {
-            background: #9553e0;
-            background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-        }
-
-        #frame {
-            position: relative;
-        }
-
-        #frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .button {
-            color: black;
-            background: #53e0e0;
-            border-radius: 8px;
-            padding: 0 6px 0 6px;
-            justify-content: flex-start;
-            line-height: 30px;
-            border: none;
-            max-width: 100px;
-            font-size: 1.2em;
-            text-decoration: none;
-            text-transform: capitalize;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(83, 224, 224, 0.3);
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .button:hover {
-            background: #2ecfd0;
-            box-shadow: 0 6px 20px rgba(46, 207, 208, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .button:active {
-            background: #1db5b6;
-            box-shadow: 0 2px 8px rgba(29, 181, 182, 0.4);
-            transform: translateY(-1px);
-        }
-
-        .sect {
-            text-align: center;
-            padding: 15px;
-            width: 100%;
-            height: 100%;
-            /* overscroll-behavior-x: contain; */
-            overflow: auto !important;
-            scroll-behavior: smooth;
-            scroll-snap-align: end;
-            scrollbar-width: thin;
-            scroll-snap-stop: always
-        }
-
-        #frame {
-            flex: 1;
-            overflow-x: scroll;
-            scrollbar-width: none;
-            --scrollbar-width: 0;
-            width: 100%;
-            margin-bottom: 5px;
-            font-size: 1.1em;
-            scroll-behavior: smooth;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column-reverse;
-            scroll-snap-type: x mandatory;
-        }
-
-        .menu,
-        .sect {
-            /* border: 5px solid var(--color2); */
-            --scrollbar-width: 4px;
-            --scrollbar-thumb-color: var(--color3);
-            --scrollbar-color: var(--color2);
-            /* border-style: solid; */
-        }
-
-        .avatar {
-            border-radius: 100%;
-            isolation: isolate;
-            corner-shape: squircle;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .avatar:hover {
-            transform: scale(1.05);
-        }
-
-        .float {
-            animation: float 15s linear infinite
-        }
-
-        @keyframes float {
-            0% {
-                rotate: 0deg
-            }
-
-            100% {
-                rotate: 360deg
-            }
-        }
-
-        #lcp {
-            float: left;
-            margin: 5px;
-            height: auto;
-            width: 25%;
-            max-width: 160px;
-            min-width: 100px;
-            shape-outside: circle(48%);
-        }
-
-        #intro {
-            text-align: right;
-        }
-
-        @media screen and (width < 440px) {
-            #lcp {
-                float: none;
-                display: flex;
-                place-self: center;
-                margin: auto;
-                width: 50%
-            }
-
-            #intro {
-                text-align: center;
-            }
-        }
-
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            text-transform: capitalize;
-        }
-
-        @keyframes slideshow {
-            0% {
-                background-position-x: 0%;
-            }
-
-            100% {
-                background-position-x: calc(var(--width) * -1)
-            }
-        }
-
-        @keyframes toTop {
-            0% {
-                translate: 0 calc(var(--height) * -1.5)
-            }
-
-            100% {
-                translate: 0 calc(100vh * 1.5)
-            }
-        }
-
-        @keyframes toRight {
-            0% {
-                translate: calc(0vw - 300%) 0;
-            }
-
-            100% {
-                translate: calc(100vw + 300%) 0;
-            }
-        }
-
-        .slideshow {
-            animation: slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite;
-        }
-
-        .slideshowOnce {
-            animation: slideshow calc(var(--frames) * var(--global-frame-dura) * var(--local-dura, 1)) steps(var(--frames), end);
-        }
-
-
-        @keyframes glide {
-            0% {
-                transform: translateY(-100%)
-            }
-
-            100% {
-                transform: translateY(100%)
-            }
-        }
-
-
-        cel-runner {
-            position: fixed;
-        }
-
-        .catchable {
-            cursor: pointer;
-            z-index: 2;
-            --tap-highlight-color: transparent;
-        }
-
-        :is(.mew, .mew_idle).shiny {
-            filter: hue-rotate(236deg)
-        }
-
-
-        .pokeball_catch {
-            z-index: 1;
-        }
-
-        .pokeball_catch,
-        .pokeball_throw {
-            pointer-events: none;
-        }
-
-        .necrozma {
-            filter: brightness(1.5)
-        }
-
-        .hoopa_unbound,
-        .hoopa_unbound_intro,
-        .hoopa_unbound_idle {
-            z-index: 1;
-            scale: 3.3 3.3;
-        }
-
-        .jirachi,
-        .jirachi_intro,
-        .jirachi_idle {
-            scale: 1.6 1.6
-        }
-
-        #close {
-            border-radius: 0;
-        }
-
-        body,
-        html {
-            background-color: #0a0019;
-            view-transition-name: none;
-        }
-
-        /* [role="marquee"] {
+    <style>@counter-style heart {
+    system: cyclic;
+    symbols: "❥";
+    suffix: " ";
+}
+
+form {
+    display: inline-grid;
+    gap: 10px
+}
+
+input:not([type="color"], [type="range"], [type="button"]) {
+    background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    font-family: HalfTerm, monospace;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+input:not([type="color"], [type="range"], [type="button"]):hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 15px rgba(189, 108, 255, 0.2);
+}
+
+input:not([type="color"], [type="range"], [type="button"]):focus {
+    outline: none;
+    border-color: rgba(189, 108, 255, 0.6);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px rgba(189, 108, 255, 0.4);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.loader {
+    content-visibility: auto;
+    cursor: wait;
+    width: 60px;
+    height: 50px;
+    --LOADER_COLOR: no-repeat linear-gradient(90deg, #000 70%, #0000 0);
+    -webkit-mask:
+        var(--LOADER_COLOR) calc(0*100%/4) 100%/calc(100%/5) calc(1*100%/5),
+        var(--LOADER_COLOR) calc(1*100%/4) 100%/calc(100%/5) calc(2*100%/5),
+        var(--LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
+        var(--LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
+        var(--LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
+    mask:
+        var(--LOADER_COLOR) calc(0*100%/4) 100%/calc(100%/5) calc(1*100%/5),
+        var(--LOADER_COLOR) calc(1*100%/4) 100%/calc(100%/5) calc(2*100%/5),
+        var(--LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
+        var(--LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
+        var(--LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
+    background: linear-gradient(#a69bfd 0 0) left/0% 100% no-repeat #ddd;
+    background: linear-gradient(#a69bfd 0 0) left/0% 100% no-repeat #ddd;
+    animation: l14 2s infinite steps(6);
+}
+
+@keyframes l14 {
+    100% {
+        background-size: 120% 100%
+    }
+}
+
+hr {
+    border: none;
+}
+
+p {
+    max-width: 90%;
+    margin: auto
+}
+
+li {
+    width: fit-content;
+    list-style: heart;
+    text-align: left;
+}
+
+li::marker {
+    color: var(--color2);
+    content: "❥ "
+}
+
+li:nth-child(odd)::marker {
+    color: var(--color3)
+}
+
+li::-moz-list-bullet {
+    color: var(--color2)
+}
+
+li:nth-child(odd)::-moz-list-bullet {
+    color: var(--color3)
+}
+
+ul {
+    text-align: center;
+    /* place-items: center; */
+    width: fit-content;
+    margin: auto;
+}
+
+@font-face {
+    font-family: HalfTerm;
+    src: url('./font.woff2') format('woff2'), url('./font.woff') format('woff'), url('./font.ttf') format('ttf');
+    font-display: swap;
+}
+
+.magnezone {
+    filter: drop-shadow(5px 5px 10px #000000) brightness(70%) blur(2px)
+}
+
+.magnezone,
+.magnezone_idle {
+    transition: filter .5s ease
+}
+
+#message {
+    font-size: 1.1em;
+    display: block;
+    width: min(95vw, 730px);
+    height: min(120px, 30vh);
+    position: fixed;
+    z-index: 9;
+    bottom: 0;
+    place-self: center;
+    margin: 10px;
+    /* overflow: auto; */
+    scale: 1 0;
+    display: none;
+    transition: scale .2s linear;
+}
+
+.debris {
+    cursor: pointer;
+    z-index: 1;
+    --tap-highlight-color: transparent;
+    scale: 2 2;
+    /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
+    background-image: url(./debris.png);
+    background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
+    background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
+    filter: brightness(1.25);
+}
+
+.asteroid1 {
+    --width: 31px;
+    --height: 31px;
+    background-position: -1px -224px;
+}
+
+.planet {
+    cursor: unset;
+    z-index: 1 !important;
+    scale: 2 2;
+    filter: brightness(0.5) opacity(90%);
+}
+
+.planet1 {
+    --width: 64px;
+    --height: 64px;
+    background-position: 0px 0px;
+}
+
+.planet2 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -64px 0px;
+}
+
+.planet3 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -128px 0px;
+}
+
+.planet4 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -192px 0px;
+}
+
+.planet5 {
+    --width: 64px;
+    --height: 64px;
+    background-position: 0px -64px;
+}
+
+.planet6 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -64px -64px;
+}
+
+.planet7 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -128px -64px;
+}
+
+.planet8 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -192px -64px;
+}
+
+.planet9 {
+    --width: 64px;
+    --height: 64px;
+    background-position: 0px -128px;
+}
+
+.planet10 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -64px -128px;
+}
+
+.planet11 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -128px -128px;
+}
+
+.planet12 {
+    --width: 64px;
+    --height: 64px;
+    background-position: -192px -128px;
+}
+
+.asteroid2 {
+    --width: 60px;
+    --height: 30px;
+    background-position: -34px -226px;
+}
+
+.asteroid3 {
+    --width: 25px;
+    --height: 18px;
+    background-position: -100px -232px;
+}
+
+@media screen and (width <=345px) {
+    #messagepic {
+        display: none;
+    }
+
+    #message {
+        text-align: center;
+    }
+}
+
+.asteroid4 {
+    --width: 13px;
+    --height: 11px;
+    background-position: -137px -235px;
+}
+
+html {
+    font-family: HalfTerm, monospace;
+    font-size: 1.2em
+}
+
+#background,
+#background * {
+    touch-action: pinch-zoom !important;
+}
+
+#background {
+    will-change: background-position-x;
+    --user-select: none;
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+    height: 100vh;
+    background-size: cover;
+    animation: drift 150s ease-in-out alternate infinite;
+    background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
+    background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
+    background-image: url(galaxy.png);
+    background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
+    background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
+    /* background: var(--color4); */
+    /* background: var(--color4); */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes drift {
+        0% {
+            background-position-x: 0px;
+        }
+
+        100% {
+            background-position-x: 100%;
+        }
+    }
+
+    @keyframes pulseIn {
+        0% {
+            filter: blur(1px)
+        }
+
+        100% {
+            filter: blur(0)
+        }
+    }
+
+    @keyframes pulseOut {
+        0% {
+            opacity: .3;
+            transform: scale(1);
+            filter: brightness(1);
+        }
+
+        100% {
+            transform: scale(1.08);
+            opacity: 0;
+            filter: brightness(2);
+        }
+
+    }
+
+    ::view-transition-old(sect) {
+        animation: pulseOut 0.5s ease-out .5s;
+
+    }
+
+    ::view-transition-new(sect) {
+        animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+.boom {
+    pointer-events: none;
+    --frames: 4 !important;
+    scale: 2.5 2.5;
+    transform: translate(4px, -2px);
+    animation: slideshow 400ms steps(var(--frames), end)
+}
+
+.obj {
+    position: absolute;
+    image-rendering: pixelated;
+    width: calc(var(--width) / var(--frames, 1));
+    height: var(--height);
+    z-index: 2;
+    background-repeat: no-repeat;
+}
+
+.shootingstar {
+    z-index: 0 !important;
+}
+
+.spacething {
+    background-image: url(./space.png);
+}
+
+.spaceship::before {
+    content: '';
+    background-image: url(./flare.gif);
+    width: 266px;
+    height: 91px;
+    display: block;
+    /* position: fixed; */
+    background-size: contain;
+    transform: rotateZ(180deg) scale(0.6) translateY(-16px);
+    background-repeat: no-repeat;
+    background-position: -40px, center;
+}
+
+.spaceship {
+    --width: 164px;
+    --height: 96px;
+    filter: drop-shadow(0px 0px 8px #ef0101);
+}
+
+body {
+    margin: 0;
+    padding: 0
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+#controls>:where(a, button) {
+
+    flex: 1;
+}
+
+#controls {
+    height: 45px;
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    align-items: flex-start;
+    place-content: space-evenly;
+    text-align: center;
+    padding: 5px;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+:root {
+    --color1: #726cff;
+    --color2: #908df7;
+    --color3: #BC6CFF;
+    --color4: #3a3880;
+    --color5: #F9FF6C;
+    --color6: #F7FF39;
+    --animspeed: .1s;
+    --global-frame-dura: 22ms;
+    --tap-highlight-color: rgba(189, 108, 255, 0.18);
+}
+
+main {
+    width: 700px;
+    z-index: 10;
+    /* border-radius: 10px; */
+    /* outline: 2px solid var(--color2); */
+    height: 705px;
+    max-height: 80vh;
+    max-height: max(74vh, 280px);
+    max-width: min(90vw, 700px);
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    /* overflow: hidden; */
+}
+
+.container {
+    width: 500px;
+    height: 500px;
+    left: 500px;
+    position: absolute;
+}
+
+
+[role=tab] {
+    width: var(--stretch);
+    margin: 0 2px 0 2px;
+    max-width: 100px;
+}
+
+#frame,
+.menu,
+#controls {
+    background: #9553e0;
+    background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+}
+
+#frame {
+    position: relative;
+}
+
+#frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.button {
+    color: black;
+    background: #53e0e0;
+    border-radius: 8px;
+    padding: 0 6px 0 6px;
+    justify-content: flex-start;
+    line-height: 30px;
+    border: none;
+    max-width: 100px;
+    font-size: 1.2em;
+    text-decoration: none;
+    text-transform: capitalize;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(83, 224, 224, 0.3);
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.button:hover {
+    background: #2ecfd0;
+    box-shadow: 0 6px 20px rgba(46, 207, 208, 0.4);
+    transform: translateY(-3px);
+}
+
+.button:active {
+    background: #1db5b6;
+    box-shadow: 0 2px 8px rgba(29, 181, 182, 0.4);
+    transform: translateY(-1px);
+}
+
+.sect {
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    /* overscroll-behavior-x: contain; */
+    overflow: auto !important;
+    scroll-behavior: smooth;
+    scroll-snap-align: end;
+    scrollbar-width: thin;
+    scroll-snap-stop: always
+}
+
+#frame {
+    flex: 1;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    --scrollbar-width: 0;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    scroll-snap-type: x mandatory;
+}
+
+.menu,
+.sect {
+    /* border: 5px solid var(--color2); */
+    --scrollbar-width: 4px;
+    --scrollbar-thumb-color: var(--color3);
+    --scrollbar-color: var(--color2);
+    /* border-style: solid; */
+}
+
+.avatar {
+    border-radius: 100%;
+    isolation: isolate;
+    corner-shape: squircle;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.drawingframe {
+    display: inline-grid;
+    margin: 5px;
+}
+
+.float {
+    animation: float 15s linear infinite
+}
+
+#drawings:empty::after {
+    content: "No signals received. Send one now!"
+}
+
+.drawing {
+    background: white;
+    border: 3px outset var(--color2)
+}
+
+@keyframes float {
+    0% {
+        rotate: 0deg
+    }
+
+    100% {
+        rotate: 360deg
+    }
+}
+
+#lcp {
+    float: left;
+    margin: 5px;
+    height: auto;
+    width: 25%;
+    max-width: 160px;
+    min-width: 100px;
+    shape-outside: circle(48%);
+}
+
+#intro {
+    text-align: right;
+}
+
+@media screen and (width < 440px) {
+    #lcp {
+        float: none;
+        display: flex;
+        place-self: center;
+        margin: auto;
+        width: 50%
+    }
+
+    #intro {
+        text-align: center;
+    }
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: capitalize;
+}
+
+@keyframes slideshow {
+    0% {
+        background-position-x: 0%;
+    }
+
+    100% {
+        background-position-x: calc(var(--width) * -1)
+    }
+}
+
+@keyframes toTop {
+    0% {
+        translate: 0 calc(var(--height) * -1.5)
+    }
+
+    100% {
+        translate: 0 calc(100vh * 1.5)
+    }
+}
+
+@keyframes toRight {
+    0% {
+        translate: calc(0vw - 300%) 0;
+    }
+
+    100% {
+        translate: calc(100vw + 300%) 0;
+    }
+}
+
+.slideshow {
+    animation: slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite;
+}
+
+.slideshowOnce {
+    animation: slideshow calc(var(--frames) * var(--global-frame-dura) * var(--local-dura, 1)) steps(var(--frames), end);
+}
+
+
+@keyframes glide {
+    0% {
+        transform: translateY(-100%)
+    }
+
+    100% {
+        transform: translateY(100%)
+    }
+}
+
+
+cel-runner {
+    position: fixed;
+}
+
+.catchable {
+    cursor: pointer;
+    z-index: 2;
+    --tap-highlight-color: transparent;
+}
+
+:is(.mew, .mew_idle).shiny {
+    filter: hue-rotate(236deg)
+}
+
+
+.pokeball_catch {
+    z-index: 1;
+}
+
+.pokeball_catch,
+.pokeball_throw {
+    pointer-events: none;
+}
+
+.necrozma {
+    filter: brightness(1.5)
+}
+
+.hoopa_unbound,
+.hoopa_unbound_intro,
+.hoopa_unbound_idle {
+    z-index: 1;
+    scale: 3.3 3.3;
+}
+
+.jirachi,
+.jirachi_intro,
+.jirachi_idle {
+    scale: 1.6 1.6
+}
+
+#close {
+    border-radius: 0;
+}
+
+body,
+html {
+    background-color: #0a0019;
+    view-transition-name: none;
+}
+
+/* [role="marquee"] {
             animation: marquee 7s linear infinite;
             overflow: hidden;
             min-width: 0;
@@ -804,62 +886,78 @@
         } */
 
 
-        .artist {
-            width: 100px;
-            height: auto;
-            aspect-ratio: 1 / 1;
-            cursor: pointer;
-            /* margin: 10px */
-        }
+.artist {
+    width: 100px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    /* margin: 10px */
+}
 
-        .msc {
-            display: inline-grid;
-            width: fit-content;
-            margin: 0
-        }
+.msc {
+    display: inline-grid;
+    width: fit-content;
+    margin: 0
+}
 
-        /* h1,h2,h3,h4,h5,h6 {
+/* h1,h2,h3,h4,h5,h6 {
             display: inline;
         } */
-        .capt {
-            text-transform: capitalize;
-            /* font-size: 1.2em; */
-            display: inline;
-        }
+.capt {
+    text-transform: capitalize;
+    /* font-size: 1.2em; */
+    display: inline;
+}
 
-        audio {
-            width: 200px;
-            max-width: 100%;
-            display: none;
-        }
+audio {
+    width: 200px;
+    max-width: 100%;
+    display: none;
+}
 
-        @media (width <=406px) {
-            .capt {
-                font-size: .9em;
-            }
-        }
+@media (width <=406px) {
+    .capt {
+        font-size: .9em;
+    }
+}
 
-        cite {
-            font-style: normal;
-        }
+cite {
+    font-style: normal;
+}
 
-        .artist[aria-pressed="true"] {
-            -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
-            box-shadow: 0px 0px 15px 5px var(--color3);
-        }
+.artist[aria-pressed="true"] {
+    -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
+    box-shadow: 0px 0px 15px 5px var(--color3);
+}
 
-        figcaption {
-            transition: text-shadow .3s ease;
-        }
+figcaption {
+    transition: text-shadow .3s ease;
+}
 
-        picture:has(:where(.artist[aria-pressed="true"], audio:playing))+figcaption {
-            text-shadow: 0px 4px 4px var(--color3);
-        }
+picture:has(:where(.artist[aria-pressed="true"], audio:playing))+figcaption {
+    text-shadow: 0px 4px 4px var(--color3);
+}
 
-        a[target] {
-            filter: hue-rotate(-30deg)
-        }
-    </style>
+a[target] {
+    filter: hue-rotate(-30deg)
+}
+
+.locateIfTooSmall {
+    display: none;
+}
+
+@media screen and (width <=722px) {
+    .locateIfTooSmall {
+        display: inline;
+    }
+}
+.formdiv {
+    margin:10px;
+    /* border: 2px solid var(--color3); */
+    justify-self: center;
+    max-width: min-content;
+    /* padding: 30px */
+}</style>
 </head>
 
 <body>
@@ -941,9 +1039,6 @@
                         <cite>Violet
                             Evergarden</cite>. After that, I started using the name Violet everywhere online.
                     </p>
-                    <h3>My actual name:</h3>
-                    <p>It’s <strong>Narin</strong>, but people around me call me Nala, so I don’t really get to hear my
-                        actual name often 😭</p>
                 </article>
             </section>
             <section class="sect" id="artists" aria-hidden="true">
@@ -951,34 +1046,6 @@
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
                 <div id="musics"
                     style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/childish_gambino.avif" type="image/avif">
-                            <source srcset="./artists/childish_gambino.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="3005"
-                                draggable="false" role="button" title="Click to play 3005 by childish gambino"
-                                class="artist avatar" src="./artists/childish_gambino.jpg" alt="childish gambino">
-                        </picture>
-                        <figcaption class="capt"><cite>childish gambino</cite></figcaption>
-                        <noscript><small><cite>3005</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy&dl=1" preload="none" title="3005"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/daniel_caeser.avif" type="image/avif">
-                            <source srcset="./artists/daniel_caeser.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Japanese Denim"
-                                draggable="false" role="button" title="Click to play Japanese Denim by daniel caeser"
-                                class="artist avatar" src="./artists/daniel_caeser.jpg" alt="daniel caeser">
-                        </picture>
-                        <figcaption class="capt"><cite>daniel caeser</cite></figcaption>
-                        <noscript><small><cite>Japanese Denim</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc&dl=1" preload="none" title="Japanese Denim"></audio>
-                    </figure>
                     
                     <figure class="msc">
                         <picture>
@@ -1010,90 +1077,6 @@
                     
                     <figure class="msc">
                         <picture>
-                            <source srcset="./artists/kanye_west.avif" type="image/avif">
-                            <source srcset="./artists/kanye_west.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Bound 2"
-                                draggable="false" role="button" title="Click to play Bound 2 by kanye west"
-                                class="artist avatar" src="./artists/kanye_west.jpg" alt="kanye west">
-                        </picture>
-                        <figcaption class="capt"><cite>kanye west</cite></figcaption>
-                        <noscript><small><cite>Bound 2</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6&dl=1" preload="none" title="Bound 2"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/tyler,_the_creator.avif" type="image/avif">
-                            <source srcset="./artists/tyler,_the_creator.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Where This Flower Blooms"
-                                draggable="false" role="button" title="Click to play Where This Flower Blooms by tyler, the creator"
-                                class="artist avatar" src="./artists/tyler,_the_creator.jpg" alt="tyler, the creator">
-                        </picture>
-                        <figcaption class="capt"><cite>tyler, the creator</cite></figcaption>
-                        <noscript><small><cite>Where This Flower Blooms</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk&dl=1" preload="none" title="Where This Flower Blooms"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/frank_ocean.avif" type="image/avif">
-                            <source srcset="./artists/frank_ocean.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="American Wedding"
-                                draggable="false" role="button" title="Click to play American Wedding by frank ocean"
-                                class="artist avatar" src="./artists/frank_ocean.jpg" alt="frank ocean">
-                        </picture>
-                        <figcaption class="capt"><cite>frank ocean</cite></figcaption>
-                        <noscript><small><cite>American Wedding</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8&dl=1" preload="none" title="American Wedding"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/brent_faiyaz.avif" type="image/avif">
-                            <source srcset="./artists/brent_faiyaz.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Best Time"
-                                draggable="false" role="button" title="Click to play Best Time by brent faiyaz"
-                                class="artist avatar" src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
-                        </picture>
-                        <figcaption class="capt"><cite>brent faiyaz</cite></figcaption>
-                        <noscript><small><cite>Best Time</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56&dl=1" preload="none" title="Best Time"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/laufey.avif" type="image/avif">
-                            <source srcset="./artists/laufey.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Lover Girl"
-                                draggable="false" role="button" title="Click to play Lover Girl by laufey"
-                                class="artist avatar" src="./artists/laufey.jpg" alt="laufey">
-                        </picture>
-                        <figcaption class="capt"><cite>laufey</cite></figcaption>
-                        <noscript><small><cite>Lover Girl</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2&dl=1" preload="none" title="Lover Girl"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
-                            <source srcset="./artists/kendrick_lamar.avif" type="image/avif">
-                            <source srcset="./artists/kendrick_lamar.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Backseat Freestyle"
-                                draggable="false" role="button" title="Click to play Backseat Freestyle by kendrick lamar"
-                                class="artist avatar" src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
-                        </picture>
-                        <figcaption class="capt"><cite>kendrick lamar</cite></figcaption>
-                        <noscript><small><cite>Backseat Freestyle</cite></small></noscript>
-                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
-                            src="https://www.dropbox.com/scl/fi/l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a&dl=1" preload="none" title="Backseat Freestyle"></audio>
-                    </figure>
-                    
-                    <figure class="msc">
-                        <picture>
                             <source srcset="./artists/SZA.avif" type="image/avif">
                             <source srcset="./artists/SZA.webp" type="image/webp">
                             <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="30 for 30"
@@ -1120,12 +1103,164 @@
                             src="https://www.dropbox.com/scl/fi/52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4&dl=1" preload="none" title="Apple Cider"></audio>
                     </figure>
                     
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/brent_faiyaz.avif" type="image/avif">
+                            <source srcset="./artists/brent_faiyaz.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Best Time"
+                                draggable="false" role="button" title="Click to play Best Time by brent faiyaz"
+                                class="artist avatar" src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
+                        </picture>
+                        <figcaption class="capt"><cite>brent faiyaz</cite></figcaption>
+                        <noscript><small><cite>Best Time</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56&dl=1" preload="none" title="Best Time"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/childish_gambino.avif" type="image/avif">
+                            <source srcset="./artists/childish_gambino.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="3005"
+                                draggable="false" role="button" title="Click to play 3005 by childish gambino"
+                                class="artist avatar" src="./artists/childish_gambino.jpg" alt="childish gambino">
+                        </picture>
+                        <figcaption class="capt"><cite>childish gambino</cite></figcaption>
+                        <noscript><small><cite>3005</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy&dl=1" preload="none" title="3005"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/daniel_caeser.avif" type="image/avif">
+                            <source srcset="./artists/daniel_caeser.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Japanese Denim"
+                                draggable="false" role="button" title="Click to play Japanese Denim by daniel caeser"
+                                class="artist avatar" src="./artists/daniel_caeser.jpg" alt="daniel caeser">
+                        </picture>
+                        <figcaption class="capt"><cite>daniel caeser</cite></figcaption>
+                        <noscript><small><cite>Japanese Denim</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc&dl=1" preload="none" title="Japanese Denim"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/frank_ocean.avif" type="image/avif">
+                            <source srcset="./artists/frank_ocean.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="American Wedding"
+                                draggable="false" role="button" title="Click to play American Wedding by frank ocean"
+                                class="artist avatar" src="./artists/frank_ocean.jpg" alt="frank ocean">
+                        </picture>
+                        <figcaption class="capt"><cite>frank ocean</cite></figcaption>
+                        <noscript><small><cite>American Wedding</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8&dl=1" preload="none" title="American Wedding"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/kanye_west.avif" type="image/avif">
+                            <source srcset="./artists/kanye_west.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Bound 2"
+                                draggable="false" role="button" title="Click to play Bound 2 by kanye west"
+                                class="artist avatar" src="./artists/kanye_west.jpg" alt="kanye west">
+                        </picture>
+                        <figcaption class="capt"><cite>kanye west</cite></figcaption>
+                        <noscript><small><cite>Bound 2</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6&dl=1" preload="none" title="Bound 2"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/kendrick_lamar.avif" type="image/avif">
+                            <source srcset="./artists/kendrick_lamar.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Backseat Freestyle"
+                                draggable="false" role="button" title="Click to play Backseat Freestyle by kendrick lamar"
+                                class="artist avatar" src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
+                        </picture>
+                        <figcaption class="capt"><cite>kendrick lamar</cite></figcaption>
+                        <noscript><small><cite>Backseat Freestyle</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a&dl=1" preload="none" title="Backseat Freestyle"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/laufey.avif" type="image/avif">
+                            <source srcset="./artists/laufey.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Lover Girl"
+                                draggable="false" role="button" title="Click to play Lover Girl by laufey"
+                                class="artist avatar" src="./artists/laufey.jpg" alt="laufey">
+                        </picture>
+                        <figcaption class="capt"><cite>laufey</cite></figcaption>
+                        <noscript><small><cite>Lover Girl</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2&dl=1" preload="none" title="Lover Girl"></audio>
+                    </figure>
+                    
+                    <figure class="msc">
+                        <picture>
+                            <source srcset="./artists/tyler,_the_creator.avif" type="image/avif">
+                            <source srcset="./artists/tyler,_the_creator.webp" type="image/webp">
+                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Where This Flower Blooms"
+                                draggable="false" role="button" title="Click to play Where This Flower Blooms by tyler, the creator"
+                                class="artist avatar" src="./artists/tyler,_the_creator.jpg" alt="tyler, the creator">
+                        </picture>
+                        <figcaption class="capt"><cite>tyler, the creator</cite></figcaption>
+                        <noscript><small><cite>Where This Flower Blooms</cite></small></noscript>
+                        <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
+                            src="https://www.dropbox.com/scl/fi/0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk&dl=1" preload="none" title="Where This Flower Blooms"></audio>
+                    </figure>
+                    
+                </div>
+            </section>
+            <section class="sect" id="mailbox" aria-hidden="true">
+                <div style="margin:15px">
+                    <h1 style="margin:0">Transmissions</h1>
+                    <div style="justify-self: center;" class="needsjs">
+                        <a class="button" id="gotoSend" href="#SendNameField" class="locateIfTooSmall">Write</a>
+                        <a class="button" id="gotoDraw" href="#PaperField" class="locateIfTooSmall">Draw</a>
+                    </div>
+                </div>
+                <div id="uhh" style="min-height: 100px;" class="needsjs">
+                    <div class="loader" role="progressbar" style="justify-self: center;" id="loader"></div>
+                    <h2>Loading...</h2>
+                    <div id="drawings" style="display: none;"></div>
+                </div>
+                <div id="mailstuff" style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
+                    <div id="sendstuff" class="formdiv">
+                        <h2>Send Message</h2>
+                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST">
+                            <input id="SendNameField" name="name" placeholder="Name" enterkeyhint="next"
+                                autocomplete="username">
+                            <input name="message" placeholder="Message" enterkeyhint="send" required>
+                            <button class="button" style="justify-self: center;">Send</button>
+                        </form>
+                    </div>
+                    <div id="senddraw" class="formdiv needsjs">
+                        <h2>Send Drawing</h2>
+                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST" enctype="text/plain">
+                            <paper-canvas id="PaperField" name="drawing" required></paper-canvas>
+                            <div>
+                                <input type="color" alpha value="#000000" id="color">
+                                <input type="range" value="1" min="1" max="30" step="1" id="brushsize">
+                                <input class="button" id="undo" type="button" value="Undo">
+                                <input class="button" type="button" id="eyedropper" value="Pick Color"
+                                    style="display:none;justify-self: center;">
+                            </div>
+                            <button class="button" style="justify-self: center;">Send</button>
+                        </form>
+                    </div>
                 </div>
             </section>
         </div>
         <nav id="controls" role="tablist">
             <a role="tab" class="button" href="#home">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
+            <a role="tab" class="button" href="#mailbox">Mail</a>
             <button aria-controls="frame" class="button" title="View background" id="hide">Hide</button>
         </nav>
     </main>
@@ -1159,6 +1294,117 @@
             , show = D.getElementById('show')
             , hide = D.getElementById('hide')
             , main = D.querySelector('main')
+            , loader = D.getElementById('loader')
+            , drawings = D.getElementById('drawings')
+            // , gotoSend = D.getElementById('gotoSend')
+            , mailstuff = D.getElementById('mailstuff')
+            , sendstuff = D.getElementById('sendstuff')
+            // , gotoDraw = D.getElementById('gotoDraw')
+            , senddraw = D.getElementById('senddraw')
+            , container = D.getElementById('uhh')
+            , undo = D.getElementById('undo')
+            , brushsize = D.getElementById('brushsize')
+            , color = D.getElementById('color')
+            , eyedropper = D.getElementById('eyedropper')
+            , paper// = D.querySelector('paper-canvas')
+        if (window.EyeDropper) {
+            eyedropper.style.display = 'block'
+            h.on(eyedropper, {
+                click: function () {
+                    initpaper()
+                    new EyeDropper()
+                        .open()
+                        .then(function (c) {
+                            var col = c.sRGBHex
+                            var t = col.match(/\d+/g).slice(0, 3).map(function (n) {
+                                return (+n).toString(16).padStart(2, 0)
+                            })
+                                .join('')
+                            paper.color = color.value = '#' + t
+                        })
+                }
+            })
+        }
+        h.on(undo, {
+            click: function () {
+                initpaper()
+                paper.undo()
+            }
+        })
+        h.on(color, {
+            change: function () {
+                paper.color = this.value
+            }
+        })
+        h.on(brushsize, {
+            change: function () {
+                initpaper()
+                paper.brushsize = this.value
+            }
+        })
+        function initpaper() {
+            paper || (paper = D.querySelector('paper-canvas'))
+        }
+        /* h.on(gotoSend, {
+             _click: function () {
+                 doHide(sendstuff)
+             }
+         })
+         function doHide(me) {
+             container.style.display = gotoDraw.style.display = gotoSend.style.display = 'none'
+             me.style.display = ''
+         }
+         h.on(gotoDraw, {
+             _click: function () {
+                 doHide(senddraw)
+             }
+         })*/
+        /*   h.on(loader, {
+               contentvisibilityautostatechange: function (e, off) {
+                   if (!e.skipped) {
+                       off()*/
+        var scr = D.createElement('script')
+        scr.type = 'module'
+        scr.src = 'https://addsoupbase.github.io/webcomponents/paper-canvas.js'
+        D.head.appendChild(scr)
+        var xhr = new XMLHttpRequest
+        xhr.open("GET", 'https://drawing-submissions.deno.dev?user=dohaaa', true)
+        xhr.responseType = 'json'
+        xhr.onerror = function (e) {
+            loader.parentNode.textContent = 'Something went wrong!'
+        }
+        xhr.onload = function () {
+            var json = xhr.response
+            loader.nextElementSibling.remove()
+            loader.remove()
+            drawings.style.display = ''
+            json.forEach(function (thing) {
+                var src = thing[0],
+                    timestamp = thing[1],
+                    container = D.createElement('div')
+                    , time = D.createElement('time')
+                    , img = new Image
+                img.crossOrigin = 'anonymous'
+                img.className = 'drawing'
+                container.className = 'drawingframe'
+                var link = D.createElement('a')
+                link.style.display = 'contents'
+                link.href =
+                    img.src = 'https://images.weserv.nl/?url=https://drive.google.com/thumbnail?id=' + src + '&sz=w220'
+                link.appendChild(img)
+                link.setAttribute('target', '_blank')
+                container.appendChild(link)
+                container.appendChild(time)
+                var t = new Date(timestamp)
+                time.textContent = t.toLocaleDateString()
+                time.setAttribute('datetime', t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, 0) + '-' + String(t.getDate()).padStart(2, 0))
+                drawings.appendChild(container)
+            })
+        }
+        xhr.send()
+        /*    }
+        }
+    })*/
         h.debounce(hide, {
             click: function () {
                 show.style.visibility = 'visible'
@@ -1203,7 +1449,7 @@
                     if (e.title === current) {
                         if (e.paused) {
                             e.currentTime = 0
-                            e.load()
+                            // e.load()
                             e.play()
                             nowplaying.textContent = 'Now playing: ' + e.title
                             return
@@ -1239,7 +1485,7 @@
             document.getElementById(hash.substring(1)).scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' })
             dispatchEvent(new Event('hashchange'))
         }
-        reduced || import('./bg.js')
+        reduced || (window.requestIdleCallback || window.scheduler?.postTask || setTimeout)(() => {import('./bg.js')}, { priority: 'background' })
     })
 </script>
 
