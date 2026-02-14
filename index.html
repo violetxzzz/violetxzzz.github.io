@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
@@ -63,7 +61,7 @@
     <meta name="author" content="addsoupbase">
     <link rel="canonical" href="https://violetxzzz.github.io">
     <script
-        type="application/ld+json">{"@context":"https://schema.org","@type": "WebSite","name":"addsoupbase","url":"https://violetxzzz.github.io","description":"Violet's space themed page","author":{"@type": "Person","name":"addsoupbase","sameAs":["https://twitter.com/addsoupbase"]},"mainEntityOfPage":{"@type":"WebPage","@id":"https://violetxzzz.github.io"},"image":{"@type":"ImageObject","url":"https://addsoupbase.github.io/media/avatars/Violet.avif","width":256,"height":256}}</script>
+        type="application/ld+json">{"@context":"https://schema.org","@type": "WebSite","name":"Violet's Galaxy","url":"https://violetxzzz.github.io","description":"Violet's space themed page","author":{"@type": "Person","name":"addsoupbase","sameAs":["https://twitter.com/addsoupbase"]},"mainEntityOfPage":{"@type":"WebPage","@id":"https://violetxzzz.github.io"},"image":{"@type":"ImageObject","url":"https://addsoupbase.github.io/media/avatars/Violet.avif","width":256,"height":256}}</script>
     <link rel="apple-touch-icon" sizes="57x57" href="./apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="./apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="./apple-touch-icon-72x72.png">
@@ -91,6 +89,7 @@
             .needsjs {
                 display: none;
             }
+
             audio {
                 display: revert !important;
                 margin-block: 10px;
@@ -983,8 +982,7 @@ a[target] {
                         <li>Age: 17</li>
                         <li>Birthday: <time datetime="07-31">July 31st</time></li>
                         <li>Height: 160 cm</li>
-                        <li>Favorite color: <span
-                                style="text-decoration: underline;text-decoration-color:var(--color2);">Purple</span>
+                        <li>Favorite color: <span style="text-decoration: underline;text-decoration-color:var(--color2);">Purple</span>
                         </li>
                         <li>Hobbies: Talking about music, writing, and photography!!!</li>
                         <li>Nationality: Kurdish</li>
@@ -1230,7 +1228,8 @@ a[target] {
                     <h2>Loading...</h2>
                     <div id="drawings" style="display: none;"></div>
                 </div>
-                <div id="mailstuff" style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
+                <div id="mailstuff"
+                    style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
                     <div id="sendstuff" class="formdiv">
                         <h2>Send Message</h2>
                         <form action="https://drawing-submissions.deno.dev?user=violet" method="POST">
@@ -1242,7 +1241,8 @@ a[target] {
                     </div>
                     <div id="senddraw" class="formdiv needsjs">
                         <h2>Send Drawing</h2>
-                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST" enctype="text/plain">
+                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST"
+                            enctype="text/plain">
                             <paper-canvas id="PaperField" name="drawing" required></paper-canvas>
                             <div>
                                 <input type="color" alpha value="#000000" id="color">
@@ -1363,10 +1363,6 @@ a[target] {
                contentvisibilityautostatechange: function (e, off) {
                    if (!e.skipped) {
                        off()*/
-        var scr = D.createElement('script')
-        scr.type = 'module'
-        scr.src = 'https://addsoupbase.github.io/webcomponents/paper-canvas.js'
-        D.head.appendChild(scr)
         var xhr = new XMLHttpRequest
         xhr.open("GET", 'https://drawing-submissions.deno.dev?user=violet', true)
         xhr.responseType = 'json'
@@ -1391,6 +1387,7 @@ a[target] {
                 link.style.display = 'contents'
                 link.href =
                     img.src = 'https://images.weserv.nl/?url=https://drive.google.com/thumbnail?id=' + src + '&sz=w220'
+                img.width=img.height = 220
                 link.appendChild(img)
                 link.setAttribute('target', '_blank')
                 container.appendChild(link)
@@ -1485,8 +1482,8 @@ a[target] {
             document.getElementById(hash.substring(1)).scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' })
             dispatchEvent(new Event('hashchange'))
         }
-        reduced || (window.requestIdleCallback || window.scheduler?.postTask || setTimeout)(() => {import('./bg.js')}, { priority: 'background' })
+        reduced || (window.requestIdleCallback || window.scheduler?.postTask?.bind(scheduler) || setTimeout)(() => { import('./bg.js') }, { priority: 'background' })
     })
 </script>
-
+<script type="module" href="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 </html>
