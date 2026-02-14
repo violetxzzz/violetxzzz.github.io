@@ -138,6 +138,7 @@ let title = `Violet's Galaxy`
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/h.js"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
+    <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <!--{{return `<style>${await file('styles.css')}</style>`}}-->
 </head>
 
@@ -580,5 +581,4 @@ let title = `Violet's Galaxy`
         reduced || (window.requestIdleCallback || window.scheduler?.postTask?.bind(scheduler) || setTimeout)(() => { import('./bg.js') }, { priority: 'background' })
     })
 </script>
-<script type="module" href="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 </html>

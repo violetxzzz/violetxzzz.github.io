@@ -136,6 +136,7 @@
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/h.js"></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
+    <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <style>@counter-style heart {
     system: cyclic;
     symbols: "❥";
@@ -1485,5 +1486,4 @@ a[target] {
         reduced || (window.requestIdleCallback || window.scheduler?.postTask?.bind(scheduler) || setTimeout)(() => { import('./bg.js') }, { priority: 'background' })
     })
 </script>
-<script type="module" href="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 </html>
