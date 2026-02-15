@@ -1233,7 +1233,7 @@ a[target] {
                     style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
                     <div id="sendstuff" class="formdiv">
                         <h2>Send Message</h2>
-                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST">
+                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST" id="messageform">
                             <input id="SendNameField" name="name" placeholder="Name" enterkeyhint="next"
                                 autocomplete="username">
                             <input name="message" placeholder="Message" enterkeyhint="send" required>
@@ -1242,7 +1242,7 @@ a[target] {
                     </div>
                     <div id="senddraw" class="formdiv needsjs">
                         <h2>Send Drawing</h2>
-                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST"
+                        <form id="paperform" action="https://drawing-submissions.deno.dev?user=violet" method="POST"
                             enctype="text/plain">
                             <paper-canvas id="PaperField" name="drawing" required></paper-canvas>
                             <div>
@@ -1334,6 +1334,7 @@ a[target] {
         })
         h.on(color, {
             change: function () {
+                initpaper()
                 paper.color = this.value
             }
         })
