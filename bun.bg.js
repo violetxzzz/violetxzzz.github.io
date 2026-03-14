@@ -1,5 +1,5 @@
 /*:
-   return `const data = ` + JSON.stringify((await dir('./sprites/')).map(o=>o.replace('.png','')))
+   return `const data = ` + uneval((await dir('./sprites/')).map(o=>o.replace('.png','')))
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'

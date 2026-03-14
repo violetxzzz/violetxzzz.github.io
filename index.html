@@ -1387,9 +1387,10 @@ a[target] {
                 container.className = 'drawingframe'
                 var link = D.createElement('a')
                 link.style.display = 'contents'
+                var size = 250
                 link.href =
-                    img.src = 'https://images.weserv.nl/?url=https://drive.google.com/thumbnail?id=' + src + '&sz=w220'
-                img.width=img.height = 220
+                    img.src = 'https://images.weserv.nl/?url='+encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w'+size)
+                img.width=img.height = size
                 link.appendChild(img)
                 link.setAttribute('target', '_blank')
                 container.appendChild(link)
