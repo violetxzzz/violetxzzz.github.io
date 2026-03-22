@@ -3,25 +3,20 @@ import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
 const { background } = v.id
 const $ = v.esc
-const { css } = v
-load(
-    { src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
+load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
-    let wait = window.scheduler?.yield && (n => scheduler.yield().then(n))
+    let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let i = data.length; i--;) {
         let t = data[i]
         let name = t[0]
         let frames = t[1]
-        let waiting = []
-        for (let anim in frames) {
+        Promise.all(load(...Object.keys(frames).map(anim => {
             let a = frames[anim]
             let src = `./new/${name}/${name}-${anim}.png`
-            console.log(src)
             let duras = a.values.split(';').map(Number)
-            waiting.push(load({ duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }))
-        }
-        Promise.all(waiting).then(() => mons.push(name))
-        wait && await new Promise(wait)
+            return { duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }
+        }))).then(() => mons.push(name))
+        wait && await wait()
     }
 }()
 let mons = []
@@ -408,6 +403,6 @@ async function spawnShootingStar() {
 }
 // spawnShootingStar()
 load({ src: './shootingstar-11.png', framesX: 9, framesY: 1 })[0]
-.then(()=>{
-    setTimeout(spawnShootingStar, 1000)
-})
+    .then(() => {
+        setTimeout(spawnShootingStar, 1000)
+    })
