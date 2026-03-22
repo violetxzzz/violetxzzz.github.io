@@ -5,7 +5,6 @@ const { background } = v.id
 const $ = v.esc
 const { css } = v
 load(
-    { src: './shootingstar-11.png', framesX: 9, framesY: 1 },
     { src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && (n => scheduler.yield().then(n))
@@ -62,7 +61,7 @@ function spawnJirachi() {
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
     if (isHidden()) return
-    Math.random() > .5 ? spawnHoopaUnbound() : spawnHoopaUnbound()
+    Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
 }
 setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
@@ -408,4 +407,7 @@ async function spawnShootingStar() {
     a.destroy()
 }
 // spawnShootingStar()
-setTimeout(spawnShootingStar, 1000)
+load({ src: './shootingstar-11.png', framesX: 9, framesY: 1 })[0]
+.then(()=>{
+    setTimeout(spawnShootingStar, 1000)
+})
