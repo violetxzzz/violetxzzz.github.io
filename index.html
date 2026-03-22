@@ -1418,7 +1418,7 @@ a[target] {
                 container.appendChild(time)
                 var t = new Date(timestamp)
                 time.textContent = t.toLocaleDateString()
-                time.setAttribute('datetime', t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, 0) + '-' + String(t.getDate()).padStart(2, 0))
+                time.setAttribute('datetime',t.toISOString().slice(0,10))
                 drawings.appendChild(container)
             })
         }
