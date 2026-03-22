@@ -447,7 +447,11 @@ main {
     position: absolute;
 }
 
-
+@supports not selector(:defined) {
+    #senddraw {
+        display: none !important;
+    }
+}
 [role=tab] {
     width: var(--stretch);
     margin: 0 2px 0 2px;

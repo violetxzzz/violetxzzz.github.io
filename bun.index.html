@@ -478,6 +478,7 @@ let title = `Violet's Galaxy`
         }
         xhr.onload = function () {
             var json = xhr.response
+            if (typeof json !== 'object') json = (window.JSON ? JSON.parse : eval)(json)
             var aaaa =
                 loader.nextElementSibling
             aaaa.parentNode.removeChild(aaaa)

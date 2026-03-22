@@ -587,7 +587,11 @@ main {
     position: absolute;
 }
 
-
+@supports not selector(:defined) {
+    #senddraw {
+        display: none !important;
+    }
+}
 [role=tab] {
     width: var(--stretch);
     margin: 0 2px 0 2px;
@@ -1387,6 +1391,7 @@ a[target] {
         }
         xhr.onload = function () {
             var json = xhr.response
+            if (typeof json !== 'object') json = (window.JSON ? JSON.parse : eval)(json)
             var aaaa =
                 loader.nextElementSibling
             aaaa.parentNode.removeChild(aaaa)
