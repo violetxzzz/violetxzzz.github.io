@@ -14,7 +14,7 @@ load(
     { src: './shootingstar-11.png', framesX: 9, framesY: 1 },
     { src: './sprites/pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './sprites/pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./sprites/boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
-    let wait = window.scheduler?.yield ? (n => scheduler.yield().then(n)) : (n => setTimeout(n))
+    let wait = window.scheduler?.yield && (n => scheduler.yield().then(n))
     for (let i = data.length; i--;) {
         let t = data[i]
         let name = t[0]
@@ -28,7 +28,7 @@ load(
             waiting.push(load({ duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }))
         }
         Promise.all(waiting).then(() => mons.push(name))
-        await new Promise(wait)
+        wait && await new Promise(wait)
     }
 }()
 let mons = []
