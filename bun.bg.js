@@ -309,9 +309,8 @@ function spawnPokemon() {
             scale *= 2.2
             speed *= 1.5
             break
-        case 'minior_core':
-            index = Math.floor(Math.random() * 8)
-        case 'minior_meteor':
+        case 'minior':
+            // index = Math.floor(Math.random() * 8) its broken idk why!
         case 'poipole':
         case 'beldum':
             scale *= 2.5
@@ -347,6 +346,7 @@ function spawnPokemon() {
         case 'solrock':
         case 'bronzong':
         case 'metang':
+        case 'porygonz':
             scale *= 2.8
             break
         case 'naganadel':
@@ -397,11 +397,7 @@ async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
     if (isHidden()) return
     let a =
-        $`<slide-show src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
-    a.style.left = randomX()
-    a.style.top = randomY()
-    a.style.rotate = `${Math.random() * 360}deg`
-    a.style.scale = Math.random() * 1.5
+        $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
     a.setParent(background)
     a.play()
     await a.until('endEvent')
