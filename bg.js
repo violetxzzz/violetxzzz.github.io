@@ -6,7 +6,7 @@ const $ = v.esc
 const { css } = v
 load(
     { src: './shootingstar-11.png', framesX: 9, framesY: 1 },
-    { src: './sprites/pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './sprites/pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./sprites/boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
+    { src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && (n => scheduler.yield().then(n))
     for (let i = data.length; i--;) {
@@ -17,7 +17,7 @@ load(
         for (let anim in frames) {
             let a = frames[anim]
             let src = `./new/${name}/${name}-${anim}.png`
-            console.debug(src)
+            console.log(src)
             let duras = a.values.split(';').map(Number)
             waiting.push(load({ duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }))
         }
@@ -26,7 +26,6 @@ load(
     }
 }()
 let mons = []
-let sprites = {}
 function shiny(odds = 4000) {
     return Math.random() * odds > odds - 1 ? ' shiny' : ''
 }
@@ -122,7 +121,7 @@ background.delegate({
         let rect = this.shadowRoot.firstChild.getBoundingClientRect()
         let pokemonCenterX = (rect.x + (rect.width / 2))
         let pokemonCenterY = rect.y + rect.height / 2
-        let n = $`<slide-show aria-hidden="true" class="pokeball_throw pokeball" src="./sprites/pokeball_throw-8.png"></slide-show>`
+        let n = $`<slide-show aria-hidden="true" class="pokeball_throw pokeball" src="./pokeball_throw-8.png"></slide-show>`
             .setParent(background)
         n.play()
         await n.animate([
@@ -138,7 +137,7 @@ background.delegate({
             fill: 'forwards',
             easing: 'linear'
         }).finished
-        n.src = './sprites/pokeball_catch-57.png'
+        n.src = './pokeball_catch-57.png'
         n.repeatCount = 1
         n.time = 0
         n.dur = .07
@@ -181,7 +180,7 @@ background.delegate({
         this.className = `boom${t} boom obj`
         this.style.translate = translate
         this.style.animation = ''
-        let boom = $`<slide-show src="./sprites/boom${t}-4.png" dur=".08" repeat="1"></slide-show>`
+        let boom = $`<slide-show src="./boom${t}-4.png" dur=".08" repeat="1"></slide-show>`
         this.pushNode(boom)
         boom.play()
         let that = this
