@@ -1,98 +1,108 @@
-const data = ["arceus-72","arceus.shiny-72","arceus_idle-72","arceus_idle.shiny-72","azelf-56","azelf_idle-72","baltoy-80","baltoy_idle-48","beheeyem-48","beheeyem_idle-80","beldum-64","beldum_idle-80","boom1-4","boom2-4","boom3-4","buzzwole-36","buzzwole_idle-336","celesteela-96","celesteela_idle-162","claydol-64","claydol_idle-16","cosmoem-56","cosmoem_idle-56","deoxys-64","deoxys_attack-80","deoxys_attack_idle-57","deoxys_defense-48","deoxys_defense_idle-56","deoxys_idle-96","deoxys_speed-28","deoxys_speed_idle-28","duosion-60","duosion_idle-48","dusknoir-48","dusknoir_idle-116","duskull-48","duskull_idle-80","elgyem-56","elgyem.shiny-56","elgyem_idle-72","elgyem_idle.shiny-72","eternatus-48","eternatus_idle-40","giritina2-96","giritina2_idle-96","hoopa-62","hoopa_idle-88","hoopa_unbound-71","hoopa_unbound.shiny-71","hoopa_unbound_idle-71","hoopa_unbound_idle.shiny-71","hoopa_unbound_intro-268","hoopa_unbound_intro.shiny","jirachi-54","jirachi.shiny-54","jirachi_idle-40","jirachi_idle.shiny-40","jirachi_intro-180","jirachi_intro.shiny-180","lunala-40","lunala.shiny","lunala_idle-52","lunala_idle.shiny-52","lunatone-48","lunatone_idle-64","mesprit-56","mesprit_idle-72","metang-64","metang_idle-96","mew-48","mew_idle-40","mewtwo-48","mewtwo_idle-72","minior_core-96","minior_core_idle-96","minior_meteor-96","minior_meteor_idle-96","naganadel-32","naganadel_idle-60","necrozma-71","necrozma.shiny","necrozma_idle-142","necrozma_idle.shiny-142","nihilego-62","nihilego_idle-62","orbeetle-40","orbeetle_idle-62","poipole-40","poipole_idle-36","pokeball_catch-57","pokeball_throw-8","rayquaza-74","rayquaza.shiny-74","rayquaza_idle-48","rayquaza_idle.shiny-48","reshiram-36","reshiram_idle-118","reuniclus-64","reuniclus_idle-96","solosis-56","solosis_idle-46","solrock-60","solrock_idle-48","unown-56","unown_idle-56","uxie-56","uxie_idle-72","zekrom-80","zekrom_idle-102"]
+const data = [["arceus",({Walk:({framesY:2,values:"8;10;8;10;8;10;8;10",frameWidth:48,frameHeight:88}),Idle:({framesY:2,values:"12;12;12;12;12;12",frameWidth:48,frameHeight:88})})],["azelf",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["baltoy",({Walk:({framesY:2,values:"6;6;6;4;4;4;4;4;4;4;4;6;6;6;6;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:32,frameHeight:40})})],["beheeyem",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:56})})],["beldum",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"10;10;10;10;10;10;10;10",frameWidth:32,frameHeight:40})})],["buzzwole",({Walk:({framesY:2,values:"6;6;6;6;6;6",frameWidth:56,frameHeight:72}),Idle:({framesY:2,values:"60;12;4;4;4;4;4;20;60;12;4;4;4;4;4;20;60;12;4;4;4;4;4;20",frameWidth:48,frameHeight:72})})],["celesteela",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6",frameWidth:64,frameHeight:112}),Idle:({framesY:2,values:"120;20;2;20",frameWidth:72,frameHeight:112})})],["claydol",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8",frameWidth:24,frameHeight:40})})],["cosmoem",({Walk:({framesY:2,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"20;8;20;8",frameWidth:24,frameHeight:40})})],["deoxys",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:32,frameHeight:64})})],["deoxys_attack",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"14;14;15;14",frameWidth:40,frameHeight:64})})],["deoxys_defense",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;8;8;12;8;8",frameWidth:40,frameHeight:64})})],["deoxys_speed",({Walk:({framesY:2,values:"2;2;6;4;2;2;6;4",frameWidth:40,frameHeight:56}),Idle:({framesY:2,values:"4;4;4;4;4;8",frameWidth:32,frameHeight:64})})],["duosion",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["dusknoir",({Walk:({framesY:2,values:"12;12;12;12",frameWidth:48,frameHeight:72}),Idle:({framesY:2,values:"8;8;10;10;8;7;12;10;10;9;8;8;8",frameWidth:48,frameHeight:80})})],["duskull",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:56})})],["elgyem",({Walk:({framesY:2,values:"8;6;6;8;8;6;6;8",frameWidth:24,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:24,frameHeight:56})})],["eternatus",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:104,frameHeight:120}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:104,frameHeight:128})})],["giritina2",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6",frameWidth:80,frameHeight:96}),Idle:({framesY:2,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:80,frameHeight:96})})],["hoopa",({Walk:({framesY:2,values:"7;7;9;9;9;7;7;7",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"4;4;4;4;4;4;4;4;6;6;6;6;8;8;8;8",frameWidth:32,frameHeight:48})})],["hoopa_unbound",({Special0:({framesY:2,values:"3;3;3;3;3;3;3;3;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;3;3;3;3;3;3;3;3",frameWidth:72,frameHeight:152}),Walk:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:64,frameHeight:112}),Idle:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:64,frameHeight:112})})],["jirachi",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6",frameWidth:40,frameHeight:48}),Special2:({framesY:2,values:"4;1;1;1;1;2;2;2;2;2;2;2;2;2;2;2;2;2;3;3;1;2;1;3;1;3;1;4;1;3;3;1;3;3;1;2;2;2;2;2;2;2;2;4;2;2;2;2;2;1;1;3;1;1;3;2;1;2;3;1;2;3;1;3;1;3;1;2;2;2;2;1;3;1;4;1;3;2;2;2;2;2;3;3;4;5",frameWidth:72,frameHeight:96}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:40,frameHeight:48})})],["lunala",({Walk:({framesY:2,values:"8;12;8;12",frameWidth:80,frameHeight:104}),Idle:({framesY:2,values:"12;14;12;14",frameWidth:80,frameHeight:96})})],["lunatone",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["mesprit",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["metang",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:48}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:40,frameHeight:48})})],["mew",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:32,frameHeight:56})})],["mewtwo",({Walk:({framesY:2,values:"12;6;6;12;6;6",frameWidth:48,frameHeight:56}),Idle:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:56})})],["minior",({Walk:({framesY:10,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48}),Idle:({framesY:10,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["naganadel",({Walk:({framesY:2,values:"8;8;8;8",frameWidth:48,frameHeight:56}),Idle:({framesY:2,values:"8;9;8;8;11;8;8",frameWidth:40,frameHeight:72})})],["necrozma",({Walk:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:72,frameHeight:96}),Idle:({framesY:2,values:"8;14;14;14;14;14;14;14;14;14;8",frameWidth:72,frameHeight:96})})],["nihilego",({Walk:({framesY:2,values:"6;10;10;6;10;10;10",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"6;10;10;6;10;10;10",frameWidth:32,frameHeight:48})})],["orbeetle",({Walk:({framesY:2,values:"4;4;6;6;6;6;4;4",frameWidth:40,frameHeight:56}),Idle:({framesY:2,values:"6;6;6;12;8;8;8;8",frameWidth:40,frameHeight:56})})],["poipole",({Walk:({framesY:2,values:"4;4;4;4;4;4;4;4;4;4",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"6;12;6;12",frameWidth:24,frameHeight:48})})],["rayquaza",({Walk:({framesY:2,values:"8;8;6;4;4;4;8;8;6;6;6;6",frameWidth:80,frameHeight:128}),Idle:({framesY:2,values:"14;10;14;10",frameWidth:80,frameHeight:120})})],["reshiram",({Walk:({framesY:2,values:"8;6;8;6;8",frameWidth:88,frameHeight:96}),Idle:({framesY:2,values:"90;4;8;4;8;4",frameWidth:72,frameHeight:104})})],["reuniclus",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:56,frameHeight:56}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:56,frameHeight:56})})],["solosis",({Walk:({framesY:2,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:40}),Idle:({framesY:2,values:"13;10;13;10",frameWidth:24,frameHeight:40})})],["solrock",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:32,frameHeight:48})})],["unown",({Walk:({framesY:28,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:48}),Idle:({framesY:28,values:"20;8;20;8",frameWidth:24,frameHeight:40})})],["uxie",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["zekrom",({Walk:({framesY:2,values:"10;10;15;20;10;15",frameWidth:72,frameHeight:104}),Idle:({framesY:2,values:"60;10;2;2;2;2;2;2;2;2;2;2;2;10",frameWidth:72,frameHeight:96})})]]
 import *as v from 'https://addsoupbase.github.io/v4.js'
-import loadsprite from 'https://addsoupbase.github.io/webcomponents/cel-runner.js'
+import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
 const { background } = v.id
 const $ = v.esc
 const { css } = v
-const slideshow = `slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite`
+load(
+    { src: './shootingstar-11.png', framesX: 9, framesY: 1 },
+    { src: './sprites/pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './sprites/pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./sprites/boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
+!async function () {
+    let wait = window.scheduler?.yield ? (n => scheduler.yield().then(n)) : (n => setTimeout(n))
+    for (let i = data.length; i--;) {
+        let t = data[i]
+        let name = t[0]
+        let frames = t[1]
+        let waiting = []
+        for (let anim in frames) {
+            let a = frames[anim]
+            let src = `./new/${name}/${name}-${anim}.png`
+            console.debug(src)
+            let duras = a.values.split(';').map(Number)
+            waiting.push(load({ duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }))
+        }
+        Promise.all(waiting).then(() => mons.push(name))
+        await new Promise(wait)
+    }
+}()
 let mons = []
 let sprites = {}
 function shiny(odds = 4000) {
     return Math.random() * odds > odds - 1 ? ' shiny' : ''
 }
-async function spawnJirachi() {
+function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
-    let jirachi = $`<cel-runner dura="40ms" src="${sprites.jirachi_intro}" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};--local-dura: 2;" class="jirachi_intro ${shiny()}"></cel-runner>`
+    let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.png" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro ${shiny()}"></slide-show>`
         .setParent(background)
-    await jirachi.until('spriteended')
-    jirachi.classList.remove('jirachi_intro')
-    jirachi.classList.add('jirachi', 'catchable')
-    jirachi.src = sprites.jirachi
-    jirachi.dura = '15ms'
-    jirachi.animate([{ translate: `0 100vh` }], {
-        duration: 20000,
-        delay: 200,
-        // composite:'accumulate',
-        iterations: 1,
-        easing: 'linear'
-    }).onfinish = () => jirachi.purge()
+    jirachi.on({
+        _endEvent() {
+            jirachi.pause()
+            jirachi.src = './new/jirachi/jirachi-Walk.png'
+            jirachi.repeatCount = 'indefinite'
+            jirachi.time = 0
+            jirachi.resume()
+            // jirachi.dur = .01
+            jirachi.classList.remove('jirachi_intro')
+            jirachi.classList.add('jirachi', 'catchable')
+            // jirachi.shadowRoot.querySelector('animate').setAttribute('repeatCount', 'indefinite')
+            // jirachi.resume()
+            // jirachi.time = 0
+            jirachi.animate([{ translate: `0 100vh` }], {
+                duration: 20000,
+                delay: 200,
+                // composite:'accumulate',
+                iterations: 1,
+                easing: 'linear'
+            }).onfinish = () => jirachi.destroy()
+        }
+    })
+    jirachi.play()
 }
+// setTimeout(spawnHoopaUnbound, 1000)
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
     if (isHidden()) return
-    Math.random() > .5 ? spawnHoopaUnbound() : spawnJirachi()
+    Math.random() > .5 ? spawnHoopaUnbound() : spawnHoopaUnbound()
 }
 setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
-async function spawnHoopaUnbound() {
-    // setTimeout(spawnHoopaUnbound, 40000 + Math.random() * 10000)
+function spawnHoopaUnbound() {
+    // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-    let hoopaUnbound = $`<cel-runner dura="15ms" data-name="hoopa_unbound" aria-hidden="true" src="${sprites.hoopa_unbound_intro}" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></cel-runner>`
+    let hoopa = $`<slide-show repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.png" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></slide-show>`
         .setParent(background)
-    await hoopaUnbound.until('spriteended')
-    hoopaUnbound.classList.remove('hoopa_unbound_intro', 'slideshowOnce')
-    hoopaUnbound.classList.add('hoopa_unbound', 'catchable')
-    hoopaUnbound.src = sprites.hoopa_unbound
-    // hoopaUnbound.style.animation = `${slideshow}`
-    hoopaUnbound.animate([{ translate: `0 140vh` }], {
-        duration: 16000,
-        delay: 600,
-        // composite:'accumulate',
-        iterations: 1,
-        easing: 'linear'
-    }).onfinish = () => hoopaUnbound.purge()
+    hoopa.dur = .02
+    hoopa.on({
+        _endEvent() {
+            hoopa.pause()
+            hoopa.src = './new/hoopa_unbound/hoopa_unbound-Walk.png'
+            hoopa.repeatCount = 'indefinite'
+            hoopa.time = 0
+            hoopa.resume()
+            // jirachi.dur = .01
+            hoopa.classList.remove('hoopa_unbound_intro')
+            hoopa.classList.add('hoopa_unbound', 'catchable')
+            // jirachi.shadowRoot.querySelector('animate').setAttribute('repeatCount', 'indefinite')
+            // jirachi.resume()
+            // jirachi.time = 0
+            hoopa.animate([{ translate: `0 130vh` }], {
+                duration: 20000,
+                delay: 200,
+                // composite:'accumulate',
+                iterations: 1,
+                easing: 'linear'
+            }).onfinish = () => hoopa.destroy()
+        }
+    })
+    hoopa.play()
 }
 // spawnHoopaUnbound()
 // setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
-function doImages(key) {
-    let i = new Image
-    let src = i.src = `./sprites/${key}.png`
-    i.onload = async () => {
-        let { 0: k, 1: frames } = key.split('-')
-        let blob = await (await fetch(src)).blob()
-        let url = URL.createObjectURL(blob)
-        // preload(url)
-        // $`<div class="${k} obj"></div>`.setParent(document.body)
-        if (k.endsWith('.shiny')) {
-            css.registerCSSRaw(`.${k} {background-image: url(${url}) !important}`)
-            preload(url)
-        }
-        else {
-            if (!k.startsWith('boom') && !k.startsWith('pokeball') && k !== 'shootingstar') {
-                let t = { src: url, name: k }
-                mons.push(t)
-                let y = 1
-                if (k.startsWith('minior_core')) y = 7
-                else if (k.startsWith('unown')) {
-                    y = 28
-                    for (let i = 3; i--;) mons.push(t)
-                }
-                if (!legendary.has(k)) {
-                    for (let i = 10; i--;) mons.push(t)
-                }
-                loadsprite({ src: url, x: frames, y })
-                sprites[k] = url
-                preload(url)
-            }
-            else css.write(`.${k}{--width: ${i.naturalWidth}px; --height: ${i.naturalHeight}px; background-image: url(${url}); --frames: ${frames};}`)
-        }
-    }
-}
-data.forEach(doImages)
+// data.forEach(doImages)
 function isHidden() { return document.hidden }
 background.delegate({
     animationend() {
-        this.purge()
+        this.destroy()
     },
 })
 function preload(url) {
@@ -103,17 +113,18 @@ background.delegate({
     async pointerdown(e) {
         e.stopImmediatePropagation()
         this.classList.remove('catchable')
-        let shiny = this.classList.contains('shiny')
+        let shiny = this.index == 1
         this.style.pointerEvents = 'none'
-        this.pauseOtherAnims()
+        this.getAnimations({ subtree: true }).forEach(o => o.pause())
         let { name } = this.dataset
         this.classList.replace(name, name + '_idle')
-        this.src = sprites[name + '_idle']
-        let rect = this.getBoundingClientRect()
-        let pokemonCenterX = (rect.left - 10.75) + (rect.width / 2) - 10.5
-        let pokemonCenterY = (rect.top - 10.5) + (rect.height / 2) - 10.5
-        let n = $`<div aria-hidden="true" class="obj pokeball_throw slideshow pokeball"></div>`
+        this.src = this.src.replace('-Walk', '-Idle')
+        let rect = this.shadowRoot.firstChild.getBoundingClientRect()
+        let pokemonCenterX = (rect.x + (rect.width / 2))
+        let pokemonCenterY = rect.y + rect.height / 2
+        let n = $`<slide-show aria-hidden="true" class="pokeball_throw pokeball" src="./sprites/pokeball_throw-8.png"></slide-show>`
             .setParent(background)
+        n.play()
         await n.animate([
             {
                 transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
@@ -127,10 +138,10 @@ background.delegate({
             fill: 'forwards',
             easing: 'linear'
         }).finished
-        n.classList.remove('slideshow')
-        n.classList.replace('pokeball_throw', 'pokeball_catch')
-        n.clientHeight
-        n.style.animation = 'slideshow 4s steps(var(--frames), end)'
+        n.src = './sprites/pokeball_catch-57.png'
+        n.repeatCount = 1
+        n.time = 0
+        n.dur = .07
         this.animate([{
             transform: 'scale(1,1)', filter: 'brightness(0%) invert(1) opacity(90%)'
         }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
@@ -141,10 +152,12 @@ background.delegate({
             delay: 500,
             composite: 'add',
             easing: 'ease-in'
-        }).finished.then(() => this.purge(true))
-        await n.until('!animationend')
+        }).finished.then(() => this.destroy(true))
+        await new Promise(s => setTimeout(s, 4000))
+        n.time = 0
+        n.pause()
         n.fadeOut().finished.then(() => {
-            n.purge(true)
+            n.destroy(true)
             if (name === 'lunala') {
                 showMessageBox(shiny)
             }
@@ -168,6 +181,15 @@ background.delegate({
         this.className = `boom${t} boom obj`
         this.style.translate = translate
         this.style.animation = ''
+        let boom = $`<slide-show src="./sprites/boom${t}-4.png" dur=".08" repeat="1"></slide-show>`
+        this.pushNode(boom)
+        boom.play()
+        let that = this
+        boom.on({
+            _endEvent() {
+                that.destroy()
+            }
+        })
         delete this.dataset.type
     }
 }, o => !isNaN(o.dataset.type))
@@ -177,12 +199,12 @@ function spawnSpaceShip() {
     if (isHidden()) return
     let scale = Math.random()
     let dir = Math.random() > .5
-    let o = $`<div class="spaceship spacething obj" style="${dir ? 'scale: -.8 .8;' : ''}top: ${randomY()}; animation: toRight ${40 + (Math.random() * 20)}s linear${dir ? '' : ' reverse'}"></div>`
+    let o = $`<slide-show class="spaceship spacething obj" style="${dir ? 'scale: -.8 .8;' : ''}top: ${randomY()}; animation: toRight ${40 + (Math.random() * 20)}s linear${dir ? '' : ' reverse'}"></slide-show>`
         .setParent(background)
     // .onanimationend = remove
 }
 function remove() {
-    v.Proxify(this).purge()
+    v.Proxify(this).destroy()
 }
 let { message, lunalapreview } = v.id
 function showMessageBox(shiny) {
@@ -242,21 +264,19 @@ let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giritina2 arceus
 // spawnSleepingPokemon()
 function spawnPokemon() {
     setTimeout(spawnPokemon, 1600 + (Math.random() * 100))
-    let regular = mons.filter(o => !special.has(o.name) && !o.name.endsWith('_idle'))
+    let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle'))
     let pkm = regular[Math.floor(Math.random() * regular.length)]
     let a = 10
     if (!pkm || isHidden()) return
-    let { name } = pkm
-    while (a-- && legendary.has(name) && document.querySelector(`.${name}`)) {
+    while (a-- && legendary.has(pkm) && document.querySelector(`.${pkm}`)) {
         pkm = regular[Math.floor(Math.random() * regular.length)]
-        name = pkm.name
     }
     let i = Math.random() > .5 ? 1 : -1
     let scale = .7
     let index = 0
     let speed = 1.2
-    let dur = 15
-    switch (name) {
+    let dur = 1 / 60
+    switch (pkm) {
         case 'duosion':
             scale *= 2.3
             break
@@ -314,7 +334,7 @@ function spawnPokemon() {
         case 'eternatus':
             scale *= 11
             // speed *= .2
-            dur = 30
+            dur *= 2
             break
         case 'lunala':
         case 'reshiram':
@@ -360,7 +380,8 @@ function spawnPokemon() {
             break
     }
     scale *= i
-    let s = $`<cel-runner index="${index}" dura="${dur}ms" data-name="${name}" src="${pkm.src}" aria-hidden="true" class="${pkm.name} catchable${shiny()}" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></cel-runner>`
+    if (shiny()) index += 1
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></slide-show>`
     s.setParent(background)
         .animFrom('toRight', {
             duration: ((40 + Math.random() * 40) / speed) * 1000 * i,
@@ -368,7 +389,8 @@ function spawnPokemon() {
             iterations: 1,
             direction: i === 1 ? 'normal' : 'reverse'
         })
-        .onfinish = () => s.purge()
+        .onfinish = () => s.destroy()
+    s.play()
 }
 setTimeout(spawnPokemon, 300)
 // showMessageBox()
@@ -376,13 +398,15 @@ async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
     if (isHidden()) return
     let a =
-        $`<cel-runner class="shootingstar obj" src="./shootingstar-11.png" frames-x="9" frames-y="1" dura="100ms"></cel-runner>`
+        $`<slide-show src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
     a.style.left = randomX()
     a.style.top = randomY()
     a.style.rotate = `${Math.random() * 360}deg`
-    a.style.zoom = Math.random() * 1
+    a.style.scale = Math.random() * 1.5
     a.setParent(background)
-    await a.until('spriteended')
-    a.purge()
+    a.play()
+    await a.until('endEvent')
+    a.destroy()
 }
-setTimeout(spawnShootingStar, 10000)
+// spawnShootingStar()
+setTimeout(spawnShootingStar, 1000)

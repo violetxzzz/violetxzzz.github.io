@@ -343,6 +343,7 @@ html {
 }
 
 .obj {
+    transform-origin: center;
     position: absolute;
     image-rendering: pixelated;
     width: calc(var(--width) / var(--frames, 1));
@@ -354,7 +355,9 @@ html {
 .shootingstar {
     z-index: 0 !important;
 }
-
+.shootingstar::part(sprite) {
+    rotate: 90deg
+}
 .spacething {
     background-image: url(./space.png);
 }
@@ -677,8 +680,9 @@ h6 {
 }
 
 
-cel-runner {
-    position: fixed;
+slide-show {
+    position: absolute;
+    /* transform: scale(2.4, 2.4) */
 }
 
 .catchable {
@@ -708,7 +712,6 @@ cel-runner {
 .hoopa_unbound,
 .hoopa_unbound_intro,
 .hoopa_unbound_idle {
-    z-index: 1;
     scale: 3.3 3.3;
 }
 
@@ -812,8 +815,9 @@ a[target] {
         display: inline;
     }
 }
+
 .formdiv {
-    margin:10px;
+    margin: 10px;
     /* border: 2px solid var(--color3); */
     justify-self: center;
     max-width: min-content;

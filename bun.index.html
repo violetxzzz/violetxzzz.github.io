@@ -3,6 +3,7 @@
 <!--{{@define
 let title = `Violet's Galaxy`
 }}-->
+
 <head>
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
@@ -165,7 +166,8 @@ let title = `Violet's Galaxy`
                         <li>Age: 17</li>
                         <li>Birthday: <time datetime="07-31">July 31st</time></li>
                         <li>Height: 160 cm</li>
-                        <li>Favorite color: <span style="text-decoration: underline;text-decoration-color:var(--color2);">Purple</span>
+                        <li>Favorite color: <span
+                                style="text-decoration: underline;text-decoration-color:var(--color2);">Purple</span>
                         </li>
                         <li>Hobbies: Talking about music, writing, and photography!!!</li>
                         <li>Nationality: Kurdish</li>
@@ -332,7 +334,7 @@ let title = `Violet's Galaxy`
                             <input id="SendNameField" name="name" placeholder="Name" enterkeyhint="next"
                                 autocomplete="username">
                             <input name="message" placeholder="Message" enterkeyhint="send" required>
-                            <button class="button" style="justify-self: center;">Send</button>
+                            <button class="button submitter" style="justify-self: center;">Send</button>
                         </form>
                     </div>
                     <div id="senddraw" class="formdiv needsjs">
@@ -347,7 +349,7 @@ let title = `Violet's Galaxy`
                                 <input class="button" type="button" id="eyedropper" value="Pick Color"
                                     style="display:none;justify-self: center;">
                             </div>
-                            <button class="button" style="justify-self: center;">Send</button>
+                            <button class="button submitter" style="justify-self: center;">Send</button>
                         </form>
                     </div>
                 </div>
@@ -368,7 +370,7 @@ let title = `Violet's Galaxy`
                 style="border-radius: 10px;margin:10px;height:90px;width:auto;float:left;max-width: fit-content;border-color: #ffc4ff;            --user-select:none;border-style:solid;border-width: medium;"
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
-        <p style="word-wrap: break-word;">Congratulations, you just caught my favorite Pokémon!</p>
+        <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
         <img id="lunalapreview" alt="lunala" src="lunalasleep.gif"
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
@@ -380,6 +382,14 @@ let title = `Violet's Galaxy`
 <script>
     !function (D, h) {
         'use strict'
+        var submitted = new Set
+            ;[].forEach.call(D.getElementsByClassName('submitter'), function (e) {
+                e.parentNode.addEventListener("submit", function (e) {
+                    var t = e.target
+                    if (!submitted.has(t)) submitted.add(t)
+                    else e.returnValue = !!e.preventDefault()
+                })
+            })
         var sects = [].slice.call(D.getElementsByClassName('sect'))
             , controls = D.getElementById('controls')
             , nowplaying = D.getElementById('nowplaying')
@@ -468,8 +478,10 @@ let title = `Violet's Galaxy`
         }
         xhr.onload = function () {
             var json = xhr.response
-            loader.nextElementSibling.remove()
-            loader.remove()
+            var aaaa =
+                loader.nextElementSibling
+            aaaa.parentNode.removeChild(aaaa)
+            loader.parentNode.removeChild(loader)
             drawings.style.display = ''
             json.forEach(function (thing) {
                 var src = thing[0],
@@ -484,8 +496,8 @@ let title = `Violet's Galaxy`
                 link.style.display = 'contents'
                 var size = 250
                 link.href =
-                    img.src = 'https://images.weserv.nl/?url='+encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w'+size)
-                img.width=img.height = size
+                    img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w' + size)
+                img.width = img.height = size
                 link.appendChild(img)
                 link.setAttribute('target', '_blank')
                 container.appendChild(link)
@@ -583,4 +595,5 @@ let title = `Violet's Galaxy`
         reduced || (window.requestIdleCallback || window.scheduler?.postTask?.bind(scheduler) || setTimeout)(() => { import('./bg.js') }, { priority: 'background' })
     })
 </script>
+
 </html>
