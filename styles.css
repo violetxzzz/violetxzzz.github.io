@@ -38,7 +38,7 @@ input::placeholder {
 
 .loader {
     content-visibility: auto;
-    cursor: wait;
+    cursor: url("cosmica/busy.ani"), wait;
     width: 60px;
     height: 50px;
     --LOADER_COLOR: no-repeat linear-gradient(90deg, #000 70%, #0000 0);
@@ -136,7 +136,7 @@ ul {
 }
 
 .debris {
-    cursor: pointer;
+    cursor: url("cosmica/link\ select.cur"), pointer;
     z-index: 1;
     --tap-highlight-color: transparent;
     scale: 2 2;
@@ -355,9 +355,11 @@ html {
 .shootingstar {
     z-index: 0 !important;
 }
+
 .shootingstar::part(sprite) {
     rotate: 90deg
 }
+
 .spacething {
     background-image: url(./space.png);
 }
@@ -447,11 +449,42 @@ main {
     position: absolute;
 }
 
+html {
+    cursor: url("cosmica/default.cur"), default
+}
+
+
+
+h1,
+p,
+cite,
+h2,
+li,
+time,
+span,
+strong,
+output,
+figcaption,
+input:not([type="button"], [type="submit"], [type="reset"]) {
+    cursor: url("cosmica/text\ select.cur"), text
+}
+a,
+button,
+.button,
+.artist,
+input:is([type="color"],[type="range"]) {
+    cursor: url("cosmica/link\ select.cur"), pointer
+}
+paper-canvas {
+    cursor: url("cosmica/handwriting.cur"), crosshair
+}
+
 @supports not selector(:defined) {
     #senddraw {
         display: none !important;
     }
 }
+
 [role=tab] {
     width: var(--stretch);
     margin: 0 2px 0 2px;
@@ -496,7 +529,6 @@ main {
     text-decoration: none;
     text-transform: capitalize;
     text-align: center;
-    cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(83, 224, 224, 0.3);
@@ -603,6 +635,7 @@ main {
     width: 25%;
     max-width: 160px;
     min-width: 100px;
+    cursor: url("cosmica/person\ select.cur"), default;
     shape-outside: circle(48%);
 }
 
@@ -690,7 +723,7 @@ slide-show {
 }
 
 .catchable {
-    cursor: pointer;
+    cursor: url("cosmica/link\ select.cur"), pointer;
     z-index: 2;
     --tap-highlight-color: transparent;
 }
@@ -758,7 +791,7 @@ html {
     width: 100px;
     height: auto;
     aspect-ratio: 1 / 1;
-    cursor: pointer;
+    cursor: url("cosmica/link\ select.cur"), pointer
     /* margin: 10px */
 }
 
