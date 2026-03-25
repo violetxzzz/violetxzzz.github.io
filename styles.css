@@ -136,7 +136,7 @@ ul {
 }
 
 .debris {
-    cursor: url("cosmica/link\ select.cur"), pointer;
+    cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
     --tap-highlight-color: transparent;
     scale: 2 2;
@@ -465,15 +465,15 @@ span,
 strong,
 output,
 figcaption,
-input:not([type="button"], [type="submit"], [type="reset"]) {
-    cursor: url("cosmica/text\ select.cur"), text
+input {
+    cursor: url("cosmica/text%20select.cur"), text
 }
 a,
 button,
 .button,
 .artist,
-input:is([type="color"],[type="range"]) {
-    cursor: url("cosmica/link\ select.cur"), pointer
+input[type="color"],input[type="range"] {
+    cursor: url("cosmica/link%20select.cur"), pointer
 }
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair
@@ -635,7 +635,7 @@ paper-canvas {
     width: 25%;
     max-width: 160px;
     min-width: 100px;
-    cursor: url("cosmica/person\ select.cur"), default;
+    cursor: url("cosmica/person%20select.cur"), default;
     shape-outside: circle(48%);
 }
 
@@ -723,7 +723,7 @@ slide-show {
 }
 
 .catchable {
-    cursor: url("cosmica/link\ select.cur"), pointer;
+    cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 2;
     --tap-highlight-color: transparent;
 }
@@ -791,7 +791,7 @@ html {
     width: 100px;
     height: auto;
     aspect-ratio: 1 / 1;
-    cursor: url("cosmica/link\ select.cur"), pointer
+    cursor: url("cosmica/link%20select.cur"), pointer
     /* margin: 10px */
 }
 
