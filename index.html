@@ -136,6 +136,7 @@
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/h.js"></script>
+    <script src="https://addsoupbase.github.io/aria.js" defer></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <style>@counter-style heart {
@@ -148,7 +149,9 @@ form {
     display: inline-grid;
     gap: 10px
 }
-
+.heading{
+    font-size: 2em;
+}
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -276,7 +279,7 @@ ul {
 }
 
 .debris {
-    cursor: url("cosmica/link\ select.cur"), pointer;
+    cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
     --tap-highlight-color: transparent;
     scale: 2 2;
@@ -605,15 +608,22 @@ span,
 strong,
 output,
 figcaption,
-input:not([type="button"], [type="submit"], [type="reset"]) {
-    cursor: url("cosmica/text\ select.cur"), text
+input {
+    cursor: url("cosmica/text%20select.cur"), text
 }
 a,
 button,
 .button,
 .artist,
-input:is([type="color"],[type="range"]) {
-    cursor: url("cosmica/link\ select.cur"), pointer
+input[type="color"],input[type="range"] {
+    cursor: url("cosmica/link%20select.cur"), pointer
+}
+.button[aria-selected="true"] {
+    filter: brightness(60%)
+}
+#drawings > li {
+    display: block;
+    text-align: center;
 }
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair
@@ -775,7 +785,7 @@ paper-canvas {
     width: 25%;
     max-width: 160px;
     min-width: 100px;
-    cursor: url("cosmica/person\ select.cur"), default;
+    cursor: url("cosmica/person%20select.cur"), default;
     shape-outside: circle(48%);
 }
 
@@ -863,7 +873,7 @@ slide-show {
 }
 
 .catchable {
-    cursor: url("cosmica/link\ select.cur"), pointer;
+    cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 2;
     --tap-highlight-color: transparent;
 }
@@ -931,7 +941,7 @@ html {
     width: 100px;
     height: auto;
     aspect-ratio: 1 / 1;
-    cursor: url("cosmica/link\ select.cur"), pointer
+    cursor: url("cosmica/link%20select.cur"), pointer
     /* margin: 10px */
 }
 
@@ -1004,7 +1014,7 @@ a[target] {
 
 <body>
     <main class="center_screen">
-        <div id="frame" class="menu" style="view-transition-name: sect;">
+        <div id="frame" class="menu" style="view-transition-name: sect;" role="tabpanel" aria-labelledby="controls">
             <section class="sect" id="home" aria-hidden="false">
                 <picture>
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
@@ -1084,7 +1094,7 @@ a[target] {
                 </article>
             </section>
             <section class="sect" id="artists" aria-hidden="true">
-                <h1 style="display: inline;">Favorite Music Artists</h1>
+                <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
                 <div id="musics"
                     style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
@@ -1093,7 +1103,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/A$AP_rocky.avif" type="image/avif">
                             <source srcset="./artists/A$AP_rocky.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Fashion Killa"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Fashion Killa"
                                 draggable="false" role="button" title="Click to play Fashion Killa by A$AP rocky"
                                 class="artist avatar" src="./artists/A$AP_rocky.jpg" alt="A$AP rocky">
                         </picture>
@@ -1107,7 +1117,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/J._cole.avif" type="image/avif">
                             <source srcset="./artists/J._cole.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Wet Dreamz"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Wet Dreamz"
                                 draggable="false" role="button" title="Click to play Wet Dreamz by J. cole"
                                 class="artist avatar" src="./artists/J._cole.jpg" alt="J. cole">
                         </picture>
@@ -1121,7 +1131,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/SZA.avif" type="image/avif">
                             <source srcset="./artists/SZA.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="30 for 30"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="30 for 30"
                                 draggable="false" role="button" title="Click to play 30 for 30 by SZA"
                                 class="artist avatar" src="./artists/SZA.jpg" alt="SZA">
                         </picture>
@@ -1135,7 +1145,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/beabadoobee.avif" type="image/avif">
                             <source srcset="./artists/beabadoobee.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Apple Cider"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Apple Cider"
                                 draggable="false" role="button" title="Click to play Apple Cider by beabadoobee"
                                 class="artist avatar" src="./artists/beabadoobee.jpg" alt="beabadoobee">
                         </picture>
@@ -1149,7 +1159,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/brent_faiyaz.avif" type="image/avif">
                             <source srcset="./artists/brent_faiyaz.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Best Time"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Best Time"
                                 draggable="false" role="button" title="Click to play Best Time by brent faiyaz"
                                 class="artist avatar" src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
                         </picture>
@@ -1163,7 +1173,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/childish_gambino.avif" type="image/avif">
                             <source srcset="./artists/childish_gambino.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="3005"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="3005"
                                 draggable="false" role="button" title="Click to play 3005 by childish gambino"
                                 class="artist avatar" src="./artists/childish_gambino.jpg" alt="childish gambino">
                         </picture>
@@ -1177,7 +1187,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/daniel_caeser.avif" type="image/avif">
                             <source srcset="./artists/daniel_caeser.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Japanese Denim"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Japanese Denim"
                                 draggable="false" role="button" title="Click to play Japanese Denim by daniel caeser"
                                 class="artist avatar" src="./artists/daniel_caeser.jpg" alt="daniel caeser">
                         </picture>
@@ -1191,7 +1201,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/frank_ocean.avif" type="image/avif">
                             <source srcset="./artists/frank_ocean.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="American Wedding"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="American Wedding"
                                 draggable="false" role="button" title="Click to play American Wedding by frank ocean"
                                 class="artist avatar" src="./artists/frank_ocean.jpg" alt="frank ocean">
                         </picture>
@@ -1205,7 +1215,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/kanye_west.avif" type="image/avif">
                             <source srcset="./artists/kanye_west.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Bound 2"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Bound 2"
                                 draggable="false" role="button" title="Click to play Bound 2 by kanye west"
                                 class="artist avatar" src="./artists/kanye_west.jpg" alt="kanye west">
                         </picture>
@@ -1219,7 +1229,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/kendrick_lamar.avif" type="image/avif">
                             <source srcset="./artists/kendrick_lamar.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Backseat Freestyle"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Backseat Freestyle"
                                 draggable="false" role="button" title="Click to play Backseat Freestyle by kendrick lamar"
                                 class="artist avatar" src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
                         </picture>
@@ -1233,7 +1243,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/laufey.avif" type="image/avif">
                             <source srcset="./artists/laufey.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Lover Girl"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Lover Girl"
                                 draggable="false" role="button" title="Click to play Lover Girl by laufey"
                                 class="artist avatar" src="./artists/laufey.jpg" alt="laufey">
                         </picture>
@@ -1247,7 +1257,7 @@ a[target] {
                         <picture>
                             <source srcset="./artists/tyler,_the_creator.avif" type="image/avif">
                             <source srcset="./artists/tyler,_the_creator.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Where This Flower Blooms"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="Where This Flower Blooms"
                                 draggable="false" role="button" title="Click to play Where This Flower Blooms by tyler, the creator"
                                 class="artist avatar" src="./artists/tyler,_the_creator.jpg" alt="tyler, the creator">
                         </picture>
@@ -1261,16 +1271,16 @@ a[target] {
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
                 <div style="margin:15px">
-                    <h1 style="margin:0">Transmissions</h1>
-                    <div style="justify-self: center;" class="needsjs">
-                        <a class="button" id="gotoSend" href="#SendNameField" class="locateIfTooSmall">Write</a>
-                        <a class="button" id="gotoDraw" href="#PaperField" class="locateIfTooSmall">Draw</a>
-                    </div>
+                    <h2 style="margin:0" class="heading">Transmissions</h2>
+                    <nav style="justify-self: center;display:flex;gap:10px;justify-content:center" class="needsjs">
+                        <a class="button" id="gotoSend" href="#SendNameField" class="locateIfTooSmall">Write</a><a
+                            class="button" id="gotoDraw" href="#PaperField" class="locateIfTooSmall">Draw</a>
+                    </nav>
                 </div>
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
-                    <div class="loader" role="progressbar" style="justify-self: center;" id="loader"></div>
+                    <div class="loader" role="progressbar" style="justify-self: center;margin:auto" id="loader"></div>
                     <h2>Loading...</h2>
-                    <div id="drawings" style="display: none;"></div>
+                    <ul id="drawings" style="display: none;"></ul>
                 </div>
                 <div id="mailstuff"
                     style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
@@ -1302,7 +1312,7 @@ a[target] {
             </section>
         </div>
         <nav id="controls" role="tablist">
-            <a role="tab" class="button" href="#home">Home</a>
+            <a role="tab" class="button" href="#home" tabindex="0">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
             <a role="tab" class="button" href="#mailbox">Mail</a>
             <button aria-controls="frame" class="button" title="View background" id="hide">Hide</button>
@@ -1357,8 +1367,10 @@ a[target] {
             , undo = D.getElementById('undo')
             , brushsize = D.getElementById('brushsize')
             , color = D.getElementById('color')
-            , eyedropper = D.getElementById('eyedropper')
+            , eyedropper = D.getElementById('eyedropper'),
+            frame = D.getElementById('frame')
             , paper// = D.querySelector('paper-canvas')
+        var tabs = [].slice.call(D.querySelectorAll('a[role="tab"]'))
         if (window.EyeDropper) {
             eyedropper.style.display = 'block'
             h.on(eyedropper, {
@@ -1377,6 +1389,16 @@ a[target] {
                 }
             })
         }
+        function select(n) {
+            for (var i = tabs.length; i--;) tabs[i].ariaSelected = false
+            n.ariaSelected = true
+        }
+        h.on(frame, {
+            scrollsnapchange: function (e) {
+                var s = 'a[href="' + '#' + e.snapTargetInline.id + '"]'
+                select(D.querySelector(s))
+            }
+        })
         h.on(undo, {
             click: function () {
                 initpaper()
@@ -1433,9 +1455,13 @@ a[target] {
             json.forEach(function (thing) {
                 var src = thing[0],
                     timestamp = thing[1],
-                    container = D.createElement('div')
+                    container = D.createElement('figure')
                     , time = D.createElement('time')
-                    , img = new Image
+                    , img = new Image,
+                    list = D.createElement('li'),
+                    caption = D.createElement('figcaption')
+                caption.appendChild(time)
+                list.appendChild(container)
                 img.crossOrigin = 'anonymous'
                 img.className = 'drawing'
                 container.className = 'drawingframe'
@@ -1448,11 +1474,11 @@ a[target] {
                 link.appendChild(img)
                 link.setAttribute('target', '_blank')
                 container.appendChild(link)
-                container.appendChild(time)
+                container.appendChild(caption)
                 var t = new Date(timestamp)
                 time.textContent = t.toLocaleDateString()
-                time.setAttribute('datetime',t.toISOString().slice(0,10))
-                drawings.appendChild(container)
+                time.setAttribute('datetime', t.toISOString().slice(0, 10))
+                drawings.appendChild(list)
             })
         }
         xhr.send()
@@ -1487,10 +1513,12 @@ a[target] {
                     default:
                         if (location.hash !== this.getAttribute('href'))
                             startViewTransition()
+                        select(this)
                         break
                 }
             }
         })
+        if (location.hash) h.on(window, { _load: function () { select(D.querySelector('a[href="' + location.hash + '"]')) } })
         h.delegate(musics, {
             click: function () {
                 var current = this.dataset.plays

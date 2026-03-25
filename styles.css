@@ -8,7 +8,9 @@ form {
     display: inline-grid;
     gap: 10px
 }
-
+.heading{
+    font-size: 2em;
+}
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -474,6 +476,13 @@ button,
 .artist,
 input[type="color"],input[type="range"] {
     cursor: url("cosmica/link%20select.cur"), pointer
+}
+.button[aria-selected="true"] {
+    filter: brightness(60%)
+}
+#drawings > li {
+    display: block;
+    text-align: center;
 }
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair

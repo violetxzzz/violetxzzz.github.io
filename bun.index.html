@@ -138,6 +138,7 @@ let title = `Violet's Galaxy`
     <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script src="https://addsoupbase.github.io/h.js"></script>
+    <script src="https://addsoupbase.github.io/aria.js" defer></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <!--{{return `<style>${await file('styles.css')}</style>`}}-->
@@ -145,7 +146,7 @@ let title = `Violet's Galaxy`
 
 <body>
     <main class="center_screen">
-        <div id="frame" class="menu" style="view-transition-name: sect;">
+        <div id="frame" class="menu" style="view-transition-name: sect;" role="tabpanel" aria-labelledby="controls">
             <section class="sect" id="home" aria-hidden="false">
                 <picture>
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
@@ -225,7 +226,7 @@ let title = `Violet's Galaxy`
                 </article>
             </section>
             <section class="sect" id="artists" aria-hidden="true">
-                <h1 style="display: inline;">Favorite Music Artists</h1>
+                <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
                 <div id="musics"
                     style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
@@ -299,7 +300,7 @@ let title = `Violet's Galaxy`
                         <picture>
                             <source srcset="./artists/${o}.avif" type="image/avif">
                             <source srcset="./artists/${o}.webp" type="image/webp">
-                            <img fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="${title}"
+                            <img tabindex="0" fetchpriority="low" loading="lazy" aria-pressed="false" data-plays="${title}"
                                 draggable="false" role="button" title="Click to play ${title} by ${artist}"
                                 class="artist avatar" src="./artists/${o}.jpg" alt="${artist}">
                         </picture>
@@ -315,16 +316,16 @@ let title = `Violet's Galaxy`
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
                 <div style="margin:15px">
-                    <h1 style="margin:0">Transmissions</h1>
-                    <div style="justify-self: center;" class="needsjs">
-                        <a class="button" id="gotoSend" href="#SendNameField" class="locateIfTooSmall">Write</a>
-                        <a class="button" id="gotoDraw" href="#PaperField" class="locateIfTooSmall">Draw</a>
-                    </div>
+                    <h2 style="margin:0" class="heading">Transmissions</h2>
+                    <nav style="justify-self: center;display:flex;gap:10px;justify-content:center" class="needsjs">
+                        <a class="button" id="gotoSend" href="#SendNameField" class="locateIfTooSmall">Write</a><a
+                            class="button" id="gotoDraw" href="#PaperField" class="locateIfTooSmall">Draw</a>
+                    </nav>
                 </div>
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
-                    <div class="loader" role="progressbar" style="justify-self: center;" id="loader"></div>
+                    <div class="loader" role="progressbar" style="justify-self: center;margin:auto" id="loader"></div>
                     <h2>Loading...</h2>
-                    <div id="drawings" style="display: none;"></div>
+                    <ul id="drawings" style="display: none;"></ul>
                 </div>
                 <div id="mailstuff"
                     style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
@@ -356,7 +357,7 @@ let title = `Violet's Galaxy`
             </section>
         </div>
         <nav id="controls" role="tablist">
-            <a role="tab" class="button" href="#home">Home</a>
+            <a role="tab" class="button" href="#home" tabindex="0">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
             <a role="tab" class="button" href="#mailbox">Mail</a>
             <button aria-controls="frame" class="button" title="View background" id="hide">Hide</button>
@@ -411,8 +412,10 @@ let title = `Violet's Galaxy`
             , undo = D.getElementById('undo')
             , brushsize = D.getElementById('brushsize')
             , color = D.getElementById('color')
-            , eyedropper = D.getElementById('eyedropper')
+            , eyedropper = D.getElementById('eyedropper'),
+            frame = D.getElementById('frame')
             , paper// = D.querySelector('paper-canvas')
+        var tabs = [].slice.call(D.querySelectorAll('a[role="tab"]'))
         if (window.EyeDropper) {
             eyedropper.style.display = 'block'
             h.on(eyedropper, {
@@ -431,6 +434,16 @@ let title = `Violet's Galaxy`
                 }
             })
         }
+        function select(n) {
+            for (var i = tabs.length; i--;) tabs[i].ariaSelected = false
+            n.ariaSelected = true
+        }
+        h.on(frame, {
+            scrollsnapchange: function (e) {
+                var s = 'a[href="' + '#' + e.snapTargetInline.id + '"]'
+                select(D.querySelector(s))
+            }
+        })
         h.on(undo, {
             click: function () {
                 initpaper()
@@ -487,9 +500,13 @@ let title = `Violet's Galaxy`
             json.forEach(function (thing) {
                 var src = thing[0],
                     timestamp = thing[1],
-                    container = D.createElement('div')
+                    container = D.createElement('figure')
                     , time = D.createElement('time')
-                    , img = new Image
+                    , img = new Image,
+                    list = D.createElement('li'),
+                    caption = D.createElement('figcaption')
+                caption.appendChild(time)
+                list.appendChild(container)
                 img.crossOrigin = 'anonymous'
                 img.className = 'drawing'
                 container.className = 'drawingframe'
@@ -502,11 +519,11 @@ let title = `Violet's Galaxy`
                 link.appendChild(img)
                 link.setAttribute('target', '_blank')
                 container.appendChild(link)
-                container.appendChild(time)
+                container.appendChild(caption)
                 var t = new Date(timestamp)
                 time.textContent = t.toLocaleDateString()
-                time.setAttribute('datetime',t.toISOString().slice(0,10))
-                drawings.appendChild(container)
+                time.setAttribute('datetime', t.toISOString().slice(0, 10))
+                drawings.appendChild(list)
             })
         }
         xhr.send()
@@ -541,10 +558,12 @@ let title = `Violet's Galaxy`
                     default:
                         if (location.hash !== this.getAttribute('href'))
                             startViewTransition()
+                        select(this)
                         break
                 }
             }
         })
+        if (location.hash) h.on(window, { _load: function () { select(D.querySelector('a[href="' + location.hash + '"]')) } })
         h.delegate(musics, {
             click: function () {
                 var current = this.dataset.plays
