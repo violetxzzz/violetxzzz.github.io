@@ -176,7 +176,7 @@ background.delegate({
                 break
         }
         let rect = this.getBoundingClientRect()
-            , translate = `${rect.left}px 0`
+            , translate = `${rect.x + rect.width/2}px 0`
         this.className = `boom${t} boom obj`
         this.style.translate = translate
         this.style.animation = ''
