@@ -621,7 +621,9 @@ paper-canvas {
 #drawings:empty::after {
     content: "No signals received. Send one now!"
 }
-
+#drawings {
+    padding: 0;
+}
 .drawing {
     background: white;
     border: 3px outset var(--color2)
