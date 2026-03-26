@@ -90,7 +90,7 @@ let title = `Violet's Galaxy`
     <noscript>
         <style>
             .needsjs {
-                display: none;
+                display: none !important;
             }
 
             audio {
@@ -229,8 +229,8 @@ let title = `Violet's Galaxy`
             <section class="sect" id="artists" aria-hidden="true">
                 <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
-                <div id="musics"
-                    style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
+                <ul id="musics"
+                    style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);">
                     <!--{{ 
                     function n(a){
                     let link
@@ -297,6 +297,7 @@ let title = `Violet's Galaxy`
                     let {title, src} = n(o)
                     let artist = o.split('_').join(' ')
                     return`
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/${o}.avif" type="image/avif">
@@ -310,17 +311,18 @@ let title = `Violet's Galaxy`
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="${src}" preload="none" title="${title}"></audio>
                     </figure>
+                    </li>
                     `})
                     .join('')
                 }}-->
-                </div>
+                </ul>
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
                 <div style="margin:15px">
                     <h2 style="margin:0" class="heading">Transmissions</h2>
-                    <nav style="justify-self: center;display:flex;gap:10px;justify-content:center" class="needsjs">
+                    <nav style="justify-self: center;display:flex;gap:10px;justify-content:center">
                         <a class="button" id="gotoSend" href="#SendNameField">Write</a><a
-                            class="button locateIfTooSmall needsjs" id="gotoDraw" href="#PaperField">Draw</a>
+                            class="button locateIfTooSmall needsjs needswebcomponent" id="gotoDraw" href="#PaperField">Draw</a>
                     </nav>
                 </div>
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
@@ -348,7 +350,7 @@ let title = `Violet's Galaxy`
                                 <input type="color" alpha value="#000000" id="color">
                                 <input type="range" value="1" min="1" max="30" step="1" id="brushsize">
                                 <input class="button" id="undo" type="button" value="Undo">
-                                <input class="button" type="button" id="eyedropper" value="Pick Color"
+                                <input class="button" type="button" id="eyedropper" value="Eyedropper"
                                     style="display:none;justify-self: center;">
                             </div>
                             <button class="button submitter" style="justify-self: center;">Send</button>
@@ -376,7 +378,7 @@ let title = `Violet's Galaxy`
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
-    <button style="position: fixed;left:30px;bottom:30px;z-index: 8;scale:1.3 1.3;" aria-controls="frame"
+    <button style="position: fixed;left:15px;bottom:15px;z-index: 8;scale:1.3 1.3;" aria-controls="frame"
         class="button needsjs" title="View background" id="hide">Hide</button>
 </body>
 <script>
@@ -440,10 +442,12 @@ let title = `Violet's Galaxy`
         h.on(frame, {
             scrollsnapchange: function (e) {
                 var id = e.snapTargetInline.id
-                var s = 'a[href="' + '#' + id + '"]'
-                var elt = D.querySelector(s)
-                select(elt)
-                ariaShow(D.getElementById(id))
+                if (id === 'mailbox' || id === 'home' || id === 'artists') {
+                    var s = 'a[href="' + '#' + id + '"]'
+                    var elt = D.querySelector(s)
+                    select(elt)
+                    ariaShow(D.getElementById(id))
+                }
             }
         })
         h.on(undo, {
@@ -507,6 +511,8 @@ let title = `Violet's Galaxy`
                     , img = new Image,
                     list = D.createElement('li'),
                     caption = D.createElement('figcaption')
+                img.loading = 'lazy'
+                img.decoding = 'async'
                 caption.appendChild(time)
                 list.appendChild(container)
                 img.crossOrigin = 'anonymous'
@@ -544,14 +550,15 @@ let title = `Violet's Galaxy`
                     case 'Background':
                         break
                     default:
-                        if (location.hash !== this.getAttribute('href'))
-                            startViewTransition()
+                        // if (location.hash !== this.getAttribute('href')) startViewTransition()
                         select(this)
                         break
                 }
             }
         })
-        if (location.hash) h.on(window, { _load: function () { select(D.querySelector('a[href="' + location.hash + '"]')) } })
+        if (location.hash) h.on(window, { _load: function () { 
+            var id = location.hash.slice(1)
+             if (id === 'mailbox' || id === 'home' || id === 'artists')select(D.querySelector('a[href="' + location.hash + '"]')) } })
         h.delegate(musics, {
             click: function () {
                 var current = this.dataset.plays
@@ -581,7 +588,6 @@ let title = `Violet's Galaxy`
                 var hash = location.hash
                 var d = D.getElementById(hash.substring(1))
                 ariaShow(d)
-
             }
         })
         function ariaShow(d) {

@@ -8,9 +8,11 @@ form {
     display: inline-grid;
     gap: 10px
 }
-.heading{
+
+.heading {
     font-size: 2em;
 }
+
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -334,6 +336,10 @@ html {
     ::view-transition-new(sect) {
         animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
     }
+
+    .pulseIn {
+        animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
 }
 
 .boom {
@@ -470,20 +476,34 @@ figcaption,
 input {
     cursor: url("cosmica/text%20select.cur"), text
 }
+
 a,
 button,
 .button,
 .artist,
-input[type="color"],input[type="range"] {
+input[type="color"],
+input[type="range"] {
     cursor: url("cosmica/link%20select.cur"), pointer
 }
+
 .button[aria-selected="true"] {
     filter: brightness(60%)
 }
-#drawings > li {
+
+#drawings>li,
+#musics>li {
     display: inline;
     text-align: center;
 }
+
+#musics>li {
+    margin-inline: 5px
+}
+
+#musics {
+    padding: 0;
+}
+
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair
 }
@@ -623,9 +643,11 @@ paper-canvas {
 #drawings:empty::after {
     content: "No signals received. Send one now!"
 }
+
 #drawings {
     padding: 0;
 }
+
 .drawing {
     background: white;
     border: 3px outset var(--color2)
@@ -655,11 +677,13 @@ paper-canvas {
 #intro {
     text-align: right;
 }
+
 @supports (scroll-snap-align: none) {
-     #frame {
+    #frame {
         overflow-x: scroll !important
-     }
+    }
 }
+
 @media screen and (width < 440px) {
     #lcp {
         float: none;
@@ -809,7 +833,7 @@ html {
     height: auto;
     aspect-ratio: 1 / 1;
     cursor: url("cosmica/link%20select.cur"), pointer
-    /* margin: 10px */
+        /* margin: 10px */
 }
 
 .msc {
@@ -861,14 +885,9 @@ a[target] {
 }
 
 .locateIfTooSmall {
-    display: none;
+    display: inline;
 }
 
-@media screen and (width <=722px) {
-    .locateIfTooSmall {
-        display: inline;
-    }
-}
 
 .formdiv {
     margin: 10px;
@@ -877,14 +896,21 @@ a[target] {
     max-width: min-content;
     /* padding: 30px */
 }
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  ul { list-style: none; }
-  ul li:before {
-    content: "❥ ";
-  }
-  ul li:nth-child(odd):before {
-    color: #BC6CFF;
-  }
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+    ul {
+        list-style: none;
+    }
+
+    ul li:before {
+        content: "❥ ";
+    }
+
+    ul li:nth-child(odd):before {
+        color: #BC6CFF;
+    }
+
     ul li:nth-child(even):before {
         color: #908df7;
     }

@@ -88,7 +88,7 @@
     <noscript>
         <style>
             .needsjs {
-                display: none;
+                display: none !important;
             }
 
             audio {
@@ -149,9 +149,11 @@ form {
     display: inline-grid;
     gap: 10px
 }
-.heading{
+
+.heading {
     font-size: 2em;
 }
+
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -475,6 +477,10 @@ html {
     ::view-transition-new(sect) {
         animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
     }
+
+    .pulseIn {
+        animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
 }
 
 .boom {
@@ -611,20 +617,34 @@ figcaption,
 input {
     cursor: url("cosmica/text%20select.cur"), text
 }
+
 a,
 button,
 .button,
 .artist,
-input[type="color"],input[type="range"] {
+input[type="color"],
+input[type="range"] {
     cursor: url("cosmica/link%20select.cur"), pointer
 }
+
 .button[aria-selected="true"] {
     filter: brightness(60%)
 }
-#drawings > li {
+
+#drawings>li,
+#musics>li {
     display: inline;
     text-align: center;
 }
+
+#musics>li {
+    margin-inline: 5px
+}
+
+#musics {
+    padding: 0;
+}
+
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair
 }
@@ -645,6 +665,7 @@ paper-canvas {
 .menu,
 #controls {
     -ms-scrollbar-base-color: #BC6CFF;
+    -ms-scrollbar-face-color: #BC6CFF;
     background: #9553e0;
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -763,9 +784,11 @@ paper-canvas {
 #drawings:empty::after {
     content: "No signals received. Send one now!"
 }
+
 #drawings {
     padding: 0;
 }
+
 .drawing {
     background: white;
     border: 3px outset var(--color2)
@@ -795,11 +818,13 @@ paper-canvas {
 #intro {
     text-align: right;
 }
+
 @supports (scroll-snap-align: none) {
-     #frame {
+    #frame {
         overflow-x: scroll !important
-     }
+    }
 }
+
 @media screen and (width < 440px) {
     #lcp {
         float: none;
@@ -949,7 +974,7 @@ html {
     height: auto;
     aspect-ratio: 1 / 1;
     cursor: url("cosmica/link%20select.cur"), pointer
-    /* margin: 10px */
+        /* margin: 10px */
 }
 
 .msc {
@@ -1001,14 +1026,9 @@ a[target] {
 }
 
 .locateIfTooSmall {
-    display: none;
+    display: inline;
 }
 
-@media screen and (width <=722px) {
-    .locateIfTooSmall {
-        display: inline;
-    }
-}
 
 .formdiv {
     margin: 10px;
@@ -1017,14 +1037,21 @@ a[target] {
     max-width: min-content;
     /* padding: 30px */
 }
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  ul { list-style: none; }
-  ul li:before {
-    content: "❥ ";
-  }
-  ul li:nth-child(odd):before {
-    color: #BC6CFF;
-  }
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+    ul {
+        list-style: none;
+    }
+
+    ul li:before {
+        content: "❥ ";
+    }
+
+    ul li:nth-child(odd):before {
+        color: #BC6CFF;
+    }
+
     ul li:nth-child(even):before {
         color: #908df7;
     }
@@ -1116,9 +1143,10 @@ a[target] {
             <section class="sect" id="artists" aria-hidden="true">
                 <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
-                <div id="musics"
-                    style="max-width: 450px;margin:auto;display: grid;justify-items: center;grid-template-columns: repeat(2, 1fr);">
+                <ul id="musics"
+                    style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);">
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/A$AP_rocky.avif" type="image/avif">
@@ -1132,7 +1160,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/giufeufznk8c8w2ptn3tn/Fashion-Killa.m4a?rlkey=4yvs2suimfekzq3w25g4ex70o&st=u9kuuzzo&dl=1" preload="none" title="Fashion Killa"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/J._cole.avif" type="image/avif">
@@ -1146,7 +1176,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k&dl=1" preload="none" title="Wet Dreamz"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/SZA.avif" type="image/avif">
@@ -1160,7 +1192,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/qtuxfwvy2zy7bfen7wi3o/30-for-30.m4a?rlkey=rp4tpocfpsohv9zbi0w89s84y&st=udpjhng4&dl=1" preload="none" title="30 for 30"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/beabadoobee.avif" type="image/avif">
@@ -1174,7 +1208,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4&dl=1" preload="none" title="Apple Cider"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/brent_faiyaz.avif" type="image/avif">
@@ -1188,7 +1224,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56&dl=1" preload="none" title="Best Time"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/childish_gambino.avif" type="image/avif">
@@ -1202,7 +1240,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy&dl=1" preload="none" title="3005"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/daniel_caeser.avif" type="image/avif">
@@ -1216,7 +1256,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc&dl=1" preload="none" title="Japanese Denim"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/frank_ocean.avif" type="image/avif">
@@ -1230,7 +1272,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8&dl=1" preload="none" title="American Wedding"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/kanye_west.avif" type="image/avif">
@@ -1244,7 +1288,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6&dl=1" preload="none" title="Bound 2"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/kendrick_lamar.avif" type="image/avif">
@@ -1258,7 +1304,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a&dl=1" preload="none" title="Backseat Freestyle"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/laufey.avif" type="image/avif">
@@ -1272,7 +1320,9 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2&dl=1" preload="none" title="Lover Girl"></audio>
                     </figure>
+                    </li>
                     
+                    <li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/tyler,_the_creator.avif" type="image/avif">
@@ -1286,15 +1336,16 @@ a[target] {
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk&dl=1" preload="none" title="Where This Flower Blooms"></audio>
                     </figure>
+                    </li>
                     
-                </div>
+                </ul>
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
                 <div style="margin:15px">
                     <h2 style="margin:0" class="heading">Transmissions</h2>
-                    <nav style="justify-self: center;display:flex;gap:10px;justify-content:center" class="needsjs">
+                    <nav style="justify-self: center;display:flex;gap:10px;justify-content:center">
                         <a class="button" id="gotoSend" href="#SendNameField">Write</a><a
-                            class="button locateIfTooSmall needsjs" id="gotoDraw" href="#PaperField">Draw</a>
+                            class="button locateIfTooSmall needsjs needswebcomponent" id="gotoDraw" href="#PaperField">Draw</a>
                     </nav>
                 </div>
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
@@ -1322,7 +1373,7 @@ a[target] {
                                 <input type="color" alpha value="#000000" id="color">
                                 <input type="range" value="1" min="1" max="30" step="1" id="brushsize">
                                 <input class="button" id="undo" type="button" value="Undo">
-                                <input class="button" type="button" id="eyedropper" value="Pick Color"
+                                <input class="button" type="button" id="eyedropper" value="Eyedropper"
                                     style="display:none;justify-self: center;">
                             </div>
                             <button class="button submitter" style="justify-self: center;">Send</button>
@@ -1350,7 +1401,7 @@ a[target] {
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
-    <button style="position: fixed;left:30px;bottom:30px;z-index: 8;scale:1.3 1.3;" aria-controls="frame"
+    <button style="position: fixed;left:15px;bottom:15px;z-index: 8;scale:1.3 1.3;" aria-controls="frame"
         class="button needsjs" title="View background" id="hide">Hide</button>
 </body>
 <script>
@@ -1414,10 +1465,12 @@ a[target] {
         h.on(frame, {
             scrollsnapchange: function (e) {
                 var id = e.snapTargetInline.id
-                var s = 'a[href="' + '#' + id + '"]'
-                var elt = D.querySelector(s)
-                select(elt)
-                ariaShow(D.getElementById(id))
+                if (id === 'mailbox' || id === 'home' || id === 'artists') {
+                    var s = 'a[href="' + '#' + id + '"]'
+                    var elt = D.querySelector(s)
+                    select(elt)
+                    ariaShow(D.getElementById(id))
+                }
             }
         })
         h.on(undo, {
@@ -1481,6 +1534,8 @@ a[target] {
                     , img = new Image,
                     list = D.createElement('li'),
                     caption = D.createElement('figcaption')
+                img.loading = 'lazy'
+                img.decoding = 'async'
                 caption.appendChild(time)
                 list.appendChild(container)
                 img.crossOrigin = 'anonymous'
@@ -1518,14 +1573,15 @@ a[target] {
                     case 'Background':
                         break
                     default:
-                        if (location.hash !== this.getAttribute('href'))
-                            startViewTransition()
+                        // if (location.hash !== this.getAttribute('href')) startViewTransition()
                         select(this)
                         break
                 }
             }
         })
-        if (location.hash) h.on(window, { _load: function () { select(D.querySelector('a[href="' + location.hash + '"]')) } })
+        if (location.hash) h.on(window, { _load: function () { 
+            var id = location.hash.slice(1)
+             if (id === 'mailbox' || id === 'home' || id === 'artists')select(D.querySelector('a[href="' + location.hash + '"]')) } })
         h.delegate(musics, {
             click: function () {
                 var current = this.dataset.plays
@@ -1555,7 +1611,6 @@ a[target] {
                 var hash = location.hash
                 var d = D.getElementById(hash.substring(1))
                 ariaShow(d)
-
             }
         })
         function ariaShow(d) {
