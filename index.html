@@ -714,7 +714,7 @@ paper-canvas {
 
 #frame {
     flex: 1;
-    overflow-x: scroll;
+    overflow-x: hidden;
     scrollbar-width: none;
     --scrollbar-width: 0;
     width: 100%;
@@ -794,7 +794,11 @@ paper-canvas {
 #intro {
     text-align: right;
 }
-
+@supports (scroll-snap-align: none) {
+     #frame {
+        overflow-x: scroll !important
+     }
+}
 @media screen and (width < 440px) {
     #lcp {
         float: none;
@@ -1012,6 +1016,7 @@ a[target] {
     max-width: min-content;
     /* padding: 30px */
 }</style>
+    <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
 </head>
 
 <body>
@@ -1275,8 +1280,8 @@ a[target] {
                 <div style="margin:15px">
                     <h2 style="margin:0" class="heading">Transmissions</h2>
                     <nav style="justify-self: center;display:flex;gap:10px;justify-content:center" class="needsjs">
-                        <a class="button" id="gotoSend" href="#SendNameField" class="locateIfTooSmall">Write</a><a
-                            class="button" id="gotoDraw" href="#PaperField" class="locateIfTooSmall">Draw</a>
+                        <a class="button" id="gotoSend" href="#SendNameField">Write</a><a
+                            class="button locateIfTooSmall needsjs" id="gotoDraw" href="#PaperField">Draw</a>
                     </nav>
                 </div>
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
@@ -1295,7 +1300,7 @@ a[target] {
                             <button class="button submitter" style="justify-self: center;">Send</button>
                         </form>
                     </div>
-                    <div id="senddraw" class="formdiv needsjs">
+                    <div id="senddraw" class="formdiv needsjs needswebcomponent">
                         <h2>Send Drawing</h2>
                         <form id="paperform" action="https://drawing-submissions.deno.dev?user=violet" method="POST"
                             enctype="text/plain">
@@ -1317,7 +1322,6 @@ a[target] {
             <a role="tab" class="button" href="#home" tabindex="0">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
             <a role="tab" class="button" href="#mailbox">Mail</a>
-            <button aria-controls="frame" class="button" title="View background" id="hide">Hide</button>
         </nav>
     </main>
     <div role="alert" id="message" class="menu" style="display: none;">
@@ -1333,9 +1337,8 @@ a[target] {
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
-    <button class="button"
-        style="translate: 0 100px;position: fixed;left:30px;bottom:30px;z-index: 8;scale:1.3 1.3;visibility: hidden;"
-        id="show">Show</button>
+    <button style="position: fixed;left:30px;bottom:30px;z-index: 8;scale:1.3 1.3;" aria-controls="frame"
+        class="button needsjs" title="View background" id="hide">Hide</button>
 </body>
 <script>
     !function (D, h) {
@@ -1355,7 +1358,7 @@ a[target] {
             , musicButtons = [].slice.call(musics.getElementsByTagName('img'))
             , audios = [].slice.call(musics.getElementsByTagName('audio'))
             , startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : Function.prototype
-            , show = D.getElementById('show')
+            //, show = D.getElementById('show')
             , hide = D.getElementById('hide')
             , main = D.querySelector('main')
             , loader = D.getElementById('loader')
@@ -1397,8 +1400,11 @@ a[target] {
         }
         h.on(frame, {
             scrollsnapchange: function (e) {
-                var s = 'a[href="' + '#' + e.snapTargetInline.id + '"]'
-                select(D.querySelector(s))
+                var id = e.snapTargetInline.id
+                var s = 'a[href="' + '#' + id + '"]'
+                var elt = D.querySelector(s)
+                select(elt)
+                ariaShow(D.getElementById(id))
             }
         })
         h.on(undo, {
@@ -1489,24 +1495,10 @@ a[target] {
     })*/
         h.debounce(hide, {
             click: function () {
-                show.style.visibility = 'visible'
-                show.style.translate = '0 0'
-                main.style.display = 'none'
-                hide.toggleAttribute('inert', true)
-                show.toggleAttribute('inert', false)
+                this.textContent = this.textContent === 'Hide' ? 'Show' : 'Hide'
+                main.style.display = main.style.display === 'none' ? '' : 'none'
             }
-        }, 1000)
-        h.debounce(show, {
-            click: function () {
-                main.style.display = ''
-                show.style.translate = '0 100px'
-                show.toggleAttribute('inert', true)
-                hide.toggleAttribute('inert', false)
-                setTimeout(function () {
-                    show.style.visibility = 'hidden'
-                }, 300)
-            }
-        }, 1000)
+        }, 300)
         h.delegate(controls, {
             click: function (e) {
                 switch (this.textContent) {
@@ -1549,14 +1541,19 @@ a[target] {
             hashchange: function () {
                 var hash = location.hash
                 var d = D.getElementById(hash.substring(1))
-                sects.forEach(function (e) {
-                    if (e === d) {
-                        if (d) d.ariaHidden = 'false'
-                    }
-                    else e.ariaHidden = 'true'
-                })
+                ariaShow(d)
+
             }
         })
+        function ariaShow(d) {
+            for (var i = sects.length; i--;) {
+                var e = sects[i]
+                if (e === d) {
+                    if (d) d.ariaHidden = 'false'
+                }
+                else e.ariaHidden = 'true'
+            }
+        }
     }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
