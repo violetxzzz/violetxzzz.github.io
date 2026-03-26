@@ -503,6 +503,8 @@ paper-canvas {
 #frame,
 .menu,
 #controls {
+    -ms-scrollbar-base-color: #BC6CFF;
+    -ms-scrollbar-face-color: #BC6CFF;
     background: #9553e0;
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -874,4 +876,16 @@ a[target] {
     justify-self: center;
     max-width: min-content;
     /* padding: 30px */
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  ul { list-style: none; }
+  ul li:before {
+    content: "❥ ";
+  }
+  ul li:nth-child(odd):before {
+    color: #BC6CFF;
+  }
+    ul li:nth-child(even):before {
+        color: #908df7;
+    }
 }
