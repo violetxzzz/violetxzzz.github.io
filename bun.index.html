@@ -5,7 +5,6 @@ let title = `Violet's Galaxy`
 }}-->
 
 <head>
-    <link rel="modulepreload" href="bg.js">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <meta http-equiv="content-language" content="en">
     <meta property="og:locale" content="en_US">
@@ -140,6 +139,7 @@ let title = `Violet's Galaxy`
     <script src="https://addsoupbase.github.io/h.js"></script>
     <script src="https://addsoupbase.github.io/aria.js" defer></script>
     <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
+    <link rel="modulepreload" href="bg.js">
     <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <!--{{return `<style>${await file('styles.css')}</style>`}}-->
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
@@ -229,8 +229,7 @@ let title = `Violet's Galaxy`
             <section class="sect" id="artists" aria-hidden="true">
                 <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
-                <ul id="musics"
-                    style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);">
+                <ul id="musics" style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);">
                     <!--{{ 
                     function n(a){
                     let link
@@ -322,7 +321,8 @@ let title = `Violet's Galaxy`
                     <h2 style="margin:0" class="heading">Transmissions</h2>
                     <nav style="justify-self: center;display:flex;gap:10px;justify-content:center">
                         <a class="button" id="gotoSend" href="#SendNameField">Write</a><a
-                            class="button locateIfTooSmall needsjs needswebcomponent" id="gotoDraw" href="#PaperField">Draw</a>
+                            class="button locateIfTooSmall needsjs needswebcomponent" id="gotoDraw"
+                            href="#PaperField">Draw</a>
                     </nav>
                 </div>
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
@@ -365,7 +365,7 @@ let title = `Violet's Galaxy`
             <a role="tab" class="button" href="#mailbox">Mail</a>
         </nav>
     </main>
-    <div role="alert" id="message" class="menu" style="display: none;">
+    <div role="alert" id="message" class="menu" style="">
         <picture>
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
@@ -378,8 +378,8 @@ let title = `Violet's Galaxy`
             style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
-    <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame"
-        class="button needsjs" title="View background" id="hide">Hide</button>
+    <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
+        title="View background" id="hide">Hide</button>
 </body>
 <script>
     !function (D, h) {
@@ -556,9 +556,12 @@ let title = `Violet's Galaxy`
                 }
             }
         })
-       h.on(window, { _load: function () { 
-            var id = location.hash.slice(1) || 'home'
-             if (id === 'mailbox' || id === 'home' || id === 'artists') select(D.querySelector('a[href="#' + id+ '"]')) } })
+        h.on(window, {
+            _load: function () {
+                var id = location.hash.slice(1) || 'home'
+                if (id === 'mailbox' || id === 'home' || id === 'artists') select(D.querySelector('a[href="#' + id + '"]'))
+            }
+        })
         h.delegate(musics, {
             click: function () {
                 var current = this.dataset.plays
@@ -601,6 +604,7 @@ let title = `Violet's Galaxy`
         }
     }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
+    console.log('%cSprites Credit: https://sprites.pmdcollab.org/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
 <script>
     addEventListener('load', () => {

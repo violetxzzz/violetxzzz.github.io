@@ -9,6 +9,19 @@ import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
 const { background } = v.id
 const $ = v.esc
+const setOffsetPath = function (sheet) {
+    document.adoptedStyleSheets = [].concat.call(document.adoptedStyleSheets, sheet)
+    return sheet.replaceSync.bind(sheet)
+}(new CSSStyleSheet)
+background.observe('resize', {
+    callback(n) {
+        let { width, height } = n.contentRect
+        let halfW = innerWidth / 2
+        let halfH = innerHeight / 2
+        setOffsetPath(`:root{--ltr: path("M -${halfW} 0 L ${width + halfW} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
+    }
+})
+window.setOffsetPath = setOffsetPath
 load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
@@ -43,17 +56,12 @@ function spawnJirachi() {
             jirachi.resume()
             // jirachi.dur = .01
             jirachi.classList.remove('jirachi_intro')
+            jirachi.style.setProperty('--offset-path', 'var(--ttb)')
+            jirachi.style.animationDuration = '42600ms'
             jirachi.classList.add('jirachi', 'catchable')
             // jirachi.shadowRoot.querySelector('animate').setAttribute('repeatCount', 'indefinite')
             // jirachi.resume()
             // jirachi.time = 0
-            jirachi.animate([{ translate: `0 100vh` }], {
-                duration: 20000,
-                delay: 200,
-                // composite:'accumulate',
-                iterations: 1,
-                easing: 'linear'
-            }).onfinish = () => jirachi.destroy()
         }
     })
     jirachi.play()
@@ -84,13 +92,9 @@ function spawnHoopaUnbound() {
             // jirachi.shadowRoot.querySelector('animate').setAttribute('repeatCount', 'indefinite')
             // jirachi.resume()
             // jirachi.time = 0
-            hoopa.animate([{ translate: `0 130vh` }], {
-                duration: 20000,
-                delay: 200,
-                // composite:'accumulate',
-                iterations: 1,
-                easing: 'linear'
-            }).onfinish = () => hoopa.destroy()
+              hoopa.style.setProperty('--offset-path', 'var(--ttb)')
+            hoopa.style.animationDuration = '70000ms'
+            hoopa.classList.add('hoopa_unbound', 'catchable')
         }
     })
     hoopa.play()
@@ -100,8 +104,8 @@ function spawnHoopaUnbound() {
 // data.forEach(doImages)
 function isHidden() { return document.hidden }
 background.delegate({
-    animationend() {
-        this.destroy()
+    animationend(e) {
+        e.animationName === 'offset' && this.destroy()
     },
 })
 function preload(url) {
@@ -111,10 +115,10 @@ let showedMessage = false
 background.delegate({
     async pointerdown(e) {
         e.stopImmediatePropagation()
-        this.classList.remove('catchable')
         let shiny = this.index == 1
         this.style.pointerEvents = 'none'
-        this.getAnimations({ subtree: true }).forEach(o => o.pause())
+        this.getAnimations({ subtree: true }).forEach(commitStyles)
+        this.classList.remove('catchable')
         let { name } = this.dataset
         this.classList.replace(name, name + '_idle')
         this.src = this.src.replace('-Walk', '-Idle')
@@ -176,7 +180,7 @@ background.delegate({
                 break
         }
         let rect = this.getBoundingClientRect()
-            , translate = `${rect.x + rect.width/2}px 0`
+            , translate = `${rect.x + rect.width / 2}px 0`
         this.className = `boom${t} boom obj`
         this.style.translate = translate
         this.style.animation = ''
@@ -198,7 +202,7 @@ function spawnSpaceShip() {
     if (isHidden()) return
     let scale = Math.random()
     let dir = Math.random() > .5
-    let o = $`<slide-show class="spaceship spacething obj" style="${dir ? 'scale: -.8 .8;' : ''}top: ${randomY()}; animation: toRight ${40 + (Math.random() * 20)}s linear${dir ? '' : ' reverse'}"></slide-show>`
+    let o = $`<slide-show class="spaceship spacething obj" style="${dir ? 'scale: -.8 .8;' : ''}top: ${randomY()}; animation: offset ${40 + (Math.random() * 20)}s linear${dir ? '' : ' reverse'}"></slide-show>`
         .setParent(background)
     // .onanimationend = remove
 }
@@ -230,7 +234,7 @@ function spawnAsteroid() {
     setTimeout(spawnAsteroid, 4000 + (Math.random() * 1000))
     if (isHidden()) return
     let i = Math.floor(Math.random() * 4) + 1
-    let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="top:${randomY()};animation:float ${40 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${20 + (i * 5) + (Math.random() * 20)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+    let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
         .setParent(background)
         .onanimationend = remove
     // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
@@ -240,7 +244,7 @@ function spawnPlanet() {
     setTimeout(spawnPlanet, 30000 + (Math.random() * 1000))
     if (isHidden()) return
     let i = Math.floor(Math.random() * 12) + 1
-    let asteroid = $`<div class="planet planet${i} obj debris" style="top:${randomY()};animation:float ${700 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${600 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
+    let asteroid = $`<div class="planet planet${i} obj debris" style="top:${randomY()};animation:float ${700 - Math.random() * 30}s linear infinite${Math.random() > .5 ? '' : ' reverse'}, offset ${600 - (i * 4)}s linear${Math.random() > .5 ? '' : ' reverse'}"></div>`
         .setParent(background)
 }
 // setTimeout(spawnPlanet, 10000 + Math.random() * 10000)
@@ -255,7 +259,7 @@ function randomX() {
     let sleeping = mons.filter(o => o.endsWith('sleep'))
     let pkm = sleeping[Math.floor(Math.random() * sleeping.length)]
     if (!pkm || isHidden()) return
-    $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, toRight ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
+    $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, offset ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
         .setParent(background)
 }*/
 let special = new Set(`hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
@@ -310,7 +314,7 @@ function spawnPokemon() {
             speed *= 1.5
             break
         case 'minior':
-            // index = Math.floor(Math.random() * 8) its broken idk why!
+        // index = Math.floor(Math.random() * 8) its broken idk why!
         case 'poipole':
         case 'beldum':
             scale *= 2.5
@@ -380,15 +384,8 @@ function spawnPokemon() {
     }
     scale *= i
     if (shiny()) index += 1
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="scale: ${scale} ${Math.abs(scale)};top: ${randomY()};"></slide-show>`
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="--offset-path: var(--ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1700}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
-        .animFrom('toRight', {
-            duration: ((40 + Math.random() * 40) / speed) * 1000 * i,
-            easing: 'linear',
-            iterations: 1,
-            direction: i === 1 ? 'normal' : 'reverse'
-        })
-        .onfinish = () => s.destroy()
     s.play()
 }
 setTimeout(spawnPokemon, 300)
@@ -408,3 +405,4 @@ load({ src: './shootingstar-11.png', framesX: 9, framesY: 1 })[0]
     .then(() => {
         setTimeout(spawnShootingStar, 1000)
     })
+function commitStyles(o) { o.commitStyles() }

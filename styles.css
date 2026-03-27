@@ -142,8 +142,10 @@ ul {
 .debris {
     cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
+    --offset-path: var(--ltr);
     --tap-highlight-color: transparent;
-    scale: 2 2;
+    transform: scale(2, 2) rotate(var(--asteroid-rotate));
+    animation: float 30s linear infinite, offset 30s linear;
     /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
     background-image: url(./debris.png);
     background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
@@ -271,6 +273,8 @@ html {
 
 #background,
 #background * {
+    --offset-rotate: 0deg;
+    --user-select:none;
     touch-action: pinch-zoom !important;
 }
 
@@ -652,14 +656,18 @@ paper-canvas {
     background: white;
     border: 3px outset var(--color2)
 }
-
+@property --asteroid-rotate {
+    initial-value: 0deg;
+    syntax: "<angle>";
+    inherits: false;
+}
 @keyframes float {
     0% {
-        rotate: 0deg
+        --asteroid-rotate: 0deg
     }
 
     100% {
-        rotate: 360deg
+        --asteroid-rotate: 360deg
     }
 }
 
@@ -728,16 +736,27 @@ h6 {
     }
 }
 
-@keyframes toRight {
+@keyframes offset {
     0% {
-        translate: calc(0vw - 300%) 0;
+        --offset-distance: 0%;
     }
 
     100% {
-        translate: calc(100vw + 300%) 0;
+        --offset-distance: 100%
     }
 }
+@keyframes toLeft {
+    0% {
+        --offset-distance: 100%;
+    }
 
+    100% {
+        --offset-distance: 0%
+    }
+}
+.catchable {
+    animation: offset 10s linear
+}
 .slideshow {
     animation: slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite;
 }
