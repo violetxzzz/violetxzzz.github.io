@@ -19,10 +19,9 @@ background.observe('resize', {
         let { width, height } = n.contentRect
         let halfW = innerWidth / 2
         let halfH = innerHeight / 2
-        setOffsetPath(`:root{--ltr: path("M -${halfW} 0 L ${width + halfW} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
+        setOffsetPath(`:root{--ltr: path("M -${halfW} 0 L ${width + (halfW/3)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
-window.setOffsetPath = setOffsetPath
 load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
@@ -320,6 +319,9 @@ function spawnPokemon() {
         case 'beldum':
             scale *= 2.5
             break
+            case 'cosmog':
+                scale *= 1.5
+                break
         case 'celesteela':
         case 'nihilego':
         case 'dusknoir':
@@ -385,7 +387,7 @@ function spawnPokemon() {
     }
     scale *= i
     if (shiny()) index += 1
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="--offset-path: var(--ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1700}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
 }

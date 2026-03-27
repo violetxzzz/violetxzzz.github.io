@@ -86,6 +86,9 @@
     <title>Violet's Galaxy</title>
     <noscript>
         <style>
+            .authortitle {
+                display: inline !important;
+            }
             .needsjs {
                 display: none !important;
             }
@@ -132,11 +135,11 @@
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
     <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
-    <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
-    <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
-    <script src="https://addsoupbase.github.io/h.js"></script>
-    <script src="https://addsoupbase.github.io/aria.js" defer></script>
-    <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
+    <script crossorigin="anonymous" src='https://addsoupbase.github.io/legacy.js' nomodule></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/css.js" blocking="render"></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/h.js"></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" defer></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <link rel="modulepreload" href="bg.js">
     <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <style>@counter-style heart {
@@ -279,7 +282,10 @@ ul {
     display: none;
     transition: scale .2s linear;
 }
-
+.authortitle {
+    display: none;
+    font-size: medium;
+}
 .debris {
     cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
@@ -1174,7 +1180,7 @@ a[target] {
                                 class="artist avatar" src="./artists/A$AP_rocky.jpg" alt="A$AP rocky">
                         </picture>
                         <figcaption class="capt"><cite>A$AP rocky</cite></figcaption>
-                        <noscript><small><cite>Fashion Killa</cite></small></noscript>
+                        <cite class="authortitle">Fashion Killa</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/giufeufznk8c8w2ptn3tn/Fashion-Killa.m4a?rlkey=4yvs2suimfekzq3w25g4ex70o&st=u9kuuzzo&dl=1" preload="none" title="Fashion Killa"></audio>
                     </figure>
@@ -1190,7 +1196,7 @@ a[target] {
                                 class="artist avatar" src="./artists/J._cole.jpg" alt="J. cole">
                         </picture>
                         <figcaption class="capt"><cite>J. cole</cite></figcaption>
-                        <noscript><small><cite>Wet Dreamz</cite></small></noscript>
+                        <cite class="authortitle">Wet Dreamz</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k&dl=1" preload="none" title="Wet Dreamz"></audio>
                     </figure>
@@ -1206,7 +1212,7 @@ a[target] {
                                 class="artist avatar" src="./artists/SZA.jpg" alt="SZA">
                         </picture>
                         <figcaption class="capt"><cite>SZA</cite></figcaption>
-                        <noscript><small><cite>30 for 30</cite></small></noscript>
+                        <cite class="authortitle">30 for 30</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/qtuxfwvy2zy7bfen7wi3o/30-for-30.m4a?rlkey=rp4tpocfpsohv9zbi0w89s84y&st=udpjhng4&dl=1" preload="none" title="30 for 30"></audio>
                     </figure>
@@ -1222,7 +1228,7 @@ a[target] {
                                 class="artist avatar" src="./artists/beabadoobee.jpg" alt="beabadoobee">
                         </picture>
                         <figcaption class="capt"><cite>beabadoobee</cite></figcaption>
-                        <noscript><small><cite>Apple Cider</cite></small></noscript>
+                        <cite class="authortitle">Apple Cider</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4&dl=1" preload="none" title="Apple Cider"></audio>
                     </figure>
@@ -1238,7 +1244,7 @@ a[target] {
                                 class="artist avatar" src="./artists/brent_faiyaz.jpg" alt="brent faiyaz">
                         </picture>
                         <figcaption class="capt"><cite>brent faiyaz</cite></figcaption>
-                        <noscript><small><cite>Best Time</cite></small></noscript>
+                        <cite class="authortitle">Best Time</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56&dl=1" preload="none" title="Best Time"></audio>
                     </figure>
@@ -1254,7 +1260,7 @@ a[target] {
                                 class="artist avatar" src="./artists/childish_gambino.jpg" alt="childish gambino">
                         </picture>
                         <figcaption class="capt"><cite>childish gambino</cite></figcaption>
-                        <noscript><small><cite>3005</cite></small></noscript>
+                        <cite class="authortitle">3005</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy&dl=1" preload="none" title="3005"></audio>
                     </figure>
@@ -1270,7 +1276,7 @@ a[target] {
                                 class="artist avatar" src="./artists/daniel_caeser.jpg" alt="daniel caeser">
                         </picture>
                         <figcaption class="capt"><cite>daniel caeser</cite></figcaption>
-                        <noscript><small><cite>Japanese Denim</cite></small></noscript>
+                        <cite class="authortitle">Japanese Denim</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc&dl=1" preload="none" title="Japanese Denim"></audio>
                     </figure>
@@ -1286,7 +1292,7 @@ a[target] {
                                 class="artist avatar" src="./artists/frank_ocean.jpg" alt="frank ocean">
                         </picture>
                         <figcaption class="capt"><cite>frank ocean</cite></figcaption>
-                        <noscript><small><cite>American Wedding</cite></small></noscript>
+                        <cite class="authortitle">American Wedding</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8&dl=1" preload="none" title="American Wedding"></audio>
                     </figure>
@@ -1302,7 +1308,7 @@ a[target] {
                                 class="artist avatar" src="./artists/kanye_west.jpg" alt="kanye west">
                         </picture>
                         <figcaption class="capt"><cite>kanye west</cite></figcaption>
-                        <noscript><small><cite>Bound 2</cite></small></noscript>
+                        <cite class="authortitle">Bound 2</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6&dl=1" preload="none" title="Bound 2"></audio>
                     </figure>
@@ -1318,7 +1324,7 @@ a[target] {
                                 class="artist avatar" src="./artists/kendrick_lamar.jpg" alt="kendrick lamar">
                         </picture>
                         <figcaption class="capt"><cite>kendrick lamar</cite></figcaption>
-                        <noscript><small><cite>Backseat Freestyle</cite></small></noscript>
+                        <cite class="authortitle">Backseat Freestyle</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a&dl=1" preload="none" title="Backseat Freestyle"></audio>
                     </figure>
@@ -1334,7 +1340,7 @@ a[target] {
                                 class="artist avatar" src="./artists/laufey.jpg" alt="laufey">
                         </picture>
                         <figcaption class="capt"><cite>laufey</cite></figcaption>
-                        <noscript><small><cite>Lover Girl</cite></small></noscript>
+                        <cite class="authortitle">Lover Girl</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2&dl=1" preload="none" title="Lover Girl"></audio>
                     </figure>
@@ -1350,7 +1356,7 @@ a[target] {
                                 class="artist avatar" src="./artists/tyler,_the_creator.jpg" alt="tyler, the creator">
                         </picture>
                         <figcaption class="capt"><cite>tyler, the creator</cite></figcaption>
-                        <noscript><small><cite>Where This Flower Blooms</cite></small></noscript>
+                        <cite class="authortitle">Where This Flower Blooms</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="https://www.dropbox.com/scl/fi/0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk&dl=1" preload="none" title="Where This Flower Blooms"></audio>
                     </figure>
@@ -1638,10 +1644,7 @@ a[target] {
         function ariaShow(d) {
             for (var i = sects.length; i--;) {
                 var e = sects[i]
-                if (e === d) {
-                    if (d) d.ariaHidden = 'false'
-                }
-                else e.ariaHidden = 'true'
+                e.ariaHidden = String(e !== d)
             }
         }
     }(document, window[Symbol.for('[[HModule]]')])

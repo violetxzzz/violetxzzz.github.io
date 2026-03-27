@@ -138,7 +138,10 @@ ul {
     display: none;
     transition: scale .2s linear;
 }
-
+.authortitle {
+    display: none;
+    font-size: medium;
+}
 .debris {
     cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;

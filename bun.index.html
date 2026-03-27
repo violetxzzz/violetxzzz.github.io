@@ -88,6 +88,9 @@ let title = `Violet's Galaxy`
     <title><!--{{return title}}--></title>
     <noscript>
         <style>
+            .authortitle {
+                display: inline !important;
+            }
             .needsjs {
                 display: none !important;
             }
@@ -134,11 +137,11 @@ let title = `Violet's Galaxy`
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
     <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
-    <script src='https://addsoupbase.github.io/legacy.js' nomodule></script>
-    <script src="https://addsoupbase.github.io/css.js" blocking="render"></script>
-    <script src="https://addsoupbase.github.io/h.js"></script>
-    <script src="https://addsoupbase.github.io/aria.js" defer></script>
-    <script src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
+    <script crossorigin="anonymous" src='https://addsoupbase.github.io/legacy.js' nomodule></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/css.js" blocking="render"></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/h.js"></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" defer></script>
+    <script crossorigin="anonymous" src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <link rel="modulepreload" href="bg.js">
     <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <!--{{return `<style>${await file('styles.css')}</style>`}}-->
@@ -306,7 +309,7 @@ let title = `Violet's Galaxy`
                                 class="artist avatar" src="./artists/${o}.jpg" alt="${artist}">
                         </picture>
                         <figcaption class="capt"><cite>${artist}</cite></figcaption>
-                        <noscript><small><cite>${title}</cite></small></noscript>
+                        <cite class="authortitle">${title}</cite>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="${src}" preload="none" title="${title}"></audio>
                     </figure>
@@ -596,10 +599,7 @@ let title = `Violet's Galaxy`
         function ariaShow(d) {
             for (var i = sects.length; i--;) {
                 var e = sects[i]
-                if (e === d) {
-                    if (d) d.ariaHidden = 'false'
-                }
-                else e.ariaHidden = 'true'
+                e.ariaHidden = String(e !== d)
             }
         }
     }(document, window[Symbol.for('[[HModule]]')])
