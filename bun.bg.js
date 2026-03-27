@@ -7,6 +7,13 @@ let a = await Array.fromAsync(await dir('./new'), async o=>{
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
+if (typeof CSSPropertyRule !== 'function') 
+    CSS.registerProperty({
+        name: '--asteroid-rotate',
+        syntax: "<angle>",
+        inherits: false,
+        initialValue: '0deg'
+    })
 const { background } = v.id
 const $ = v.esc
 const setOffsetPath = function (sheet) {
@@ -92,7 +99,7 @@ function spawnHoopaUnbound() {
             // jirachi.shadowRoot.querySelector('animate').setAttribute('repeatCount', 'indefinite')
             // jirachi.resume()
             // jirachi.time = 0
-              hoopa.style.setProperty('--offset-path', 'var(--ttb)')
+            hoopa.style.setProperty('--offset-path', 'var(--ttb)')
             hoopa.style.animationDuration = '70000ms'
             hoopa.classList.add('hoopa_unbound', 'catchable')
         }
