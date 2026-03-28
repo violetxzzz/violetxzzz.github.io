@@ -337,11 +337,11 @@ let title = `Violet's Galaxy`
                     <h2 style="display: inline;" class="heading">Friends</h2>
                     <ul id="friendslist">
                         <!--{{
-                            let closest = new Set(['misha', 'rika','sukuna','shon','kyuu','mochi','caelix'])
+                            let closest = new Set(['misha', 'rika','sukuna','shon','kyuu','mochi','caelix', 'lagia'])
                             function sort(a, b) {
                                 let hasA = closest.has(a)
                                 let hasB = closest.has(b)
-                                if (hasA) return hasB ? a.localeCompare(b) : -1
+                                if (hasA) return -1
                                 if (hasB)return 1
                                 return a.localeCompare(b)
                             }
@@ -374,7 +374,7 @@ let title = `Violet's Galaxy`
                                     break
                                 }
                                 let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}"></picture>`
-                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size ? '</div>' : ''}`
+                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
                     </ul>
