@@ -1,1 +1,1 @@
-{"Walk":{"framesY":2,"values":"8;12;8;12","frameWidth":80,"frameHeight":104},"Idle":{"framesY":2,"values":"12;14;12;14","frameWidth":80,"frameHeight":96}}
+{"Walk":{"framesY":2,"values":"8;12;8;12","frameWidth":80,"frameHeight":104},"Sleep":{"framesY":2,"values":"16;12;16;16;12;16","frameWidth":40,"frameHeight":104},"Idle":{"framesY":2,"values":"12;14;12;14","frameWidth":80,"frameHeight":96},"Hop":{"framesY":2,"values":"2;1;2;3;4;4;3;2;1;2","frameWidth":80,"frameHeight":144}}

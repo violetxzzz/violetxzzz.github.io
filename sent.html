@@ -141,6 +141,18 @@ form {
     font-size: 2em;
 }
 
+#buddy::part(sprite) {
+    transform: none;
+}
+
+#buddy:state(--broken) {
+    display: none;
+}
+
+#buddy:--broken {
+    display: none;
+}
+
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -266,10 +278,12 @@ ul {
     display: none;
     transition: scale .2s linear;
 }
+
 .authortitle {
     display: none;
     font-size: medium;
 }
+
 .debris {
     cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
@@ -405,7 +419,7 @@ html {
 #background,
 #background * {
     --offset-rotate: 0deg;
-    --user-select:none;
+    --user-select: none;
     touch-action: pinch-zoom !important;
 }
 
@@ -626,18 +640,22 @@ input[type="range"] {
 }
 
 #drawings>li,
+#friends>li,
 #musics>li {
     display: inline;
     text-align: center;
 }
 
+
 #musics>li {
     margin-inline: 5px
 }
 
-#musics {
+#musics,
+#friends {
     padding: 0;
 }
+
 
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair
@@ -783,15 +801,56 @@ paper-canvas {
     padding: 0;
 }
 
+.listfriend figcaption {
+    text-transform: capitalize;
+}
+
+#friends {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 0;
+}
+
+.listfriend {
+    display: inline-flex;
+    cursor: url("cosmica/person%20select.cur"), default;
+}
+
+.listfriend figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    margin: 0;
+}
+
+.listfriend picture {
+    display: contents
+}
+
+.friend {
+    width: 80px;
+    height: 80px;
+    min-width: unset;
+    max-width: unset;
+    object-fit: cover;
+    border-radius: 80px;
+    cursor: url("cosmica/person%20select.cur"), default;
+}
+
 .drawing {
     background: white;
     border: 3px outset var(--color2)
 }
+
 @property --asteroid-rotate {
     initial-value: 0deg;
     syntax: "<angle>";
     inherits: false;
 }
+
 @keyframes float {
     0% {
         --asteroid-rotate: 0deg
@@ -823,6 +882,21 @@ paper-canvas {
     }
 }
 
+#buddyholder {
+    display: none;
+}
+
+@supports selector(:defined) {
+    #buddyholder {
+        display: inline;
+        margin: auto
+    }
+}
+@supports not (position-anchor: none) {
+#buddy {
+    display: none;
+}
+}
 @media screen and (width < 440px) {
     #lcp {
         float: none;
@@ -830,6 +904,34 @@ paper-canvas {
         place-self: center;
         margin: auto;
         width: 50%
+    }
+
+    @supports selector(:defined) {
+        #buddyholder {
+            display: block;
+        }
+        #buddy {
+            position: relative !important;
+            position-anchor: none !important;
+            left: 50% !important;
+            transform: scale(1.5);
+            top: -20% !important;
+            display: flex ;
+        }
+    }
+
+
+    #buddy:state(--broken) {
+        display: none;
+    }
+
+    #buddy:--broken {
+
+        display: none;
+    }
+
+    #buddy::part(sprite) {
+        transform: translate(-50%)
     }
 
     #intro {
@@ -876,6 +978,7 @@ h6 {
         --offset-distance: 100%
     }
 }
+
 @keyframes toLeft {
     0% {
         --offset-distance: 100%;
@@ -885,9 +988,11 @@ h6 {
         --offset-distance: 0%
     }
 }
+
 .catchable {
     animation: offset 10s linear
 }
+
 .slideshow {
     animation: slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite;
 }

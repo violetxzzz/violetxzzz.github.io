@@ -83,12 +83,17 @@
     <link rel="preconnect" href="https://images.weserv.nl">
     <link rel="preconnect" href="https://www.dropbox.com">
     <link rel="preload" as="image" href="galaxy.avif" type="image/avif" blocking="render">
+
     <title>Violet's Galaxy</title>
     <noscript>
         <style>
+            #buddyholder {
+                display: none !important;
+            }
             .authortitle {
                 display: inline !important;
             }
+
             .needsjs {
                 display: none !important;
             }
@@ -155,6 +160,18 @@ form {
 
 .heading {
     font-size: 2em;
+}
+
+#buddy::part(sprite) {
+    transform: none;
+}
+
+#buddy:state(--broken) {
+    display: none;
+}
+
+#buddy:--broken {
+    display: none;
 }
 
 input:not([type="color"], [type="range"], [type="button"]) {
@@ -282,10 +299,12 @@ ul {
     display: none;
     transition: scale .2s linear;
 }
+
 .authortitle {
     display: none;
     font-size: medium;
 }
+
 .debris {
     cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
@@ -421,7 +440,7 @@ html {
 #background,
 #background * {
     --offset-rotate: 0deg;
-    --user-select:none;
+    --user-select: none;
     touch-action: pinch-zoom !important;
 }
 
@@ -642,18 +661,22 @@ input[type="range"] {
 }
 
 #drawings>li,
+#friends>li,
 #musics>li {
     display: inline;
     text-align: center;
 }
 
+
 #musics>li {
     margin-inline: 5px
 }
 
-#musics {
+#musics,
+#friends {
     padding: 0;
 }
+
 
 paper-canvas {
     cursor: url("cosmica/handwriting.cur"), crosshair
@@ -799,15 +822,56 @@ paper-canvas {
     padding: 0;
 }
 
+.listfriend figcaption {
+    text-transform: capitalize;
+}
+
+#friends {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 0;
+}
+
+.listfriend {
+    display: inline-flex;
+    cursor: url("cosmica/person%20select.cur"), default;
+}
+
+.listfriend figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    margin: 0;
+}
+
+.listfriend picture {
+    display: contents
+}
+
+.friend {
+    width: 80px;
+    height: 80px;
+    min-width: unset;
+    max-width: unset;
+    object-fit: cover;
+    border-radius: 80px;
+    cursor: url("cosmica/person%20select.cur"), default;
+}
+
 .drawing {
     background: white;
     border: 3px outset var(--color2)
 }
+
 @property --asteroid-rotate {
     initial-value: 0deg;
     syntax: "<angle>";
     inherits: false;
 }
+
 @keyframes float {
     0% {
         --asteroid-rotate: 0deg
@@ -839,6 +903,21 @@ paper-canvas {
     }
 }
 
+#buddyholder {
+    display: none;
+}
+
+@supports selector(:defined) {
+    #buddyholder {
+        display: inline;
+        margin: auto
+    }
+}
+@supports not (position-anchor: none) {
+#buddy {
+    display: none;
+}
+}
 @media screen and (width < 440px) {
     #lcp {
         float: none;
@@ -846,6 +925,34 @@ paper-canvas {
         place-self: center;
         margin: auto;
         width: 50%
+    }
+
+    @supports selector(:defined) {
+        #buddyholder {
+            display: block;
+        }
+        #buddy {
+            position: relative !important;
+            position-anchor: none !important;
+            left: 50% !important;
+            transform: scale(1.5);
+            top: -20% !important;
+            display: flex ;
+        }
+    }
+
+
+    #buddy:state(--broken) {
+        display: none;
+    }
+
+    #buddy:--broken {
+
+        display: none;
+    }
+
+    #buddy::part(sprite) {
+        transform: translate(-50%)
     }
 
     #intro {
@@ -892,6 +999,7 @@ h6 {
         --offset-distance: 100%
     }
 }
+
 @keyframes toLeft {
     0% {
         --offset-distance: 100%;
@@ -901,9 +1009,11 @@ h6 {
         --offset-distance: 0%
     }
 }
+
 .catchable {
     animation: offset 10s linear
 }
+
 .slideshow {
     animation: slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite;
 }
@@ -1096,9 +1206,14 @@ a[target] {
                 </picture>
                 <article>
                     <div>
-                        <h1 style="place-self: center;font-size:2.5em;display: inline;">Violet</h1>
+                        <h1 style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp">Violet</h1>
+                        <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
+                            <slide-show src="./new/lunala/lunala-Hop.png" index="0" autoplay
+                                style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)" id="buddy"
+                                dur=".05"></slide-show>
+                        </div>
                     </div>
-                    <p style="margin: 10px;place-self:end;" id="intro">Hii, I’m Violet!!
+                    <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
                         Welcome to my amazing website, made by Missy (<cite><a target="_blank" rel="author"
                                 href="https://addsoupbase.github.io">addsoupbase</a></cite>) ✨</p>
                     <h2>Here’s some general info about me:</h2>
@@ -1364,6 +1479,14 @@ a[target] {
                     
                 </ul>
             </section>
+            <section class="sect" id="friends" aria-hidden="true">
+                <div>
+                    <h2 style="display: inline;" class="heading">Friends</h2>
+                    <ul id="friends">
+                        <li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/znsxxe.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/znsxxe.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/znsxxe.jpg" class="friend f-alex" alt="alex"></picture><figcaption>alex</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/auzz.avif" type="image/avif"><source srcset="friends/auzz.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/auzz.jpg" class="friend f-auzz" alt="auzz"></picture><figcaption>auzz</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/Dohaaa.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/Dohaaa.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/Dohaaa.jpg" class="friend f-doha" alt="doha"></picture><figcaption>doha</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/gabe.avif" type="image/avif"><source srcset="friends/gabe.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/gabe.jpg" class="friend f-gabe" alt="gabe"></picture><figcaption>gabe</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/juaj.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/juaj.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/juaj.jpg" class="friend f-juaj" alt="juaj"></picture><figcaption>juaj</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/kyuu.avif" type="image/avif"><source srcset="friends/kyuu.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/kyuu.jpg" class="friend f-kyuu" alt="kyuu"></picture><figcaption>kyuu</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/mcx.avif" type="image/avif"><source srcset="friends/mcx.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/mcx.jpg" class="friend f-mcx" alt="mcx"></picture><figcaption>mcx</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/mental.avif" type="image/avif"><source srcset="friends/mental.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/mental.jpg" class="friend f-mental" alt="mental"></picture><figcaption>mental</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/cat.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/cat.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/cat.jpg" class="friend f-misha" alt="misha"></picture><figcaption>misha</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/mochi.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/mochi.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/mochi.jpg" class="friend f-mochi" alt="mochi"></picture><figcaption>mochi</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/pancake08746.avif" type="image/avif"><source srcset="friends/pancake08746.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/pancake08746.jpg" class="friend f-pancake08746" alt="pancake08746"></picture><figcaption>pancake08746</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/patty.avif" type="image/avif"><source srcset="friends/patty.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/patty.jpg" class="friend f-patty" alt="patty"></picture><figcaption>patty</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/remi.avif" type="image/avif"><source srcset="friends/remi.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/remi.jpg" class="friend f-remi" alt="remi"></picture><figcaption>remi</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/rikapika.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/rikapika.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/rikapika.jpg" class="friend f-rika" alt="rika"></picture><figcaption>rika</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/saayda.avif" type="image/avif"><source srcset="friends/saayda.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/saayda.jpg" class="friend f-saayda" alt="saayda"></picture><figcaption>saayda</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/shon.avif" type="image/avif"><source srcset="friends/shon.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/shon.jpg" class="friend f-shon" alt="shon"></picture><figcaption>shon</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/sukuna.avif" type="image/avif"><source srcset="friends/sukuna.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/sukuna.jpg" class="friend f-sukuna" alt="sukuna"></picture><figcaption>sukuna</figcaption></figure></li><li class="listfriend"><figure><div class="friend" style="background-color:white"></div><figcaption>white</figcaption></figure></li>
+                    </ul>
+                </div>
+            </section>
             <section class="sect" id="mailbox" aria-hidden="true">
                 <div style="margin:15px">
                     <h2 style="margin:0" class="heading">Transmissions</h2>
@@ -1410,6 +1533,7 @@ a[target] {
         <nav id="controls" role="tablist">
             <a role="tab" class="button" href="#home" tabindex="0">Home</a>
             <a role="tab" class="button" href="#artists">Music</a>
+            <a role="tab" class="button" href="#friends">Friends</a>
             <a role="tab" class="button" href="#mailbox">Mail</a>
         </nav>
     </main>
@@ -1422,8 +1546,8 @@ a[target] {
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
-        <img id="lunalapreview" alt="lunala" src="lunalasleep.gif"
-            style="filter:drop-shadow(0px 10px 6px black);image-rendering:pixelated;height:200%;transform:translate(-50%,-50%);left:50%;top:-20px;position:absolute">
+        <slide-show id="lunalapreview" src="new/lunala/lunala-Sleep.png" dur=".027" autoplay style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
+    
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
@@ -1490,7 +1614,7 @@ a[target] {
         h.on(frame, {
             scrollsnapchange: function (e) {
                 var id = e.snapTargetInline.id
-                if (id === 'mailbox' || id === 'home' || id === 'artists') {
+                if (/^mailbox|home|artists|friends$/.test(id)) {
                     var s = 'a[href="' + '#' + id + '"]'
                     var elt = D.querySelector(s)
                     select(elt)

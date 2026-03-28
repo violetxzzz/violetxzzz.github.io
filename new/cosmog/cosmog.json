@@ -1,1 +1,1 @@
-{"Walk":{"framesY":1,"values":"4;8;8;8;8;8;4","frameWidth":32,"frameHeight":40},"Idle":{"framesY":1,"values":"24;8;8;24;8;8","frameWidth":32,"frameHeight":48}}
+{"Walk":{"framesY":2,"values":"4;8;8;8;8;8;4","frameWidth":32,"frameHeight":40},"Idle":{"framesY":2,"values":"24;8;8;24;8;8","frameWidth":32,"frameHeight":48}}

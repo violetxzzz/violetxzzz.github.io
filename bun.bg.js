@@ -14,7 +14,10 @@ if (typeof CSSPropertyRule !== 'function')
         inherits: false,
         initialValue: '0deg'
     })
-const { background } = v.id
+const { background, buddy } = v.id
+if (shiny()) {
+    buddy.index = 1
+}
 const $ = v.esc
 const setOffsetPath = function (sheet) {
     document.adoptedStyleSheets = [].concat.call(document.adoptedStyleSheets, sheet)
@@ -25,7 +28,7 @@ background.observe('resize', {
         let { width, height } = n.contentRect
         let halfW = innerWidth / 2
         let halfH = innerHeight / 2
-        setOffsetPath(`:root{--ltr: path("M -${halfW} 0 L ${width + (halfW/3)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
+        setOffsetPath(`:root{--ltr: path("M -${halfW/2.1} 0 L ${width + (halfW/2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
 load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
@@ -51,7 +54,7 @@ function shiny(odds = 4000) {
 function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
-    let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.png" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro ${shiny()}"></slide-show>`
+    let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.png" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     jirachi.on({
         _endEvent() {
@@ -82,7 +85,7 @@ setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-    let hoopa = $`<slide-show repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.png" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro ${shiny()}"></slide-show>`
+    let hoopa = $`<slide-show repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.png" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     hoopa.dur = .02
     hoopa.on({
@@ -218,7 +221,7 @@ function remove() {
 let { message, lunalapreview } = v.id
 function showMessageBox(shiny) {
     if (shiny)
-        lunalapreview.src = './lunalasleepshiny.gif'
+        lunalapreview.index = 1
     if (!showedMessage) {
         showedMessage = true
         message.style.display = 'block'
@@ -320,7 +323,7 @@ function spawnPokemon() {
             speed *= 1.5
             break
         case 'minior':
-        // index = Math.floor(Math.random() * 8) its broken idk why!
+        index = Math.floor(Math.random() * 7)
         case 'poipole':
         case 'beldum':
             scale *= 2.5
@@ -392,7 +395,10 @@ function spawnPokemon() {
             break
     }
     scale *= i
-    if (shiny()) index += 1
+    if (shiny()) {
+        index += 1
+        if (pkm === 'minior') index = 7
+    } 
     let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
