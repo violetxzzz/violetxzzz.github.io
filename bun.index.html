@@ -92,6 +92,7 @@ let title = `Violet's Galaxy`
             #buddyholder {
                 display: none !important;
             }
+
             .authortitle {
                 display: inline !important;
             }
@@ -165,11 +166,13 @@ let title = `Violet's Galaxy`
                 </picture>
                 <article>
                     <div>
-                        <h1 style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp">Violet</h1>
+                        <h1
+                            style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--color3);">
+                            Violet</h1>
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
                             <slide-show src="./new/lunala/lunala-Hop.png" index="0" autoplay
-                                style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)" id="buddy"
-                                dur=".05"></slide-show>
+                                style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
+                                id="buddy" dur=".05"></slide-show>
                         </div>
                     </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
@@ -332,10 +335,18 @@ let title = `Violet's Galaxy`
             <section class="sect" id="friends" aria-hidden="true">
                 <div>
                     <h2 style="display: inline;" class="heading">Friends</h2>
-                    <ul id="friends">
+                    <ul id="friendslist">
                         <!--{{
-                            let friends = ['pancake08746',"auzz","gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","white","doha","rika","alex","juaj","sukuna","mochi"].sort()
-                            return friends.map(name=>{
+                            let closest = new Set(['misha', 'rika','sukuna','shon','kyuu','mochi','caelix'])
+                            function sort(a, b) {
+                                let hasA = closest.has(a)
+                                let hasB = closest.has(b)
+                                if (hasA) return hasB ? a.localeCompare(b) : -1
+                                if (hasB)return 1
+                                return a.localeCompare(b)
+                            }
+                            let friends = ['pancake08746',"auzz",'morrfie','lina','cutlass','blackgun777','genesix923','saenger','lagia','caelix',"gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","white","doha","rika","alex","juaj","sukuna","mochi"].sort(sort)
+                            return friends.map((name, i)=>{
                                 let nn
                                 switch(name) {
                                     default: var src = `friends/${name}`
@@ -343,29 +354,35 @@ let title = `Violet's Galaxy`
                                     case 'misha':
                                     src = `https://addsoupbase.github.io/media/cat`
                                     break
+                                    case 'morrfie':
+                                        nn||= 'morrfie'
                                     case 'mochi':
                                     nn ||= 'mochi'
                                     case 'doha':
                                     nn ||= 'Dohaaa'
+                                    case 'caelix':
+                                    nn ||= 'caelix'
                                     case 'rika':
                                     nn ||= 'rikapika'
                                     case 'alex':
                                     nn ||= 'znsxxe'
+                                    case 'lagia':
+                                        nn||= 'Lagia'
                                     case 'juaj':
                                     nn ||= 'juaj'
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name}" alt="${name}"></picture>`
-                                return `<li class="listfriend"><figure>${name === 'white' ? '<div class="friend" style="background-color:white"></div>' : a}<figcaption>${name}</figcaption></figure></li>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}"></picture>`
+                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size ? '</div>' : ''}`
                             }).join('')
                             }}-->
                     </ul>
                 </div>
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
-                <div style="margin:15px">
-                    <h2 style="margin:0" class="heading">Transmissions</h2>
+                <div style="margin-bottom:15px">
+                    <h2 class="heading" style="margin:0">Transmissions</h2>
                     <nav style="justify-self: center;display:flex;gap:10px;justify-content:center">
                         <a class="button" id="gotoSend" href="#SendNameField">Write</a><a
                             class="button locateIfTooSmall needsjs needswebcomponent" id="gotoDraw"
@@ -422,8 +439,9 @@ let title = `Violet's Galaxy`
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
-        <slide-show id="lunalapreview" src="new/lunala/lunala-Sleep.png" dur=".027" autoplay style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
-    
+        <slide-show id="lunalapreview" src="new/lunala/lunala-Sleep.png" dur=".027" autoplay
+            style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
+
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"

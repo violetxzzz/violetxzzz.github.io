@@ -512,7 +512,7 @@ input[type="range"] {
 }
 
 #drawings>li,
-#friends>li,
+#friendslist>li,
 #musics>li {
     display: inline;
     text-align: center;
@@ -524,7 +524,7 @@ input[type="range"] {
 }
 
 #musics,
-#friends {
+#friendslist {
     padding: 0;
 }
 
@@ -641,19 +641,37 @@ paper-canvas {
     --scrollbar-color: var(--color2);
     /* border-style: solid; */
 }
-
+#closest {
+    width: 100%;
+    justify-content: center;
+}
+#closest li:nth-child(odd) {
+    text-decoration: underline var(--color2)
+}
+#closest li:nth-child(even) {
+    text-decoration: underline var(--color3)
+}
+#closest li {
+    zoom: 1.35;
+    margin-inline:10px;
+    -ms-zoom: 1.35
+}
 .avatar {
     border-radius: 100%;
     isolation: isolate;
     corner-shape: squircle;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline: 3px solid rgba(255, 255, 255, 0.1);
+    box-shadow: rgba(42, 5, 103, 0.409) 4px 4px 4px;
+    /* transform-origin: center; */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+    /* will-change: transform; */
 }
 
 .avatar:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
+    box-shadow: rgba(42, 5, 103, 0.409) -4px 4px 4px;
 }
 
 .drawingframe {
@@ -677,10 +695,10 @@ paper-canvas {
     text-transform: capitalize;
 }
 
-#friends {
+#friendslist {
+    align-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 16px;
     padding: 0;
 }

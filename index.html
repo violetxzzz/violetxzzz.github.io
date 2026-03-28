@@ -90,6 +90,7 @@
             #buddyholder {
                 display: none !important;
             }
+
             .authortitle {
                 display: inline !important;
             }
@@ -661,7 +662,7 @@ input[type="range"] {
 }
 
 #drawings>li,
-#friends>li,
+#friendslist>li,
 #musics>li {
     display: inline;
     text-align: center;
@@ -673,7 +674,7 @@ input[type="range"] {
 }
 
 #musics,
-#friends {
+#friendslist {
     padding: 0;
 }
 
@@ -790,19 +791,37 @@ paper-canvas {
     --scrollbar-color: var(--color2);
     /* border-style: solid; */
 }
-
+#closest {
+    width: 100%;
+    justify-content: center;
+}
+#closest li:nth-child(odd) {
+    text-decoration: underline var(--color2)
+}
+#closest li:nth-child(even) {
+    text-decoration: underline var(--color3)
+}
+#closest li {
+    zoom: 1.35;
+    margin-inline:10px;
+    -ms-zoom: 1.35
+}
 .avatar {
     border-radius: 100%;
     isolation: isolate;
     corner-shape: squircle;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline: 3px solid rgba(255, 255, 255, 0.1);
+    box-shadow: rgba(42, 5, 103, 0.409) 4px 4px 4px;
+    /* transform-origin: center; */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+    /* will-change: transform; */
 }
 
 .avatar:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
+    box-shadow: rgba(42, 5, 103, 0.409) -4px 4px 4px;
 }
 
 .drawingframe {
@@ -826,10 +845,10 @@ paper-canvas {
     text-transform: capitalize;
 }
 
-#friends {
+#friendslist {
+    align-content: space-between;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 16px;
     padding: 0;
 }
@@ -1209,11 +1228,13 @@ a[target] {
                 </picture>
                 <article>
                     <div>
-                        <h1 style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp">Violet</h1>
+                        <h1
+                            style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--color3);">
+                            Violet</h1>
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
                             <slide-show src="./new/lunala/lunala-Hop.png" index="0" autoplay
-                                style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)" id="buddy"
-                                dur=".05"></slide-show>
+                                style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
+                                id="buddy" dur=".05"></slide-show>
                         </div>
                     </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
@@ -1485,14 +1506,14 @@ a[target] {
             <section class="sect" id="friends" aria-hidden="true">
                 <div>
                     <h2 style="display: inline;" class="heading">Friends</h2>
-                    <ul id="friends">
-                        <li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/znsxxe.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/znsxxe.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/znsxxe.jpg" class="friend f-alex" alt="alex"></picture><figcaption>alex</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/auzz.avif" type="image/avif"><source srcset="friends/auzz.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/auzz.jpg" class="friend f-auzz" alt="auzz"></picture><figcaption>auzz</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/Dohaaa.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/Dohaaa.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/Dohaaa.jpg" class="friend f-doha" alt="doha"></picture><figcaption>doha</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/gabe.avif" type="image/avif"><source srcset="friends/gabe.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/gabe.jpg" class="friend f-gabe" alt="gabe"></picture><figcaption>gabe</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/juaj.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/juaj.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/juaj.jpg" class="friend f-juaj" alt="juaj"></picture><figcaption>juaj</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/kyuu.avif" type="image/avif"><source srcset="friends/kyuu.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/kyuu.jpg" class="friend f-kyuu" alt="kyuu"></picture><figcaption>kyuu</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/mcx.avif" type="image/avif"><source srcset="friends/mcx.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/mcx.jpg" class="friend f-mcx" alt="mcx"></picture><figcaption>mcx</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/mental.avif" type="image/avif"><source srcset="friends/mental.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/mental.jpg" class="friend f-mental" alt="mental"></picture><figcaption>mental</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/cat.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/cat.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/cat.jpg" class="friend f-misha" alt="misha"></picture><figcaption>misha</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/mochi.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/mochi.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/mochi.jpg" class="friend f-mochi" alt="mochi"></picture><figcaption>mochi</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/pancake08746.avif" type="image/avif"><source srcset="friends/pancake08746.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/pancake08746.jpg" class="friend f-pancake08746" alt="pancake08746"></picture><figcaption>pancake08746</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/patty.avif" type="image/avif"><source srcset="friends/patty.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/patty.jpg" class="friend f-patty" alt="patty"></picture><figcaption>patty</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/remi.avif" type="image/avif"><source srcset="friends/remi.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/remi.jpg" class="friend f-remi" alt="remi"></picture><figcaption>remi</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/rikapika.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/rikapika.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/rikapika.jpg" class="friend f-rika" alt="rika"></picture><figcaption>rika</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/saayda.avif" type="image/avif"><source srcset="friends/saayda.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/saayda.jpg" class="friend f-saayda" alt="saayda"></picture><figcaption>saayda</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/shon.avif" type="image/avif"><source srcset="friends/shon.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/shon.jpg" class="friend f-shon" alt="shon"></picture><figcaption>shon</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/sukuna.avif" type="image/avif"><source srcset="friends/sukuna.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/sukuna.jpg" class="friend f-sukuna" alt="sukuna"></picture><figcaption>sukuna</figcaption></figure></li><li class="listfriend"><figure><div class="friend" style="background-color:white"></div><figcaption>white</figcaption></figure></li>
+                    <ul id="friendslist">
+                        <div id='closest'><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/caelix.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/caelix.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/caelix.jpg" class="friend f-caelix avatar" alt="caelix"></picture><figcaption aria-hidden="true">caelix</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/kyuu.avif" type="image/avif"><source srcset="friends/kyuu.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/kyuu.jpg" class="friend f-kyuu avatar" alt="kyuu"></picture><figcaption aria-hidden="true">kyuu</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/cat.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/cat.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/cat.jpg" class="friend f-misha avatar" alt="misha"></picture><figcaption aria-hidden="true">misha</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/mochi.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/mochi.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/mochi.jpg" class="friend f-mochi avatar" alt="mochi"></picture><figcaption aria-hidden="true">mochi</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/rikapika.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/rikapika.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/rikapika.jpg" class="friend f-rika avatar" alt="rika"></picture><figcaption aria-hidden="true">rika</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/shon.avif" type="image/avif"><source srcset="friends/shon.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/shon.jpg" class="friend f-shon avatar" alt="shon"></picture><figcaption aria-hidden="true">shon</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/sukuna.avif" type="image/avif"><source srcset="friends/sukuna.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/sukuna.jpg" class="friend f-sukuna avatar" alt="sukuna"></picture><figcaption aria-hidden="true">sukuna</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/znsxxe.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/znsxxe.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/znsxxe.jpg" class="friend f-alex avatar" alt="alex"></picture><figcaption aria-hidden="true">alex</figcaption></figure></li></div><li class="listfriend"><figure><picture><source srcset="friends/auzz.avif" type="image/avif"><source srcset="friends/auzz.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/auzz.jpg" class="friend f-auzz avatar" alt="auzz"></picture><figcaption aria-hidden="true">auzz</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/blackgun777.avif" type="image/avif"><source srcset="friends/blackgun777.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/blackgun777.jpg" class="friend f-blackgun777 avatar" alt="blackgun777"></picture><figcaption aria-hidden="true">blackgun777</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/cutlass.avif" type="image/avif"><source srcset="friends/cutlass.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/cutlass.jpg" class="friend f-cutlass avatar" alt="cutlass"></picture><figcaption aria-hidden="true">cutlass</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/Dohaaa.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/Dohaaa.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/Dohaaa.jpg" class="friend f-doha avatar" alt="doha"></picture><figcaption aria-hidden="true">doha</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/gabe.avif" type="image/avif"><source srcset="friends/gabe.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/gabe.jpg" class="friend f-gabe avatar" alt="gabe"></picture><figcaption aria-hidden="true">gabe</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/genesix923.avif" type="image/avif"><source srcset="friends/genesix923.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/genesix923.jpg" class="friend f-genesix923 avatar" alt="genesix923"></picture><figcaption aria-hidden="true">genesix923</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/juaj.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/juaj.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/juaj.jpg" class="friend f-juaj avatar" alt="juaj"></picture><figcaption aria-hidden="true">juaj</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/Lagia.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/Lagia.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/Lagia.jpg" class="friend f-lagia avatar" alt="lagia"></picture><figcaption aria-hidden="true">lagia</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/lina.avif" type="image/avif"><source srcset="friends/lina.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/lina.jpg" class="friend f-lina avatar" alt="lina"></picture><figcaption aria-hidden="true">lina</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/mcx.avif" type="image/avif"><source srcset="friends/mcx.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/mcx.jpg" class="friend f-mcx avatar" alt="mcx"></picture><figcaption aria-hidden="true">mcx</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/mental.avif" type="image/avif"><source srcset="friends/mental.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/mental.jpg" class="friend f-mental avatar" alt="mental"></picture><figcaption aria-hidden="true">mental</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="https://addsoupbase.github.io/media/avatars/morrfie.avif" type="image/avif"><source srcset="https://addsoupbase.github.io/media/avatars/morrfie.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="https://addsoupbase.github.io/media/avatars/morrfie.jpg" class="friend f-morrfie avatar" alt="morrfie"></picture><figcaption aria-hidden="true">morrfie</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/pancake08746.avif" type="image/avif"><source srcset="friends/pancake08746.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/pancake08746.jpg" class="friend f-pancake08746 avatar" alt="pancake08746"></picture><figcaption aria-hidden="true">pancake08746</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/patty.avif" type="image/avif"><source srcset="friends/patty.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/patty.jpg" class="friend f-patty avatar" alt="patty"></picture><figcaption aria-hidden="true">patty</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/remi.avif" type="image/avif"><source srcset="friends/remi.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/remi.jpg" class="friend f-remi avatar" alt="remi"></picture><figcaption aria-hidden="true">remi</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/saayda.avif" type="image/avif"><source srcset="friends/saayda.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/saayda.jpg" class="friend f-saayda avatar" alt="saayda"></picture><figcaption aria-hidden="true">saayda</figcaption></figure></li><li class="listfriend"><figure><picture><source srcset="friends/saenger.avif" type="image/avif"><source srcset="friends/saenger.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="friends/saenger.jpg" class="friend f-saenger avatar" alt="saenger"></picture><figcaption aria-hidden="true">saenger</figcaption></figure></li><li class="listfriend"><figure><div class="friend avatar" style="background-color:white"></div><figcaption aria-hidden="true">white</figcaption></figure></li>
                     </ul>
                 </div>
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
-                <div style="margin:15px">
-                    <h2 style="margin:0" class="heading">Transmissions</h2>
+                <div style="margin-bottom:15px">
+                    <h2 class="heading" style="margin:0">Transmissions</h2>
                     <nav style="justify-self: center;display:flex;gap:10px;justify-content:center">
                         <a class="button" id="gotoSend" href="#SendNameField">Write</a><a
                             class="button locateIfTooSmall needsjs needswebcomponent" id="gotoDraw"
@@ -1549,8 +1570,9 @@ a[target] {
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
-        <slide-show id="lunalapreview" src="new/lunala/lunala-Sleep.png" dur=".027" autoplay style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
-    
+        <slide-show id="lunalapreview" src="new/lunala/lunala-Sleep.png" dur=".027" autoplay
+            style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
+
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"

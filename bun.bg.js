@@ -411,7 +411,7 @@ function spawnPokemon() {
         if (pkm === 'minior') index = 7
         else if (pkm === 'mewtwo') index = 2
         else index += 1
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="${pkm === 'kartana' ? 'image-rendering:auto !important;' : ''}--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
 }
