@@ -288,6 +288,8 @@ ul {
 #message {
     font-size: 1.1em;
     display: block;
+    left: 0;
+    right: 0;
     width: min(95vw, 730px);
     height: min(120px, 30vh);
     position: fixed;
@@ -791,21 +793,26 @@ paper-canvas {
     --scrollbar-color: var(--color2);
     /* border-style: solid; */
 }
+
 #closest {
     width: 100%;
     justify-content: center;
 }
+
 #closest li:nth-child(odd) {
     text-decoration: underline var(--color2)
 }
+
 #closest li:nth-child(even) {
     text-decoration: underline var(--color3)
 }
+
 #closest li {
     zoom: 1.35;
-    margin-inline:10px;
+    margin-inline: 10px;
     -ms-zoom: 1.35
 }
+
 .avatar {
     border-radius: 100%;
     isolation: isolate;
@@ -933,14 +940,17 @@ paper-canvas {
         margin: auto
     }
 }
+
 @supports not (position-anchor: none) {
-#buddy {
-    display: none;
+    #buddy {
+        display: none;
+    }
 }
-}
+
 [data-name="unown"].isShiny {
-filter: hue-rotate(20deg) saturate(5);
+    filter: hue-rotate(20deg) saturate(5);
 }
+
 @media screen and (width < 440px) {
     #lcp {
         float: none;
@@ -954,13 +964,14 @@ filter: hue-rotate(20deg) saturate(5);
         #buddyholder {
             display: block;
         }
+
         #buddy {
             position: relative !important;
             position-anchor: none !important;
             left: 50% !important;
             transform: scale(1.5);
             top: -20% !important;
-            display: flex ;
+            display: flex;
         }
     }
 
@@ -1085,7 +1096,9 @@ slide-show {
 .necrozma {
     filter: brightness(1.5)
 }
-
+.hoopa_unbound_intro, .jirachi_intro {
+    pointer-events: none;
+}
 .hoopa_unbound,
 .hoopa_unbound_intro,
 .hoopa_unbound_idle {
@@ -1562,7 +1575,7 @@ a[target] {
             <a role="tab" class="button" href="#mailbox">Mail</a>
         </nav>
     </main>
-    <div role="alert" id="message" class="menu" style="">
+    <div role="alert" id="message" class="menu">
         <picture>
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
