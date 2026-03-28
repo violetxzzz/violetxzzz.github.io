@@ -1,7 +1,7 @@
-const data = [["arceus",({Walk:({framesY:2,values:"8;10;8;10;8;10;8;10",frameWidth:48,frameHeight:88}),Idle:({framesY:2,values:"12;12;12;12;12;12",frameWidth:48,frameHeight:88})})],["azelf",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["baltoy",({Walk:({framesY:2,values:"6;6;6;4;4;4;4;4;4;4;4;6;6;6;6;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:32,frameHeight:40})})],["beheeyem",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:56})})],["beldum",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"10;10;10;10;10;10;10;10",frameWidth:32,frameHeight:40})})],["buzzwole",({Walk:({framesY:2,values:"6;6;6;6;6;6",frameWidth:56,frameHeight:72}),Idle:({framesY:2,values:"60;12;4;4;4;4;4;20;60;12;4;4;4;4;4;20;60;12;4;4;4;4;4;20",frameWidth:48,frameHeight:72})})],["celesteela",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6",frameWidth:64,frameHeight:112}),Idle:({framesY:2,values:"120;20;2;20",frameWidth:72,frameHeight:112})})],["claydol",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8",frameWidth:24,frameHeight:40})})],["cosmoem",({Walk:({framesY:2,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"20;8;20;8",frameWidth:24,frameHeight:40})})],["cosmog",({Walk:({framesY:2,values:"4;8;8;8;8;8;4",frameWidth:32,frameHeight:40}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:48})})],["deoxys",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:32,frameHeight:64})})],["deoxys_attack",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"14;14;15;14",frameWidth:40,frameHeight:64})})],["deoxys_defense",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;8;8;12;8;8",frameWidth:40,frameHeight:64})})],["deoxys_speed",({Walk:({framesY:2,values:"2;2;6;4;2;2;6;4",frameWidth:40,frameHeight:56}),Idle:({framesY:2,values:"4;4;4;4;4;8",frameWidth:32,frameHeight:64})})],["duosion",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["dusknoir",({Walk:({framesY:2,values:"12;12;12;12",frameWidth:48,frameHeight:72}),Idle:({framesY:2,values:"8;8;10;10;8;7;12;10;10;9;8;8;8",frameWidth:48,frameHeight:80})})],["duskull",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:56})})],["elgyem",({Walk:({framesY:2,values:"8;6;6;8;8;6;6;8",frameWidth:24,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:24,frameHeight:56})})],["eternatus",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:104,frameHeight:120}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:104,frameHeight:128})})],["giritina2",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6",frameWidth:80,frameHeight:96}),Idle:({framesY:2,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:80,frameHeight:96})})],["hoopa",({Walk:({framesY:2,values:"7;7;9;9;9;7;7;7",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"4;4;4;4;4;4;4;4;6;6;6;6;8;8;8;8",frameWidth:32,frameHeight:48})})],["hoopa_unbound",({Special0:({framesY:2,values:"3;3;3;3;3;3;3;3;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;3;3;3;3;3;3;3;3",frameWidth:72,frameHeight:152}),Walk:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:64,frameHeight:112}),Idle:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:64,frameHeight:112})})],["jirachi",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6",frameWidth:40,frameHeight:48}),Special2:({framesY:2,values:"4;1;1;1;1;2;2;2;2;2;2;2;2;2;2;2;2;2;3;3;1;2;1;3;1;3;1;4;1;3;3;1;3;3;1;2;2;2;2;2;2;2;2;4;2;2;2;2;2;1;1;3;1;1;3;2;1;2;3;1;2;3;1;3;1;3;1;2;2;2;2;1;3;1;4;1;3;2;2;2;2;2;3;3;4;5",frameWidth:72,frameHeight:96}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:40,frameHeight:48})})],["lunala",({Walk:({framesY:2,values:"8;12;8;12",frameWidth:80,frameHeight:104}),Sleep:({framesY:2,values:"16;12;16;16;12;16",frameWidth:40,frameHeight:104}),Idle:({framesY:2,values:"12;14;12;14",frameWidth:80,frameHeight:96}),Hop:({framesY:2,values:"2;1;2;3;4;4;3;2;1;2",frameWidth:80,frameHeight:144})})],["lunatone",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["mesprit",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["metang",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:48}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:40,frameHeight:48})})],["mew",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:32,frameHeight:56})})],["mewtwo",({Walk:({framesY:2,values:"12;6;6;12;6;6",frameWidth:48,frameHeight:56}),Idle:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:56})})],["naganadel",({Walk:({framesY:2,values:"8;8;8;8",frameWidth:48,frameHeight:56}),Idle:({framesY:2,values:"8;9;8;8;11;8;8",frameWidth:40,frameHeight:72})})],["necrozma",({Walk:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:72,frameHeight:96}),Idle:({framesY:2,values:"8;14;14;14;14;14;14;14;14;14;8",frameWidth:72,frameHeight:96})})],["nihilego",({Walk:({framesY:2,values:"6;10;10;6;10;10;10",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"6;10;10;6;10;10;10",frameWidth:32,frameHeight:48})})],["orbeetle",({Walk:({framesY:2,values:"4;4;6;6;6;6;4;4",frameWidth:40,frameHeight:56}),Idle:({framesY:2,values:"6;6;6;12;8;8;8;8",frameWidth:40,frameHeight:56})})],["poipole",({Walk:({framesY:2,values:"4;4;4;4;4;4;4;4;4;4",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"6;12;6;12",frameWidth:24,frameHeight:48})})],["porygonz",({Walk:({framesY:2,values:"6;6;4;6;6;4;6",frameWidth:24,frameHeight:64}),Idle:({framesY:2,values:"4;4;4;4;4;2;2;3;4;4;2;2;4;4;4;60",frameWidth:24,frameHeight:64})})],["rayquaza",({Walk:({framesY:2,values:"8;8;6;4;4;4;8;8;6;6;6;6",frameWidth:80,frameHeight:128}),Idle:({framesY:2,values:"14;10;14;10",frameWidth:80,frameHeight:120})})],["reshiram",({Walk:({framesY:2,values:"8;6;8;6;8",frameWidth:88,frameHeight:96}),Idle:({framesY:2,values:"90;4;8;4;8;4",frameWidth:72,frameHeight:104})})],["reuniclus",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:56,frameHeight:56}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:56,frameHeight:56})})],["solosis",({Walk:({framesY:2,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:40}),Idle:({framesY:2,values:"13;10;13;10",frameWidth:24,frameHeight:40})})],["solrock",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:32,frameHeight:48})})],["unown",({Walk:({framesY:28,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:48}),Idle:({framesY:28,values:"20;8;20;8",frameWidth:24,frameHeight:40})})],["uxie",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["zekrom",({Walk:({framesY:2,values:"10;10;15;20;10;15",frameWidth:72,frameHeight:104}),Idle:({framesY:2,values:"60;10;2;2;2;2;2;2;2;2;2;2;2;10",frameWidth:72,frameHeight:96})})]]
+const data = [["arceus",({Walk:({framesY:2,values:"8;10;8;10;8;10;8;10",frameWidth:48,frameHeight:88}),Idle:({framesY:2,values:"12;12;12;12;12;12",frameWidth:48,frameHeight:88})})],["azelf",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["baltoy",({Walk:({framesY:2,values:"6;6;6;4;4;4;4;4;4;4;4;6;6;6;6;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:32,frameHeight:40})})],["beheeyem",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:56})})],["beldum",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"10;10;10;10;10;10;10;10",frameWidth:32,frameHeight:40})})],["buzzwole",({Walk:({framesY:2,values:"6;6;6;6;6;6",frameWidth:56,frameHeight:72}),Idle:({framesY:2,values:"60;12;4;4;4;4;4;20;60;12;4;4;4;4;4;20;60;12;4;4;4;4;4;20",frameWidth:48,frameHeight:72})})],["celesteela",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6",frameWidth:64,frameHeight:112}),Idle:({framesY:2,values:"120;20;2;20",frameWidth:72,frameHeight:112})})],["claydol",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8",frameWidth:24,frameHeight:40})})],["cosmoem",({Walk:({framesY:2,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"20;8;20;8",frameWidth:24,frameHeight:40})})],["cosmog",({Walk:({framesY:2,values:"4;8;8;8;8;8;4",frameWidth:32,frameHeight:40}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:48})})],["deoxys",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:32,frameHeight:64})})],["deoxys_attack",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"14;14;15;14",frameWidth:40,frameHeight:64})})],["deoxys_defense",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;8;8;12;8;8",frameWidth:40,frameHeight:64})})],["deoxys_speed",({Walk:({framesY:2,values:"2;2;6;4;2;2;6;4",frameWidth:40,frameHeight:56}),Idle:({framesY:2,values:"4;4;4;4;4;8",frameWidth:32,frameHeight:64})})],["duosion",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["dusknoir",({Walk:({framesY:2,values:"12;12;12;12",frameWidth:48,frameHeight:72}),Idle:({framesY:2,values:"8;8;10;10;8;7;12;10;10;9;8;8;8",frameWidth:48,frameHeight:80})})],["duskull",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"24;8;8;24;8;8",frameWidth:32,frameHeight:56})})],["elgyem",({Walk:({framesY:2,values:"8;6;6;8;8;6;6;8",frameWidth:24,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:24,frameHeight:56})})],["eternatus",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:104,frameHeight:120}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:104,frameHeight:128})})],["giritina2",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6;6;6;6;6;6;6",frameWidth:80,frameHeight:96}),Idle:({framesY:2,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:80,frameHeight:96})})],["hoopa",({Walk:({framesY:2,values:"7;7;9;9;9;7;7;7",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"4;4;4;4;4;4;4;4;6;6;6;6;8;8;8;8",frameWidth:32,frameHeight:48})})],["hoopa_unbound",({Special0:({framesY:2,values:"3;3;3;3;3;3;3;3;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;3;3;3;3;3;3;3;3",frameWidth:72,frameHeight:152}),Walk:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:64,frameHeight:112}),Idle:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:64,frameHeight:112})})],["jirachi",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6",frameWidth:40,frameHeight:48}),Special2:({framesY:2,values:"4;1;1;1;1;2;2;2;2;2;2;2;2;2;2;2;2;2;3;3;1;2;1;3;1;3;1;4;1;3;3;1;3;3;1;2;2;2;2;2;2;2;2;4;2;2;2;2;2;1;1;3;1;1;3;2;1;2;3;1;2;3;1;3;1;3;1;2;2;2;2;1;3;1;4;1;3;2;2;2;2;2;3;3;4;5",frameWidth:72,frameHeight:96}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:40,frameHeight:48})})],["kartana",({Walk:({framesY:2,values:"4;6;8;4;6;4",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;12;16;8;12;8",frameWidth:32,frameHeight:48})})],["lunala",({Walk:({framesY:2,values:"8;12;8;12",frameWidth:80,frameHeight:104}),Sleep:({framesY:2,values:"16;12;16;16;12;16",frameWidth:40,frameHeight:104}),Idle:({framesY:2,values:"12;14;12;14",frameWidth:80,frameHeight:96}),Hop:({framesY:2,values:"2;1;2;3;4;4;3;2;1;2",frameWidth:80,frameHeight:144})})],["lunatone",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["mesprit",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["metang",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:40,frameHeight:48}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:40,frameHeight:48})})],["mew",({Walk:({framesY:2,values:"8;8;8;8;8;8",frameWidth:40,frameHeight:64}),Idle:({framesY:2,values:"12;8;12;8",frameWidth:32,frameHeight:56})})],["mewtwo",({Walk:({framesY:3,values:"12;6;6;12;6;6",frameWidth:48,frameHeight:56}),Idle:({framesY:3,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:56})})],["minior",({Walk:({framesY:8,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48}),Idle:({framesY:8,values:"8;8;8;8;8;8;8;8;8;8;8;8",frameWidth:24,frameHeight:48})})],["naganadel",({Walk:({framesY:2,values:"8;8;8;8",frameWidth:48,frameHeight:56}),Idle:({framesY:2,values:"8;9;8;8;11;8;8",frameWidth:40,frameHeight:72})})],["necrozma",({Walk:({framesY:2,values:"4;7;7;7;7;7;7;7;7;7;4",frameWidth:72,frameHeight:96}),Idle:({framesY:2,values:"8;14;14;14;14;14;14;14;14;14;8",frameWidth:72,frameHeight:96})})],["necrozma_ultra",({Walk:({framesY:2,values:"8;12;8;12",frameWidth:72,frameHeight:104}),Idle:({framesY:2,values:"4;2;2;2;2;2;2;2;2;2;2;2;4",frameWidth:80,frameHeight:128})})],["nihilego",({Walk:({framesY:2,values:"6;10;10;6;10;10;10",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"6;10;10;6;10;10;10",frameWidth:32,frameHeight:48})})],["orbeetle",({Walk:({framesY:2,values:"4;4;6;6;6;6;4;4",frameWidth:40,frameHeight:56}),Idle:({framesY:2,values:"6;6;6;12;8;8;8;8",frameWidth:40,frameHeight:56})})],["poipole",({Walk:({framesY:2,values:"4;4;4;4;4;4;4;4;4;4",frameWidth:24,frameHeight:48}),Idle:({framesY:2,values:"6;12;6;12",frameWidth:24,frameHeight:48})})],["porygonz",({Walk:({framesY:2,values:"6;6;4;6;6;4;6",frameWidth:24,frameHeight:64}),Idle:({framesY:2,values:"4;4;4;4;4;2;2;3;4;4;2;2;4;4;4;60",frameWidth:24,frameHeight:64})})],["rayquaza",({Walk:({framesY:2,values:"8;8;6;4;4;4;8;8;6;6;6;6",frameWidth:80,frameHeight:128}),Idle:({framesY:2,values:"14;10;14;10",frameWidth:80,frameHeight:120})})],["reshiram",({Walk:({framesY:2,values:"8;6;8;6;8",frameWidth:88,frameHeight:96}),Idle:({framesY:2,values:"90;4;8;4;8;4",frameWidth:72,frameHeight:104})})],["reuniclus",({Walk:({framesY:2,values:"8;8;8;8;8;8;8;8",frameWidth:56,frameHeight:56}),Idle:({framesY:2,values:"12;12;12;12;12;12;12;12",frameWidth:56,frameHeight:56})})],["solosis",({Walk:({framesY:2,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:40}),Idle:({framesY:2,values:"13;10;13;10",frameWidth:24,frameHeight:40})})],["solrock",({Walk:({framesY:2,values:"6;6;6;6;6;6;6;6;6;6",frameWidth:32,frameHeight:48}),Idle:({framesY:2,values:"8;8;8;8;8;8",frameWidth:32,frameHeight:48})})],["unown",({Walk:({framesY:28,values:"6;6;5;5;6;6;6;5;5;6",frameWidth:32,frameHeight:48}),Idle:({framesY:28,values:"20;8;20;8",frameWidth:24,frameHeight:40})})],["uxie",({Walk:({framesY:2,values:"8;8;6;6;8;8;6;6",frameWidth:32,frameHeight:56}),Idle:({framesY:2,values:"14;8;6;8;14;8;6;8",frameWidth:32,frameHeight:56})})],["zekrom",({Walk:({framesY:2,values:"10;10;15;20;10;15",frameWidth:72,frameHeight:104}),Idle:({framesY:2,values:"60;10;2;2;2;2;2;2;2;2;2;2;2;10",frameWidth:72,frameHeight:96})})]]
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
-if (typeof CSSPropertyRule !== 'function') 
+if (typeof CSSPropertyRule !== 'function')
     CSS.registerProperty({
         name: '--asteroid-rotate',
         syntax: "<angle>",
@@ -22,7 +22,7 @@ background.observe('resize', {
         let { width, height } = n.contentRect
         let halfW = innerWidth / 2
         let halfH = innerHeight / 2
-        setOffsetPath(`:root{--ltr: path("M -${halfW/2.1} 0 L ${width + (halfW/2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
+        setOffsetPath(`:root{--ltr: path("M -${halfW / 2.1} 0 L ${width + (halfW / 2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
 load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
@@ -117,6 +117,7 @@ function preload(url) {
 let showedMessage = false
 background.delegate({
     async pointerdown(e) {
+        let pkm = this.dataset.name
         e.stopImmediatePropagation()
         let shiny = this.index == 1
         this.style.pointerEvents = 'none'
@@ -144,14 +145,15 @@ background.delegate({
             fill: 'forwards',
             easing: 'linear'
         }).finished
+        let unown = pkm === 'unown' ? 'hue-rotate(20deg) saturate(5) ' : ''
         n.src = './pokeball_catch-57.png'
         n.repeatCount = 1
         n.time = 0
         n.dur = .07
         this.animate([{
-            transform: 'scale(1,1)', filter: 'brightness(0%) invert(1) opacity(90%)'
+            transform: 'scale(1,1)', filter: `${unown}brightness(0%) invert(1) opacity(90%)`
         }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
-            transform: 'scale(0.25,0.25)', filter: 'opacity(0%) brightness(0%) invert(1)'
+            transform: 'scale(0.25,0.25)', filter: `${unown}opacity(0%) brightness(0%) invert(1)`
         }], {
             duration: 400,
             iterations: 1,
@@ -302,6 +304,9 @@ function spawnPokemon() {
             break
         case 'beheeyem':
         case 'elgyem':
+            scale *= 2.7
+            speed *= 1.5
+            break
         case 'cosmoem':
             scale *= 2.3
             speed *= 1.5
@@ -317,25 +322,27 @@ function spawnPokemon() {
             speed *= 1.5
             break
         case 'minior':
-        index = Math.floor(Math.random() * 7)
+            index = Math.floor(Math.random() * 7)
         case 'poipole':
         case 'beldum':
             scale *= 2.5
             break
-            case 'cosmog':
-                scale *= 1.5
-                break
+        case 'cosmog':
+            scale *= 1.5
+            break
         case 'celesteela':
         case 'nihilego':
         case 'dusknoir':
             scale *= 3
             break
+        case 'mewtwo':
+            index = Math.floor(Math.random() * 2)
+            speed /= 3
         case 'deoxys_speed':
             speed *= 3
         case 'deoxys_attack':
         case 'deoxys_defense':
         case 'deoxys':
-        case 'mewtwo':
             speed *= 3
             scale *= 2.7
             break
@@ -343,6 +350,10 @@ function spawnPokemon() {
             scale *= 11
             // speed *= .2
             dur *= 2
+            break
+        case 'necrozma_ultra':
+            scale *= 7.4
+            dur *= 1.55
             break
         case 'lunala':
         case 'reshiram':
@@ -389,11 +400,12 @@ function spawnPokemon() {
             break
     }
     scale *= i
-    if (shiny()) {
-        index += 1
+    let isShiny = shiny()
+    if (isShiny)
         if (pkm === 'minior') index = 7
-    } 
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
+        else if (pkm === 'mewtwo') index = 2
+        else index += 1
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="${pkm === 'kartana' ? 'image-rendering:auto !important;' : ''}--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
 }

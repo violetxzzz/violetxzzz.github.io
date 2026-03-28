@@ -7,7 +7,7 @@ let a = await Array.fromAsync(await dir('./new'), async o=>{
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
-if (typeof CSSPropertyRule !== 'function') 
+if (typeof CSSPropertyRule !== 'function')
     CSS.registerProperty({
         name: '--asteroid-rotate',
         syntax: "<angle>",
@@ -28,7 +28,7 @@ background.observe('resize', {
         let { width, height } = n.contentRect
         let halfW = innerWidth / 2
         let halfH = innerHeight / 2
-        setOffsetPath(`:root{--ltr: path("M -${halfW/2.1} 0 L ${width + (halfW/2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
+        setOffsetPath(`:root{--ltr: path("M -${halfW / 2.1} 0 L ${width + (halfW / 2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
 load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
@@ -123,6 +123,7 @@ function preload(url) {
 let showedMessage = false
 background.delegate({
     async pointerdown(e) {
+        let pkm = this.dataset.name
         e.stopImmediatePropagation()
         let shiny = this.index == 1
         this.style.pointerEvents = 'none'
@@ -150,14 +151,15 @@ background.delegate({
             fill: 'forwards',
             easing: 'linear'
         }).finished
+        let unown = pkm === 'unown' ? 'hue-rotate(20deg) saturate(5) ' : ''
         n.src = './pokeball_catch-57.png'
         n.repeatCount = 1
         n.time = 0
         n.dur = .07
         this.animate([{
-            transform: 'scale(1,1)', filter: 'brightness(0%) invert(1) opacity(90%)'
+            transform: 'scale(1,1)', filter: `${unown}brightness(0%) invert(1) opacity(90%)`
         }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
-            transform: 'scale(0.25,0.25)', filter: 'opacity(0%) brightness(0%) invert(1)'
+            transform: 'scale(0.25,0.25)', filter: `${unown}opacity(0%) brightness(0%) invert(1)`
         }], {
             duration: 400,
             iterations: 1,
@@ -308,6 +310,9 @@ function spawnPokemon() {
             break
         case 'beheeyem':
         case 'elgyem':
+            scale *= 2.7
+            speed *= 1.5
+            break
         case 'cosmoem':
             scale *= 2.3
             speed *= 1.5
@@ -323,25 +328,27 @@ function spawnPokemon() {
             speed *= 1.5
             break
         case 'minior':
-        index = Math.floor(Math.random() * 7)
+            index = Math.floor(Math.random() * 7)
         case 'poipole':
         case 'beldum':
             scale *= 2.5
             break
-            case 'cosmog':
-                scale *= 1.5
-                break
+        case 'cosmog':
+            scale *= 1.5
+            break
         case 'celesteela':
         case 'nihilego':
         case 'dusknoir':
             scale *= 3
             break
+        case 'mewtwo':
+            index = Math.floor(Math.random() * 2)
+            speed /= 3
         case 'deoxys_speed':
             speed *= 3
         case 'deoxys_attack':
         case 'deoxys_defense':
         case 'deoxys':
-        case 'mewtwo':
             speed *= 3
             scale *= 2.7
             break
@@ -349,6 +356,10 @@ function spawnPokemon() {
             scale *= 11
             // speed *= .2
             dur *= 2
+            break
+        case 'necrozma_ultra':
+            scale *= 7.4
+            dur *= 1.55
             break
         case 'lunala':
         case 'reshiram':
@@ -395,11 +406,12 @@ function spawnPokemon() {
             break
     }
     scale *= i
-    if (shiny()) {
-        index += 1
+    let isShiny = shiny()
+    if (isShiny)
         if (pkm === 'minior') index = 7
-    } 
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
+        else if (pkm === 'mewtwo') index = 2
+        else index += 1
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="${pkm === 'kartana' ? 'image-rendering:auto !important;' : ''}--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
 }

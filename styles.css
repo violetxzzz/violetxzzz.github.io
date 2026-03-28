@@ -769,6 +769,9 @@ paper-canvas {
     display: none;
 }
 }
+[data-name="unown"].isShiny {
+filter: hue-rotate(20deg) saturate(5);
+}
 @media screen and (width < 440px) {
     #lcp {
         float: none;
