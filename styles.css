@@ -296,7 +296,6 @@ html {
     background-size: cover;
     animation: drift 150s ease-in-out alternate infinite;
     background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
-    background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
     background-image: url(galaxy.png);
     background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
     /* background: var(--color4); */
