@@ -21,9 +21,7 @@ form {
     display: none;
 }
 
-#buddy:--broken {
-    display: none;
-}
+
 
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
@@ -105,14 +103,6 @@ li:nth-child(odd)::marker {
     color: var(--color3)
 }
 
-li::-moz-list-bullet {
-    color: var(--color2)
-}
-
-li:nth-child(odd)::-moz-list-bullet {
-    color: var(--color3)
-}
-
 ul {
     text-align: center;
     /* place-items: center; */
@@ -161,13 +151,12 @@ ul {
 .debris {
     cursor: url("cosmica/link%20select.cur"), pointer;
     z-index: 1;
-    --offset-path: var(--ltr);
+    offset-path: var(--ltr);
     --tap-highlight-color: transparent;
     transform: scale(2, 2) rotate(var(--asteroid-rotate));
     animation: float 30s linear infinite, offset 30s linear;
     /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
     background-image: url(./debris.png);
-    background-image: -webkit-image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
     background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
     filter: brightness(1.25);
 }
@@ -292,7 +281,7 @@ html {
 
 #background,
 #background * {
-    --offset-rotate: 0deg;
+    offset-rotate: 0deg;
     --user-select: none;
     touch-action: pinch-zoom !important;
 }
@@ -309,7 +298,6 @@ html {
     background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
     background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
     background-image: url(galaxy.png);
-    background-image: -webkit-image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
     background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
     /* background: var(--color4); */
     /* background: var(--color4); */
@@ -830,11 +818,6 @@ paper-canvas {
         display: none;
     }
 
-    #buddy:--broken {
-
-        display: none;
-    }
-
     #buddy::part(sprite) {
         transform: translate(-50%)
     }
@@ -845,12 +828,7 @@ paper-canvas {
 }
 
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+:heading {
     text-transform: capitalize;
 }
 
@@ -876,21 +854,21 @@ h6 {
 
 @keyframes offset {
     0% {
-        --offset-distance: 0%;
+        offset-distance: 0%;
     }
 
     100% {
-        --offset-distance: 100%
+        offset-distance: 100%
     }
 }
 
 @keyframes toLeft {
     0% {
-        --offset-distance: 100%;
+        offset-distance: 100%;
     }
 
     100% {
-        --offset-distance: 0%
+        offset-distance: 0%
     }
 }
 
