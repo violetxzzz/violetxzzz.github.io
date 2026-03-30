@@ -14,10 +14,7 @@ if (typeof CSSPropertyRule !== 'function')
         inherits: false,
         initialValue: '0deg'
     })
-const { background, buddy } = v.id
-if (shiny()) {
-    buddy.index = 1
-}
+const {background} = v.id
 const $ = v.esc
 const setOffsetPath = function (sheet) {
     document.adoptedStyleSheets = [].concat.call(document.adoptedStyleSheets, sheet)

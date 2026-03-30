@@ -172,7 +172,7 @@ let title = `Violet's Galaxy`
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
                             <slide-show src="./new/lunala/lunala-Hop.png" index="0" autoplay
                                 style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
-                                id="buddy" dur=".05"></slide-show>
+                                id="buddy" class="avatarsprite" dur=".05"></slide-show>
                         </div>
                     </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
@@ -373,7 +373,7 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}"></picture>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
@@ -668,6 +668,42 @@ let title = `Violet's Galaxy`
     }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
     console.log('%cSprites Credit: https://sprites.pmdcollab.org/', 'font-size: 2em;font-family:HalfTerm, monospace')
+</script>
+<script type="module">
+    import * as v from 'https://addsoupbase.github.io/v4.js'
+    import preload from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
+    let { friendslist } = v.id
+    function shiny(odds = 4000) {
+        return Math.random() * odds > odds - 1 ? ' shiny' : ''
+    }
+    [].forEach.call(document.getElementsByClassName('avatarsprite'), o => {
+        if (shiny()) o.index = 1
+    })
+    let others /*:
+    return `= ${uneval(
+       Object.fromEntries(await Array.fromAsync(await dir('hi'), async o=>
+             [o, Object.values(JSON.parse(await file(`./hi/${o}/${o}.json`)))[0]])
+    ))}`*/
+    friendslist.delegate({
+        '%load': loadMe
+    })
+    friendslist.querySelectorAll('img')
+        .forEach(o => o.complete && loadMe.call(o))
+    function loadMe() {
+        let s = this.closest('li').querySelector('slide-show')
+        if (s) {
+            let { alt } = this
+            let { framesY, frameWidth, frameHeight, values } = others[alt]
+            let src = `./hi/${alt}/${alt}.png`
+            let duras = values.split(';').map(Number)
+            preload({ src, framesY, frameWidth, frameHeight, duras, framesX: duras.length })
+            [0].then(() => {
+                s.src = src
+                s.style.display = ''
+                s.play()
+            })
+        }
+    }
 </script>
 <script>
     addEventListener('load', () => {
