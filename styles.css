@@ -16,7 +16,9 @@ form {
 #buddy::part(sprite) {
     transform: none;
 }
-
+#buddy {
+    zoom: revert
+}
 #buddy:state(--broken) {
     display: none;
 }
@@ -503,7 +505,8 @@ html {
 }
 .avatarsprite::part(sprite) {
     transform: none;
-    filter: drop-shadow(2px 1px 1px black)
+    /* zoom: calc(1/1.35); */
+    filter: drop-shadow(2px px 1px black)
 }
 
 .p_sukuna {
@@ -682,10 +685,19 @@ paper-canvas {
 }
 
 #closest li {
-    zoom: 1.35;
+    /* zoom: 1.35; */
     margin-inline: 10px;
 }
-
+#closest li img {
+    width: 108px;
+    height: 108px
+}
+#closest figure {
+    width: 108px
+}
+#closest .avatarsprite {
+    transform: scale(1.4, 1.4) translate(-13px,11px)
+}
 .avatar {
     border-radius: 100%;
     isolation: isolate;

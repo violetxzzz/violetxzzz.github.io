@@ -3,7 +3,7 @@ let a = await Array.fromAsync(await dir('./new'), async o=>{
     let json = JSON.parse(await file(`./new/${o}/${o}.json`))
     return[o, json]
     })
-   return `const data = ${uneval(a)}`
+   return `const data = ${uneval(Object.fromEntries(a))}`
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
@@ -31,12 +31,11 @@ background.observe('resize', {
 load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
-    for (let i = data.length; i--;) {
-        let t = data[i]
-        let name = t[0]
-        let frames = t[1]
-        Promise.all(load(...Object.keys(frames).map(anim => {
-            let a = frames[anim]
+    for (let name in data) {
+        let t = data[name]
+        // let name = t[0]
+        // let frames = t[1]
+        Promise.all(load(...Object.entries(t).map(({0:anim, 1:a}) => {
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
             return { duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }
