@@ -97,12 +97,12 @@ li {
 }
 
 li::marker {
-    color: var(--color2);
+    color: var(--_color2);
     content: "❥ "
 }
 
 li:nth-child(odd)::marker {
-    color: var(--color3)
+    color: var(--_color3)
 }
 
 ul {
@@ -297,7 +297,7 @@ html {
     height: 100vh;
     background-size: cover;
     animation: drift 150s ease-in-out alternate infinite;
-    background-color: linear-gradient(225deg, var(--color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
+    background-color: linear-gradient(225deg, var(--_color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
     background-image: url(galaxy.png);
     background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
     /* background: var(--color4); */
@@ -436,14 +436,12 @@ body {
 }
 
 :root {
-    --color1: #726cff;
-    --color2: #908df7;
-    --color3: #BC6CFF;
-    --color4: #3a3880;
-    --color5: #F9FF6C;
-    --color6: #F7FF39;
-    --animspeed: .1s;
-    --global-frame-dura: 22ms;
+    --_color1: #726cff;
+    --_color2: #908df7;
+    --_color3: #BC6CFF;
+    --_color4: #3a3880;
+    --_color5: #F9FF6C;
+    --_color6: #F7FF39;
     --tap-highlight-color: rgba(189, 108, 255, 0.18);
 }
 
@@ -478,7 +476,7 @@ html {
     /* translate: -40px 60px; */
 /* } */
 .p_mochi {
-    translate: -36px 51px
+    translate: -36px 41px
 }
 .p_rika {
     scale: 1.2;
@@ -501,12 +499,12 @@ html {
 }
 .p_kyuu {
     scale: 1.27;
-    translate: -40px 51px
+    translate: -34px 45px
 }
 .avatarsprite::part(sprite) {
     transform: none;
     /* zoom: calc(1/1.35); */
-    filter: drop-shadow(2px px 1px black)
+    filter: drop-shadow(2px 1px 1px rgba(0, 0, 0, 0.521))
 }
 
 .p_sukuna {
@@ -666,8 +664,8 @@ paper-canvas {
 .sect {
     /* border: 5px solid var(--color2); */
     --scrollbar-width: 4px;
-    --scrollbar-thumb-color: var(--color3);
-    --scrollbar-color: var(--color2);
+    --scrollbar-thumb-color: var(--_color3);
+    --scrollbar-color: var(--_color2);
     /* border-style: solid; */
 }
 
@@ -677,11 +675,11 @@ paper-canvas {
 }
 
 #closest li:nth-child(odd) {
-    text-decoration: underline var(--color2)
+    text-decoration: underline var(--_color2)
 }
 
 #closest li:nth-child(even) {
-    text-decoration: underline var(--color3)
+    text-decoration: underline var(--_color3)
 }
 
 #closest li {
@@ -713,7 +711,7 @@ paper-canvas {
 
 .avatar:hover {
     transform: scale(1.07);
-    box-shadow: rgba(42, 5, 103, 0.409) -4px 4px 4px;
+    box-shadow: rgba(42, 5, 103, 0.409) 12px 12px 8px;
 }
 
 .drawingframe {
@@ -776,7 +774,7 @@ paper-canvas {
 
 .drawing {
     background: white;
-    border: 3px outset var(--color2)
+    border: 3px outset var(--_color2)
 }
 
 @property --asteroid-rotate {
@@ -924,14 +922,6 @@ paper-canvas {
     animation: offset 10s linear
 }
 
-.slideshow {
-    animation: slideshow calc(var(--frames) * var(--global-frame-dura)) steps(var(--frames), end) infinite;
-}
-
-.slideshowOnce {
-    animation: slideshow calc(var(--frames) * var(--global-frame-dura) * var(--local-dura, 1)) steps(var(--frames), end);
-}
-
 
 @keyframes glide {
     0% {
@@ -1059,8 +1049,8 @@ cite {
 }
 
 .artist[aria-pressed="true"] {
-    -webkit-box-shadow: 0px 0px 15px 5px var(--color3);
-    box-shadow: 0px 0px 15px 5px var(--color3);
+    -webkit-box-shadow: 0px 0px 15px 5px var(--_color3);
+    box-shadow: 0px 0px 15px 5px var(--_color3);
 }
 
 figcaption {
@@ -1068,7 +1058,7 @@ figcaption {
 }
 
 picture:has(:where(.artist[aria-pressed="true"], audio:playing))+figcaption {
-    text-shadow: 0px 4px 4px var(--color3);
+    text-shadow: 0px 4px 4px var(--_color3);
 }
 
 a[target] {
