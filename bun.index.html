@@ -304,15 +304,14 @@ let title = `Violet's Galaxy`
                     link = '3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k'
                     break
                     }
-                    return {src: 'https://www.dropbox.com/scl/fi/' + link + '&dl=1', title}
+                    return {src: 'https://www.dropbox.com/scl/fi/' + link + '&dl=0&raw=1', title}
                     }
                     return(await dir('./artists/')
                     ).filter(o=>o.endsWith('.avif')).map(o=>o.split('.avif')[0])
                     .map(o=>{
                     let {title, src} = n(o)
                     let artist = o.split('_').join(' ')
-                    return`
-                    <li>
+                    return`<li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/${o}.avif" type="image/avif">
@@ -326,8 +325,7 @@ let title = `Violet's Galaxy`
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="${src}" preload="none" title="${title}"></audio>
                     </figure>
-                    </li>
-                    `})
+                    </li>`})
                     .join('')
                 }}-->
                 </ul>
