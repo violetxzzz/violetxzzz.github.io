@@ -23,8 +23,6 @@ form {
     display: none;
 }
 
-
-
 input:not([type="color"], [type="range"], [type="button"]) {
     background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
     border: 2px solid rgba(255, 255, 255, 0.2);
