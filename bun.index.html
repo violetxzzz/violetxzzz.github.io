@@ -490,7 +490,7 @@ let title = `Violet's Galaxy`
                         .open()
                         .then(function (c) {
                             var col = c.sRGBHex
-                            var t = col.match(/\d+/g).slice(0, 3).map(function (n) {
+                            var t = col.match(/\d+/g).substring(0, 3).map(function (n) {
                                 return (+n).toString(16).padStart(2, 0)
                             })
                                 .join('')
@@ -503,10 +503,11 @@ let title = `Violet's Galaxy`
             for (var i = tabs.length; i--;) tabs[i].ariaSelected = false
             n.ariaSelected = true
         }
+        var tabNames = RegExp('^(?:'+[].map.call(D.getElementsByClassName('sect'), function(o){return o.id}).join('|')+')$')
         h.on(frame, {
             scrollsnapchange: function (e) {
                 var id = e.snapTargetInline.id
-                if (/^mailbox|home|artists|friends$/.test(id)) {
+                if (tabNames.test(id)) {
                     var s = 'a[href="' + '#' + id + '"]'
                     var elt = D.querySelector(s)
                     select(elt)
@@ -594,7 +595,7 @@ let title = `Violet's Galaxy`
                 container.appendChild(caption)
                 var t = new Date(timestamp)
                 time.textContent = t.toLocaleDateString()
-                time.setAttribute('datetime', t.toISOString().slice(0, 10))
+                time.setAttribute('datetime', t.toISOString().substring(0, 10))
                 drawings.appendChild(list)
             })
         }
@@ -622,8 +623,8 @@ let title = `Violet's Galaxy`
         })
         h.on(window, {
             _load: function () {
-                var id = location.hash.slice(1) || 'home'
-                if (id === 'mailbox' || id === 'home' || id === 'artists') select(D.querySelector('a[href="#' + id + '"]'))
+                var id = location.hash.substring(1) || 'home'
+                if (tabNames.test(id)) select(D.querySelector('a[href="#' + id + '"]'))
             }
         })
         h.delegate(musics, {

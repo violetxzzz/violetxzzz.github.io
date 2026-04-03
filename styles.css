@@ -694,7 +694,13 @@ paper-canvas {
     width: 108px
 }
 #closest .avatarsprite {
+    pointer-events: none !important;
+    touch-action: none !important;
     transform: scale(1.4, 1.4) translate(-13px,11px)
+}
+.avatarsprite::part(sprite) {
+        pointer-events: none !important;
+    touch-action: none !important;
 }
 .avatar {
     border-radius: 100%;
