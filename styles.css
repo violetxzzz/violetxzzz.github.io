@@ -16,9 +16,11 @@ form {
 #buddy::part(sprite) {
     transform: none;
 }
+
 #buddy {
     zoom: revert
 }
+
 #buddy:state(--broken) {
     display: none;
 }
@@ -471,22 +473,26 @@ html {
 
 
 /* .avatarsprite { */
-    /* translate: -40px 60px; */
+/* translate: -40px 60px; */
 /* } */
 .p_mochi {
     translate: -36px 41px
 }
+
 .p_rika {
     scale: 1.2;
     translate: -30px 60px
 }
+
 .p_caelix {
-    translate:-30px 53px
+    translate: -30px 53px
 }
+
 .p_saenger {
     translate: -34px 55px;
     scale: 1.1
 }
+
 .p_misha {
     translate: -37px 63px
 }
@@ -495,10 +501,12 @@ html {
     scale: 1.3;
     translate: -36px 67px
 }
+
 .p_kyuu {
     scale: 1.27;
     translate: -34px 45px
 }
+
 .avatarsprite::part(sprite) {
     transform: none;
     /* zoom: calc(1/1.35); */
@@ -684,22 +692,27 @@ paper-canvas {
     /* zoom: 1.35; */
     margin-inline: 10px;
 }
+
 #closest li img {
     width: 108px;
     height: 108px
 }
+
 #closest figure {
     width: 108px
 }
+
 #closest .avatarsprite {
     pointer-events: none !important;
     touch-action: none !important;
-    transform: scale(1.4, 1.4) translate(-13px,11px)
+    transform: scale(1.4, 1.4) translate(-13px, 11px)
 }
+
 .avatarsprite::part(sprite) {
-        pointer-events: none !important;
+    pointer-events: none !important;
     touch-action: none !important;
 }
+
 .avatar {
     border-radius: 100%;
     isolation: isolate;
@@ -778,7 +791,51 @@ paper-canvas {
 
 .drawing {
     background: white;
-    border: 3px outset var(--_color2)
+    border: 3px outset var(--_color2);
+    box-sizing: content-box;
+}
+
+#topdrawings {
+    margin: 0;
+    padding: 0;
+    /* border: 3px outset yellow; */
+}
+
+#topdrawings>li:nth-child(1) img {
+    border-color: yellow;
+    border-width: 4px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.564);
+}
+
+#topdrawings>li:nth-child(1) time {
+    text-decoration: underline solid yellow
+}
+
+
+#topdrawings>li:nth-child(2) img {
+    border-color: silver;
+    border-width: 4px;
+    box-shadow: 0px 0px 5 rgba(192, 192, 192, 0.564);
+}
+
+#topdrawings>li:nth-child(2) time {
+    text-decoration: underline solid silver
+}
+
+#topdrawings>li:nth-child(3) img {
+    border-color: rgb(151, 101, 9);
+    border-width: 4px;
+    box-shadow: 0px 0px 2px rgb(151, 101, 9, .564);
+}
+
+#topdrawings>li:nth-child(3) time {
+    text-decoration: underline solid rgb(151, 101, 9)
+}
+
+
+#topdrawings>li {
+    display: inline;
+    text-align: center;
 }
 
 @property --asteroid-rotate {

@@ -161,8 +161,8 @@ let title = `Violet's Galaxy`
                 <picture>
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
                     <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
-                    <img fetchpriority="high" alt="Marceline the Vampire Queen" width="256" height="256" class="avatar" id="lcp"
-                        src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
+                    <img fetchpriority="high" alt="Marceline the Vampire Queen" width="256" height="256" class="avatar"
+                        id="lcp" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
                 </picture>
                 <article>
                     <div>
@@ -335,7 +335,7 @@ let title = `Violet's Galaxy`
                     <h2 style="display: inline;" class="heading">Friends</h2>
                     <ul id="friendslist">
                         <!--{{
-                            let closest = new Set(['misha', 'rika','sukuna','shon','kyuu','mochi','caelix', 'saenger'])
+                            let closest = new Set(['misha', 'rika','sukuna','shon','kyuu','mochi','caelix', 'saenger'].sort())
                             function sort(a, b) {
                                 let hasA = closest.has(a)
                                 let hasB = closest.has(b)
@@ -390,7 +390,10 @@ let title = `Violet's Galaxy`
                 <div id="uhh" style="min-height: 100px;" class="needsjs">
                     <div class="loader" role="progressbar" style="justify-self: center;margin:auto" id="loader"></div>
                     <h2>Loading...</h2>
-                    <ul id="drawings" style="display: none;"></ul>
+                    <div style="display: none;">
+                        <ol id="topdrawings"></ol>
+                        <ul id="drawings"></ul>
+                    </div>
                 </div>
                 <div id="mailstuff"
                     style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;;place-content: space-around;">
@@ -456,29 +459,31 @@ let title = `Violet's Galaxy`
                     else e.returnValue = !!e.preventDefault()
                 })
             })
+        function g(t) { return D.getElementById(t) }
         var sects = [].slice.call(D.getElementsByClassName('sect'))
-            , controls = D.getElementById('controls')
-            , nowplaying = D.getElementById('nowplaying')
-            , musics = D.getElementById('musics')
+            , controls = g('controls')
+            , nowplaying = g('nowplaying')
+            , musics = g('musics')
             , musicButtons = [].slice.call(musics.getElementsByTagName('img'))
             , audios = [].slice.call(musics.getElementsByTagName('audio'))
             , startViewTransition = D.startViewTransition ? D.startViewTransition.bind(D) : Function.prototype
             //, show = D.getElementById('show')
-            , hide = D.getElementById('hide')
+            , hide = g('hide')
             , main = D.querySelector('main')
-            , loader = D.getElementById('loader')
-            , drawings = D.getElementById('drawings')
+            , loader = g('loader')
+            , drawings = g('drawings'),
+            topDrawings = g('topdrawings')
             // , gotoSend = D.getElementById('gotoSend')
-            , mailstuff = D.getElementById('mailstuff')
-            , sendstuff = D.getElementById('sendstuff')
+            , mailstuff = g('mailstuff')
+            , sendstuff = g('sendstuff')
             // , gotoDraw = D.getElementById('gotoDraw')
-            , senddraw = D.getElementById('senddraw')
-            , container = D.getElementById('uhh')
-            , undo = D.getElementById('undo')
-            , brushsize = D.getElementById('brushsize')
-            , color = D.getElementById('color')
-            , eyedropper = D.getElementById('eyedropper'),
-            frame = D.getElementById('frame')
+            , senddraw = g('senddraw')
+            , container = g('uhh')
+            , undo = g('undo')
+            , brushsize = g('brushsize')
+            , color = g('color')
+            , eyedropper = g('eyedropper'),
+            frame = g('frame')
             , paper// = D.querySelector('paper-canvas')
         var tabs = [].slice.call(D.querySelectorAll('a[role="tab"]'))
         if (window.EyeDropper) {
@@ -503,7 +508,7 @@ let title = `Violet's Galaxy`
             for (var i = tabs.length; i--;) tabs[i].ariaSelected = false
             n.ariaSelected = true
         }
-        var tabNames = RegExp('^(?:'+[].map.call(D.getElementsByClassName('sect'), function(o){return o.id}).join('|')+')$')
+        var tabNames = RegExp('^(?:' + [].map.call(D.getElementsByClassName('sect'), function (o) { return o.id }).join('|') + ')$')
         h.on(frame, {
             scrollsnapchange: function (e) {
                 var id = e.snapTargetInline.id
@@ -511,7 +516,7 @@ let title = `Violet's Galaxy`
                     var s = 'a[href="' + '#' + id + '"]'
                     var elt = D.querySelector(s)
                     select(elt)
-                    ariaShow(D.getElementById(id))
+                    ariaShow(g(id))
                 }
             }
         })
@@ -567,27 +572,26 @@ let title = `Violet's Galaxy`
                 loader.nextElementSibling
             aaaa.parentNode.removeChild(aaaa)
             loader.parentNode.removeChild(loader)
-            drawings.style.display = ''
+            drawings.parentNode.style.display = ''
             json.forEach(function (thing) {
                 var src = thing[0],
                     timestamp = thing[1],
                     container = D.createElement('figure')
                     , time = D.createElement('time')
                     , img = new Image,
-                    list = D.createElement('li'),
+                    item = D.createElement('li'),
                     caption = D.createElement('figcaption')
                 img.loading = 'lazy'
                 img.decoding = 'async'
                 caption.appendChild(time)
-                list.appendChild(container)
+                item.appendChild(container)
                 img.crossOrigin = 'anonymous'
                 img.className = 'drawing'
                 container.className = 'drawingframe'
                 var link = D.createElement('a')
                 link.style.display = 'contents'
                 var size = 250
-                link.href =
-                    img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w' + size)
+                link.href = img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w' + size)
                 img.width = img.height = size
                 link.appendChild(img)
                 link.setAttribute('target', '_blank')
@@ -596,7 +600,16 @@ let title = `Violet's Galaxy`
                 var t = new Date(timestamp)
                 time.textContent = t.toLocaleDateString()
                 time.setAttribute('datetime', t.toISOString().substring(0, 10))
-                drawings.appendChild(list)
+                switch (src) {
+                    case '1MzhAgkI7G4QMjKMvLJq0qM_YgX2N5ksm': //1st
+                    case '1SlLK86aJ_uQoiyK60c6_BJfMLgZmW_VK': //2nd
+                    case '1qZRVANhxS56X9X1G5iX572TU9y7WC2-1': //3rd
+                        topDrawings.appendChild(item)
+                        break
+                    default:
+                        drawings.appendChild(item)
+                        break
+                }
             })
         }
         xhr.send()
