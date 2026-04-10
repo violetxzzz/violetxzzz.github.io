@@ -1,3 +1,17 @@
+:root {
+    --_color1: #726cff;
+    --_color2: #908df7;
+    --_color3: #BC6CFF;
+    --_color4: #3a3880;
+    --_color5: #F9FF6C;
+    --_color6: #F7FF39;
+    --tap-highlight-color: rgba(189, 108, 255, 0.18);
+    --_CURSOR: url("cosmica/default.cur"), default;
+    --_TEXT_SELECT: url("cosmica/text%20select.cur"), text;
+    --_POINTER: url("cosmica/link%20select.cur"), pointer;
+    --_PERSON_SELECT: url("cosmica/person%20select.cur"), default
+}
+
 @counter-style heart {
     system: cyclic;
     symbols: "❥";
@@ -151,7 +165,7 @@ ul {
 }
 
 .debris {
-    cursor: url("cosmica/link%20select.cur"), pointer;
+    cursor: var(--_POINTER);
     z-index: 1;
     offset-path: var(--ltr);
     --tap-highlight-color: transparent;
@@ -435,14 +449,8 @@ body {
     justify-content: center;
 }
 
-:root {
-    --_color1: #726cff;
-    --_color2: #908df7;
-    --_color3: #BC6CFF;
-    --_color4: #3a3880;
-    --_color5: #F9FF6C;
-    --_color6: #F7FF39;
-    --tap-highlight-color: rgba(189, 108, 255, 0.18);
+html {
+    cursor: var(--_CURSOR)
 }
 
 main {
@@ -467,9 +475,7 @@ main {
     position: absolute;
 }
 
-html {
-    cursor: url("cosmica/default.cur"), default
-}
+
 
 
 /* .avatarsprite { */
@@ -517,27 +523,15 @@ html {
     translate: -34px 63px;
 }
 
-h1,
-p,
-cite,
-h2,
-li,
-time,
-span,
-strong,
-output,
-figcaption,
-input {
-    cursor: url("cosmica/text%20select.cur"), text
+:_text-selectable {
+    cursor: var(--_TEXT_SELECT)
 }
 
-a,
-button,
+
 .button,
 .artist,
-input[type="color"],
-input[type="range"] {
-    cursor: url("cosmica/link%20select.cur"), pointer
+:_clickable {
+    cursor: var(--_POINTER)
 }
 
 .button[aria-selected="true"] {
@@ -763,7 +757,7 @@ paper-canvas {
 
 .listfriend {
     display: inline-flex;
-    cursor: url("cosmica/person%20select.cur"), default;
+    cursor: var(--_PERSON_SELECT);
 }
 
 .listfriend figure {
@@ -786,7 +780,7 @@ paper-canvas {
     max-width: unset;
     object-fit: cover;
     border-radius: 80px;
-    cursor: url("cosmica/person%20select.cur"), default;
+    cursor: var(--_PERSON_SELECT);
 }
 
 .drawing {
@@ -804,6 +798,7 @@ paper-canvas {
 #topdrawings time {
     text-underline-offset: 6px
 }
+
 #topdrawings>li:nth-child(1) img {
     border-color: rgb(220, 220, 0);
     /* border-width: 4px; */
@@ -864,7 +859,7 @@ paper-canvas {
     width: 25%;
     max-width: 160px;
     min-width: 100px;
-    cursor: url("cosmica/person%20select.cur"), default;
+    cursor: var(--_PERSON_SELECT);
     shape-outside: circle(48%);
 }
 
@@ -1004,7 +999,7 @@ slide-show {
 }
 
 .catchable {
-    cursor: url("cosmica/link%20select.cur"), pointer;
+    cursor: var(--_POINTER);
     z-index: 2;
     --tap-highlight-color: transparent;
 }
@@ -1077,7 +1072,7 @@ html {
     width: 100px;
     height: auto;
     aspect-ratio: 1 / 1;
-    cursor: url("cosmica/link%20select.cur"), pointer
+    cursor: var(--_POINTER)
         /* margin: 10px */
 }
 
