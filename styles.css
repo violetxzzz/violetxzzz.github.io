@@ -810,9 +810,9 @@ paper-canvas {
     box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.3);
 }
 
-#topdrawings>li:nth-child(1) time {
+/* #topdrawings>li:nth-child(1) time {
     text-decoration: underline solid rgba(255, 255, 0, 0.6)
-}
+} */
 
 
 #topdrawings>li:nth-child(2) img {
@@ -821,9 +821,9 @@ paper-canvas {
     box-shadow: 0px 0px 10px rgba(192, 192, 192, 0.3);
 }
 
-#topdrawings>li:nth-child(2) time {
+/* #topdrawings>li:nth-child(2) time {
     text-decoration: underline solid rgba(192, 192, 192, 0.6)
-}
+} */
 
 #topdrawings>li:nth-child(3) img {
     border-color: rgb(151, 101, 9);
@@ -831,9 +831,9 @@ paper-canvas {
     box-shadow: 0px 0px 10px rgb(151, 101, 9, .3);
 }
 
-#topdrawings>li:nth-child(3) time {
+/* #topdrawings>li:nth-child(3) time {
     text-decoration: underline solid rgba(151, 101, 9, 0.6)
-}
+} */
 
 
 #topdrawings>li {
