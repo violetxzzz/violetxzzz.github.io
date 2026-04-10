@@ -320,8 +320,7 @@ let title = `Violet's Galaxy`
                                 draggable="false" role="button" title="Click to play ${title} by ${artist}"
                                 class="artist avatar" src="./artists/${o}.jpg" alt="${artist}">
                         </picture>
-                        <figcaption class="capt"><cite>${artist}</cite></figcaption>
-                        <cite class="authortitle">${title}</cite>
+                        <figcaption class="capt" aria-hidden="true"><span class="authortitle"><cite>${title}</cite> by </span><cite>${artist}</cite></figcaption>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="${src}" preload="none" title="${title}"></audio>
                     </figure>
@@ -372,7 +371,7 @@ let title = `Violet's Galaxy`
                                     break
                                 }
                                 let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
-                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
+                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="${name !== 'white'}">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
                     </ul>
