@@ -801,35 +801,38 @@ paper-canvas {
     /* border: 3px outset yellow; */
 }
 
+#topdrawings time {
+    text-underline-offset: 6px
+}
 #topdrawings>li:nth-child(1) img {
-    border-color: yellow;
-    border-width: 4px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.564);
+    border-color: rgb(220, 220, 0);
+    /* border-width: 4px; */
+    box-shadow: 0px 0px 10px rgba(255, 255, 0, 0.3);
 }
 
 #topdrawings>li:nth-child(1) time {
-    text-decoration: underline solid yellow
+    text-decoration: underline solid rgba(255, 255, 0, 0.6)
 }
 
 
 #topdrawings>li:nth-child(2) img {
     border-color: silver;
-    border-width: 4px;
-    box-shadow: 0px 0px 5 rgba(192, 192, 192, 0.564);
+    /* border-width: 4px; */
+    box-shadow: 0px 0px 10px rgba(192, 192, 192, 0.3);
 }
 
 #topdrawings>li:nth-child(2) time {
-    text-decoration: underline solid silver
+    text-decoration: underline solid rgba(192, 192, 192, 0.6)
 }
 
 #topdrawings>li:nth-child(3) img {
     border-color: rgb(151, 101, 9);
-    border-width: 4px;
-    box-shadow: 0px 0px 2px rgb(151, 101, 9, .564);
+    /* border-width: 4px; */
+    box-shadow: 0px 0px 10px rgb(151, 101, 9, .3);
 }
 
 #topdrawings>li:nth-child(3) time {
-    text-decoration: underline solid rgb(151, 101, 9)
+    text-decoration: underline solid rgba(151, 101, 9, 0.6)
 }
 
 

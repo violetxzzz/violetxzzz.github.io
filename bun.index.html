@@ -599,10 +599,17 @@ let title = `Violet's Galaxy`
                 var t = new Date(timestamp)
                 time.textContent = t.toLocaleDateString()
                 time.setAttribute('datetime', t.toISOString().substring(0, 10))
+                var first = '1DaISuf1hl_NPG4_SJAsztsubLWfmyNMd',
+                second = '1MzhAgkI7G4QMjKMvLJq0qM_YgX2N5ksm',
+                third = '1SlLK86aJ_uQoiyK60c6_BJfMLgZmW_VK'
                 switch (src) {
-                    case '1MzhAgkI7G4QMjKMvLJq0qM_YgX2N5ksm': //1st
-                    case '1SlLK86aJ_uQoiyK60c6_BJfMLgZmW_VK': //2nd
-                    case '1qZRVANhxS56X9X1G5iX572TU9y7WC2-1': //3rd
+                    case first: //1st
+                        var emoji = '🥇'
+                    case second: //2nd
+                        emoji = emoji || '🥈'
+                    case third: //3rd
+                        emoji = emoji || '🥉'
+                        time.textContent = emoji + time.textContent + emoji
                         topDrawings.appendChild(item)
                         break
                     default:
