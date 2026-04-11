@@ -557,7 +557,7 @@ main {
 
 
 paper-canvas {
-    cursor: url("cosmica/handwriting.cur"), crosshair
+    cursor: url("cosmica/handwriting.cur"), crosshair !important
 }
 
 @supports not selector(:defined) {
