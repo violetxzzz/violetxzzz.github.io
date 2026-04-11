@@ -172,7 +172,7 @@ let title = `Violet's Galaxy`
                             style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
                             Violet</h1>
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
-                            <slide-show singleton src="./new/lunala/lunala-Hop.png" index="0" autoplay
+                            <slide-show aria-label="Lunala" singleton src="./new/lunala/lunala-Hop.png" index="0" autoplay
                                 style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
                                 id="buddy" class="avatarsprite" dur=".05"></slide-show>
                         </div>
@@ -447,7 +447,7 @@ let title = `Violet's Galaxy`
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
-        title="View background" id="hide">Hide</button>
+        title="View background" id="hide" aria-label="Toggle the background visibility">Hide</button>
 </body>
 <script>
     !function (D, h) {
@@ -583,7 +583,7 @@ let title = `Violet's Galaxy`
                     item = D.createElement('li'),
                     caption = D.createElement('figcaption')
                 img.loading = 'lazy'
-                img.decoding = 'async'
+                img.decoding = 'sync'
                 caption.appendChild(time)
                 item.appendChild(container)
                 img.crossOrigin = 'anonymous'

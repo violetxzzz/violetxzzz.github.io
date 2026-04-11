@@ -746,10 +746,10 @@ paper-canvas {
     text-transform: capitalize;
 }
 
-#friendslist, #closest {
+#friendslist, #closest,#musics {
     align-content: space-between;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 16px;
     padding: 0;
