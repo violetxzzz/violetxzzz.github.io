@@ -746,7 +746,7 @@ paper-canvas {
     text-transform: capitalize;
 }
 
-#friendslist {
+#friendslist, #closest {
     align-content: space-between;
     display: flex;
     justify-content: center;

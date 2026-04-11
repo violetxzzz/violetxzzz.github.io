@@ -5,6 +5,10 @@ let title = `Violet's Galaxy`
 }}-->
 
 <head>
+    <link rel="preload" as="image" href="./new/lunala/lunala-Hop.png" fetchpriority="high">
+    <link rel="preload" as="font" fetchpriority="high" crossorigin href="font.woff2" type="font/woff2"
+        blocking="render">
+    <link rel="preload" as="image" href="galaxy.avif" type="image/avif" fetchpriority="high" blocking="render">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <meta http-equiv="content-language" content="en">
     <meta property="og:locale" content="en_US">
@@ -84,8 +88,6 @@ let title = `Violet's Galaxy`
     <link rel="preconnect" href="https://addsoupbase.github.io">
     <link rel="preconnect" href="https://images.weserv.nl">
     <link rel="preconnect" href="https://www.dropbox.com">
-    <link rel="preload" as="image" href="galaxy.avif" type="image/avif" blocking="render">
-
     <title><!--{{return title}}--></title>
     <noscript>
         <style>
@@ -142,13 +144,13 @@ let title = `Violet's Galaxy`
         </style>
         <link rel="stylesheet" href="https://addsoupbase.github.io/noscript.css">
     </noscript>
-    <link rel="preload" as="font" crossorigin href="font.woff2" type="font/woff2" blocking="render">
     <script crossorigin="anonymous" src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/h.js"></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" defer></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <link rel="modulepreload" href="bg.js">
+    <!-- <link rel="modulepreload" href="https://addsoupbase.github.io/webcomponents/slide-show.js"> -->
     <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <!--{{return `<style>${await sheet('styles.css')}</style>`}}-->
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
@@ -170,7 +172,7 @@ let title = `Violet's Galaxy`
                             style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
                             Violet</h1>
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
-                            <slide-show src="./new/lunala/lunala-Hop.png" index="0" autoplay
+                            <slide-show singleton src="./new/lunala/lunala-Hop.png" index="0" autoplay
                                 style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
                                 id="buddy" class="avatarsprite" dur=".05"></slide-show>
                         </div>
@@ -370,7 +372,7 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show singleton dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="${name !== 'white'}">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
@@ -600,8 +602,8 @@ let title = `Violet's Galaxy`
                 time.textContent = t.toLocaleDateString()
                 time.setAttribute('datetime', t.toISOString().substring(0, 10))
                 var first = '1DaISuf1hl_NPG4_SJAsztsubLWfmyNMd',
-                second = '1MzhAgkI7G4QMjKMvLJq0qM_YgX2N5ksm',
-                third = '1SlLK86aJ_uQoiyK60c6_BJfMLgZmW_VK'
+                    second = '1MzhAgkI7G4QMjKMvLJq0qM_YgX2N5ksm',
+                    third = '1SlLK86aJ_uQoiyK60c6_BJfMLgZmW_VK'
                 switch (src) {
                     case first: //1st
                         var emoji = '🥇'
@@ -703,7 +705,8 @@ let title = `Violet's Galaxy`
              [o, Object.values(JSON.parse(await file(`./hi/${o}/${o}.json`)))[0]])
     ))}`*/
     friendslist.delegate({
-        '%load': loadMe
+        '%load': loadMe,
+        '%error': loadMe
     })
     friendslist.querySelectorAll('img')
         .forEach(o => o.complete && loadMe.call(o))
