@@ -169,10 +169,10 @@ let title = `Violet's Galaxy`
                 <article>
                     <div>
                         <h1
-                            style="place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
+                            style="letter-spacing:3px;place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
                             Violet</h1>
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
-                            <slide-show aria-label="Lunala" singleton src="./new/lunala/lunala-Hop.png" index="0" autoplay
+                            <slide-show aria-label="Lunala" unique src="./new/lunala/lunala-Hop.png" index="0" autoplay
                                 style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
                                 id="buddy" class="avatarsprite" dur=".05"></slide-show>
                         </div>
@@ -372,7 +372,7 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show singleton dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="${name !== 'white'}">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
@@ -441,7 +441,7 @@ let title = `Violet's Galaxy`
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
-        <slide-show id="lunalapreview" src="new/lunala/lunala-Sleep.png" dur=".027" autoplay
+        <slide-show id="lunalapreview" unique src="new/lunala/lunala-Sleep.png" dur=".027" autoplay
             style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
 
     </div>
