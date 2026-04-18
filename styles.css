@@ -584,9 +584,7 @@ paper-canvas {
     border-radius: 12px;
 }
 
-#frame {
-    position: relative;
-}
+
 
 #frame::before {
     content: '';
@@ -658,6 +656,9 @@ paper-canvas {
     flex-wrap: wrap;
     flex-direction: column-reverse;
     scroll-snap-type: x mandatory;
+    position: relative;
+    overflow-y: hidden;
+    overflow-y: clip;
 }
 
 .menu,
@@ -694,6 +695,33 @@ paper-canvas {
 
 #closest figure {
     width: 108px
+}
+
+.icon:state(--broken) {
+    display: none
+}
+
+.icon {
+    left: anchor(right);
+    top: anchor(bottom);
+    transform: scale(1.5) translate(0px, 4px);
+    --user-select: none;
+}
+@media screen and (width <= 411px) {
+    .icon {
+        transform: scale(1.2) translate(0px, 4px);
+        image-rendering: auto;
+    }
+}
+.icon::part(sprite) {
+    pointer-events: none;
+}
+
+@media (resolution <=1.25dppx),
+(-webkit-device-pixel-ratio <=1.25) {
+    .icon {
+        image-rendering: auto;
+    }
 }
 
 #closest .avatarsprite {
@@ -746,7 +774,9 @@ paper-canvas {
     text-transform: capitalize;
 }
 
-#friendslist, #closest,#musics {
+#friendslist,
+#closest,
+#musics {
     align-content: space-between;
     display: flex;
     justify-content: space-evenly;
@@ -885,7 +915,7 @@ paper-canvas {
 }
 
 @supports not (position-anchor: none) {
-    #buddy {
+    [anchor] {
         display: none;
     }
 }

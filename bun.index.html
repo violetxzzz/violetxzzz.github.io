@@ -85,9 +85,8 @@ let title = `Violet's Galaxy`
         document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
     </script>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://drawing-submissions.deno.dev">
     <link rel="preconnect" href="https://addsoupbase.github.io">
-    <link rel="preconnect" href="https://images.weserv.nl">
-    <link rel="preconnect" href="https://www.dropbox.com">
     <title><!--{{return title}}--></title>
     <noscript>
         <style>
@@ -174,7 +173,7 @@ let title = `Violet's Galaxy`
                         <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
                             <slide-show aria-label="Lunala" unique src="./new/lunala/lunala-Hop.png" index="0" autoplay
                                 style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
-                                id="buddy" class="avatarsprite" dur=".05"></slide-show>
+                                id="buddy" anchor="lcp" class="avatarsprite" dur=".05"></slide-show>
                         </div>
                     </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
@@ -372,7 +371,7 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show loading="lazy" unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="${name !== 'white'}">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
@@ -426,11 +425,20 @@ let title = `Violet's Galaxy`
             </section>
         </div>
         <nav id="controls" role="tablist">
-            <a role="tab" class="button" href="#home" tabindex="0">Home</a>
-            <a role="tab" class="button" href="#artists">Music</a>
-            <a role="tab" class="button" href="#friends">Friends</a>
-            <a role="tab" class="button" href="#mailbox">Mail</a>
+            <a role="tab" class="button" href="#home" tabindex="0" id="homebutton" style="anchor-name:--home">Home</a>
+            <a role="tab" class="button" href="#artists" id="music" style="anchor-name:--music">Music</a>
+            <a role="tab" class="button" href="#friends" id="friendsbutton" style="anchor-name:--friends">Friends</a>
+            <a role="tab" class="button" href="#mailbox" style="anchor-name: --mail" id="mail">Mail</a>
         </nav>
+        <slide-show aria-label="Buneary" anchor="homebutton" class="icon" style="position-anchor: --home"
+            src="./buneary.png" framesx="8" framesy="2" dur=".2"></slide-show>
+        <slide-show aria-label="Meloetta" anchor="music" class="icon" style="position-anchor: --music"
+            src="./meloetta.png" framesx="8" framesy="2" dur=".2"></slide-show>
+        <slide-show aria-label="Marill" anchor="friendsbutton" class="icon"
+            style="translate:0 -4px;position-anchor: --friends" src="./marill.png" framesx="8" framesy="2"
+            dur=".2"></slide-show>
+        <slide-show aria-label="Delibird" anchor="mail" class="icon" style="position-anchor: --mail"
+            src="./delibird.png" framesx="8" framesy="2" dur=".2"></slide-show>
     </main>
     <div role="alert" id="message" class="menu">
         <picture>
@@ -443,7 +451,6 @@ let title = `Violet's Galaxy`
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
         <slide-show id="lunalapreview" unique src="new/lunala/lunala-Sleep.png" dur=".027" autoplay
             style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
-
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
@@ -672,10 +679,26 @@ let title = `Violet's Galaxy`
                 })
             }
         }, function (o) { return o.classList.contains('artist') })
+        function createPreload(src, rel) {
+            if (!document.querySelector('link[rel=' + (rel = rel || 'preconnect') + '][href="' + src + '"]')) {
+                var n = document.createElement("link")
+                n.rel = rel
+                n.href = src
+                document.head.appendChild(n)
+            }
+        }
         h.on(window, {
             hashchange: function () {
-                var hash = location.hash
-                var d = D.getElementById(hash.substring(1))
+                var hash = location.hash.substring(1)
+                switch (hash) {
+                    case 'artists':
+                        createPreload('https://www.dropbox.com', 'dns-prefetch')
+                        break
+                    case 'mailbox':
+                        createPreload('https://images.weserv.nl')
+                        break
+                }
+                var d = D.getElementById(hash)
                 ariaShow(d)
             }
         })
@@ -696,7 +719,7 @@ let title = `Violet's Galaxy`
     function shiny(odds = 4000) {
         return Math.random() * odds > odds - 1 ? ' shiny' : ''
     }
-    [].forEach.call(document.getElementsByClassName('avatarsprite'), o => {
+    [].forEach.call(document.getElementsByTagName('slide-show'), o => {
         if (shiny()) o.index = 1
     })
     let others /*:

@@ -7,6 +7,23 @@ let a = await Array.fromAsync(await dir('./new'), async o=>{
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
+const { background } = v.id
+if (CSS.supports('anchor-name', '--a')) {
+    let { controls } = v.id
+    let icons = [].slice.call(document.getElementsByClassName('icon'))
+    controls.delegate({
+        mouseover() {
+            let icon = icons[this.parent.eltIndexOf(this)]
+            icon.play()
+            icon.resume()
+        },
+        mouseout() {
+            let icon = icons[this.parent.eltIndexOf(this)]
+            icon.pause()
+            icon.time = 0
+        }
+    })
+}
 if (typeof CSSPropertyRule !== 'function')
     CSS.registerProperty({
         name: '--asteroid-rotate',
@@ -14,7 +31,6 @@ if (typeof CSSPropertyRule !== 'function')
         inherits: false,
         initialValue: '0deg'
     })
-const {background} = v.id
 const $ = v.esc
 const setOffsetPath = function (sheet) {
     document.adoptedStyleSheets = [].concat.call(document.adoptedStyleSheets, sheet)
@@ -35,7 +51,7 @@ load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeba
         let t = data[name]
         // let name = t[0]
         // let frames = t[1]
-        Promise.all(load(...Object.entries(t).map(({0:anim, 1:a}) => {
+        Promise.all(load(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
             return { duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }
