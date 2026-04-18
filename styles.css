@@ -494,9 +494,13 @@ main {
     translate: -30px 53px
 }
 
-.p_saenger {
+.p_saenger,.p_lagia {
     translate: -34px 55px;
     scale: 1.1
+}
+.p_habu {
+    translate: -32px 52px;
+    scale: 1.2
 }
 
 .p_misha {

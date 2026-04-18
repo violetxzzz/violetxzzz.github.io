@@ -248,7 +248,7 @@ function showMessageBox(shiny) {
 }
 // spawnSpaceShip()
 function spawnAsteroid() {
-    setTimeout(spawnAsteroid, 4000 + (Math.random() * 1000))
+    setTimeout(spawnAsteroid, 3300 + (Math.random() * 1000))
     if (isHidden()) return
     let i = Math.floor(Math.random() * 4) + 1
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`

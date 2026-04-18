@@ -210,6 +210,7 @@ let title = `Violet's Galaxy`
                         <li><cite>Berserk</cite></li>
                         <li><cite>Vinland Saga</cite></li>
                         <li><cite>Violet Evergarden</cite></li>
+                        <li><cite>Dragon Ball Z</cite></li>
                         <li><cite>JoJo’s Bizarre Adventure</cite></li>
                     </ul>
                     <hr>
@@ -335,7 +336,7 @@ let title = `Violet's Galaxy`
                     <h2 style="display: inline;" class="heading">Friends</h2>
                     <ul id="friendslist">
                         <!--{{
-                            let closest = new Set(['misha', 'rika','sukuna','shon','kyuu','mochi','caelix', 'saenger'].sort())
+                            let closest = new Set(['misha','habu', 'lagia', 'rika','sukuna','shon','kyuu','mochi','caelix', 'saenger'].sort())
                             function sort(a, b) {
                                 let hasA = closest.has(a)
                                 let hasB = closest.has(b)
@@ -343,7 +344,7 @@ let title = `Violet's Galaxy`
                                 if (hasB)return 1
                                 return a.localeCompare(b)
                             }
-                            let friends = ['pancake08746',"auzz",'morrfie','lina','cutlass','blackgun777','genesix923','saenger','lagia','caelix',"gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","white","doha","rika","alex","juaj","sukuna","mochi"].sort(sort)
+                            let friends = ['pancake08746','habu',"auzz",'morrfie','lina','cutlass','blackgun777','genesix923','saenger','lagia','caelix',"gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","doha","rika","alex","juaj","sukuna","mochi"].sort(sort)
                             return friends.map((name, i)=>{
                                 let nn
                                 switch(name) {
@@ -372,7 +373,7 @@ let title = `Violet's Galaxy`
                                     break
                                 }
                                 let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show loading="lazy" unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
-                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${name === 'white' ? '<div class="friend avatar" style="background-color:white"></div>' : a}<figcaption aria-hidden="${name !== 'white'}">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
+                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
                     </ul>
