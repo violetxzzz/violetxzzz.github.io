@@ -1,4 +1,5 @@
 :root {
+    /* color: white; */
     --_color1: #726cff;
     --_color2: #908df7;
     --_color3: #BC6CFF;
@@ -494,17 +495,19 @@ main {
     translate: -30px 53px
 }
 
-.p_saenger,.p_lagia {
+.p_saenger,
+.p_lagia {
     translate: -34px 55px;
     scale: 1.1
 }
+
 .p_habu {
     translate: -32px 52px;
     scale: 1.2
 }
 
 .p_misha {
-    translate: -37px 63px
+    translate: -37px 54px
 }
 
 .p_shon {
@@ -536,6 +539,12 @@ main {
 .artist,
 :_clickable {
     cursor: var(--_POINTER)
+}
+figure :any-link {
+    filter: hue-rotate(311deg) 
+}
+:any-link, :any-link * {
+    cursor: var(--_POINTER) !important
 }
 
 .button[aria-selected="true"] {
@@ -711,12 +720,14 @@ paper-canvas {
     transform: scale(1.5) translate(0px, 4px);
     --user-select: none;
 }
-@media screen and (width <= 411px) {
+
+@media screen and (width <=411px) {
     .icon {
         transform: scale(1.2) translate(0px, 4px);
         image-rendering: auto;
     }
 }
+
 .icon::part(sprite) {
     pointer-events: none;
 }
@@ -754,7 +765,7 @@ paper-canvas {
 
 .avatar:hover {
     transform: scale(1.07);
-    box-shadow: rgba(42, 5, 103, 0.409) 12px 12px 8px;
+    box-shadow: rgba(43, 5, 103, 0.144) 12px 12px 8px;
 }
 
 .drawingframe {
@@ -1154,9 +1165,6 @@ picture:has(:where(.artist[aria-pressed="true"], audio:playing))+figcaption {
     text-shadow: 0px 4px 4px var(--_color3);
 }
 
-a[target] {
-    filter: hue-rotate(-30deg)
-}
 
 .locateIfTooSmall {
     display: inline;

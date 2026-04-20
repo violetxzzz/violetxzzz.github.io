@@ -51,7 +51,6 @@ let title = `Violet's Galaxy`
     <link rel="apple-touch-icon" sizes="180x180" href=".//apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href=".//favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href=".//favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
     <meta name="origin" content="https://violetxzzz.github.io">
     <meta name="msapplication-tooltip" content="<!--{{return title}}-->">
     <meta name="prism:alternateTitle" content="<!--{{return title}}-->">
@@ -145,14 +144,12 @@ let title = `Violet's Galaxy`
     </noscript>
     <script crossorigin="anonymous" src='https://addsoupbase.github.io/legacy.js' nomodule></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/css.js" blocking="render"></script>
-    <script crossorigin="anonymous" src="https://addsoupbase.github.io/h.js"></script>
-    <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" defer></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <link rel="modulepreload" href="bg.js">
     <!-- <link rel="modulepreload" href="https://addsoupbase.github.io/webcomponents/slide-show.js"> -->
-    <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
     <!--{{return `<style>${await sheet('styles.css')}</style>`}}-->
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
+    <link rel="manifest" href="./site.webmanifest" fetchpriority="low">
 </head>
 
 <body>
@@ -177,8 +174,7 @@ let title = `Violet's Galaxy`
                         </div>
                     </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
-                        Welcome to my amazing website, made by Missy (<cite><a target="_blank" rel="author"
-                                href="https://addsoupbase.github.io">addsoupbase</a></cite>) ✨</p>
+                        Welcome to my amazing website, made by Missy (<cite>addsoupbase</cite>) ✨</p>
                     <h2>Here’s some general info about me:</h2>
                     <ul>
                         <li>Name: Violet</li>
@@ -344,9 +340,25 @@ let title = `Violet's Galaxy`
                                 if (hasB)return 1
                                 return a.localeCompare(b)
                             }
+                            let mons = {
+                                mochi: 'Milotic',
+                                sukuna: 'Sneasel',
+                                rika: 'Sylveon',
+                                misha: 'Misdreavus',
+                                shon: 'Litten',
+                                kyuu: 'Chimecho',
+                                caelix:'Salamence',
+                                lagia: 'Lairon'
+                            }
+                            let websites = {
+                                misha: 'https://addsoupbase.github.io',
+                                rika: 'https://rikaaqt.github.io',
+                                doha: 'https://dohaaa0268.github.io'
+                            }
                             let friends = ['pancake08746','hiro','habu',"auzz",'morrfie','lina','cutlass','blackgun777','genesix923','saenger','lagia','caelix',"gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","doha","rika","alex","juaj","sukuna","mochi"].sort(sort)
                             return friends.map((name, i)=>{
                                 let nn
+                                let site = websites[name] || ''
                                 switch(name) {
                                     default: var src = `friends/${name}`
                                     break
@@ -372,8 +384,8 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show loading="lazy" unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png"></slide-show>` : ''}</picture>`
-                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}<figcaption aria-hidden="true">${name}</figcaption></figure></li>${i === closest.size-1 ? '</div>' : ''}`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show loading="lazy" unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png" aria-label="${mons[name]}"></slide-show>` : ''}</picture>`
+                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}${site && `<a href="${site}" ${site ? `title="Visit ${name}'s page"` : ''} target="_blank" ${name === 'misha' ? 'rel="author"' : ''}>`}<figcaption aria-hidden="true">${name}${name === 'misha' ? ' (missy)': ''}${site ? `<span style="font-size: .6em;position:fixed;top:25%;margin-left:3px;">🔗</span>` : ''}</figcaption>${site && '</a>'}</figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
                     </ul>
@@ -457,6 +469,7 @@ let title = `Violet's Galaxy`
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
         title="View background" id="hide" aria-label="Toggle the background visibility">Hide</button>
 </body>
+<script crossorigin="anonymous" src="https://addsoupbase.github.io/h.js"></script>
 <script>
     !function (D, h) {
         'use strict'
@@ -750,6 +763,8 @@ let title = `Violet's Galaxy`
         }
     }
 </script>
+<script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
+<script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>
 <script>
     addEventListener('load', () => {
         'use strict'
