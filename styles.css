@@ -13,6 +13,46 @@
     --_PERSON_SELECT: url("cosmica/person%20select.cur"), default
 }
 
+address {
+    display: grid;
+    text-align: center;
+    place-content: center;
+}
+
+.social {
+    position: relative;
+    display: flow;
+    font-style: normal;
+}
+
+.social::before {
+    width: 20px;
+    height: 20px;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    display: inline-block;
+    /* position: absolute; */
+    margin-right: 2px;
+}
+
+#discordlink::before {
+    content: "" / "Discord";
+    margin-right:5px;
+    background-image: url(discord.svg);
+}
+#tiktoklink::before {
+    content: "" / "TikTok";
+    background-image: url(tiktok.svg);
+    width: 22px;
+    /* margin-right: 0px; */
+    height:22px;
+}
+
+address>a {
+    place-self: center;
+    display: flex;
+}
+
 @counter-style heart {
     system: cyclic;
     symbols: "❥";
@@ -540,10 +580,13 @@ main {
 :_clickable {
     cursor: var(--_POINTER)
 }
-figure :any-link {
-    filter: hue-rotate(311deg) 
+
+:where(figure, address) :any-link {
+    filter: hue-rotate(311deg)
 }
-:any-link, :any-link * {
+
+:any-link,
+:any-link * {
     cursor: var(--_POINTER) !important
 }
 
