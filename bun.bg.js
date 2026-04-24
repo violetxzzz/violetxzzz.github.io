@@ -232,10 +232,8 @@ function spawnSpaceShip() {
 function remove() {
     v.Proxify(this).destroy()
 }
-let { message, lunalapreview } = v.id
+let { message } = v.id
 function showMessageBox(shiny) {
-    if (shiny)
-        lunalapreview.index = 1
     if (!showedMessage) {
         showedMessage = true
         message.style.display = 'block'

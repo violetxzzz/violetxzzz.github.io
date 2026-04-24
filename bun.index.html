@@ -5,7 +5,6 @@ let title = `Violet's Galaxy`
 }}-->
 
 <head>
-    <link rel="preload" as="image" href="./new/lunala/lunala-Hop.png" fetchpriority="high">
     <link rel="preload" as="font" fetchpriority="high" crossorigin href="font.woff2" type="font/woff2"
         blocking="render">
     <link rel="preload" as="image" href="galaxy.avif" type="image/avif" fetchpriority="high" blocking="render">
@@ -89,9 +88,7 @@ let title = `Violet's Galaxy`
     <title><!--{{return title}}--></title>
     <noscript>
         <style>
-            #buddyholder {
-                display: none !important;
-            }
+
 
             .authortitle {
                 display: inline !important;
@@ -150,7 +147,8 @@ let title = `Violet's Galaxy`
     <!--{{return `<style>${await sheet('styles.css')}</style>`}}-->
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
     <link rel="manifest" href="./site.webmanifest" fetchpriority="low">
-    <link rel="preload" as="fetch" href="https://drawing-submissions.deno.dev?user=violet" type="application/json" crossorigin="anonymous">
+    <link rel="preload" as="fetch" href="https://drawing-submissions.deno.dev?user=violet" type="application/json"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -164,16 +162,12 @@ let title = `Violet's Galaxy`
                         id="lcp" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
                 </picture>
                 <article>
-                    <div>
+                    <div id="buddyholder">
                         <h1
                             style="letter-spacing:3px;place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
                             Violet</h1>
-                        <div style="width:120px;height:80px;place-self: center;" id="buddyholder">
-                            <slide-show aria-label="Lunala" unique src="./new/lunala/lunala-Hop.png" index="0" autoplay
-                                style="top: anchor(-10%);position-anchor:--lcp;left:anchor(110%);transform:scale(1.2)"
-                                id="buddy" anchor="lcp" class="avatarsprite" dur=".05"></slide-show>
-                        </div>
-                    </div>
+                            <img src="lunalahop.gif" id="lunalap" class="spr avatarsprite">
+                </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
                         Welcome to my amazing website, made by Missy (<cite>addsoupbase</cite>) ✨</p>
                     <h2>Here’s some general info about me:</h2>
@@ -240,8 +234,9 @@ let title = `Violet's Galaxy`
                             Evergarden</cite>. After that, I started using the name Violet everywhere online.
                     </p>
                     <h2>Socials</h2>
-                    <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn" rel="noopener noreferrer"
-                            target="_blank">narin.zkn</a><a id="discordlink" class="social" rel="noopener noreferrer" target="_blank"
+                    <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn"
+                            rel="noopener noreferrer" target="_blank">narin.zkn</a><a id="discordlink" class="social"
+                            rel="noopener noreferrer" target="_blank"
                             href="https://discord.com/users/1291651593653194766">xarxnx</a></address>
                 </article>
             </section>
@@ -389,7 +384,7 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" alt="${name}">${closest.has(name) ? `<slide-show loading="lazy" unique dur=".026" class="avatarsprite p_${name}" style="display:none" data-src="./hi/${name}/${name}.png" aria-label="${mons[name]}"></slide-show>` : ''}</picture>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" loading="lazy" alt="${name}">${closest.has(name) ? `<div style="position:absolute"><img loading="lazy" unique dur=".026" class="avatarsprite p_${name}" src="${name}.gif" alt="${mons[name]}" id="${name}"></div>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}${site && `<a href="${site}" ${site ? `title="Visit ${name}'s page"` : ''} target="_blank" ${name === 'misha' ? 'rel="author"' : ''}>`}<figcaption aria-hidden="true">${name}${name === 'misha' ? ' (missy)': ''}${site ? `<span style="font-size: .6em;position:fixed;top:25%;margin-left:3px;">🔗</span>` : ''}</figcaption>${site && '</a>'}</figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
@@ -448,14 +443,14 @@ let title = `Violet's Galaxy`
             <a role="tab" class="button" href="#friends" id="friendsbutton" style="anchor-name:--friends">Friends</a>
             <a role="tab" class="button" href="#mailbox" style="anchor-name: --mail" id="mail">Mail</a>
         </nav>
-        <slide-show aria-label="Buneary" anchor="homebutton" class="icon" style="position-anchor: --home"
+        <slide-show unique aria-label="Buneary" anchor="homebutton" class="icon" style="position-anchor: --home"
             src="./buneary.png" framesx="8" framesy="2" dur=".2"></slide-show>
-        <slide-show aria-label="Meloetta" anchor="music" class="icon" style="position-anchor: --music"
+        <slide-show unique aria-label="Meloetta" anchor="music" class="icon" style="position-anchor: --music"
             src="./meloetta.png" framesx="8" framesy="2" dur=".2"></slide-show>
-        <slide-show aria-label="Marill" anchor="friendsbutton" class="icon"
+        <slide-show unique aria-label="Marill" anchor="friendsbutton" class="icon"
             style="translate:0 -4px;position-anchor: --friends" src="./marill.png" framesx="8" framesy="2"
             dur=".2"></slide-show>
-        <slide-show aria-label="Delibird" anchor="mail" class="icon" style="position-anchor: --mail"
+        <slide-show unique aria-label="Delibird" anchor="mail" class="icon" style="position-anchor: --mail"
             src="./delibird.png" framesx="8" framesy="2" dur=".2"></slide-show>
     </main>
     <div role="alert" id="message" class="menu">
@@ -467,8 +462,8 @@ let title = `Violet's Galaxy`
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
-        <slide-show id="lunalapreview" unique src="new/lunala/lunala-Sleep.png" dur=".027" autoplay
-            style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-20px;position:absolute;transform:scale(2)"></slide-show>
+        <img alt="Lunala" src="lunalasleep.gif" class="avatarsprite" style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-70px;position:absolute;transform:scale(2);width:40px;height:104px;object-position: 0 calc(-104px * var(--SPRITE_INDEX, 0))">
+     
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
@@ -721,12 +716,16 @@ let title = `Violet's Galaxy`
                 ariaShow(d)
             }
         })
+          function shiny(odds = 4000) {
+            return Math.random() * odds > odds - 1 ? ' shiny' : ''
+        }
         function ariaShow(d) {
             for (var i = sects.length; i--;) {
                 var e = sects[i]
                 e.ariaHidden = String(e !== d)
             }
         }
+        [].forEach.call(document.getElementsByClassName('avatarsprite'), function (o) { shiny() && o.style.setProperty('--SPRITE_INDEX', 1) })
     }(document, window[Symbol.for('[[HModule]]')])
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
     console.log('%cSprites Credit: https://sprites.pmdcollab.org/', 'font-size: 2em;font-family:HalfTerm, monospace')
@@ -734,7 +733,6 @@ let title = `Violet's Galaxy`
 <script type="module">
     import * as v from 'https://addsoupbase.github.io/v4.js'
     import preload from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
-    let { friendslist } = v.id
     function shiny(odds = 4000) {
         return Math.random() * odds > odds - 1 ? ' shiny' : ''
     }
@@ -746,12 +744,6 @@ let title = `Violet's Galaxy`
        Object.fromEntries(await Array.fromAsync(await dir('hi'), async o=>
              [o, Object.values(JSON.parse(await file(`./hi/${o}/${o}.json`)))[0]])
     ))}`*/
-    friendslist.delegate({
-        '%load': loadMe,
-        '%error': loadMe
-    })
-    friendslist.querySelectorAll('img')
-        .forEach(o => o.complete && loadMe.call(o))
     function loadMe() {
         let s = this.closest('li').querySelector('slide-show')
         if (s) {
