@@ -6,7 +6,7 @@ let a = await Array.fromAsync(await dir('./new'), async o=>{
    return `const data = ${uneval(Object.fromEntries(a))}`
 */
 import *as v from 'https://addsoupbase.github.io/v4.js'
-import load from '../webcomponents/slide-show.js'
+import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
 const { background } = v.id
 if (CSS.supports('anchor-name', '--a')) {
     let { controls } = v.id

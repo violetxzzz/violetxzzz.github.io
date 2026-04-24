@@ -389,14 +389,6 @@
 <script>
     !function (D, h) {
         'use strict'
-        var submitted = new Set
-            ;[].forEach.call(D.getElementsByClassName('submitter'), function (e) {
-                e.parentNode.addEventListener("submit", function (e) {
-                    var t = e.target
-                    if (!submitted.has(t)) submitted.add(t)
-                    else e.returnValue = !!e.preventDefault()
-                })
-            })
         function g(t) { return D.getElementById(t) }
         var sects = [].slice.call(D.getElementsByClassName('sect'))
             , controls = g('controls')
@@ -648,7 +640,7 @@
 </script>
 <script type="module">
     import * as v from 'https://addsoupbase.github.io/v4.js'
-    import preload from '../webcomponents/slide-show.js'
+    import preload from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
     function shiny(odds = 4000) {
         return Math.random() * odds > odds - 1 ? ' shiny' : ''
     }
