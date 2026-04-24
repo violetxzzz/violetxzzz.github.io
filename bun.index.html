@@ -79,7 +79,7 @@ let title = `Violet's Galaxy`
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-title" content="<!--{{return title}}-->">
     <link rel="apple-touch-startup-image" href="favicon.ico">
-    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.221:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
+    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.222:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
         document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
     </script>
     <meta charset="UTF-8">
@@ -88,8 +88,6 @@ let title = `Violet's Galaxy`
     <title><!--{{return title}}--></title>
     <noscript>
         <style>
-
-
             .authortitle {
                 display: inline !important;
             }
@@ -166,8 +164,8 @@ let title = `Violet's Galaxy`
                         <h1
                             style="letter-spacing:3px;place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
                             Violet</h1>
-                            <img src="lunalahop.gif" id="lunalap" class="spr avatarsprite">
-                </div>
+                        <img src="lunalahop.gif" id="lunalap" class="spr avatarsprite">
+                    </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
                         Welcome to my amazing website, made by Missy (<cite>addsoupbase</cite>) ✨</p>
                     <h2>Here’s some general info about me:</h2>
@@ -384,7 +382,7 @@ let title = `Violet's Galaxy`
                                     src = `https://addsoupbase.github.io/media/avatars/${nn}`
                                     break
                                 }
-                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" loading="lazy" alt="${name}">${closest.has(name) ? `<div style="position:absolute"><img loading="lazy" unique dur=".026" class="avatarsprite p_${name}" src="${name}.gif" alt="${mons[name]}" id="${name}"></div>` : ''}</picture>`
+                                let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" loading="lazy" alt="${name}">${closest.has(name) ? `<div style="position:absolute"><img loading="lazy" dur=".026" class="avatarsprite p_${name}" src="${name}.gif" alt="${mons[name]}" id="${name}"></div>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}${site && `<a href="${site}" ${site ? `title="Visit ${name}'s page"` : ''} target="_blank" ${name === 'misha' ? 'rel="author"' : ''}>`}<figcaption aria-hidden="true">${name}${name === 'misha' ? ' (missy)': ''}${site ? `<span style="font-size: .6em;position:fixed;top:25%;margin-left:3px;">🔗</span>` : ''}</figcaption>${site && '</a>'}</figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
                             }}-->
@@ -458,12 +456,12 @@ let title = `Violet's Galaxy`
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.avif" type="image/avif">
             <source srcset="https://addsoupbase.github.io/media/avatars/Violet.webp" type="image/webp">
             <img id="messagepic"
-                style="border-radius: 10px;margin:10px;height:90px;width:auto;float:left;max-width: fit-content;border-color: #ffc4ff;            --user-select:none;border-style:solid;border-width: medium;"
+                style="border-radius: 10px;margin:10px;height:90px;width:auto;float:left;max-width: fit-content;border-color: #ffc4ff;--user-select:none;border-style:solid;border-width: medium;"
                 alt="violet" width="256" height="256" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
         </picture>
         <p style="word-wrap: break-word;margin:10px">Congratulations, you just caught my favorite Pokémon!</p>
-        <img alt="Lunala" src="lunalasleep.gif" class="avatarsprite" style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-70px;position:absolute;transform:scale(2);width:40px;height:104px;object-position: 0 calc(-104px * var(--SPRITE_INDEX, 0))">
-     
+        <img alt="Lunala" src="lunalasleep.gif" class="avatarsprite"
+            style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-70px;position:absolute;transform:scale(2);width:40px;height:104px;object-position: 0 calc(-104px * var(--SPRITE_INDEX, 0))">
     </div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
@@ -716,8 +714,8 @@ let title = `Violet's Galaxy`
                 ariaShow(d)
             }
         })
-          function shiny(odds = 4000) {
-            return Math.random() * odds > odds - 1 ? ' shiny' : ''
+        function shiny(odds) {
+            return Math.random() * 4000 > 4000 - 1 ? ' shiny' : ''
         }
         function ariaShow(d) {
             for (var i = sects.length; i--;) {
@@ -732,33 +730,13 @@ let title = `Violet's Galaxy`
 </script>
 <script type="module">
     import * as v from 'https://addsoupbase.github.io/v4.js'
-    import preload from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
+    import preload from '../webcomponents/slide-show.js'
     function shiny(odds = 4000) {
         return Math.random() * odds > odds - 1 ? ' shiny' : ''
     }
     [].forEach.call(document.getElementsByTagName('slide-show'), o => {
         if (shiny()) o.index = 1
     })
-    let others /*:
-    return `= ${uneval(
-       Object.fromEntries(await Array.fromAsync(await dir('hi'), async o=>
-             [o, Object.values(JSON.parse(await file(`./hi/${o}/${o}.json`)))[0]])
-    ))}`*/
-    function loadMe() {
-        let s = this.closest('li').querySelector('slide-show')
-        if (s) {
-            let { alt } = this
-            let { framesY, frameWidth, frameHeight, values } = others[alt]
-            let src = `./hi/${alt}/${alt}.png`
-            let duras = values.split(';').map(Number)
-            preload({ src, framesY, frameWidth, frameHeight, duras, framesX: duras.length })
-            [0].then(() => {
-                s.src = src
-                s.style.display = ''
-                s.play()
-            })
-        }
-    }
 </script>
 <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>

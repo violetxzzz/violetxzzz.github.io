@@ -751,9 +751,7 @@ paper-canvas {
     width: 108px
 }
 
-.icon:state(--broken) {
-    display: none
-}
+
 
 .icon {
     left: anchor(right);
@@ -970,10 +968,8 @@ paper-canvas {
 
 #lunalap {
     position: absolute;
-    transform: scale(1.2) translateX(15px)
-}
-
-#lunalap {
+    transform: scale(1.2) translateX(15px);
+    margin-inline:auto;
     width: 80px;
     height: 144px;
     object-position: 0 calc(-144px * var(--SPRITE_INDEX, 0))
