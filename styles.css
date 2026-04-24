@@ -40,7 +40,14 @@ address {
     margin-right: 5px;
     background-image: url(discord.svg);
 }
-
+#instalink::before {
+    content: "" / "Instagran";
+    margin-right: 3px;
+    background-image: url(instagram.svg);
+}
+.icon:state(--broken) {
+    display: none;
+}
 #tiktoklink::before {
     content: "" / "TikTok";
     background-image: url(tiktok.svg);
