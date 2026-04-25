@@ -1245,6 +1245,7 @@ audio {
     width: 200px;
     max-width: 100%;
     display: none;
+    margin:auto;
 }
 
 @media (width <=406px) {

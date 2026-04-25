@@ -235,7 +235,9 @@ let title = `Violet's Galaxy`
                     <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn"
                             rel="noopener noreferrer" target="_blank">narin.zkn</a><a id="discordlink" class="social"
                             rel="noopener noreferrer" target="_blank"
-                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer" target="_blank" href="http://instagram.com/violetxz0" class="social" id="instalink">violetxz0</a></address>
+                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer"
+                            target="_blank" href="http://instagram.com/violetxz0" class="social"
+                            id="instalink">violetxz0</a></address>
                 </article>
             </section>
             <section class="sect" id="artists" aria-hidden="true">
@@ -420,8 +422,8 @@ let title = `Violet's Galaxy`
                     <div id="senddraw" class="formdiv needsjs needswebcomponent">
                         <h2>Send Drawing</h2>
                         <form id="paperform" action="https://drawing-submissions.deno.dev?user=violet" method="POST"
-                            enctype="text/plain">
-                            <paper-canvas id="PaperField" name="drawing" required></paper-canvas>
+                            enctype="multipart/form-data">
+                            <paper-canvas type="file" id="PaperField" name="drawing" required></paper-canvas>
                             <div>
                                 <input type="color" alpha value="#000000" id="color">
                                 <input type="range" value="1" min="1" max="30" step="1" id="brushsize">
@@ -580,14 +582,14 @@ let title = `Violet's Galaxy`
         xhr.onload = function () {
             var json = xhr.response
             if (typeof json !== 'object') json = (window.JSON ? JSON.parse : eval)(json)
-            var aaaa =
-                loader.nextElementSibling
+            var aaaa = loader.nextElementSibling
             aaaa.parentNode.removeChild(aaaa)
             loader.parentNode.removeChild(loader)
             drawings.parentNode.style.display = ''
             json.forEach(function (thing) {
                 var src = thing[0],
                     timestamp = thing[1],
+                    alt = thing[2],
                     container = D.createElement('figure')
                     , time = D.createElement('time')
                     , img = new Image,
@@ -595,6 +597,7 @@ let title = `Violet's Galaxy`
                     caption = D.createElement('figcaption')
                 img.loading = 'lazy'
                 img.decoding = 'sync'
+                if (alt) img.alt = alt
                 caption.appendChild(time)
                 item.appendChild(container)
                 img.crossOrigin = 'anonymous'
