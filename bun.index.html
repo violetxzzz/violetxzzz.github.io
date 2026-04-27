@@ -724,16 +724,7 @@ let title = `Violet's Galaxy`
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
     console.log('%cSprites Credit: https://sprites.pmdcollab.org/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
-<script type="module">
-    import * as v from 'https://addsoupbase.github.io/v4.js'
-    import preload from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
-    function shiny(odds = 4000) {
-        return Math.random() * odds > odds - 1 ? ' shiny' : ''
-    }
-    [].forEach.call(document.getElementsByTagName('slide-show'), o => {
-        if (shiny()) o.index = 1
-    })
-</script>
+<script type="module" data-loading="lazy" src="setup.js"></script>
 <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>
 <script>
