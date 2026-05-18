@@ -191,7 +191,8 @@
                         style="max-width:90%;contain:paint;display: block; background-color: #f2e6e6; border-radius:20px;outline:3px solid #67c5ba;corner-shape:bevel;margin:auto;place-self:center">
                         <source srcset="misdreavus.avif" type="image/avif">
                         <source srcset="misdreavus.webp" type="image/webp">
-                        <img loading="lazy" src="misdreavus.gif" alt="misdreavus and flutter mane with hearts and sparkles">
+                        <img loading="lazy" src="misdreavus.gif"
+                            alt="misdreavus and flutter mane with hearts and sparkles">
                     </picture>
                 </article>
             </section>
@@ -754,26 +755,27 @@
 <script rel="inline" src="setup.js" defer></script>
 <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>
-<script>!function(){
-    'use strict'
-    document.readyState === 'complete' ? go() : addEventListener('load', go, {once:true})
-    function go() {
+<script async type="module" crossorigin="anonymous"
+    src="https://addsoupbase.github.io/webcomponents/slide-show.js"></script>
+<script>!function () {
         'use strict'
-        let reduced = document.documentElement.dataset.reducedMotion === 'true',
-            { hash } = location
-        if (hash && hash !== '#') {
-            setTimeout(() => {
-                document.getElementById(hash.substring(1)).scrollIntoView({ inline: 'center', behavior: reduced ? 'instant' : 'smooth' })
-            }, 60)
-            dispatchEvent(new Event('hashchange'))
+        document.readyState === 'complete' ? go() : addEventListener('load', go, { once: true })
+        function go() {
+            'use strict'
+            let reduced = document.documentElement.dataset.reducedMotion === 'true',
+                { hash } = location
+            if (hash && hash !== '#') {
+                setTimeout(() => {
+                    document.getElementById(hash.substring(1)).scrollIntoView({ inline: 'center', behavior: reduced ? 'instant' : 'smooth' })
+                }, 60)
+                dispatchEvent(new Event('hashchange'))
+            }
             reduced || setTimeout(() => {
                 import('./bg.js')
             }, 1000)
         }
-    }
-}()
+    }()
 </script>
-<script async type="module" crossorigin="anonymous"
-    src="https://addsoupbase.github.io/webcomponents/slide-show.js"></script>
+
 
 </html>
