@@ -1,13 +1,31 @@
-/*:
-let a = await Array.fromAsync(await dir('./new'), async o=>{
-    let json = JSON.parse(await file(`./new/${o}/${o}.json`))
+/*${
+let a = await Array.fromAsync(await inline('./new'), async o=>{
+    let json = JSON.parse(await inline(`./new/${o}/${o}.json`))
     return[o, json]
     })
    return `const data = ${uneval(Object.fromEntries(a))}`
-*/
+}*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
+const h = window[Symbol.for('[[HModule]]')]
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
 const { background } = v.id
+let frozen = false
+function freeze() {
+    document.body.classList.add('frozen')
+    frozen = true
+        ;[].forEach.call(background.querySelectorAll('slide-show'),
+            o => {
+                o.classList.contains('dialga') || o.pause()
+            })
+}
+function unfreeze() {
+    document.body.classList.remove('frozen')
+    frozen = false
+     ;[].forEach.call(background.querySelectorAll('slide-show'),
+            o => {
+                o.classList.contains('dialga') || o.resume()
+            })
+}
 if (CSS.supports('anchor-name', '--a')) {
     let { controls } = v.id
     let icons = [].slice.call(document.getElementsByClassName('icon'))
@@ -55,7 +73,7 @@ load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeba
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
             return { duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }
-        }))).then(() => mons.push(name))
+        }))).then(() => name === 'dialga_origin' || mons.push(name))
         wait && await wait()
     }
 }()
@@ -90,8 +108,93 @@ function spawnJirachi() {
 // setTimeout(spawnHoopaUnbound, 1000)
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
-    if (isHidden()) return
-    Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
+    if (frozen || isHidden()) return
+    if (Math.random() < .2) spawnPalkia()
+    else if (Math.random() < .08) spawnDialga()
+    else Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
+}
+spawnDialga()
+function range(min, max) {
+    return Math.random() * (max - min) + min
+}
+async function spawnPalkia() {
+    if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
+    function caught() {
+        return !palika.classList.contains('catchable')
+    }
+    function r() {
+        palika.style.top = randomX()
+        palika.style.left = randomY()
+        palika.style.rotate = range(-45, 45) + 'deg'
+        palika.style.visibility = 'visible'
+    }
+    let palika = $`<slide-show autoplay src="./new/palkia/palkia-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
+        .setParent(background)
+    palika.on({
+        _catch() {
+            this.style.rotate = ''
+        }
+    })
+    await h.wait(300)
+    if (caught()) return
+    palika.style.visibility = 'hidden'
+    await h.wait(1300)
+    if (caught()) return
+    r()
+    await h.wait(400 * Math.random())
+    if (caught()) return
+    palika.style.visibility = 'hidden'
+    await h.wait(1000)
+    if (caught()) return
+    r()
+    palika.style.visibility = 'visible'
+    palika.src = './new/palkia/palkia-Walk2.png'
+    setTimeout(() => {
+        if (caught()) return
+        palika.destroy()
+    }, 3600)
+}
+async function spawnDialga() {
+    if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
+    function caught() {
+        return !dialga.classList.contains('catchable')
+    }
+
+    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="catchable dialga" index="${shiny() ? 1 : 0}">`
+        .setParent(background)
+    dialga.animate([
+        { rotate: 'y 90deg' },
+        { rotate: 'y 0deg' }
+    ], {
+        iterations: 1,
+        duration: 300,
+        easing: 'linear',
+        fill: 'forwards'
+    })
+    await h.wait(2000)
+    if (caught()) return
+    dialga.dur = .04
+    dialga.src = './new/dialga/dialga-Walk2.png'
+    await h.wait(6000)
+    if (caught()) return
+    dialga.src = './new/dialga/dialga-Walk.png'
+    await h.wait(1000)
+    if (caught()) return
+    dialga.style.filter = `drop-shadow(0 0 400px rgb(0, 204, 255))`
+    await h.wait(200)
+    if (caught()) return
+    freeze()
+    dialga.classList.remove('catchable')
+    dialga.animate([
+        { rotate: 'y 0deg' },
+        { rotate: 'y 90deg' }
+    ], {
+        iterations: 1,
+        delay: 600,
+        duration: 300,
+        easing: 'linear',
+        fill: 'forwards'
+    }).finished.then(() => dialga.destroy())
 }
 setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
@@ -136,14 +239,16 @@ let showedMessage = false
 background.delegate({
     async pointerdown(e) {
         let pkm = this.dataset.name
+        if (pkm !== 'dialga_origin' && frozen) return
         e.stopImmediatePropagation()
         let shiny = this.index == 1
         this.style.pointerEvents = 'none'
         this.getAnimations({ subtree: true }).forEach(commitStyles)
         this.classList.remove('catchable')
+        this.dispatchEvent(new Event('catch'))
         let { name } = this.dataset
         this.classList.replace(name, name + '_idle')
-        this.src = this.src.replace('-Walk', '-Idle')
+        this.src = this.src.replace(/-Walk2?/, '-Idle')
         let rect = this.shadowRoot.firstChild.getBoundingClientRect()
         let pokemonCenterX = (rect.x + (rect.width / 2))
         let pokemonCenterY = rect.y + rect.height / 2
@@ -187,11 +292,15 @@ background.delegate({
             if (name === 'lunala') {
                 showMessageBox(shiny)
             }
+            else if (name === 'dialga_origin') {
+                unfreeze()
+            }
         })
     }
 }, o => o.matches('.catchable'), false, new AbortController)
 background.delegate({
     pointerdown(e) {
+        if (frozen) return
         e.stopImmediatePropagation()
         let t = +this.dataset.type
         switch (t) {
@@ -253,7 +362,7 @@ function showMessageBox(shiny) {
 // spawnSpaceShip()
 function spawnAsteroid() {
     setTimeout(spawnAsteroid, 3300 + (Math.random() * 1000))
-    if (isHidden()) return
+    if (frozen || isHidden()) return
     let i = Math.floor(Math.random() * 4) + 1
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
         .setParent(background)
@@ -270,10 +379,10 @@ function spawnPlanet() {
 }
 // setTimeout(spawnPlanet, 10000 + Math.random() * 10000)
 function randomY() {
-    return `${Math.random() * innerHeight}px`
+    return `${Math.random() * 100}%`
 }
 function randomX() {
-    return `${Math.random() * innerWidth}px`
+    return `${Math.random() * 100}%`
 }
 /*function spawnSleepingPokemon() {
     setTimeout(spawnSleepingPokemon, 3500 + (Math.random() * 1000))
@@ -283,14 +392,20 @@ function randomX() {
     $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, offset ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
         .setParent(background)
 }*/
-let special = new Set(`hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
+let special = new Set(`palkia hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
 let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giritina2 arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
 // spawnSleepingPokemon()
 function spawnPokemon() {
     setTimeout(spawnPokemon, 1600 + (Math.random() * 100))
     let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle'))
-    let pkm = regular[Math.floor(Math.random() * regular.length)]
     let a = 10
+    let pkm = regular[Math.floor(Math.random() * regular.length)]
+    if (frozen) {
+        if (!document.querySelector('.dialga,.dialga_origin')) {
+            pkm = 'dialga_origin'
+        }
+        else return
+    }
     if (!pkm || isHidden()) return
     while (a-- && legendary.has(pkm) && document.querySelector(`.${pkm}`)) {
         pkm = regular[Math.floor(Math.random() * regular.length)]
@@ -404,13 +519,15 @@ function spawnPokemon() {
             scale *= 5.7
             break
         case 'arceus':
-            scale *= 3.4
+            scale *= 3.8
             break
         case 'unown':
             scale *= 2.3
             index = Math.floor(Math.random() * 29)
             break
         case 'bronzor':
+            scale *= 2.2
+            break
         case 'baltoy':
             scale *= 1.8
             break
@@ -429,7 +546,7 @@ setTimeout(spawnPokemon, 300)
 // showMessageBox()
 async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
-    if (isHidden()) return
+    if (frozen || isHidden()) return
     let a =
         $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
     a.setParent(background)

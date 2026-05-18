@@ -1,16 +1,16 @@
 :root {
     /* color: white; */
-    --_color1: #726cff;
-    --_color2: #908df7;
-    --_color3: #BC6CFF;
-    --_color4: #3a3880;
-    --_color5: #F9FF6C;
-    --_color6: #F7FF39;
+    --c-color1: #726cff;
+    --c-color2: #908df7;
+    --c-color3: #BC6CFF;
+    --c-color4: #3a3880;
+    --c-color5: #F9FF6C;
+    --c-color6: #F7FF39;
     --tap-highlight-color: rgba(189, 108, 255, 0.18);
-    --_CURSOR: url("cosmica/default.cur"), default;
-    --_TEXT_SELECT: url("cosmica/text%20select.cur"), text;
-    --_POINTER: url("cosmica/link%20select.cur"), pointer;
-    --_PERSON_SELECT: url("cosmica/person%20select.cur"), default
+    --c-CURSOR: url("cosmica/default.cur"), default;
+    --c-TEXT_SELECT: url("cosmica/text%20select.cur"), text;
+    --c-POINTER: url("cosmica/link%20select.cur"), pointer;
+    --c-PERSON_SELECT: url("cosmica/person%20select.cur"), default
 }
 
 address {
@@ -40,14 +40,17 @@ address {
     margin-right: 5px;
     background-image: url(discord.svg);
 }
+
 #instalink::before {
     content: "" / "Instagran";
     margin-right: 3px;
     background-image: url(instagram.svg);
 }
+
 .icon:state(--broken) {
     display: none;
 }
+
 #tiktoklink::before {
     content: "" / "TikTok";
     background-image: url(tiktok.svg);
@@ -89,26 +92,36 @@ form {
 }
 
 input:not([type="color"], [type="range"], [type="button"]) {
-    background: linear-gradient(225deg, rgba(149, 83, 224, 1) 0%, rgba(90, 62, 156, 1) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    padding: 8px 12px;
-    color: white;
+    background: rgba(20, 10, 40, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(189, 108, 255, 0.4);
+    border-radius: 16px;
+    padding: 10px 16px;
+    color: #f0eaff;
+    caret-color: var(--c-color1);
+    caret-shape: underscore;
     font-family: HalfTerm, monospace;
-    font-size: 1.2em;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-size: 1.1em;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 input:not([type="color"], [type="range"], [type="button"]):hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 15px rgba(189, 108, 255, 0.2);
+    border-color: rgba(189, 108, 255, 0.8);
+    background: rgba(25, 12, 50, 0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 input:not([type="color"], [type="range"], [type="button"]):focus {
     outline: none;
-    border-color: rgba(189, 108, 255, 0.6);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px rgba(189, 108, 255, 0.4);
+    border-color: #bc6cff;
+    background: rgba(30, 15, 60, 0.75);
+    box-shadow: 0 0 0 3px rgba(189, 108, 255, 0.25), 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+input:not([type="color"], [type="range"], [type="button"])::placeholder {
+    color: rgba(220, 200, 255, 0.5);
+    letter-spacing: 0.3px;
 }
 
 input::placeholder {
@@ -120,19 +133,19 @@ input::placeholder {
     cursor: url("cosmica/busy.ani"), wait;
     width: 60px;
     height: 50px;
-    --LOADER_COLOR: no-repeat linear-gradient(90deg, #000 70%, #0000 0);
+    --c-LOADER_COLOR: no-repeat linear-gradient(90deg, #000 70%, #0000 0);
     -webkit-mask:
-        var(--LOADER_COLOR) calc(0*100%/4) 100%/calc(100%/5) calc(1*100%/5),
-        var(--LOADER_COLOR) calc(1*100%/4) 100%/calc(100%/5) calc(2*100%/5),
-        var(--LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
-        var(--LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
-        var(--LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
+        var(--c-LOADER_COLOR) calc(0*100%/4) 100%/calc(100%/5) calc(1*100%/5),
+        var(--c-LOADER_COLOR) calc(1*100%/4) 100%/calc(100%/5) calc(2*100%/5),
+        var(--c-LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
+        var(--c-LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
+        var(--c-LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
     mask:
-        var(--LOADER_COLOR) calc(0*100%/4) 100%/calc(100%/5) calc(1*100%/5),
-        var(--LOADER_COLOR) calc(1*100%/4) 100%/calc(100%/5) calc(2*100%/5),
-        var(--LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
-        var(--LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
-        var(--LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
+        var(--c-LOADER_COLOR) calc(0*100%/4) 100%/calc(100%/5) calc(1*100%/5),
+        var(--c-LOADER_COLOR) calc(1*100%/4) 100%/calc(100%/5) calc(2*100%/5),
+        var(--c-LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
+        var(--c-LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
+        var(--c-LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
     background: linear-gradient(#a69bfd 0 0) left/0% 100% no-repeat #ddd;
     background: linear-gradient(#a69bfd 0 0) left/0% 100% no-repeat #ddd;
     animation: l14 2s infinite steps(6);
@@ -160,17 +173,18 @@ li {
 }
 
 li::marker {
-    color: var(--_color2);
+    color: var(--c-color2);
     content: "❥ "
 }
 
 li:nth-child(odd)::marker {
-    color: var(--_color3)
+    color: var(--c-color3)
 }
 
 ul {
     text-align: center;
     /* place-items: center; */
+    word-break: break-word;
     width: fit-content;
     margin: auto;
 }
@@ -214,10 +228,10 @@ ul {
 }
 
 .debris {
-    cursor: var(--_POINTER);
+    cursor: var(--c-POINTER);
     z-index: 1;
     offset-path: var(--ltr);
-    --tap-highlight-color: transparent;
+    --c-tap-highlight-color: transparent;
     transform: scale(2, 2) rotate(var(--asteroid-rotate));
     animation: float 30s linear infinite, offset 30s linear;
     /* filter: drop-shadow(0px 0px 7px rgb(255, 255, 255, .4)); */
@@ -323,7 +337,7 @@ ul {
     background-position: -100px -232px;
 }
 
-@media screen and (width <=345px) {
+@media screen and (width < 345px) {
     #messagepic {
         display: none;
     }
@@ -352,17 +366,11 @@ html {
 }
 
 #background {
-    will-change: background-position-x;
     --user-select: none;
     position: fixed;
     width: 100vw;
     z-index: 1;
     height: 100vh;
-    background-size: cover;
-    animation: drift 150s ease-in-out alternate infinite;
-    background-color: linear-gradient(225deg, var(--_color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
-    background-image: url(galaxy.png);
-    background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
     /* background: var(--color4); */
     /* background: var(--color4); */
 }
@@ -414,6 +422,14 @@ html {
 
     .pulseIn {
         animation: pulseIn 0.5s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #backdrop {
+        animation: none;
+        will-change: auto;
     }
 }
 
@@ -470,7 +486,23 @@ html {
 
 body {
     margin: 0;
-    padding: 0
+    padding: 0;
+
+}
+body.frozen :where(#backdrop, #background > :not(.dialga,.pokeball, .dialga_origin,[data-name="dialga_origin"])) {
+    filter:grayscale(1);
+    animation-play-state: paused !important;
+}
+#backdrop {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    animation: drift 150s ease-in-out alternate infinite;
+    background-color: linear-gradient(225deg, var(--c-color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
+    background-image: url(galaxy.png);
+    background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
+    will-change: background-position-x;
 }
 
 *,
@@ -480,7 +512,6 @@ body {
 }
 
 #controls>:where(a, button) {
-
     flex: 1;
 }
 
@@ -501,7 +532,7 @@ body {
 }
 
 html {
-    cursor: var(--_CURSOR)
+    cursor: var(--c-CURSOR)
 }
 
 main {
@@ -576,14 +607,14 @@ main {
 }
 
 :_text-selectable {
-    cursor: var(--_TEXT_SELECT)
+    cursor: var(--c-TEXT_SELECT)
 }
 
 
 .button,
 .artist,
 :_clickable {
-    cursor: var(--_POINTER)
+    cursor: var(--c-POINTER)
 }
 
 :where(figure, address) :any-link {
@@ -592,7 +623,7 @@ main {
 
 :any-link,
 :any-link * {
-    cursor: var(--_POINTER) !important
+    cursor: var(--c-POINTER) !important
 }
 
 .button[aria-selected="true"] {
@@ -616,8 +647,7 @@ main {
     padding: 0;
 }
 
-
-paper-canvas {
+paper-canvas::part(paper) {
     cursor: url("cosmica/handwriting.cur"), crosshair !important
 }
 
@@ -726,8 +756,8 @@ paper-canvas {
 .sect {
     /* border: 5px solid var(--color2); */
     --scrollbar-width: 4px;
-    --scrollbar-thumb-color: var(--_color3);
-    --scrollbar-color: var(--_color2);
+    --scrollbar-thumb-color: var(--c-color3);
+    --scrollbar-color: var(--c-color2);
     /* border-style: solid; */
 }
 
@@ -737,11 +767,11 @@ paper-canvas {
 }
 
 #closest li:nth-child(odd) {
-    text-decoration: underline var(--_color2)
+    text-decoration: underline var(--c-color2)
 }
 
 #closest li:nth-child(even) {
-    text-decoration: underline var(--_color3)
+    text-decoration: underline var(--c-color3)
 }
 
 #closest li {
@@ -763,14 +793,30 @@ paper-canvas {
 .icon {
     left: anchor(right);
     top: anchor(bottom);
-    transform: scale(1.5) translate(0px, 4px);
+    transform: scale(1.5) translate(-2px, 4px);
     --user-select: none;
 }
 
-@media screen and (width <=411px) {
+@media screen and (width < 411px) {
     .icon {
-        transform: scale(1.2) translate(0px, 4px);
+        transform: scale(1.2) translate(3px, 4px);
         image-rendering: auto;
+    }
+}
+
+@media screen and (width < 550px) {
+    #controls>a {
+        font-size: 90%;
+    }
+}
+
+@media screen and (width <295px) {
+    .icon {
+        display: none;
+    }
+
+    #controls>a {
+        font-size: 64%;
     }
 }
 
@@ -778,8 +824,8 @@ paper-canvas {
     pointer-events: none;
 }
 
-@media (resolution <=1.25dppx),
-(-webkit-device-pixel-ratio <=1.25) {
+@media (resolution <1.25dppx),
+(-webkit-device-pixel-ratio <1.25) {
     .icon {
         image-rendering: auto;
     }
@@ -848,7 +894,7 @@ paper-canvas {
 
 .listfriend {
     display: inline-flex;
-    cursor: var(--_PERSON_SELECT);
+    cursor: var(--c-PERSON_SELECT);
 }
 
 .listfriend figure {
@@ -871,12 +917,12 @@ paper-canvas {
     max-width: unset;
     object-fit: cover;
     border-radius: 80px;
-    cursor: var(--_PERSON_SELECT);
+    cursor: var(--c-PERSON_SELECT);
 }
 
 .drawing {
     background: white;
-    border: 3px outset var(--_color2);
+    border: 3px outset var(--c-color2);
     box-sizing: content-box;
 }
 
@@ -950,12 +996,19 @@ paper-canvas {
     width: 25%;
     max-width: 160px;
     min-width: 100px;
-    cursor: var(--_PERSON_SELECT);
+    cursor: var(--c-PERSON_SELECT);
     shape-outside: circle(48%);
 }
 
 #intro {
     text-align: right;
+    /* white-space: break-spaces; */
+}
+
+@media screen and (width < 720px) and (width > 495px) {
+    #intro {
+        width: 60%
+    }
 }
 
 @supports (scroll-snap-align: none) {
@@ -976,7 +1029,7 @@ paper-canvas {
 #lunalap {
     position: absolute;
     transform: scale(1.2) translateX(15px);
-    margin-inline:auto;
+    margin-inline: auto;
     width: 80px;
     height: 144px;
     object-position: 0 calc(-144px * var(--SPRITE_INDEX, 0))
@@ -1060,7 +1113,7 @@ paper-canvas {
     object-fit: none;
 }
 
-@media screen and (width < 485px) {
+@media screen and (width < 495px) {
     #lcp {
         float: none;
         display: flex;
@@ -1078,6 +1131,7 @@ paper-canvas {
     }
 
     #intro {
+        /* white-space: unset; */
         text-align: center;
     }
 }
@@ -1127,7 +1181,7 @@ paper-canvas {
     }
 }
 
-.catchable {
+.catchable:not(.dialga,.palkia) {
     animation: offset 10s linear
 }
 
@@ -1149,9 +1203,9 @@ slide-show {
 }
 
 .catchable {
-    cursor: var(--_POINTER);
+    cursor: var(--c-POINTER);
     z-index: 2;
-    --tap-highlight-color: transparent;
+    --c-tap-highlight-color: transparent;
 }
 
 :is(.mew, .mew_idle).shiny {
@@ -1181,6 +1235,27 @@ slide-show {
 .hoopa_unbound_intro,
 .hoopa_unbound_idle {
     scale: 3.3 3.3;
+}
+.palkia,.dialga, .dialga_origin,.dialga_origin_idle{
+    scale: 2.67 2.67;
+}
+:is(.palkia,.dialga).catchable {
+    animation: aura 1s ease-in-out alternate-reverse infinite
+}
+@keyframes aura {
+    0% {
+        transform: translate(0px, 0px)
+    }
+    100% {
+        transform: translate(0px, -4px)
+    }
+}
+.palkia {
+    filter: drop-shadow(0 0 4px purple);
+}
+.dialga {
+        filter: drop-shadow(0 0 4px rgb(0, 204, 255));
+    transition: filter 2s ease;
 }
 
 .jirachi,
@@ -1220,9 +1295,9 @@ html {
 
 .artist {
     width: 100px;
-    height: auto;
+    height: 100px;
     aspect-ratio: 1 / 1;
-    cursor: var(--_POINTER)
+    cursor: var(--c-POINTER)
         /* margin: 10px */
 }
 
@@ -1245,10 +1320,10 @@ audio {
     width: 200px;
     max-width: 100%;
     display: none;
-    margin:auto;
+    margin: auto;
 }
 
-@media (width <=406px) {
+@media (width < 406px) {
     .capt {
         font-size: .9em;
     }
@@ -1259,8 +1334,8 @@ cite {
 }
 
 .artist[aria-pressed="true"] {
-    -webkit-box-shadow: 0px 0px 15px 5px var(--_color3);
-    box-shadow: 0px 0px 15px 5px var(--_color3);
+    -webkit-box-shadow: 0px 0px 15px 5px var(--c-color3);
+    box-shadow: 0px 0px 15px 5px var(--c-color3);
 }
 
 figcaption {
@@ -1268,7 +1343,7 @@ figcaption {
 }
 
 picture:has(:where(.artist[aria-pressed="true"], audio:playing))+figcaption {
-    text-shadow: 0px 4px 4px var(--_color3);
+    text-shadow: 0px 4px 4px var(--c-color3);
 }
 
 

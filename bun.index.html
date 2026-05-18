@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--{{@define
-let title = `Violet's Galaxy`
-}}-->
 
 <head>
     <link rel="preload" as="font" fetchpriority="high" crossorigin href="font.woff2" type="font/woff2"
@@ -25,10 +22,10 @@ let title = `Violet's Galaxy`
     <meta property="og:image" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta property="og:url" content="https://violetxzzz.github.io">
     <meta property="og:description" content="Violet's space themed page">
-    <meta property="og:title" content="<!--{{return title}}-->">
-    <meta property="og:site_name" content="<!--{{return title}}-->">
-    <meta name="twitter:title" content="<!--{{return title}}-->">
-    <meta name="application-name" content="<!--{{return title}}-->">
+    <meta property="og:title" content="<!--${return title}-->">
+    <meta property="og:site_name" content="<!--${return title}-->">
+    <meta name="twitter:title" content="<!--${return title}-->">
+    <meta name="application-name" content="<!--${return title}-->">
     <meta name="application-url" content="https://violetxzzz.github.io">
     <meta name="twitter:url" content="https://violetxzzz.github.io">
     <meta name="web_author" content="addsoupbase">
@@ -53,8 +50,8 @@ let title = `Violet's Galaxy`
     <link rel="icon" type="image/png" sizes="32x32" href=".//favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href=".//favicon-16x16.png">
     <meta name="origin" content="https://violetxzzz.github.io">
-    <meta name="msapplication-tooltip" content="<!--{{return title}}-->">
-    <meta name="prism:alternateTitle" content="<!--{{return title}}-->">
+    <meta name="msapplication-tooltip" content="<!--${return title}-->">
+    <meta name="prism:alternateTitle" content="<!--${return title}-->">
     <meta name="twitter:card" content="summary">
     <meta name="thumbnail" content="https://addsoupbase.github.io/media/avatars/Violet.avif">
     <meta property="profile:username" content="addsoupbase">
@@ -67,7 +64,7 @@ let title = `Violet's Galaxy`
     <meta name="author" content="addsoupbase">
     <link rel="canonical" href="https://violetxzzz.github.io">
     <script
-        type="application/ld+json">{"@context":"https://schema.org","@type": "WebSite","name":"<!--{{return title}}-->","url":"https://violetxzzz.github.io","description":"Violet's space themed page","author":{"@type": "Person","name":"addsoupbase","sameAs":["https://twitter.com/addsoupbase"]},"mainEntityOfPage":{"@type":"WebPage","@id":"https://violetxzzz.github.io"},"image":{"@type":"ImageObject","url":"https://addsoupbase.github.io/media/avatars/Violet.avif","width":256,"height":256}}</script>
+        type="application/ld+json">{"@context":"https://schema.org","@type": "WebSite","name":"<!--${return title}-->","url":"https://violetxzzz.github.io","description":"Violet's space themed page","author":{"@type": "Person","name":"addsoupbase","sameAs":["https://twitter.com/addsoupbase"]},"mainEntityOfPage":{"@type":"WebPage","@id":"https://violetxzzz.github.io"},"image":{"@type":"ImageObject","url":"https://addsoupbase.github.io/media/avatars/Violet.avif","width":256,"height":256}}</script>
     <link rel="apple-touch-icon" sizes="57x57" href="./apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="./apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="./apple-touch-icon-72x72.png">
@@ -79,14 +76,14 @@ let title = `Violet's Galaxy`
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
     <meta name="mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-capable" content="no">
-    <meta name="apple-mobile-web-app-title" content="<!--{{return title}}-->">
+    <meta name="apple-mobile-web-app-title" content="<!--${return title}-->">
     <link rel="apple-touch-startup-image" href="favicon.ico">
     <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.222:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
         document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
     </script>
     <link rel="preconnect" href="https://drawing-submissions.deno.dev">
     <link rel="preconnect" href="https://addsoupbase.github.io">
-    <title><!--{{return title}}--></title>
+    <title><!--${return title}--></title>
     <noscript>
         <style>
             .authortitle {
@@ -122,7 +119,7 @@ let title = `Violet's Galaxy`
             }
 
             .artist {
-                cursor: var(--_CURSOR) !important
+                cursor: var(--c-CURSOR) !important
             }
 
             audio::-webkit-media-controls-panel {
@@ -142,8 +139,8 @@ let title = `Violet's Galaxy`
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/css.js" blocking="render"></script>
     <script crossorigin="anonymous" src="https://addsoupbase.github.io/css_bad.js" nomodule></script>
     <link rel="modulepreload" href="bg.js">
-    <!-- <link rel="modulepreload" href="https://addsoupbase.github.io/webcomponents/slide-show.js"> -->
-    <!--{{return `<style>${await sheet('styles.css')}</style>`}}-->
+    <link rel="modulepreload" href="https://addsoupbase.github.io/webcomponents/slide-show.js">
+    <link rel="inline stylesheet" href="styles.css">
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
     <link rel="manifest" href="./site.webmanifest" fetchpriority="low">
     <link rel="preload" as="fetch" href="https://drawing-submissions.deno.dev?user=violet" type="application/json"
@@ -160,15 +157,46 @@ let title = `Violet's Galaxy`
                     <img fetchpriority="high" alt="Marceline the Vampire Queen" width="256" height="256" class="avatar"
                         id="lcp" src="https://addsoupbase.github.io/media/avatars/Violet.jpg">
                 </picture>
+                <div id="buddyholder">
+                    <h1
+                        style="letter-spacing:3px;place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--c-color3);">
+                        Violet</h1>
+                    <img src="lunalahop.gif" id="lunalap" alt="lunala hop" class="spr avatarsprite">
+                </div>
                 <article>
-                    <div id="buddyholder">
-                        <h1
-                            style="letter-spacing:3px;place-self: center;font-size:2.5em;display: inline;anchor-name: --lcp;text-decoration: underline;text-decoration-style: dotted;text-decoration-color: var(--_color3);">
-                            Violet</h1>
-                        <img src="lunalahop.gif" id="lunalap" alt="lunala hop" class="spr avatarsprite">
-                    </div>
                     <p style="margin: 10px;place-self:end" id="intro">Hii, I’m Violet!!
                         Welcome to my amazing website, made by Missy (<cite>addsoupbase</cite>) ✨</p>
+                    <h2>Socials:</h2>
+                    <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn"
+                            rel="noopener noreferrer" target="_blank">narin.zkn</a><a id="discordlink" class="social"
+                            rel="noopener noreferrer" target="_blank"
+                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer"
+                            target="_blank" href="http://instagram.com/violetxz0" class="social"
+                            id="instalink">violetxz0</a></address>
+                    <h2>Credits:</h2>
+                    <figure
+                        style='margin:auto;transform:scale(1.3);place-self:center;position:relative;border-radius: 100%;width:80px;height:80px;background-size: 80px 80px;background-repeat:no-repeat;background-image: url(https://addsoupbase.github.io/media/cat.jpg);background-image: image-set(url(https://addsoupbase.github.io/media/cat.avif) type("image/webp"), url(https://addsoupbase.github.io/media/cat.webp) type("image/webp"), url(https://addsoupbase.github.io/media/cat.jpg) type("image/jpg"));'>
+                        <picture>
+                            <!--<source srcset="decor.avif" type="image/avif">-->
+                            <source srcset="decor.webp" type="image/webp"><img draggable="false" width="80" height="80"
+                                src="decor.gif" style="position:absolute;left:0;top:0;transform:scale(1.2)" alt="misha"
+                                title="Misha">
+                        </picture>
+                    </figure>
+                    <h3>Misha!</h3>
+                    <p>Also known as <strong>Missy</strong>:<br>
+                        <q>My favourite Pokémon is <strong><cite>Misdreavus</cite></strong></q>
+                    </p>
+                    <picture
+                        style="max-width:90%;contain:paint;display: block; background-color: #f2e6e6; border-radius:20px;outline:3px solid #67c5ba;corner-shape:bevel;margin:auto;place-self:center">
+                        <source srcset="misdreavus.avif" type="image/avif">
+                        <source srcset="misdreavus.webp" type="image/webp">
+                        <img loading="lazy" src="misdreavus.gif" alt="misdreavus and flutter mane with hearts and sparkles">
+                    </picture>
+                </article>
+            </section>
+            <section class="sect" id="about" aria-hidden="true">
+                <article>
                     <h2>Here’s some general info about me:</h2>
                     <ul>
                         <li>Name: Violet</li>
@@ -176,7 +204,7 @@ let title = `Violet's Galaxy`
                         <li>Birthday: <time datetime="07-31">July 31st</time></li>
                         <li>Height: 160 cm</li>
                         <li>Favorite color: <span
-                                style="text-decoration: underline;text-decoration-color:var(--_color2);">Purple</span>
+                                style="text-decoration: underline;text-decoration-color:var(--c-color2);">Purple</span>
                         </li>
                         <li>Nationality: Kurdish</li>
                         <li>Hobbies: Talking about music, writing, and photography!!!</li>
@@ -232,20 +260,13 @@ let title = `Violet's Galaxy`
                         <cite>Violet
                             Evergarden</cite>. After that, I started using the name Violet everywhere online.
                     </p>
-                    <h2>Socials</h2>
-                    <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn"
-                            rel="noopener noreferrer" target="_blank">narin.zkn</a><a id="discordlink" class="social"
-                            rel="noopener noreferrer" target="_blank"
-                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer"
-                            target="_blank" href="http://instagram.com/violetxz0" class="social"
-                            id="instalink">violetxz0</a></address>
                 </article>
             </section>
             <section class="sect" id="artists" aria-hidden="true">
                 <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
                 <ul id="musics" style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);">
-                    <!--{{ 
+                    <!--${ 
                     function n(a){
                     let link
                     let title = 'unknown'
@@ -305,7 +326,7 @@ let title = `Violet's Galaxy`
                     }
                     return {src: 'https://www.dropbox.com/scl/fi/' + link + '&dl=0&raw=1', title}
                     }
-                    return(await dir('./artists/')
+                    return(await inline('./artists/')
                     ).filter(o=>o.endsWith('.avif')).map(o=>o.split('.avif')[0])
                     .map(o=>{
                     let {title, src} = n(o)
@@ -325,14 +346,14 @@ let title = `Violet's Galaxy`
                     </figure>
                     </li>`})
                     .join('')
-                }}-->
+                }-->
                 </ul>
             </section>
             <section class="sect" id="friends" aria-hidden="true">
                 <div>
                     <h2 style="display: inline;" class="heading">Friends</h2>
                     <ul id="friendslist">
-                        <!--{{
+                        <!--${
                             let closest = new Set(['misha','habu', 'lagia', 'rika','sukuna','shon','kyuu','mochi','caelix', 'saenger'].sort())
                             function sort(a, b) {
                                 let hasA = closest.has(a)
@@ -388,7 +409,7 @@ let title = `Violet's Galaxy`
                                 let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" loading="lazy" alt="${name}">${closest.has(name) ? `<div style="position:absolute"><img loading="lazy" dur=".026" class="avatarsprite p_${name}" src="${name}.gif" alt="${mons[name]}" id="${name}"></div>` : ''}</picture>`
                                 return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}${site && `<a href="${site}" ${site ? `title="Visit ${name}'s page"` : ''} target="_blank" ${name === 'misha' ? 'rel="author"' : ''}>`}<figcaption aria-hidden="true">${name}${name === 'misha' ? ' (missy)': ''}${site ? `<span style="font-size: .6em;position:fixed;top:25%;margin-left:3px;">🔗</span>` : ''}</figcaption>${site && '</a>'}</figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
-                            }}-->
+                            }-->
                     </ul>
                 </div>
             </section>
@@ -439,13 +460,18 @@ let title = `Violet's Galaxy`
             </section>
         </div>
         <nav id="controls" role="tablist">
-            <a role="tab" class="button" href="#home" tabindex="0" id="homebutton" style="anchor-name:--home">Home</a>
+            <a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton"
+                style="anchor-name:--home">Home</a>
+            <a role="tab" class="button" href="#about" style="anchor-name: --about" id="aboutbutton">About</a>
             <a role="tab" class="button" href="#artists" id="music" style="anchor-name:--music">Music</a>
             <a role="tab" class="button" href="#friends" id="friendsbutton" style="anchor-name:--friends">Friends</a>
             <a role="tab" class="button" href="#mailbox" style="anchor-name: --mail" id="mail">Mail</a>
         </nav>
         <slide-show unique aria-label="Buneary" anchor="homebutton" class="icon" style="position-anchor: --home"
             src="./buneary.png" framesx="8" framesy="2" dur=".2"></slide-show>
+        <slide-show unique aria-label="Unown" anchor="aboutbutton" class="icon"
+            style="position-anchor: --about;translate: 0 -6px" src="./unown.png" framesx="9" framesy="2"
+            dur=".1"></slide-show>
         <slide-show unique aria-label="Meloetta" anchor="music" class="icon" style="position-anchor: --music"
             src="./meloetta.png" framesx="8" framesy="2" dur=".2"></slide-show>
         <slide-show unique aria-label="Marill" anchor="friendsbutton" class="icon"
@@ -466,6 +492,7 @@ let title = `Violet's Galaxy`
         <img alt="Lunala" src="lunalasleep.gif" class="avatarsprite"
             style="filter:drop-shadow(0px 10px 6px black);left:50%;top:-70px;position:absolute;transform:scale(2);width:40px;height:104px;object-position: 0 calc(-104px * var(--SPRITE_INDEX, 0))">
     </div>
+    <div id="backdrop" aria-hidden="true"></div>
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
         title="View background" id="hide" aria-label="Toggle the background visibility">Hide</button>
@@ -724,7 +751,7 @@ let title = `Violet's Galaxy`
     console.log('%cVisit here! https://deep-fold.itch.io/', 'font-size: 2em;font-family:HalfTerm, monospace')
     console.log('%cSprites Credit: https://sprites.pmdcollab.org/', 'font-size: 2em;font-family:HalfTerm, monospace')
 </script>
-<script type="module" data-loading="lazy" src="setup.js"></script>
+<script rel="inline" src="setup.js" defer></script>
 <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>
 <script>
@@ -733,11 +760,17 @@ let title = `Violet's Galaxy`
         let reduced = document.documentElement.dataset.reducedMotion === 'true',
             { hash } = location
         if (hash && hash !== '#') {
-            document.getElementById(hash.substring(1)).scrollIntoView({ behavior: reduced ? 'instant' : 'smooth' })
+            setTimeout(() => {
+                document.getElementById(hash.substring(1)).scrollIntoView({ inline: 'center', behavior: reduced ? 'instant' : 'smooth' })
+            }, 60)
             dispatchEvent(new Event('hashchange'))
+            reduced || setTimeout(() => {
+                import('./bg.js')
+            }, 1000)
         }
-        reduced || (window.requestIdleCallback || window.scheduler?.postTask?.bind(scheduler) || setTimeout)(() => { import('./bg.js') }, { priority: 'background' })
     })
 </script>
+<script async type="module" crossorigin="anonymous"
+    src="https://addsoupbase.github.io/webcomponents/slide-show.js"></script>
 
 </html>
