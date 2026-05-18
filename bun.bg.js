@@ -113,7 +113,6 @@ function spawnExoticPokemon() {
     else if (Math.random() < .08) spawnDialga()
     else Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
 }
-spawnDialga()
 function range(min, max) {
     return Math.random() * (max - min) + min
 }
