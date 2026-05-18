@@ -754,8 +754,10 @@
 <script rel="inline" src="setup.js" defer></script>
 <script type="module" src="https://addsoupbase.github.io/webcomponents/paper-canvas.js" async></script>
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>
-<script>
-    addEventListener('load', () => {
+<script>!function(){
+    'use strict'
+    document.readyState === 'complete' ? go() : addEventListener('load', go, {once:true})
+    function go() {
         'use strict'
         let reduced = document.documentElement.dataset.reducedMotion === 'true',
             { hash } = location
@@ -768,7 +770,8 @@
                 import('./bg.js')
             }, 1000)
         }
-    })
+    }
+}()
 </script>
 <script async type="module" crossorigin="anonymous"
     src="https://addsoupbase.github.io/webcomponents/slide-show.js"></script>
