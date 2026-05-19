@@ -8,7 +8,7 @@ let a = await Array.fromAsync(await inline('./new'), async o=>{
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
 import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
-const { background } = v.id
+const { background, backdrop } = v.id
 let frozen = false
 function freeze() {
     document.body.classList.add('frozen')
@@ -21,7 +21,7 @@ function freeze() {
 function unfreeze() {
     document.body.classList.remove('frozen')
     frozen = false
-     ;[].forEach.call(background.querySelectorAll('slide-show'),
+        ;[].forEach.call(background.querySelectorAll('slide-show'),
             o => {
                 o.classList.contains('dialga') || o.resume()
             })
@@ -119,40 +119,50 @@ function range(min, max) {
 async function spawnPalkia() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
-        return !palika.classList.contains('catchable')
+        return !palkia.classList.contains('catchable')
     }
     function r() {
-        palika.style.top = randomX()
-        palika.style.left = randomY()
-        palika.style.rotate = range(-45, 45) + 'deg'
-        palika.style.visibility = 'visible'
+        palkia.style.top = randomX()
+        palkia.style.left = randomY()
+        palkia.style.rotate = range(-45, 45) + 'deg'
+        palkia.style.visibility = 'visible'
     }
-    let palika = $`<slide-show autoplay src="./new/palkia/palkia-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
+    let palkia = $`<slide-show autoplay src="./new/palkia/palkia-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
         .setParent(background)
-    palika.on({
+    palkia.on({
         _catch() {
             this.style.rotate = ''
         }
     })
     await h.wait(300)
     if (caught()) return
-    palika.style.visibility = 'hidden'
+    palkia.style.visibility = 'hidden'
     await h.wait(1300)
     if (caught()) return
     r()
     await h.wait(400 * Math.random())
     if (caught()) return
-    palika.style.visibility = 'hidden'
+    palkia.style.visibility = 'hidden'
     await h.wait(1000)
     if (caught()) return
     r()
-    palika.style.visibility = 'visible'
-    palika.src = './new/palkia/palkia-Walk2.png'
+    palkia.style.visibility = 'visible'
+    palkia.src = './new/palkia/palkia-Walk2.png'
     setTimeout(() => {
         if (caught()) return
-        palika.destroy()
+        palkia.destroy()
     }, 3600)
+    await h.wait(3000)
+    if (caught()) return
+    palkia.style.filter = 'drop-shadow(0 0 400px purple)'
+    await h.wait(300)
+    backdrop.style.filter = 'brightness(0%) invert(100%)'
+    await h.wait(800)
+    backdrop.style.filter = ''
+    backdrop.dataset.bg = ((backdrop.dataset.bg ?? 0) + 1) % 5
 }
+(window.a=
+spawnPalkia)()
 async function spawnDialga() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {

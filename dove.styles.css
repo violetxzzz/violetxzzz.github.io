@@ -505,7 +505,10 @@ body.frozen :where(#backdrop, #background > :not(.dialga,.pokeball, .dialga_orig
     will-change: background-position-x;
     transition: filter .7s ease
 }
-#backdrop[data-bg="1"] {background-color:#161811;background-image: url("./bg1.png"); background-image: image-set(url("./bg1.avif") type("image/avif"),url("./bg1.webp") type("image/webp"),url("./bg1.png") type("image/png")) }#backdrop[data-bg="2"] {background-color:#00080f;background-image: url("./bg2.png"); background-image: image-set(url("./bg2.avif") type("image/avif"),url("./bg2.webp") type("image/webp"),url("./bg2.png") type("image/png")) }#backdrop[data-bg="3"] {background-color:#160638;background-image: url("./bg3.png"); background-image: image-set(url("./bg3.avif") type("image/avif"),url("./bg3.webp") type("image/webp"),url("./bg3.png") type("image/png")) }#backdrop[data-bg="4"] {background-color:#000e02;background-image: url("./bg4.png"); background-image: image-set(url("./bg4.avif") type("image/avif"),url("./bg4.webp") type("image/webp"),url("./bg4.png") type("image/png")) }
+/*${
+let colors = ['#161811', '#00080f', '#160638','#000e02']
+return Array.from({length: 4}, (_, i) => `#backdrop[data-bg="${++i}"] {background-color:${colors[i-1]};background-image: url("./bg${i}.png"); background-image: image-set(${'avif webp png'.split(' ').map(o=>`url("./bg${i}.${o}") type("image/${o}")`)}) }`).join('')
+}*/
 *,
 ::before,
 ::after {
