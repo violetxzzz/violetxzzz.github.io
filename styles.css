@@ -1237,8 +1237,11 @@ slide-show {
 .hoopa_unbound_idle {
     scale: 3.3 3.3;
 }
-.palkia,.dialga, .dialga_origin,.dialga_origin_idle{
+.palkia,.dialga{
     scale: 2.67 2.67;
+}
+.dialga_origin,.dialga_origin_idle{
+    scale: 3.4 3.4
 }
 :is(.palkia,.dialga).catchable {
     animation: aura 1s ease-in-out alternate-reverse infinite

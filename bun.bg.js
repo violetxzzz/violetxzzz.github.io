@@ -11,6 +11,7 @@ import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
 const { background, backdrop } = v.id
 let frozen = false
 function freeze() {
+    backdrop.style.transition = 'none'
     document.body.classList.add('frozen')
     frozen = true
         ;[].forEach.call(background.querySelectorAll('slide-show'),
@@ -25,6 +26,9 @@ function unfreeze() {
             o => {
                 o.classList.contains('dialga') || o.resume()
             })
+    setTimeout(() => {
+        backdrop.style.transition = ''
+    }, 1000)
 }
 if (CSS.supports('anchor-name', '--a')) {
     let { controls } = v.id
@@ -73,7 +77,7 @@ load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeba
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
             return { duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }
-        }))).then(() => name === 'dialga_origin' || mons.push(name))
+        }))).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || mons.push(name))
         wait && await wait()
     }
 }()
@@ -109,8 +113,8 @@ function spawnJirachi() {
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
     if (frozen || isHidden()) return
-    if (Math.random() < .25) spawnPalkia()
-    else if (Math.random() < .025) spawnDialga()
+    if (Math.random() < .22) spawnPalkia()
+    else if (Math.random() < .022) spawnDialga()
     else Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
 }
 function range(min, max) {
@@ -145,21 +149,25 @@ async function spawnPalkia() {
     palkia.style.visibility = 'hidden'
     await h.wait(1000)
     if (caught()) return
-    r()
+    palkia.style.rotate = ''
+    palkia.style.top = palkia.style.left = '50%'
     palkia.style.visibility = 'visible'
     palkia.src = './new/palkia/palkia-Walk2.png'
-    setTimeout(() => {
+    let t = setTimeout(() => {
         if (caught()) return
         palkia.destroy()
     }, 3600)
     await h.wait(3000)
-    if (caught()) return
+    if (caught()) {
+        clearTimeout(t)
+        return
+    }
     palkia.style.filter = 'drop-shadow(0 0 400px purple)'
     await h.wait(300)
     backdrop.style.filter = 'brightness(0%) invert(100%)'
     await h.wait(800)
     backdrop.style.filter = ''
-    backdrop.dataset.bg = ((backdrop.dataset.bg ?? 0) + 1) % 5
+    backdrop.dataset.bg = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
 }
 async function spawnDialga() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
@@ -167,7 +175,7 @@ async function spawnDialga() {
         return !dialga.classList.contains('catchable')
     }
 
-    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="catchable dialga" index="${shiny() ? 1 : 0}">`
+    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     dialga.animate([
         { rotate: 'y 90deg' },
@@ -353,6 +361,7 @@ function showMessageBox(shiny) {
     if (!showedMessage) {
         showedMessage = true
         message.style.display = 'block'
+        message.querySelector('[alt=Lunala]').style.setProperty('--SPRITE_INDEX', +shiny)
         setTimeout(() => {
             message.style.scale = '1 1'
             setTimeout(() => {
@@ -414,9 +423,8 @@ function spawnPokemon() {
         else return
     }
     if (!pkm || isHidden()) return
-    while (a-- && legendary.has(pkm) && document.querySelector(`.${pkm}`)) {
+    while ((pkm === 'dialga_origin' && !frozen) || (a-- && legendary.has(pkm) && document.querySelector(`.${pkm}`)))
         pkm = regular[Math.floor(Math.random() * regular.length)]
-    }
     let i = Math.random() > .5 ? 1 : -1
     let scale = .7
     let index = 0
@@ -490,7 +498,7 @@ function spawnPokemon() {
             dur *= 2
             break
         case 'necrozma_ultra':
-            scale *= 7.4
+            scale *= 6.8
             dur *= 1.55
             break
         case 'lunala':
@@ -509,7 +517,7 @@ function spawnPokemon() {
             scale *= 2.8
             break
         case 'naganadel':
-            scale *= 3.5
+            scale *= 3.1
             speed *= 2.5
             break
         case 'necrozma_ultra':
