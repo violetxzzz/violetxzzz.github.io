@@ -109,8 +109,8 @@ function spawnJirachi() {
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
     if (frozen || isHidden()) return
-    if (Math.random() < .2) spawnPalkia()
-    else if (Math.random() < .08) spawnDialga()
+    if (Math.random() < .25) spawnPalkia()
+    else if (Math.random() < .025) spawnDialga()
     else Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
 }
 function range(min, max) {
@@ -161,8 +161,6 @@ async function spawnPalkia() {
     backdrop.style.filter = ''
     backdrop.dataset.bg = ((backdrop.dataset.bg ?? 0) + 1) % 5
 }
-(window.a=
-spawnPalkia)()
 async function spawnDialga() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
