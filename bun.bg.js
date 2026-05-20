@@ -165,16 +165,19 @@ async function spawnPalkia() {
     palkia.style.filter = 'drop-shadow(0 0 400px purple)'
     await h.wait(300)
     backdrop.style.filter = 'brightness(0%) invert(100%)'
+    backdrop.on({
+        _transitionend() {
+            backdrop.dataset.bg = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
+        }
+    })
     await h.wait(800)
     backdrop.style.filter = ''
-    backdrop.dataset.bg = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
 }
 async function spawnDialga() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
         return !dialga.classList.contains('catchable')
     }
-
     let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     dialga.animate([
@@ -267,7 +270,7 @@ background.delegate({
         let rect = this.shadowRoot.firstChild.getBoundingClientRect()
         let pokemonCenterX = (rect.x + (rect.width / 2))
         let pokemonCenterY = rect.y + rect.height / 2
-        let n = $`<slide-show aria-hidden="true" class="pokeball_throw pokeball" src="./pokeball_throw-8.png"></slide-show>`
+        let n = $`<slide-show aria-hidden="true" data-catching="${pkm}" class="pokeball_throw pokeball" src="./pokeball_throw-8.png"></slide-show>`
             .setParent(background)
         n.play()
         await n.animate([
@@ -417,7 +420,7 @@ function spawnPokemon() {
     let a = 10
     let pkm = regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
-        if (!document.querySelector('.dialga,.dialga_origin')) {
+        if (!document.querySelector('.dialga,.dialga_origin,[data-catching="dialga_origin"]')) {
             pkm = 'dialga_origin'
         }
         else return
