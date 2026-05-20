@@ -7,9 +7,10 @@ let a = await Array.fromAsync(await inline('./new'), async o=>{
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import load from 'https://addsoupbase.github.io/webcomponents/slide-show.js'
+import { load, catchAnimation, setField, stopAnims, MASTER_BALL } from 'https://addsoupbase.github.io/catch.js'
 const { background, backdrop } = v.id
 let frozen = false
+setField(background)
 function freeze() {
     backdrop.style.transition = 'none'
     document.body.classList.add('frozen')
@@ -30,6 +31,7 @@ function unfreeze() {
         backdrop.style.transition = ''
     }, 1000)
 }
+function choose(...c) {return c[Math.floor(Math.random() * c.length)]}
 if (CSS.supports('anchor-name', '--a')) {
     let { controls } = v.id
     let icons = [].slice.call(document.getElementsByClassName('icon'))
@@ -66,7 +68,8 @@ background.observe('resize', {
         setOffsetPath(`:root{--ltr: path("M -${halfW / 2.1} 0 L ${width + (halfW / 2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
-load({ src: './pokeball_throw-8.png', framesX: 8, framesY: 1 }, { src: './pokeball_catch-57.png', framesX: 57, framesY: 1 }, ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
+load(
+     ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let name in data) {
@@ -255,24 +258,24 @@ function preload(url) {
 }
 let showedMessage = false
 background.delegate({
-    async pointerdown(e) {
+    beforecatch(e) {
         let pkm = this.dataset.name
-        if (pkm !== 'dialga_origin' && frozen) return
-        e.stopImmediatePropagation()
+        if (!this.matches('.catchable') || (pkm !== 'dialga_origin' && frozen)) return e.preventDefault()
+        // e.stopImmediatePropagation()
+    },
+    async catch(e) {
+        let pkm = this.dataset.name
+        let n = v.Proxify(e.pokeball)
         let shiny = this.index == 1
         this.style.pointerEvents = 'none'
-        this.getAnimations({ subtree: true }).forEach(commitStyles)
+        stopAnims(this)
         this.classList.remove('catchable')
-        this.dispatchEvent(new Event('catch'))
         let { name } = this.dataset
         this.classList.replace(name, name + '_idle')
         this.src = this.src.replace(/-Walk2?/, '-Idle')
-        let rect = this.shadowRoot.firstChild.getBoundingClientRect()
-        let pokemonCenterX = (rect.x + (rect.width / 2))
-        let pokemonCenterY = rect.y + rect.height / 2
-        let n = $`<slide-show aria-hidden="true" data-catching="${pkm}" class="pokeball_throw pokeball" src="./pokeball_throw-8.png"></slide-show>`
-            .setParent(background)
-        n.play()
+        let pokemonCenterX = e.centerX
+        let pokemonCenterY = e.centerY
+        n.attr`index="${legendary.has(pkm) || special.has(pkm) ? MASTER_BALL : choose(0,1,2,3,5,6,7)}" aria-hidden="true" autoplay data-catching="${pkm}" class="pokeball_throw pokeball" src="$throw"`
         await n.animate([
             {
                 transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
@@ -287,22 +290,12 @@ background.delegate({
             easing: 'linear'
         }).finished
         let unown = pkm === 'unown' ? 'hue-rotate(20deg) saturate(5) ' : ''
-        n.src = './pokeball_catch-57.png'
+        n.src = '$catch'
         n.repeatCount = 1
         n.time = 0
-        n.dur = .07
-        this.animate([{
-            transform: 'scale(1,1)', filter: `${unown}brightness(0%) invert(1) opacity(90%)`
-        }, { filter: 'opacity(60%) brightness(0%) invert(1)' }, {
-            transform: 'scale(0.25,0.25)', filter: `${unown}opacity(0%) brightness(0%) invert(1)`
-        }], {
-            duration: 400,
-            iterations: 1,
-            delay: 500,
-            composite: 'add',
-            easing: 'ease-in'
-        }).finished.then(() => this.destroy(true))
-        await new Promise(s => setTimeout(s, 4000))
+        // n.dur = .07
+        catchAnimation(this).finished.then(() => this.destroy(true))
+        await h.wait(4700)
         n.time = 0
         n.pause()
         n.fadeOut().finished.then(() => {
@@ -315,7 +308,7 @@ background.delegate({
             }
         })
     }
-}, o => o.matches('.catchable'), false, new AbortController)
+}, null, false, new AbortController)
 background.delegate({
     pointerdown(e) {
         if (frozen) return
