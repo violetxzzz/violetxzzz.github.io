@@ -31,7 +31,7 @@ function unfreeze() {
         backdrop.style.transition = ''
     }, 1000)
 }
-function choose(...c) {return c[Math.floor(Math.random() * c.length)]}
+function choose(...c) { return c[Math.floor(Math.random() * c.length)] }
 if (CSS.supports('anchor-name', '--a')) {
     let { controls } = v.id
     let icons = [].slice.call(document.getElementsByClassName('icon'))
@@ -69,7 +69,7 @@ background.observe('resize', {
     }
 })
 load(
-     ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
+    ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let name in data) {
@@ -112,6 +112,14 @@ function spawnJirachi() {
     })
     jirachi.play()
 }
+let p = new Set
+function preloadBg(n) {
+    if (!p.has(n)) {
+        p.add(n)
+        let x = $`<picture><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.png" decoding="sync" fetchpriority="high"></picture>`
+        x.lastChild.decode()
+    }
+}
 // setTimeout(spawnHoopaUnbound, 1000)
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
@@ -126,7 +134,7 @@ function range(min, max) {
 async function spawnPalkia() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
-        return !palkia.classList.contains('catchable')
+        return !palkia.classList.contains('catchable') && !palkia.classList.contains('finished')
     }
     function r() {
         palkia.style.top = randomX()
@@ -167,10 +175,13 @@ async function spawnPalkia() {
     }
     palkia.style.filter = 'drop-shadow(0 0 400px purple)'
     await h.wait(300)
+    palkia.classList.replace('catchable', 'finished')
     backdrop.style.filter = 'brightness(0%) invert(100%)'
+    let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
+    preloadBg(n)
     backdrop.on({
         _transitionend() {
-            backdrop.dataset.bg = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
+            backdrop.dataset.bg = n
         }
     })
     await h.wait(800)
@@ -275,7 +286,7 @@ background.delegate({
         this.src = this.src.replace(/-Walk2?/, '-Idle')
         let pokemonCenterX = e.centerX
         let pokemonCenterY = e.centerY
-        n.attr`index="${legendary.has(pkm) || special.has(pkm) ? MASTER_BALL : choose(0,1,2,3,5,6,7)}" aria-hidden="true" autoplay data-catching="${pkm}" class="pokeball_throw pokeball" src="$throw"`
+        n.attr`index="${legendary.has(pkm) || special.has(pkm) ? MASTER_BALL : choose(0, 1, 2, 3, 5, 6, 7)}" aria-hidden="true" autoplay data-catching="${pkm}" class="pokeball_throw pokeball" src="$throw"`
         await n.animate([
             {
                 transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
@@ -404,12 +415,12 @@ function randomX() {
     $`<div class="${pkm} obj${shiny()}" style="top: ${randomY()};animation: float 20s linear infinite${Math.random() > .5 ? '' : ' reverse'}, offset ${40 + Math.random() * 10}s linear${Math.random() > .5 ? '' : ' reverse'}, ${slideshow};"></div>`
         .setParent(background)
 }*/
-let special = new Set(`palkia hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
+let special = new Set(`dialga palkia hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
 let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giritina2 arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
 // spawnSleepingPokemon()
-function spawnPokemon() {
-    setTimeout(spawnPokemon, 1600 + (Math.random() * 100))
-    let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle'))
+function spawnLegendary() {
+    setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
+    let regular = mons.filter(legendary.has, legendary)
     let a = 10
     let pkm = regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
@@ -418,13 +429,16 @@ function spawnPokemon() {
         }
         else return
     }
+    let max = 20
+    while (a-- && document.querySelector(`.${pkm}`)) pkm = regular[Math.floor(Math.random() * regular.length)]
     if (!pkm || isHidden()) return
-    while ((pkm === 'dialga_origin' && !frozen) || (a-- && legendary.has(pkm) && document.querySelector(`.${pkm}`)))
-        pkm = regular[Math.floor(Math.random() * regular.length)]
-    let i = Math.random() > .5 ? 1 : -1
+    let [scale, speed, index, dur] = configure(pkm)
+    createPkm(scale, speed, index, dur, pkm)
+}
+function configure(pkm) {
     let scale = .7
-    let index = 0
     let speed = 1.2
+    let index = 0
     let dur = 1 / 60
     switch (pkm) {
         case 'duosion':
@@ -494,7 +508,7 @@ function spawnPokemon() {
             dur *= 2
             break
         case 'necrozma_ultra':
-            scale *= 6.8
+            scale *= 5
             dur *= 1.55
             break
         case 'lunala':
@@ -527,7 +541,7 @@ function spawnPokemon() {
             speed *= 2
             break
         case 'necrozma':
-            scale *= 5.7
+            scale *= 4
             break
         case 'arceus':
             scale *= 3.8
@@ -543,17 +557,30 @@ function spawnPokemon() {
             scale *= 1.8
             break
     }
-    scale *= i
+    return [scale, speed, index, dur]
+}
+function spawnPokemon() {
+    setTimeout(spawnPokemon, 1600 + range(-200, 200))
+    let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle') && !legendary.has(o))
+    let a = 10
+    let pkm = regular[Math.floor(Math.random() * regular.length)]
+    if (!pkm || isHidden()) return
+    let [scale, speed, index, dur] = configure(pkm)
+    createPkm(scale, speed, index, dur, pkm)
+}
+function createPkm(scale, speed, index, dur, pkm) {
+    scale *= Math.random() > .5 ? 1 : -1
     let isShiny = shiny()
     if (isShiny)
         if (pkm === 'minior') index = 7
         else if (pkm === 'mewtwo') index = 2
         else index += 1
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${i > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${scale > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
 }
 setTimeout(spawnPokemon, 300)
+setTimeout(spawnLegendary, 10000 + range(-7000, 5000))
 // showMessageBox()
 async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
