@@ -7,11 +7,12 @@ let a = await Array.fromAsync(await inline('./new'), async o=>{
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import { load, catchAnimation, setField, stopAnims, MASTER_BALL } from 'https://addsoupbase.github.io/catch.js'
+import { load, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL } from 'https://addsoupbase.github.io/catch.js'
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
 function freeze() {
+    if (frozen) return
     backdrop.style.transition = 'none'
     document.body.classList.add('frozen')
     frozen = true
@@ -21,6 +22,7 @@ function freeze() {
             })
 }
 function unfreeze() {
+    if (!frozen) return
     document.body.classList.remove('frozen')
     frozen = false
         ;[].forEach.call(background.querySelectorAll('slide-show'),
@@ -187,6 +189,7 @@ async function spawnPalkia() {
     await h.wait(800)
     backdrop.style.filter = ''
 }
+let unfreezetimer
 async function spawnDialga() {
     if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
@@ -227,6 +230,7 @@ async function spawnDialga() {
         easing: 'linear',
         fill: 'forwards'
     }).finished.then(() => dialga.destroy())
+    unfreezetimer = setTimeout(unfreeze, 60000)
 }
 setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
@@ -286,7 +290,7 @@ background.delegate({
         this.src = this.src.replace(/-Walk2?/, '-Idle')
         let pokemonCenterX = e.centerX
         let pokemonCenterY = e.centerY
-        n.attr`index="${legendary.has(pkm) || special.has(pkm) ? MASTER_BALL : choose(0, 1, 2, 3, 5, 6, 7)}" aria-hidden="true" autoplay data-catching="${pkm}" class="pokeball_throw pokeball" src="$throw"`
+        n.attr`index="${legendary.has(pkm) || special.has(pkm) ? MASTER_BALL : choose(POKE_BALL, GREAT_BALL, ULTRA_BALL)}" aria-hidden="true" autoplay data-catching="${pkm}" class="pokeball_throw pokeball" src="$throw"`
         await n.animate([
             {
                 transform: `translate(${pokemonCenterX}px, 100vh) scale(4, 4)`,
@@ -316,6 +320,7 @@ background.delegate({
             }
             else if (name === 'dialga_origin') {
                 unfreeze()
+                clearTimeout(unfreezetimer)
             }
         })
     }

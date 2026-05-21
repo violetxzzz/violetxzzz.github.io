@@ -12,7 +12,13 @@
     --c-POINTER: url("cosmica/link%20select.cur"), pointer;
     --c-PERSON_SELECT: url("cosmica/person%20select.cur"), default
 }
-
+main.hidden, main.hidden #controls > .button {
+    visibility: hidden;
+    opacity:0
+}
+main, #controls, #background {
+    contain:strict
+}
 address {
     display: grid;
     text-align: center;

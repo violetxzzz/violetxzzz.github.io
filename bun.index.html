@@ -187,13 +187,15 @@
                     <p>Also known as <strong>Missy</strong>:<br>
                         <q>My favourite Pokémon is <strong><cite>Misdreavus</cite></strong></q>
                     </p>
-                    <picture
+                    <div style="margin-block:10px;">
+                        <picture
                         style="max-width:90%;contain:paint;display: block; background-color: #f2e6e6; border-radius:20px;outline:3px solid #67c5ba;corner-shape:bevel;margin:auto;place-self:center">
                         <source srcset="misdreavus.avif" type="image/avif">
                         <source srcset="misdreavus.webp" type="image/webp">
                         <img loading="lazy" src="misdreavus.gif"
-                            alt="misdreavus and flutter mane with hearts and sparkles">
-                    </picture>
+                        alt="misdreavus and flutter mane with hearts and sparkles">
+                        </picture>
+                        </div>
                 </article>
             </section>
             <section class="sect" id="about" aria-hidden="true">
@@ -670,7 +672,7 @@
         h.debounce(hide, {
             click: function () {
                 this.textContent = this.textContent === 'Hide' ? 'Show' : 'Hide'
-                main.style.display = main.style.display === 'none' ? '' : 'none'
+                main.classList.toggle('hidden')
             }
         }, 300)
         h.delegate(controls, {
