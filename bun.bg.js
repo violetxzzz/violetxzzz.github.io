@@ -3,7 +3,7 @@ return await inline('./dex.js')
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import {loadSprite,loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from '../catch.js'
+import {loadSprite,loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
