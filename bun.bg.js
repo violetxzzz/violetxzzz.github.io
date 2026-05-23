@@ -7,7 +7,7 @@ import {loadSprite,loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
-loadDexes(dex, origin === 'https://violetxzzz.github.io' ? 'https://addsoupbase.github.io/' : origin + '/')
+loadDexes(dex, 'https://addsoupbase.github.io/')
 function freeze() {
     if (frozen) return
     backdrop.style.transition = 'none'
