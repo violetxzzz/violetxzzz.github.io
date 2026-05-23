@@ -1,16 +1,13 @@
 /*${
-let a = await Array.fromAsync(await inline('./new'), async o=>{
-    let json = JSON.parse(await inline(`./new/${o}/${o}.json`))
-    return[o, json]
-    })
-   return `const data = ${uneval(Object.fromEntries(a))}`
+return await inline('./dex.js')
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import { load, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL } from 'https://addsoupbase.github.io/catch.js'
+import {loadSprite,loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from '../catch.js'
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
+loadDexes(dex, origin === 'https://violetxzzz.github.io' ? 'https://addsoupbase.github.io/' : origin + '/')
 function freeze() {
     if (frozen) return
     backdrop.style.transition = 'none'
@@ -70,19 +67,19 @@ background.observe('resize', {
         setOffsetPath(`:root{--ltr: path("M -${halfW / 2.1} 0 L ${width + (halfW / 2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
-load(
+loadSprite(
     ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
-    for (let name in data) {
-        let t = data[name]
+    for (let name in dex) {
+        let t = dex[name]
         // let name = t[0]
         // let frames = t[1]
-        Promise.all(load(...Object.entries(t).map(({ 0: anim, 1: a }) => {
+        Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
-            return { duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight }
-        }))).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || mons.push(name))
+            return(anim === 'Idle' ? loadPokemon : loadSprite)({name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (((name === 'reshiram') || (name === 'zekrom')) && typeof scrollMaxX === 'number' /* dude idk why but only zekrom and reshiram have messed up idle sprites on safari*/) || mons.push(name))
         wait && await wait()
     }
 }()
@@ -144,7 +141,7 @@ async function spawnPalkia() {
         palkia.style.rotate = range(-45, 45) + 'deg'
         palkia.style.visibility = 'visible'
     }
-    let palkia = $`<slide-show autoplay src="./new/palkia/palkia-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
+    let palkia = $`<slide-show autoplay data-name="palkia" src="./new/palkia/palkia-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     palkia.on({
         _catch() {
@@ -195,7 +192,7 @@ async function spawnDialga() {
     function caught() {
         return !dialga.classList.contains('catchable')
     }
-    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
+    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" data-name="dialga" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     dialga.animate([
         { rotate: 'y 90deg' },
@@ -268,9 +265,7 @@ background.delegate({
         e.animationName === 'offset' && this.destroy()
     },
 })
-function preload(url) {
-    $`<link rel="preload" as="image" href="${url}">`.setParent(document.head)
-}
+
 let showedMessage = false
 background.delegate({
     beforecatch(e) {
@@ -421,7 +416,7 @@ function randomX() {
         .setParent(background)
 }*/
 let special = new Set(`dialga palkia hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
-let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giritina2 arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
+let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giratina arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
 // spawnSleepingPokemon()
 function spawnLegendary() {
     setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
@@ -538,7 +533,7 @@ function configure(pkm) {
         case 'necrozma_ultra':
             scale *= 5
             break
-        case 'giritina2':
+        case 'giratina':
             scale *= 3.6
             break
         case 'rayquaza':
@@ -598,7 +593,7 @@ async function spawnShootingStar() {
     a.destroy()
 }
 // spawnShootingStar()
-load({ src: './shootingstar-11.png', framesX: 9, framesY: 1 })[0]
+loadSprite({ src: './shootingstar-11.png', framesX: 9, framesY: 1 })[0]
     .then(() => {
         setTimeout(spawnShootingStar, 1000)
     })

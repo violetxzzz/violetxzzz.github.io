@@ -189,13 +189,13 @@
                     </p>
                     <div style="margin-block:10px;">
                         <picture
-                        style="max-width:90%;contain:paint;display: block; background-color: #f2e6e6; border-radius:20px;outline:3px solid #67c5ba;corner-shape:bevel;margin:auto;place-self:center">
-                        <source srcset="misdreavus.avif" type="image/avif">
-                        <source srcset="misdreavus.webp" type="image/webp">
-                        <img loading="lazy" src="misdreavus.gif"
-                        alt="misdreavus and flutter mane with hearts and sparkles">
+                            style="max-width:90%;contain:paint;display: block; background-color: #f2e6e6; border-radius:20px;outline:3px solid #67c5ba;corner-shape:bevel;margin:auto;place-self:center">
+                            <source srcset="misdreavus.avif" type="image/avif">
+                            <source srcset="misdreavus.webp" type="image/webp">
+                            <img loading="lazy" src="misdreavus.gif"
+                                alt="misdreavus and flutter mane with hearts and sparkles">
                         </picture>
-                        </div>
+                    </div>
                 </article>
             </section>
             <section class="sect" id="about" aria-hidden="true">
@@ -499,6 +499,7 @@
     <div id="background" role="img" aria-label="Pokémon in space"></div>
     <button style="position: fixed;left:15px;bottom:15px;z-index: 8;" aria-controls="frame" class="button needsjs"
         title="View background" id="hide" aria-label="Toggle the background visibility">Hide</button>
+    <poke-dex title="Pokedex"></poke-dex>
 </body>
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/h.js"></script>
 <script>
@@ -555,7 +556,7 @@
         }
         var tabNames = RegExp('^(?:' + [].map.call(D.getElementsByClassName('sect'), function (o) { return o.id }).join('|') + ')$')
         h.on(frame, {
-            scrollsnapchange: function (e) {
+            scrollsnapchanging: function (e) {
                 var id = e.snapTargetInline.id
                 if (tabNames.test(id)) {
                     var s = 'a[href="' + '#' + id + '"]'

@@ -18,7 +18,31 @@ address {
     text-align: center;
     place-content: center;
 }
+poke-dex:defined {
+    z-index: 2;
+    /* right: -150px; */
+    /* bottom: -400px; */
+    transition: transform .7s ease-out, opacity .3s ease;
+    /* transform: translate(0, -45px); */
+    /* opacity: .6; */
+}
+poke-dex:defined:not(.active) {
+    cursor: pointer
+}
+poke-dex:defined:hover {
+    opacity:1;
+    /* transform:translate(-20px, -70px) */
+}
 
+main.hidden, main.hidden #controls > a {
+    opacity: 0;
+    visibility: hidden;
+}
+main,
+#controls,
+#background {
+    contain: layout size style
+}
 .social {
     position: relative;
     display: flow;
@@ -146,7 +170,6 @@ input::placeholder {
         var(--c-LOADER_COLOR) calc(2*100%/4) 100%/calc(100%/5) calc(3*100%/5),
         var(--c-LOADER_COLOR) calc(3*100%/4) 100%/calc(100%/5) calc(4*100%/5),
         var(--c-LOADER_COLOR) calc(4*100%/4) 100%/calc(100%/5) calc(5*100%/5);
-    background: linear-gradient(#a69bfd 0 0) left/0% 100% no-repeat #ddd;
     background: linear-gradient(#a69bfd 0 0) left/0% 100% no-repeat #ddd;
     animation: l14 2s infinite steps(6);
 }
@@ -1239,6 +1262,9 @@ slide-show {
 .hoopa_unbound_intro,
 .hoopa_unbound_idle {
     scale: 3.3 3.3;
+}
+body:has(main:not(.hidden)) poke-dex {
+    visibility: hidden;
 }
 .palkia,.dialga{
     scale: 2.67 2.67;
