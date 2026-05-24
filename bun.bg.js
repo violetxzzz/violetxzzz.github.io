@@ -85,7 +85,7 @@ loadSprite(
 }()
 let mons = []
 function shiny(odds = 4000) {
-    return Math.random() * odds < odds - 1 ? ' shiny' : ''
+    return Math.random() * odds > odds - 1 ? ' shiny' : ''
 }
 function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
