@@ -571,7 +571,6 @@ main {
     place-items: center;
     /* overflow: hidden; */
 }
-
 .container {
     width: 500px;
     height: 500px;
@@ -1283,7 +1282,7 @@ body:has(main:not(.hidden)) poke-dex {
     filter: drop-shadow(0 0 4px purple);
 }
 .dialga,.palkia {
-    transition: filter 2s ease;
+    transition: filter 2s ease, scale 1.8s ease-out .2s;
 }
 .dialga,.dialga_idle {
         filter: drop-shadow(0 0 4px rgb(0, 204, 255));

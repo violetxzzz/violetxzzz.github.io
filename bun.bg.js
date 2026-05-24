@@ -79,7 +79,7 @@ loadSprite(
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
             return (anim === 'Idle' ? loadPokemon : loadSprite)({ name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
-        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (((name === 'reshiram') || (name === 'zekrom')) && typeof scrollMaxX === 'number' /* dude idk why but only zekrom and reshiram have messed up idle sprites on safari*/) || mons.push(name))
+        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga'  || mons.push(name))
         wait && await wait()
     }
 }()
@@ -155,6 +155,7 @@ async function spawnPalkia() {
     r()
     await h.wait(400 * Math.random())
     if (caught()) return
+
     palkia.style.visibility = 'hidden'
     await h.wait(1000)
     if (caught()) return
@@ -171,12 +172,13 @@ async function spawnPalkia() {
         clearTimeout(t)
         return
     }
-    palkia.style.filter = 'drop-shadow(0 0 400px purple)'
+    palkia.style.filter = 'drop-shadow(0 0 700px purple) invert(1) brightness(0) opacity(0) blur(10px)'
+    palkia.style.scale = '8 8'
     await h.wait(300)
-    palkia.classList.replace('catchable', 'finished')
-    backdrop.style.filter = 'brightness(0%) invert(100%)'
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
     preloadBg(n)
+    palkia.classList.replace('catchable', 'finished')
+    backdrop.style.filter = 'brightness(0%) invert(100%)'
     backdrop.on({
         _transitionend() {
             backdrop.dataset.bg = n
@@ -421,7 +423,7 @@ function spawnLegendary() {
     setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
     let regular = mons.filter(legendary.has, legendary)
     let a = 10
-    let pkm = regular[Math.floor(Math.random() * regular.length)]
+    let pkm = 'deoxys_speed'||regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
         if (!document.querySelector('.dialga,.dialga_origin,.dialga_origin_idle,[data-catching="dialga_origin"]')) {
             pkm = 'dialga_origin'
