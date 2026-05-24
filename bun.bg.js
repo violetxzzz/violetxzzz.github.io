@@ -15,7 +15,7 @@ function freeze() {
     frozen = true
         ;[].forEach.call(background.querySelectorAll('slide-show'),
             o => {
-                o.classList.contains('dialga') || o.pause()
+                o.matches('.dialga,.pokeball') || o.pause()
             })
 }
 function unfreeze() {
@@ -113,19 +113,19 @@ function spawnJirachi() {
 }
 let p = new Set
 function preloadBg(n) {
-    if (!p.has(n)) {
+    if (n && !p.has(n)) {
         p.add(n)
         let x = $`<picture><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.png" decoding="sync" fetchpriority="high"></picture>`
         x.lastChild.decode()
     }
 }
+spawnDialga()
 // setTimeout(spawnHoopaUnbound, 1000)
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
     if (frozen || isHidden()) return
-    if (Math.random() < .22) spawnPalkia()
-    else if (Math.random() < .022) spawnDialga()
-    else Math.random() > .5 ? spawnJirachi() : spawnHoopaUnbound()
+    if (Math.random() < .25) choose(spawnPalkia, spawnDialga)()
+    else choose(spawnJirachi, spawnHoopaUnbound)()
 }
 function range(min, max) {
     return Math.random() * (max - min) + min
@@ -386,10 +386,10 @@ function showMessageBox(shiny) {
 function spawnAsteroid() {
     setTimeout(spawnAsteroid, 3300 + (Math.random() * 1000))
     if (frozen || isHidden()) return
-    let i = choose(4,4,4,4,4,4,3,3,3,1,1,1,2,2)
+    let i = choose(4, 4, 4, 4, 4, 4, 3, 3, 3, 1, 1, 1, 2, 2)
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
         .setParent(background)
-        .on({_animationend:remove})
+        .on({ _animationend: remove })
     // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
 }
 spawnAsteroid()
@@ -586,7 +586,7 @@ async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
     if (frozen || isHidden()) return
     let a =
-    $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
+        $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
     a.setParent(background)
     a.play()
     await a.until('endEvent')
