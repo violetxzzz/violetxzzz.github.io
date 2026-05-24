@@ -3,7 +3,7 @@ return await inline('./dex.js')
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import {loadSprite,loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
+import { loadSprite, loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
@@ -78,14 +78,14 @@ loadSprite(
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.png`
             let duras = a.values.split(';').map(Number)
-            return(anim === 'Idle' ? loadPokemon : loadSprite)({name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({ name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
         })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (((name === 'reshiram') || (name === 'zekrom')) && typeof scrollMaxX === 'number' /* dude idk why but only zekrom and reshiram have messed up idle sprites on safari*/) || mons.push(name))
         wait && await wait()
     }
 }()
 let mons = []
 function shiny(odds = 4000) {
-    return Math.random() * odds > odds - 1 ? ' shiny' : ''
+    return Math.random() * odds < odds - 1 ? ' shiny' : ''
 }
 function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
@@ -259,7 +259,7 @@ function spawnHoopaUnbound() {
 // spawnHoopaUnbound()
 // setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
 // data.forEach(doImages)
-function isHidden() { return document.hidden }
+function isHidden() { return document.hidden || frozen }
 background.delegate({
     animationend(e) {
         e.animationName === 'offset' && this.destroy()
@@ -386,7 +386,7 @@ function showMessageBox(shiny) {
 function spawnAsteroid() {
     setTimeout(spawnAsteroid, 3300 + (Math.random() * 1000))
     if (frozen || isHidden()) return
-    let i = Math.floor(Math.random() * 4) + 1
+    let i = choose(4,4,4,4,4,4,3,3,3,1,1,1,2,2)
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
         .setParent(background)
         .onanimationend = remove
@@ -424,14 +424,14 @@ function spawnLegendary() {
     let a = 10
     let pkm = regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
-        if (!document.querySelector('.dialga,.dialga_origin,[data-catching="dialga_origin"]')) {
+        if (!document.querySelector('.dialga,.dialga_origin,.dialga_origin_idle,[data-catching="dialga_origin"]')) {
             pkm = 'dialga_origin'
         }
         else return
     }
     let max = 20
     while (a-- && document.querySelector(`.${pkm}`)) pkm = regular[Math.floor(Math.random() * regular.length)]
-    if (!pkm || isHidden()) return
+    if (!(frozen && pkm === 'dialga_origin')) if (!pkm || isHidden()) return
     let [scale, speed, index, dur] = configure(pkm)
     createPkm(scale, speed, index, dur, pkm)
 }
@@ -564,7 +564,7 @@ function spawnPokemon() {
     let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle') && !legendary.has(o))
     let a = 10
     let pkm = regular[Math.floor(Math.random() * regular.length)]
-    if (!pkm || isHidden()) return
+    if (!pkm || isHidden() || frozen) return
     let [scale, speed, index, dur] = configure(pkm)
     createPkm(scale, speed, index, dur, pkm)
 }

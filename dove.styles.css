@@ -1266,7 +1266,7 @@ slide-show {
 body:has(main:not(.hidden)) poke-dex {
     visibility: hidden;
 }
-.palkia,.dialga{
+.palkia,.dialga,.dialga_idle,.palkia_idle{
     scale: 2.67 2.67;
 }
 .dialga_origin,.dialga_origin_idle{
@@ -1283,14 +1283,13 @@ body:has(main:not(.hidden)) poke-dex {
         transform: translate(0px, -4px)
     }
 }
-.palkia {
+.palkia,.palkia_idle {
     filter: drop-shadow(0 0 4px purple);
 }
 .dialga,.palkia {
-
     transition: filter 2s ease;
 }
-.dialga {
+.dialga,.dialga_idle {
         filter: drop-shadow(0 0 4px rgb(0, 204, 255));
 }
 
