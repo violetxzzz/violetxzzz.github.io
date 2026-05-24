@@ -36,12 +36,12 @@ if (CSS.supports('anchor-name', '--a')) {
     let icons = [].slice.call(document.getElementsByClassName('icon'))
     controls.delegate({
         mouseover() {
-            let icon = icons[this.parent.eltIndexOf(this)]
+            let icon = icons[this.parent.eltIndexOf(this)/2]
             icon.play()
             icon.resume()
         },
         mouseout() {
-            let icon = icons[this.parent.eltIndexOf(this)]
+            let icon = icons[this.parent.eltIndexOf(this)/2]
             icon.pause()
             icon.time = 0
         }
