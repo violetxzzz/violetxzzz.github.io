@@ -119,7 +119,6 @@ function preloadBg(n) {
         x.lastChild.decode()
     }
 }
-spawnDialga()
 // setTimeout(spawnHoopaUnbound, 1000)
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
