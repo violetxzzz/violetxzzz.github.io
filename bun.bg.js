@@ -172,7 +172,7 @@ async function spawnPalkia() {
         clearTimeout(t)
         return
     }
-    palkia.style.filter = 'drop-shadow(0 0 700px purple) invert(1) brightness(0) opacity(0) blur(10px)'
+    palkia.style.filter = 'drop-shadow(0 0 700px purple) invert(1) brightness(0) opacity(0)'
     palkia.style.scale = '8 8'
     await h.wait(300)
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5

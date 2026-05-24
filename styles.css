@@ -41,7 +41,7 @@ main.hidden, main.hidden #controls > a {
 main,
 #controls,
 #background {
-    contain: layout size style
+    contain: size style
 }
 .social {
     position: relative;
@@ -560,7 +560,7 @@ main {
     /* outline: 2px solid var(--color2); */
     height: 705px;
     max-height: 80vh;
-    min-height: 500px;
+    min-height: 400px;
     max-height: max(74vh, 280px);
     max-width: min(90vw, 700px);
     display: flex;
@@ -812,6 +812,7 @@ paper-canvas::part(paper) {
     left: anchor(right);
     top: anchor(bottom);
     position:absolute;
+    z-index: 1;
     transform: scale(1.5) translate(-2px, 4px);
     --user-select: none;
 }
