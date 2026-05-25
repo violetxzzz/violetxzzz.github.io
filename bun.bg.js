@@ -173,6 +173,7 @@ async function spawnPalkia() {
         return
     }
     palkia.style.filter = 'drop-shadow(0 0 700px purple) invert(1) brightness(0) opacity(0)'
+    palkia.style.willChange = 'scale, filter'
     palkia.style.scale = '8 8'
     await h.wait(300)
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
@@ -213,6 +214,7 @@ async function spawnDialga() {
     dialga.src = './new/dialga/dialga-Walk.png'
     await h.wait(1000)
     if (caught()) return
+    dialga.style.willChange = 'filter, rotate'
     dialga.style.filter = `drop-shadow(0 0 400px rgb(0, 204, 255))`
     await h.wait(200)
     if (caught()) return
