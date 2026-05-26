@@ -43,6 +43,9 @@ main,
 #background {
     contain: size style
 }
+#contrls > a {
+    padding: 0
+}
 .social {
     position: relative;
     display: flow;
@@ -518,7 +521,7 @@ body.frozen :where(#backdrop, #background > :not(.dialga,.pokeball, .dialga_orig
     animation: drift 150s ease-in-out alternate infinite;
     background-color: linear-gradient(225deg, var(--c-color4) 0%, rgba(18, 12, 130, 1) 50%, rgba(0, 0, 0, 1) 100%);
     background-image: url(galaxy.png);
-    background-image: image-set(url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
+    background-image: image-set(url("galaxy.heic") type("image/heic"), url("galaxy.avif") type("image/avif"), url("galaxy.webp") type("image/webp"), url("galaxy.png") type("image/png"));
     will-change: background-position-x;
     transition: filter .7s ease
 }
@@ -705,21 +708,23 @@ paper-canvas::part(paper) {
     background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
-
+section:focus {
+    outline: none;
+}
 .button {
     color: black;
     background: #53e0e0;
     border-radius: 8px;
-    padding: 0 6px 0 6px;
     justify-content: flex-start;
     line-height: 30px;
+    padding-inline:6px;
     border: none;
     max-width: 100px;
     font-size: 1.2em;
     text-decoration: none;
     text-transform: capitalize;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease, transform .3s ease, background-color .3s ease, filter .3s ease;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(83, 224, 224, 0.3);
     letter-spacing: 0.5px;
@@ -830,13 +835,13 @@ paper-canvas::part(paper) {
     }
 }
 
-@media screen and (width <295px) {
+@media screen and (width <329px) {
     .icon {
         display: none;
     }
 
     #controls>a {
-        font-size: 64%;
+        font-size: 75%;
     }
 }
 
@@ -1280,7 +1285,7 @@ body:has(main:not(.hidden)) poke-dex {
     filter: drop-shadow(0 0 4px purple);
 }
 .dialga,.palkia {
-    transition: filter 2s ease, scale 1.8s ease-out .2s;
+    transition: filter 1s ease, scale .8s ease-out .2s;
 }
 .dialga,.dialga_idle {
         filter: drop-shadow(0 0 4px rgb(0, 204, 255));

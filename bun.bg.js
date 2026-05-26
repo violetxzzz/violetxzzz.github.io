@@ -166,15 +166,15 @@ async function spawnPalkia() {
     let t = setTimeout(() => {
         if (caught()) return
         palkia.destroy()
-    }, 3600)
+    }, 4000)
     await h.wait(3000)
     if (caught()) {
         clearTimeout(t)
         return
     }
-    palkia.style.filter = 'drop-shadow(0 0 700px purple) invert(1) brightness(0) opacity(0)'
+    palkia.style.filter = 'drop-shadow(0 0 300px purple) invert(1) brightness(0) opacity(0)'
     palkia.style.willChange = 'scale, filter'
-    palkia.style.scale = '8 8'
+    palkia.style.scale = '. 6'
     await h.wait(300)
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
     preloadBg(n)
@@ -197,12 +197,13 @@ async function spawnDialga() {
     let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.webp" data-name="dialga" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     dialga.animate([
-        { rotate: 'y 90deg' },
-        { rotate: 'y 0deg' }
+        { scale: '0 2', opacity: 0.8 },
+        { scale: '1 1' , opacity:1 }
     ], {
         iterations: 1,
         duration: 300,
-        easing: 'linear',
+        composite:'accumulate',
+        easing: 'ease',
         fill: 'forwards'
     })
     await h.wait(2000)
@@ -214,20 +215,21 @@ async function spawnDialga() {
     dialga.src = './new/dialga/dialga-Walk.webp'
     await h.wait(1000)
     if (caught()) return
-    dialga.style.willChange = 'filter, rotate'
+    dialga.style.willChange = 'filter, scale'
     dialga.style.filter = `drop-shadow(0 0 400px rgb(0, 204, 255))`
     await h.wait(200)
     if (caught()) return
     freeze()
     dialga.classList.remove('catchable')
     dialga.animate([
-        { rotate: 'y 0deg' },
-        { rotate: 'y 90deg' }
+        { scale: '1 1',opacity:.8, },
+        { scale: '0 2', opacity:0 }
     ], {
         iterations: 1,
         delay: 600,
         duration: 300,
-        easing: 'linear',
+        easing: 'ease',
+        composite:'accumulate',
         fill: 'forwards'
     }).finished.then(() => dialga.destroy())
     unfreezetimer = setTimeout(unfreeze, 60000)
@@ -419,7 +421,7 @@ function randomX() {
         .setParent(background)
 }*/
 let special = new Set(`dialga palkia hoopa_unbound hoopa_unbound_intro jirachi_intro jirachi`.split(' '))
-let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giratina arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
+let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giratina_origin arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
 // spawnSleepingPokemon()
 function spawnLegendary() {
     setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
@@ -536,7 +538,7 @@ function configure(pkm) {
         case 'necrozma_ultra':
             scale *= 5
             break
-        case 'giratina':
+        case 'giratina_origin':
             scale *= 3.6
             break
         case 'rayquaza':

@@ -166,17 +166,15 @@
                         Welcome to my amazing website, made by Missy (<cite>addsoupbase</cite>) ✨</p>
                     <h2>Socials:</h2>
                     <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn"
-                            rel="noopener noreferrer" target="_blank">narin.zkn</a><a id="discordlink" class="social"
-                            rel="noopener noreferrer" target="_blank"
-                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer"
+                            rel="noopener noreferrer" translate="no" target="_blank">narin.zkn</a><a id="discordlink" class="social"
+                            rel="noopener noreferrer" translate="no" target="_blank"
+                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer" translate="no"
                             target="_blank" href="http://instagram.com/violetxz0" class="social"
                             id="instalink">violetxz0</a></address>
                     <h2>Credits:</h2>
                     <figure
                         style='margin:auto;transform:scale(1.3);place-self:center;position:relative;border-radius: 100%;width:80px;height:80px;background-size: 80px 80px;background-repeat:no-repeat;background-image: url(https://addsoupbase.github.io/media/cat.jpg);background-image: image-set(url(https://addsoupbase.github.io/media/cat.avif) type("image/webp"), url(https://addsoupbase.github.io/media/cat.webp) type("image/webp"), url(https://addsoupbase.github.io/media/cat.jpg) type("image/jpg"));'>
-                        <picture>
-                            <!--<source srcset="decor.avif" type="image/avif">-->
-                            <source srcset="decor.webp" type="image/webp"><img draggable="false" width="80" height="80"
+                        <picture><source srcset="decor.webp" type="image/webp"><img draggable="false" width="80" height="80"
                                 src="decor.gif" style="position:absolute;left:0;top:0;transform:scale(1.2)" alt="misha"
                                 title="Misha">
                         </picture>
@@ -224,19 +222,19 @@
                     <hr>
                     <h2>My top animes:</h2>
                     <ul>
-                        <li><cite>One Piece</cite></li>
-                        <li><cite>Bleach</cite></li>
-                        <li><cite>Berserk</cite></li>
-                        <li><cite>Vinland Saga</cite></li>
-                        <li><cite>Violet Evergarden</cite></li>
-                        <li><cite>Dragon Ball Z</cite></li>
-                        <li><cite>JoJo’s Bizarre Adventure</cite></li>
+                        <li><cite translate="no">One Piece</cite></li>
+                        <li><cite translate="no">Bleach</cite></li>
+                        <li><cite translate="no">Berserk</cite></li>
+                        <li><cite translate="no">Vinland Saga</cite></li>
+                        <li><cite translate="no">Violet Evergarden</cite></li>
+                        <li><cite translate="no">Dragon Ball Z</cite></li>
+                        <li><cite translate="no">JoJo’s Bizarre Adventure</cite></li>
                     </ul>
                     <hr>
                     <h2>My favorite manga:</h2>
-                    <cite
+                    <cite translate="no"
                         style="display: block; font-size: xx-large;margin-block: 10px;"><strong>Vagabond</strong></cite>
-                    <p><cite>Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his journey of
+                    <p><cite translate="no">Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his journey of
                         self-discovery. It
                         focuses more on inner struggles, personal growth, and what it truly means to be strong rather
                         than
@@ -258,7 +256,7 @@
                     <hr>
                     <h2>🌙 Something You Might Not Know About Me</h2>
                     <p>My actual name isn’t Violet. I got inspired by the name after watching my favorite anime,
-                        <cite>Violet
+                        <cite translate="no">Violet
                             Evergarden</cite>. After that, I started using the name Violet everywhere online.
                     </p>
                 </article>
@@ -266,8 +264,7 @@
             <section class="sect" id="artists" aria-hidden="true">
                 <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
-                <ul id="musics" style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);">
-                    <!--${ 
+                <ul id="musics" style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);"><!--${ 
                     function n(a){
                     let link
                     let title = 'unknown'
@@ -341,20 +338,18 @@
                                 draggable="false" role="button" title="Click to play ${title} by ${artist}"
                                 class="artist avatar" src="./artists/${o}.jpg" alt="${artist}">
                         </picture>
-                        <figcaption class="capt" aria-hidden="true"><span class="authortitle"><cite>${title}</cite> by </span><cite>${artist}</cite></figcaption>
+                        <figcaption class="capt" aria-hidden="true"><span class="authortitle"><cite translate="no">${title}</cite> by </span><cite translate="no">${artist}</cite></figcaption>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="${src}" preload="none" title="${title}"></audio>
                     </figure>
-                    </li>`})
+                    </li>`.replaceAll('\n','')})
                     .join('')
-                }-->
-                </ul>
+                }--></ul>
             </section>
             <section class="sect" id="friends" aria-hidden="true">
                 <div>
                     <h2 style="display: inline;" class="heading">Friends</h2>
-                    <ul id="friendslist">
-                        <!--${
+                    <ul id="friendslist"><!--${
                             let closest = new Set(['misha','habu', 'lagia', 'rika','sukuna','shon','kyuu','mochi','caelix', 'saenger'].sort())
                             function sort(a, b) {
                                 let hasA = closest.has(a)
@@ -408,10 +403,9 @@
                                     break
                                 }
                                 let a = `<picture><source srcset="${src}.avif" type="image/avif"><source srcset="${src}.webp" type="image/webp"><img width="200" height="200" loading="lazy" src="${src}.jpg" class="friend f-${name} avatar" loading="lazy" alt="${name}">${closest.has(name) ? `<div style="position:absolute"><img loading="lazy" dur=".026" class="avatarsprite p_${name}" src="${name}.gif" alt="${mons[name]}" id="${name}"></div>` : ''}</picture>`
-                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}${site && `<a href="${site}" ${site ? `title="Visit ${name}'s page"` : ''} target="_blank" ${name === 'misha' ? 'rel="author"' : ''}>`}<figcaption aria-hidden="true">${name}${name === 'misha' ? ' (missy)': ''}${site ? `<span style="font-size: .6em;position:fixed;top:25%;margin-left:3px;">🔗</span>` : ''}</figcaption>${site && '</a>'}</figure></li>${i === closest.size-1 ? '</div>' : ''}`
+                                return `${i === 0 ? "<div id='closest'>" : ''}<li class="listfriend"><figure>${a}${site && `<a href="${site}" ${site ? `title="Visit ${name}'s page"` : ''} target="_blank" ${name === 'misha' ? 'rel="author"' : ''}>`}<figcaption aria-hidden="true" translate="no">${name}${name === 'misha' ? ' (missy)': ''}${site ? `<span style="font-size: .6em;position:fixed;top:25%;margin-left:3px;">🔗</span>` : ''}</figcaption>${site && '</a>'}</figure></li>${i === closest.size-1 ? '</div>' : ''}`
                             }).join('')
-                            }-->
-                    </ul>
+                            }--></ul>
                 </div>
             </section>
             <section class="sect" id="mailbox" aria-hidden="true">
