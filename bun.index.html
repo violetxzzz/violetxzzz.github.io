@@ -78,9 +78,7 @@
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-title" content="<!--${return title}-->">
     <link rel="apple-touch-startup-image" href="favicon.ico">
-    <script>(origin === 'http://localhost:3000' || origin === 'http://192.168.1.222:3000') && navigator.serviceWorker.register('../../local.js', { scope: './' })
-        document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)
-    </script>
+    <script>document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)</script>
     <link rel="preconnect" href="https://drawing-submissions.deno.dev">
     <link rel="preconnect" href="https://addsoupbase.github.io">
     <title><!--${return title}--></title>
@@ -466,21 +464,21 @@
             <a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton"
                 style="anchor-name:--home">Home</a>
             <slide-show unique aria-label="Buneary" anchor="homebutton" class="icon" style="position-anchor: --home"
-                src="./buneary.png" framesx="8" framesy="2" dur=".2"></slide-show>
+                src="./buneary.webp" framesx="8" framesy="2" dur=".2"></slide-show>
             <a role="tab" class="button" href="#about" style="anchor-name: --about" id="aboutbutton">About</a>
             <slide-show unique aria-label="Unown" anchor="aboutbutton" class="icon"
-                style="position-anchor: --about;translate: 0 -6px" src="./unown.png" framesx="9" framesy="2"
+                style="position-anchor: --about;translate: 0 -6px" src="./unown.webp" framesx="9" framesy="2"
                 dur=".1"></slide-show>
             <a role="tab" class="button" href="#artists" id="music" style="anchor-name:--music">Music</a>
             <slide-show unique aria-label="Meloetta" anchor="music" class="icon" style="position-anchor: --music"
-                src="./meloetta.png" framesx="8" framesy="2" dur=".2"></slide-show>
+                src="./meloetta.webp" framesx="8" framesy="2" dur=".2"></slide-show>
             <a role="tab" class="button" href="#friends" id="friendsbutton" style="anchor-name:--friends">Friends</a>
             <slide-show unique aria-label="Marill" anchor="friendsbutton" class="icon"
-                style="translate:0 -4px;position-anchor: --friends" src="./marill.png" framesx="8" framesy="2"
+                style="translate:0 -4px;position-anchor: --friends" src="./marill.webp" framesx="8" framesy="2"
                 dur=".2"></slide-show>
             <a role="tab" class="button" href="#mailbox" style="anchor-name: --mail" id="mail">Mail</a> <slide-show
                 unique aria-label="Delibird" anchor="mail" class="icon" style="position-anchor: --mail"
-                src="./delibird.png" framesx="8" framesy="2" dur=".2"></slide-show>
+                src="./delibird.webp" framesx="8" framesy="2" dur=".2"></slide-show>
         </nav>
 
     </main>

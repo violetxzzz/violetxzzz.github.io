@@ -68,7 +68,7 @@ background.observe('resize', {
     }
 })
 loadSprite(
-    ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.png`, framesX: 4, framesY: 1 })))
+    ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let name in dex) {
@@ -76,9 +76,9 @@ loadSprite(
         // let name = t[0]
         // let frames = t[1]
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
-            let src = `./new/${name}/${name}-${anim}.png`
+            let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({ name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
         })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga'  || mons.push(name))
         wait && await wait()
     }
@@ -90,12 +90,12 @@ function shiny(odds = 4000) {
 function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
-    let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.png" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro" index="${shiny() ? 1 : 0}"></slide-show>`
+    let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.webp" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     jirachi.on({
         _endEvent() {
             jirachi.pause()
-            jirachi.src = './new/jirachi/jirachi-Walk.png'
+            jirachi.src = './new/jirachi/jirachi-Walk.webp'
             jirachi.repeatCount = 'indefinite'
             jirachi.time = 0
             jirachi.resume()
@@ -115,7 +115,7 @@ let p = new Set
 function preloadBg(n) {
     if (n && !p.has(n)) {
         p.add(n)
-        let x = $`<picture><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.png" decoding="sync" fetchpriority="high"></picture>`
+        let x = $`<picture><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.webp" decoding="sync" fetchpriority="high"></picture>`
         x.lastChild.decode()
     }
 }
@@ -140,7 +140,7 @@ async function spawnPalkia() {
         palkia.style.rotate = range(-45, 45) + 'deg'
         palkia.style.visibility = 'visible'
     }
-    let palkia = $`<slide-show autoplay data-name="palkia" src="./new/palkia/palkia-Walk.png" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
+    let palkia = $`<slide-show autoplay data-name="palkia" src="./new/palkia/palkia-Walk.webp" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     palkia.on({
         _catch() {
@@ -162,7 +162,7 @@ async function spawnPalkia() {
     palkia.style.rotate = ''
     palkia.style.top = palkia.style.left = '50%'
     palkia.style.visibility = 'visible'
-    palkia.src = './new/palkia/palkia-Walk2.png'
+    palkia.src = './new/palkia/palkia-Walk2.webp'
     let t = setTimeout(() => {
         if (caught()) return
         palkia.destroy()
@@ -194,7 +194,7 @@ async function spawnDialga() {
     function caught() {
         return !dialga.classList.contains('catchable')
     }
-    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.png" data-name="dialga" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
+    let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.webp" data-name="dialga" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     dialga.animate([
         { rotate: 'y 90deg' },
@@ -208,10 +208,10 @@ async function spawnDialga() {
     await h.wait(2000)
     if (caught()) return
     dialga.dur = .04
-    dialga.src = './new/dialga/dialga-Walk2.png'
+    dialga.src = './new/dialga/dialga-Walk2.webp'
     await h.wait(6000)
     if (caught()) return
-    dialga.src = './new/dialga/dialga-Walk.png'
+    dialga.src = './new/dialga/dialga-Walk.webp'
     await h.wait(1000)
     if (caught()) return
     dialga.style.willChange = 'filter, rotate'
@@ -236,13 +236,13 @@ setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-    let hoopa = $`<slide-show repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.png" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
+    let hoopa = $`<slide-show repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     hoopa.dur = .02
     hoopa.on({
         _endEvent() {
             hoopa.pause()
-            hoopa.src = './new/hoopa_unbound/hoopa_unbound-Walk.png'
+            hoopa.src = './new/hoopa_unbound/hoopa_unbound-Walk.webp'
             hoopa.repeatCount = 'indefinite'
             hoopa.time = 0
             hoopa.resume()
@@ -341,7 +341,7 @@ background.delegate({
         this.className = `boom${t} boom obj`
         this.style.translate = translate
         this.style.animation = ''
-        let boom = $`<slide-show src="./boom${t}-4.png" dur=".08" repeat="1"></slide-show>`
+        let boom = $`<slide-show src="./boom${t}-4.webp" dur=".08" repeat="1"></slide-show>`
         this.pushNode(boom)
         boom.play()
         let that = this
@@ -578,7 +578,7 @@ function createPkm(scale, speed, index, dur, pkm) {
         if (pkm === 'minior') index = 7
         else if (pkm === 'mewtwo') index = 2
         else index += 1
-    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.png" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${scale > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
+    let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.webp" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${scale > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
     s.play()
 }
@@ -589,13 +589,13 @@ async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
     if (frozen || isHidden()) return
     let a =
-        $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.png" class="shootingstar" repeat="1" dur=".07"></slide-show>`
+        $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.webp" class="shootingstar" repeat="1" dur=".07"></slide-show>`
     a.setParent(background)
     a.play()
     await a.until('endEvent')
     a.destroy()
 }
-loadSprite({ src: './shootingstar-11.png', framesX: 9, framesY: 1 })[0]
+loadSprite({ src: './shootingstar-11.webp', framesX: 9, framesY: 1 })[0]
     .then(() => {
         setTimeout(spawnShootingStar, 1000)
     })
