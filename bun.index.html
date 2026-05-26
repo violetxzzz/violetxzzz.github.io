@@ -622,7 +622,8 @@
                     timestamp = thing[1],
                     alt = thing[2],
                     container = D.createElement('figure')
-                    , time = D.createElement('time')
+                    , time = D.createElement('time'),
+                    pic = D.createElement('picture')
                     , img = new Image,
                     item = D.createElement('li'),
                     caption = D.createElement('figcaption')
@@ -637,10 +638,20 @@
                 var link = D.createElement('a')
                 link.style.display = 'contents'
                 var size = 250
-                link.href = img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w' + size)
+                var url = 'https://images.weserv.nl/?quality=50&url=' + encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w' + size)
+                link.href = img.src = url+'&output=jpg'
                 img.width = img.height = size
-                link.appendChild(img)
+                link.appendChild(pic)
                 link.setAttribute('target', '_blank')
+                ;['webp']
+                .forEach(function (format) {
+                                var so = D.createElement('source')
+                                so.srcset = url + '&output=' + format
+                                so.type = 'image/' + format
+                                pic.appendChild(so)
+                            })
+                                            pic.appendChild(img)
+
                 container.appendChild(link)
                 container.appendChild(caption)
                 var t = new Date(timestamp)
