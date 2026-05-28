@@ -445,8 +445,7 @@
                                 <input type="color" alpha value="#000000" id="color">
                                 <input type="range" value="1" min="1" max="30" step="1" id="brushsize">
                                 <input class="button" id="undo" type="button" value="Undo">
-                                <input class="button" type="button" id="eyedropper" value="Eyedropper"
-                                    style="display:none;justify-self: center;">
+    
                             </div>
                             <button class="button submitter" style="justify-self: center;">Send</button>
                         </form>
@@ -520,29 +519,10 @@
             , container = g('uhh')
             , undo = g('undo')
             , brushsize = g('brushsize')
-            , color = g('color')
-            , eyedropper = g('eyedropper'),
+            , color = g('color'),
             frame = g('frame')
             , paper// = D.querySelector('paper-canvas')
         var tabs = [].slice.call(D.querySelectorAll('a[role="tab"]'))
-        if (window.EyeDropper) {
-            eyedropper.style.display = 'block'
-            h.on(eyedropper, {
-                click: function () {
-                    initpaper()
-                    new EyeDropper()
-                        .open()
-                        .then(function (c) {
-                            var col = c.sRGBHex
-                            var t = col.match(/\d+/g).substring(0, 3).map(function (n) {
-                                return (+n).toString(16).padStart(2, 0)
-                            })
-                                .join('')
-                            paper.color = color.value = '#' + t
-                        })
-                }
-            })
-        }
         function select(n) {
             for (var i = tabs.length; i--;) tabs[i].ariaSelected = false
             n.ariaSelected = true
