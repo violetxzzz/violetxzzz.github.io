@@ -79,7 +79,7 @@
     <meta name="apple-mobile-web-app-title" content="<!--${return title}-->">
     <link rel="apple-touch-startup-image" href="favicon.ico">
     <script>document.documentElement.setAttribute('data-reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches)</script>
-    <link rel="preconnect" href="https://drawing-submissions.deno.dev">
+    <link rel="preconnect" href="https://submissions.addsoupbase1.workers.dev/">
     <link rel="preconnect" href="https://addsoupbase.github.io">
     <title><!--${return title}--></title>
     <noscript>
@@ -141,7 +141,7 @@
     <link rel="inline stylesheet" href="styles.css">
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
     <link rel="manifest" href="./site.webmanifest" fetchpriority="low">
-    <link rel="preload" as="fetch" href="https://drawing-submissions.deno.dev?user=violet" type="application/json"
+    <link rel="preload" as="fetch" href="https://submissions.addsoupbase1.workers.dev?user=violet" type="application/json"
         crossorigin="anonymous">
 </head>
 
@@ -429,7 +429,7 @@
                     style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;place-content: center;">
                     <div id="sendstuff" class="formdiv">
                         <h2>Send Message</h2>
-                        <form action="https://drawing-submissions.deno.dev?user=violet" method="POST" id="messageform">
+                        <form action="https://submissions.addsoupbase1.workers.dev?user=violet" method="POST" id="messageform">
                             <input id="SendNameField" name="name" placeholder="Name" enterkeyhint="next"
                                 autocomplete="username">
                             <input name="message" placeholder="Message" enterkeyhint="send" required>
@@ -438,7 +438,7 @@
                     </div>
                     <div id="senddraw" class="formdiv needsjs needswebcomponent">
                         <h2>Send Drawing</h2>
-                        <form id="paperform" action="https://drawing-submissions.deno.dev?user=violet" method="POST"
+                        <form id="paperform" action="https://submissions.addsoupbase1.workers.dev?user=violet" method="POST"
                             enctype="multipart/form-data">
                             <paper-canvas type="file" id="PaperField" name="drawing" required></paper-canvas>
                             <div>
@@ -599,7 +599,7 @@
                    if (!e.skipped) {
                        off()*/
         var xhr = new XMLHttpRequest
-        xhr.open("GET", 'https://drawing-submissions.deno.dev?user=violet', true)
+        xhr.open("GET", 'https://submissions.addsoupbase1.workers.dev/?user=violet', true)
         xhr.responseType = 'json'
         xhr.onerror = function (e) {
             loader.parentNode.textContent = 'Something went wrong!'
@@ -614,7 +614,8 @@
             json.forEach(function (thing) {
                 var src = thing[0],
                     timestamp = thing[1],
-                    alt = thing[2],
+                    type = thing[2],
+                    alt = thing[3],
                     container = D.createElement('figure')
                     , time = D.createElement('time'),
                     pic = D.createElement('picture')
@@ -640,7 +641,7 @@
                 ;['webp']
                 .forEach(function (format) {
                                 var so = D.createElement('source')
-                                so.srcset = url + '&output=' + format
+                                so.srcset = url + (type.endsWith('webp') ? '' : '&output=' + format)
                                 so.type = 'image/' + format
                                 pic.appendChild(so)
                             })
