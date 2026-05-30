@@ -474,7 +474,7 @@ html {
 }
 
 .shootingstar {
-    z-index: 0 !important;
+    z-index: -1 !important;
 }
 
 .shootingstar::part(sprite) {
@@ -821,7 +821,7 @@ section:focus {
     top: anchor(bottom);
     position:absolute;
     z-index: 1;
-    transform: scale(1.5) translate(-2px, 4px);
+    transform: scale(1.5) translate(-2px, -2px);
     --user-select: none;
 }
 
@@ -1257,6 +1257,7 @@ slide-show {
 .hoopa_unbound_intro,
 .jirachi_intro {
     pointer-events: none;
+    /* transform:translate(20px,20px) */
 }
 
 .hoopa_unbound,

@@ -36,12 +36,12 @@ if (CSS.supports('anchor-name', '--a')) {
     let icons = [].slice.call(document.getElementsByClassName('icon'))
     controls.delegate({
         mouseover() {
-            let icon = icons[this.parent.eltIndexOf(this)/2]
+            let icon = icons[this.parent.eltIndexOf(this) / 2]
             icon.play()
             icon.resume()
         },
         mouseout() {
-            let icon = icons[this.parent.eltIndexOf(this)/2]
+            let icon = icons[this.parent.eltIndexOf(this) / 2]
             icon.pause()
             icon.time = 0
         }
@@ -78,8 +78,8 @@ loadSprite(
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
-        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga'  || mons.push(name))
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({crop: !/jirachi|hoopa_unbound/.test(name), name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || mons.push(name))
         wait && await wait()
     }
 }()
@@ -175,10 +175,10 @@ async function spawnPalkia() {
     palkia.style.filter = 'drop-shadow(0 0 300px purple) invert(1) brightness(0) opacity(0)'
     palkia.style.willChange = 'scale, filter'
     palkia.style.scale = '6 6'
+    palkia.classList.replace('catchable', 'finished')
     await h.wait(300)
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
     preloadBg(n)
-    palkia.classList.replace('catchable', 'finished')
     backdrop.style.filter = 'brightness(0%) invert(100%)'
     backdrop.on({
         _transitionend() {
@@ -198,11 +198,11 @@ async function spawnDialga() {
         .setParent(background)
     dialga.animate([
         { scale: '0 2', opacity: 0.8 },
-        { scale: '1 1' , opacity:1 }
+        { scale: '1 1', opacity: 1 }
     ], {
         iterations: 1,
         duration: 300,
-        composite:'accumulate',
+        composite: 'accumulate',
         easing: 'ease',
         fill: 'forwards'
     })
@@ -222,14 +222,14 @@ async function spawnDialga() {
     freeze()
     dialga.classList.remove('catchable')
     dialga.animate([
-        { scale: '1 1',opacity:.8, },
-        { scale: '0 2', opacity:0 }
+        { scale: '1 1', opacity: .8, },
+        { scale: '0 2', opacity: 0 }
     ], {
         iterations: 1,
         delay: 600,
         duration: 300,
         easing: 'ease',
-        composite:'accumulate',
+        composite: 'accumulate',
         fill: 'forwards'
     }).finished.then(() => dialga.destroy())
     unfreezetimer = setTimeout(unfreeze, 60000)
@@ -427,7 +427,7 @@ function spawnLegendary() {
     setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
     let regular = mons.filter(legendary.has, legendary)
     let a = 10
-    let pkm = regular[Math.floor(Math.random() * regular.length)]
+    let pkm =  regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
         if (!document.querySelector('.dialga,.dialga_origin,.dialga_origin_idle,[data-catching="dialga_origin"]')) {
             pkm = 'dialga_origin'
@@ -440,6 +440,7 @@ function spawnLegendary() {
     let [scale, speed, index, dur] = configure(pkm)
     createPkm(scale, speed, index, dur, pkm)
 }
+spawnLegendary()
 function configure(pkm) {
     let scale = .7
     let speed = 1.2
