@@ -78,7 +78,7 @@ loadSprite(
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({crop: !/jirachi|hoopa_unbound/.test(name), name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({padLeft:a.padLeft||0,padTop:a.padTop||0, name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
         })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || mons.push(name))
         wait && await wait()
     }
@@ -160,9 +160,11 @@ async function spawnPalkia() {
     await h.wait(1000)
     if (caught()) return
     palkia.style.rotate = ''
-    palkia.style.top = palkia.style.left = '50%'
+    palkia.style.left = `${getWidth()/2}px`
+    palkia.style.top = `${getHeight()/2}px`
     palkia.style.visibility = 'visible'
     palkia.src = './new/palkia/palkia-Walk2.webp'
+    return
     let t = setTimeout(() => {
         if (caught()) return
         palkia.destroy()
@@ -389,7 +391,7 @@ function showMessageBox(shiny) {
 }
 // spawnSpaceShip()
 function spawnAsteroid() {
-    setTimeout(spawnAsteroid, 3300 + (Math.random() * 1000))
+    setTimeout(spawnAsteroid, 4300 + (Math.random() * 1000))
     if (frozen || isHidden()) return
     let i = choose(4, 4, 4, 4, 4, 4, 3, 3, 3, 1, 1, 1, 2, 2)
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
@@ -424,7 +426,7 @@ let special = new Set(`dialga palkia hoopa_unbound hoopa_unbound_intro jirachi_i
 let legendary = new Set(`mewtwo reshiram zekrom hoopa eternatus giratina_origin arceus uxie azelf mesprit mew lunala rayquaza necrozma necrozma_ultra deoxys deoxys_speed deoxys_attack deoxys_defense`.split(' '))
 // spawnSleepingPokemon()
 function spawnLegendary() {
-    setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
+    setTimeout(spawnLegendary, 6070 + range(-1000, 1000))
     let regular = mons.filter(legendary.has, legendary)
     let a = 10
     let pkm =  regular[Math.floor(Math.random() * regular.length)]
@@ -565,8 +567,14 @@ function configure(pkm) {
     }
     return [scale, speed, index, dur]
 }
+function getWidth() {
+    return innerWidth
+}
+function getHeight() {
+    return innerHeight
+}
 function spawnPokemon() {
-    setTimeout(spawnPokemon, 1600 + range(-200, 200))
+    setTimeout(spawnPokemon, (2600 + range(-200, 200)) - getWidth())
     let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle') && !legendary.has(o))
     let a = 10
     let pkm = regular[Math.floor(Math.random() * regular.length)]
@@ -585,8 +593,8 @@ function createPkm(scale, speed, index, dur, pkm) {
     s.setParent(background)
     s.play()
 }
-setTimeout(spawnPokemon, 300)
-setTimeout(spawnLegendary, 10000 + range(-7000, 5000))
+setTimeout(spawnPokemon, 1000)
+setTimeout(spawnLegendary, 16000 + range(-7000, 5000))
 // showMessageBox()
 async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
@@ -603,3 +611,4 @@ loadSprite({ src: './shootingstar-11.webp', framesX: 9, framesY: 1 })[0]
         setTimeout(spawnShootingStar, 1000)
     })
 function commitStyles(o) { o.commitStyles() }
+setTimeout(spawnJirachi, 1000)

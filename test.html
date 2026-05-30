@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../css.js" blocking=render></script>
+    <style>
+        html {
+            color-scheme: dark;
+        }
+
+        slide-show {
+            position: absolute;
+            left: 50%;
+            top: 50%
+        }
+
+        slide-show::part(sprite) {
+            outline: 1px solid red;
+            /* background: blue */
+        }
+    </style>
+    <script type="module">
+        import p from '../webcomponents/slide-show.js'
+        let z = {
+            Idle2: {
+                framesY: 2,
+                values: "40;30",
+                frameWidth: 72,
+                frameHeight: 104,
+                src: "./new/palkia/palkia-Idle2.webp"
+            },
+            Idle: {
+                framesY: 2,
+                values: "2;2;2;2;2;2;2;2;2;2",
+                frameWidth: 80,
+                frameHeight: 104,
+                src: "./new/palkia/palkia-Idle.webp"
+            },
+            Walk: {
+                framesY: 2,
+                values: "40;40",
+                frameWidth: 56,
+                frameHeight: 104,
+                src: "./new/palkia/palkia-Walk.webp"
+            },
+            Walk2: {
+                padLeft: -12,
+                padTop:16,
+                framesY: 2,
+                values: "4;4;4;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3",
+                frameWidth: 120,
+                frameHeight: 152,
+                src: "./new/palkia/palkia-Walk2.webp"
+
+            }
+        }
+        for (let i in z) {
+            let l = z[i]
+            l.framesX = l.values.split(';').length
+            p(l)
+        }
+    </script>
+
+    <slide-show src="./new/palkia/palkia-Walk2.webp" crop="40,0" autoplay dur=".08"></slide-show>
+    <slide-show src="./new/palkia/palkia-Walk2.webp" crop="40,0" autoplay dur=".0001"
+        repeat="1"></slide-show>
+    <slide-show src="./new/palkia/palkia-Idle.webp" autoplay dur=".08"></slide-show>
+</body>
+
+</html>
