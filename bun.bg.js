@@ -164,7 +164,6 @@ async function spawnPalkia() {
     palkia.style.top = `${getHeight()/2}px`
     palkia.style.visibility = 'visible'
     palkia.src = './new/palkia/palkia-Walk2.webp'
-    return
     let t = setTimeout(() => {
         if (caught()) return
         palkia.destroy()
