@@ -827,7 +827,7 @@ section:focus {
 
 @media screen and (width < 411px) {
     .icon {
-        transform: scale(1.2) translate(3px, 4px);
+        transform: scale(1.2) translate(-1px, -2px);
         image-rendering: auto;
     }
 }
