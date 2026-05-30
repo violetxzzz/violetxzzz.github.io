@@ -427,7 +427,7 @@ function spawnLegendary() {
     setTimeout(spawnLegendary, 6070 + range(-4000, 4000))
     let regular = mons.filter(legendary.has, legendary)
     let a = 10
-    let pkm = 'deoxys_speed'||regular[Math.floor(Math.random() * regular.length)]
+    let pkm = regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
         if (!document.querySelector('.dialga,.dialga_origin,.dialga_origin_idle,[data-catching="dialga_origin"]')) {
             pkm = 'dialga_origin'
