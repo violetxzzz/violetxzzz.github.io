@@ -62,7 +62,7 @@ loadSprite(
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({padLeft:a.padLeft||0,padTop:a.padTop||0, name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
         })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || mons.push(name))
         wait && await wait()
     }
@@ -101,7 +101,7 @@ function preloadBg(n) {
         p.add(n)
         let x = $`<picture><source srcset="./bg${n}.heic" type="image/heic"><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.webp" decoding="sync" fetchpriority="high"></picture>`
         x.lastChild.decode()
-        .then(()=>x.destroy())
+            .then(() => x.destroy())
     }
 }
 // setTimeout(spawnHoopaUnbound, 1000)
@@ -140,27 +140,30 @@ async function spawnPalkia() {
     r()
     await h.wait(400 * Math.random())
     if (caught()) return
-
     palkia.style.visibility = 'hidden'
     await h.wait(1000)
     if (caught()) return
     palkia.style.rotate = ''
-    palkia.style.left = `${getWidth()/2}px`
-    palkia.style.top = `${getHeight()/2}px`
+    palkia.style.left = `50%`
+    palkia.style.top = `50%`
     palkia.style.visibility = 'visible'
     palkia.src = './new/palkia/palkia-Walk2.webp'
-    let t = setTimeout(() => {
-        if (caught()) return
-        palkia.destroy()
-    }, 4000)
+    palkia.time = 0
+    palkia.on({
+        _repeatEvent() {
+            if (caught()) return
+            this.pause()
+            this.destroy()
+        }
+    })
     await h.wait(3000)
     if (caught()) {
-        clearTimeout(t)
+        palkia.off('repeatEvent')
         return
     }
-    palkia.style.filter = 'drop-shadow(0 0 300px purple) invert(1) brightness(0) opacity(0)'
+    palkia.style.filter = 'drop-shadow(0 0 100px purple) invert(1) brightness(0) opacity(0)'
     palkia.style.willChange = 'scale, filter'
-    palkia.style.scale = '6 6'
+    palkia.style.scale = 9 / visualViewport.scale
     palkia.classList.replace('catchable', 'finished')
     await h.wait(300)
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
@@ -224,9 +227,8 @@ setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-    let hoopa = $`<slide-show repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
+    let hoopa = $`<slide-show dur=".02" repeat=1 src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
-    hoopa.dur = .02
     hoopa.on({
         _endEvent() {
             hoopa.pause()
@@ -274,6 +276,7 @@ background.delegate({
         let { name } = this.dataset
         this.classList.replace(name, name + '_idle')
         this.src = this.src.replace(/-Walk2?/, '-Idle')
+        // this.time = 0
         let pokemonCenterX = e.centerX
         let pokemonCenterY = e.centerY
         n.attr`index="${legendary.has(pkm) || special.has(pkm) ? MASTER_BALL : choose(POKE_BALL, GREAT_BALL, ULTRA_BALL)}" aria-hidden="true" autoplay data-catching="${pkm}" class="pokeball_throw pokeball" src="$throw"`
@@ -292,23 +295,26 @@ background.delegate({
         }).finished
         let unown = pkm === 'unown' ? 'hue-rotate(20deg) saturate(5) ' : ''
         n.src = '$catch'
-        n.repeatCount = 1
         n.time = 0
         // n.dur = .07
         catchAnimation(this).finished.then(() => this.destroy(true))
-        await h.wait(4700)
-        n.time = 0
-        n.pause()
-        n.fadeOut().finished.then(() => {
-            n.destroy(true)
-            if (name === 'lunala') {
-                showMessageBox(shiny)
-            }
-            else if (name === 'dialga_origin') {
-                unfreeze()
-                clearTimeout(unfreezetimer)
+        n.on({
+            _repeatEvent() {
+                this.time = 0
+                this.pause()
+                this.fadeOut().finished.then(() => {
+                    this.destroy(true)
+                    if (name === 'lunala') {
+                        showMessageBox(shiny)
+                    }
+                    else if (name === 'dialga_origin') {
+                        unfreeze()
+                        clearTimeout(unfreezetimer)
+                    }
+                })
             }
         })
+
     }
 }, null, false, new AbortController)
 background.delegate({
@@ -413,7 +419,7 @@ function spawnLegendary() {
     setTimeout(spawnLegendary, 6070 + range(-1000, 1000))
     let regular = mons.filter(legendary.has, legendary)
     let a = 10
-    let pkm =  regular[Math.floor(Math.random() * regular.length)]
+    let pkm = regular[Math.floor(Math.random() * regular.length)]
     if (frozen) {
         if (!document.querySelector('.dialga,.dialga_origin,.dialga_origin_idle,[data-catching="dialga_origin"]')) {
             pkm = 'dialga_origin'
@@ -594,3 +600,4 @@ loadSprite({ src: './shootingstar-11.webp', framesX: 9, framesY: 1 })[0]
     .then(() => {
         setTimeout(spawnShootingStar, 1000)
     })
+    setInterval(spawnJirachi,500)

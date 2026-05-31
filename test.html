@@ -27,7 +27,7 @@
         
     </style>
     <script type="module">
-        import p from '../webcomponents/slide-show.js'
+        let {default: p} =await import('../webcomponents/slide-show.js?a='+Date.now())
         let z = {
         Special0: {
             padTop: 22,
@@ -60,7 +60,8 @@
         }
     </script>
 
-    <slide-show style="scale:3" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" crop="40,0" autoplay dur=".08"></slide-show>
- </body>
+    <slide-show id="a" repeat="1" index="1" style="scale:3" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" crop="40,0" dur=".08"></slide-show>
+
+</body>
 
 </html>

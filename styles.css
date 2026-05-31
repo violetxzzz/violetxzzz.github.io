@@ -38,7 +38,7 @@ poke-dex:defined:hover {
 }
 
 main.hidden,
-main.hidden #controls>a {
+main.hidden #controls a {
     opacity: 0;
     visibility: hidden;
 }
@@ -49,7 +49,7 @@ main,
     contain: size style
 }
 
-#contrls>a {
+#contrls a {
     padding: 0
 }
 
@@ -578,9 +578,11 @@ background-image: image-set(url("./bg4.heic") type("image/heic"),url("./bg4.avif
     box-sizing: border-box;
 }
 
-#controls>:where(a, button) {
-    flex: 1;
-    overflow:visible
+#controls :where(a, button) {
+     flex: 0 0 100px;
+     min-width: 0; 
+    overflow:visible;
+    display:block;
 }
 
 #controls {
@@ -862,10 +864,9 @@ section:focus {
     width: 108px
 }
 
-
-
 .icon {
     left: 100%;
+    top:100%;
     position: absolute;
     z-index: 1;
     image-rendering: auto;
@@ -879,9 +880,25 @@ section:focus {
         image-rendering: auto;
     }
 }
+#controls > div {
+      flex: 0 1 100px;   
+  min-width: 0;    
+  display: flex;     
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 4px
+}
+#controls > div a {
+  flex: 1;         
+  min-width: 0;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
 
 @media screen and (width < 550px) {
-    #controls>a {
+    #controls a {
         font-size: 90%;
     }
 }
@@ -891,7 +908,7 @@ section:focus {
         display: none;
     }
 
-    #controls>a {
+    #controls a {
         font-size: 75%;
     }
 }
@@ -1075,7 +1092,6 @@ section:focus {
     cursor: var(--c-PERSON_SELECT);
     shape-outside: circle(48%);
 }
-
 #intro {
     text-align: right;
     /* white-space: break-spaces; */

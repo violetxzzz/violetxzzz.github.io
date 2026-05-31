@@ -477,21 +477,21 @@
             </section>
         </div>
         <nav id="controls" role="tablist">
-            <a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton">Home<slide-show unique
-                    aria-label="Buneary" class="icon" style="translate: 0 -6px" src="./buneary.webp" framesx="8"
-                    framesy="2" dur=".2"></slide-show></a>
-            <a role="tab" class="button" href="#about" id="aboutbutton">About <slide-show unique aria-label="Unown"
-                    class="icon" style="translate: 0 -6px" src="./unown.webp" framesx="9" framesy="2"
-                    dur=".1"></slide-show></a>
-            <a role="tab" class="button" href="#artists" id="music">Music<slide-show unique aria-label="Meloetta"
-                    class="icon" style="translate:0 -2px" src="./meloetta.webp" framesx="8" framesy="2"
-                    dur=".2"></slide-show></a>
-            <a role="tab" class="button" href="#friends" id="friendsbutton">Friends
-                <slide-show unique aria-label="Marill" class="icon" style="translate:0 -4px" src="./marill.webp"
-                    framesx="8" framesy="2" dur=".2"></slide-show></a>
-            <a role="tab" class="button" href="#mailbox" id="mail">Mail<slide-show unique aria-label="Delibird"
-                    class="icon" style="translate: 0 -4px" src="./delibird.webp" framesx="8" framesy="2"
-                    dur=".2"></slide-show></a>
+            <div><a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton">Home</a><slide-show
+                    unique aria-label="Buneary" class="icon" paused style="translate: 0 -6px" src="./buneary.webp" framesx="8"
+                    framesy="2" dur=".2"></slide-show></div>
+            <div><a role="tab" class="button" href="#about" id="aboutbutton">About</a><slide-show unique
+                    aria-label="Unown" class="icon" paused style="translate: 0 -6px" src="./unown.webp" framesx="9" framesy="2"
+                    dur=".1"></slide-show></div>
+            <div><a role="tab" class="button" href="#artists" id="music">Music</a><slide-show unique
+                    aria-label="Meloetta" class="icon" paused style="translate:0 -2px" src="./meloetta.webp" framesx="8"
+                    framesy="2" dur=".2"></slide-show></div>
+            <div><a role="tab" class="button" href="#friends" id="friendsbutton">Friends</a><slide-show unique
+                    aria-label="Marill" class="icon" paused style="translate:0 -4px" src="./marill.webp" framesx="8"
+                    framesy="2" dur=".2"></slide-show></div>
+            <div><a role="tab" class="button" href="#mailbox" id="mail">Mail</a><slide-show unique aria-label="Delibird"
+                    class="icon" paused style="translate: 0 -4px" src="./delibird.webp" framesx="8" framesy="2"
+                    dur=".2"></slide-show></div>
         </nav>
 
     </main>
@@ -783,21 +783,24 @@
             }, 1000)
             let controls = document.getElementById('controls')
             function start() {
-                let icon = this.closest('.icon') || this.querySelector('.icon')
+                let icon = this.nextElementSibling
                 icon.play()
                 icon.resume()
             }
             function end() {
-                let icon = this.closest('.icon') || this.querySelector('.icon')
+                let icon = this.nextElementSibling
                 icon.pause()
                 icon.time = 0
             }
             h.delegate(controls, {
-                mouseover: start,
-                focusin: start,
-                focusout: end,
-                mouseout: end,
-            }, false, new AbortController)
+                touchstart: start,
+                touchcancel: end,
+                touchend: end,
+                mouseover:start,
+                mouseout:end,
+                // focusin: start,
+                // focusout: end,
+            }, o => o.matches('a'), new AbortController)
         }
     }(window[Symbol.for('[[HModule]]')])
 </script>
