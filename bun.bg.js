@@ -600,4 +600,3 @@ loadSprite({ src: './shootingstar-11.webp', framesX: 9, framesY: 1 })[0]
     .then(() => {
         setTimeout(spawnShootingStar, 1000)
     })
-    setInterval(spawnJirachi,500)
