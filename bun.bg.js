@@ -3,7 +3,7 @@ return await inline('./dex.js')
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import { loadSprite, loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
+import { isLoaded, loadSprite, loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
@@ -63,17 +63,18 @@ loadSprite(
             let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
             return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
-        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || mons.push(name))
+        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (allMons.add(name), mons.push(name)))
         wait && await wait()
     }
 }()
 let mons = []
+let allMons = new Set
 function shiny(odds = 4000) {
     return Math.random() * odds > odds - 1 ? ' shiny' : ''
 }
 function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
-    if (isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
+    if (!allMons.has('jirachi') || isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
     let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.webp" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     jirachi.on({
@@ -107,7 +108,7 @@ function preloadBg(n) {
 // setTimeout(spawnHoopaUnbound, 1000)
 function spawnExoticPokemon() {
     setTimeout(spawnExoticPokemon, 40000 + Math.random() * 10000)
-    if (frozen || isHidden()) return
+    if (!allMons.has('hoopa_unbound') || frozen || isHidden()) return
     if (Math.random() < .25) choose(spawnPalkia, spawnDialga)()
     else choose(spawnJirachi, spawnHoopaUnbound)()
 }
@@ -115,7 +116,7 @@ function range(min, max) {
     return Math.random() * (max - min) + min
 }
 async function spawnPalkia() {
-    if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
+    if (!allMons.has('hoopa_unbound') || frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
         return !palkia.classList.contains('catchable') && !palkia.classList.contains('finished')
     }
@@ -179,7 +180,7 @@ async function spawnPalkia() {
 }
 let unfreezetimer
 async function spawnDialga() {
-    if (frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
+    if (!allMons.has('hoopa_unbound') || frozen || isHidden() || document.querySelector('.palkia, .dialga')) return
     function caught() {
         return !dialga.classList.contains('catchable')
     }
@@ -226,8 +227,8 @@ async function spawnDialga() {
 setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
-    if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
-    let hoopa = $`<slide-show dur=".02" repeat=1 src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
+    // if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
+    let hoopa = $`<slide-show dur=".02" repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     hoopa.on({
         _endEvent() {
@@ -590,9 +591,8 @@ async function spawnShootingStar() {
     setTimeout(spawnShootingStar, 21000 + (Math.random() * 3000))
     if (frozen || isHidden()) return
     let a =
-        $`<slide-show style="left:${randomX()};top:${randomY()};scale:${Math.random() * 1};rotate:${Math.random() * 360}deg" src="./shootingstar-11.webp" class="shootingstar" repeat="1" dur=".07"></slide-show>`
+        $`<slide-show repeat="1" style="left:${randomX()};top:${randomY()};scale:${range(.8, 1.1)};rotate:${Math.random() * 360}deg" src="./shootingstar-11.webp" class="shootingstar" dur=".07"></slide-show>`
     a.setParent(background)
-    a.play()
     await a.until('endEvent')
     a.destroy()
 }
