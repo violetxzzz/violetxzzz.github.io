@@ -141,11 +141,31 @@
     <link rel="inline stylesheet" href="styles.css">
     <script>if (typeof CustomElementRegistry !== 'function') document.write('<style>.needswebcomponent {display: none;}</style>')</script>
     <link rel="manifest" href="./site.webmanifest" fetchpriority="low">
-    <link rel="preload" as="fetch" href="https://submissions.addsoupbase1.workers.dev?user=violet" type="application/json"
-        crossorigin="anonymous">
+    <link rel="preload" as="fetch" href="https://submissions.addsoupbase1.workers.dev?user=violet"
+        type="application/json" crossorigin="anonymous">
 </head>
 
 <body>
+    <script>
+        !function (d) {
+            'use strict'
+            var old = sessionStorage.getItem('format')
+            if (old) d.documentElement.setAttribute('data-format', old)
+            else {
+                var n = d.createRange().createContextualFragment(
+                    '<picture style="position:absolute !important;transform:scale(0) !important;pointer-events:none !important; z-index:-99999" aria-hidden="true" inert><source srcset="data:,heic" type="image/heic"><source srcset="data:,avif" type="image/avif"><source srcset="data:,webp" type="image/webp"><img src="data:,png"></picture>'
+                )
+                var img = n.querySelector('img')
+                img.onerror = function () {
+                    d.body.removeChild(img.parentNode)
+                    var format = img.currentSrc.split(',')[1]
+                    d.documentElement.setAttribute('data-format', format)
+                    sessionStorage.setItem('format', format)
+                }
+                d.body.appendChild(n)
+            }
+        }(document)
+    </script>
     <main class="center_screen">
         <div id="frame" class="menu" style="view-transition-name: sect;" role="tabpanel" aria-labelledby="controls">
             <section class="sect" id="home" aria-hidden="false">
@@ -166,15 +186,16 @@
                         Welcome to my amazing website, made by Missy (<cite>addsoupbase</cite>) ✨</p>
                     <h2>Socials:</h2>
                     <address><a id="tiktoklink" class="social" href="https://www.tiktok.com/@narin.zkn"
-                            rel="noopener noreferrer" translate="no" target="_blank">narin.zkn</a><a id="discordlink" class="social"
-                            rel="noopener noreferrer" translate="no" target="_blank"
-                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer" translate="no"
-                            target="_blank" href="http://instagram.com/violetxz0" class="social"
+                            rel="noopener noreferrer" translate="no" target="_blank">narin.zkn</a><a id="discordlink"
+                            class="social" rel="noopener noreferrer" translate="no" target="_blank"
+                            href="https://discord.com/users/1291651593653194766">xarxnx</a><a rel="noopener noreferrer"
+                            translate="no" target="_blank" href="http://instagram.com/violetxz0" class="social"
                             id="instalink">violetxz0</a></address>
                     <h2>Credits:</h2>
                     <figure
                         style='margin:auto;transform:scale(1.3);place-self:center;position:relative;border-radius: 100%;width:80px;height:80px;background-size: 80px 80px;background-repeat:no-repeat;background-image: url(https://addsoupbase.github.io/media/cat.jpg);background-image: image-set(url(https://addsoupbase.github.io/media/cat.avif) type("image/webp"), url(https://addsoupbase.github.io/media/cat.webp) type("image/webp"), url(https://addsoupbase.github.io/media/cat.jpg) type("image/jpg"));'>
-                        <picture><source srcset="decor.webp" type="image/webp"><img draggable="false" width="80" height="80"
+                        <picture>
+                            <source srcset="decor.webp" type="image/webp"><img draggable="false" width="80" height="80"
                                 src="decor.gif" style="position:absolute;left:0;top:0;transform:scale(1.2)" alt="misha"
                                 title="Misha">
                         </picture>
@@ -234,7 +255,8 @@
                     <h2>My favorite manga:</h2>
                     <cite translate="no"
                         style="display: block; font-size: xx-large;margin-block: 10px;"><strong>Vagabond</strong></cite>
-                    <p><cite translate="no">Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his journey of
+                    <p><cite translate="no">Vagabond</cite> is about Miyamoto Musashi, a legendary swordsman, and his
+                        journey of
                         self-discovery. It
                         focuses more on inner struggles, personal growth, and what it truly means to be strong rather
                         than
@@ -429,7 +451,8 @@
                     style="display: grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap: 20px;place-content: center;">
                     <div id="sendstuff" class="formdiv">
                         <h2>Send Message</h2>
-                        <form action="https://submissions.addsoupbase1.workers.dev?user=violet" method="POST" id="messageform">
+                        <form action="https://submissions.addsoupbase1.workers.dev?user=violet" method="POST"
+                            id="messageform">
                             <input id="SendNameField" name="name" placeholder="Name" enterkeyhint="next"
                                 autocomplete="username">
                             <input name="message" placeholder="Message" enterkeyhint="send" required>
@@ -438,14 +461,14 @@
                     </div>
                     <div id="senddraw" class="formdiv needsjs needswebcomponent">
                         <h2>Send Drawing</h2>
-                        <form id="paperform" action="https://submissions.addsoupbase1.workers.dev?user=violet" method="POST"
-                            enctype="multipart/form-data">
+                        <form id="paperform" action="https://submissions.addsoupbase1.workers.dev?user=violet"
+                            method="POST" enctype="multipart/form-data">
                             <paper-canvas type="file" id="PaperField" name="drawing" required></paper-canvas>
                             <div>
                                 <input type="color" alpha value="#000000" id="color">
                                 <input type="range" value="1" min="1" max="30" step="1" id="brushsize">
                                 <input class="button" id="undo" type="button" value="Undo">
-    
+
                             </div>
                             <button class="button submitter" style="justify-self: center;">Send</button>
                         </form>
@@ -454,24 +477,21 @@
             </section>
         </div>
         <nav id="controls" role="tablist">
-            <a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton"
-                style="anchor-name:--home">Home</a>
-            <slide-show unique aria-label="Buneary" anchor="homebutton" class="icon" style="position-anchor: --home;translate: 0 -6px"
-                src="./buneary.webp" framesx="8" framesy="2" dur=".2"></slide-show>
-            <a role="tab" class="button" href="#about" style="anchor-name: --about" id="aboutbutton">About</a>
-            <slide-show unique aria-label="Unown" anchor="aboutbutton" class="icon"
-                style="position-anchor: --about;translate: 0 -6px" src="./unown.webp" framesx="9" framesy="2"
-                dur=".1"></slide-show>
-            <a role="tab" class="button" href="#artists" id="music" style="anchor-name:--music">Music</a>
-            <slide-show unique aria-label="Meloetta" anchor="music" class="icon" style="position-anchor: --music;translate:0 -2px"
-                src="./meloetta.webp" framesx="8" framesy="2" dur=".2"></slide-show>
-            <a role="tab" class="button" href="#friends" id="friendsbutton" style="anchor-name:--friends">Friends</a>
-            <slide-show unique aria-label="Marill" anchor="friendsbutton" class="icon"
-                style="translate:0 -4px;position-anchor: --friends" src="./marill.webp" framesx="8" framesy="2"
-                dur=".2"></slide-show>
-            <a role="tab" class="button" href="#mailbox" style="anchor-name: --mail" id="mail">Mail</a> <slide-show
-                unique aria-label="Delibird" anchor="mail" class="icon" style="position-anchor: --mail;translate: 0 -4px"
-                src="./delibird.webp" framesx="8" framesy="2" dur=".2"></slide-show>
+            <a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton">Home<slide-show unique
+                    aria-label="Buneary" class="icon" style="translate: 0 -6px" src="./buneary.webp" framesx="8"
+                    framesy="2" dur=".2"></slide-show></a>
+            <a role="tab" class="button" href="#about" id="aboutbutton">About <slide-show unique aria-label="Unown"
+                    class="icon" style="translate: 0 -6px" src="./unown.webp" framesx="9" framesy="2"
+                    dur=".1"></slide-show></a>
+            <a role="tab" class="button" href="#artists" id="music">Music<slide-show unique aria-label="Meloetta"
+                    class="icon" style="translate:0 -2px" src="./meloetta.webp" framesx="8" framesy="2"
+                    dur=".2"></slide-show></a>
+            <a role="tab" class="button" href="#friends" id="friendsbutton">Friends
+                <slide-show unique aria-label="Marill" class="icon" style="translate:0 -4px" src="./marill.webp"
+                    framesx="8" framesy="2" dur=".2"></slide-show></a>
+            <a role="tab" class="button" href="#mailbox" id="mail">Mail<slide-show unique aria-label="Delibird"
+                    class="icon" style="translate: 0 -4px" src="./delibird.webp" framesx="8" framesy="2"
+                    dur=".2"></slide-show></a>
         </nav>
 
     </main>
@@ -614,18 +634,18 @@
                 link.style.display = 'contents'
                 var size = 250
                 var url = 'https://images.weserv.nl/?quality=50&url=' + encodeURIComponent('https://drive.google.com/thumbnail?id=' + src + '&sz=w' + size)
-                link.href = img.src = url+'&output=jpg'
+                link.href = img.src = url + '&output=jpg'
                 img.width = img.height = size
                 link.appendChild(pic)
                 link.setAttribute('target', '_blank')
-                ;['webp']
-                .forEach(function (format) {
-                                var so = D.createElement('source')
-                                so.srcset = url + (type.endsWith('webp') ? '' : '&output=' + format)
-                                so.type = 'image/' + format
-                                pic.appendChild(so)
-                            })
-                                            pic.appendChild(img)
+                    ;['webp']
+                        .forEach(function (format) {
+                            var so = D.createElement('source')
+                            so.srcset = url + (type.endsWith('webp') ? '' : '&output=' + format)
+                            so.type = 'image/' + format
+                            pic.appendChild(so)
+                        })
+                pic.appendChild(img)
 
                 container.appendChild(link)
                 container.appendChild(caption)
@@ -745,15 +765,15 @@
 <script crossorigin="anonymous" src="https://addsoupbase.github.io/aria.js" async></script>
 <script async type="module" crossorigin="anonymous"
     src="https://addsoupbase.github.io/webcomponents/slide-show.js"></script>
-<script>!function () {
+<script>!function (h) {
         'use strict'
         document.readyState === 'complete' ? go() : addEventListener('load', go, { once: true })
         function go() {
             'use strict'
             let reduced = document.documentElement.dataset.reducedMotion === 'true',
-                { hash } = location
+                hash = location.hash
             if (hash && hash !== '#') {
-                setTimeout(() => {
+                setTimeout(function () {
                     document.getElementById(hash.substring(1)).scrollIntoView({ inline: 'center', behavior: reduced ? 'instant' : 'smooth' })
                 }, 60)
                 dispatchEvent(new Event('hashchange'))
@@ -761,8 +781,25 @@
             reduced || setTimeout(() => {
                 import('./bg.js')
             }, 1000)
+            let controls = document.getElementById('controls')
+            function start() {
+                let icon = this.closest('.icon') || this.querySelector('.icon')
+                icon.play()
+                icon.resume()
+            }
+            function end() {
+                let icon = this.closest('.icon') || this.querySelector('.icon')
+                icon.pause()
+                icon.time = 0
+            }
+            h.delegate(controls, {
+                mouseover: start,
+                focusin: start,
+                focusout: end,
+                mouseout: end,
+            })
         }
-    }()
+    }(window[Symbol.for('[[HModule]]')])
 </script>
 
 

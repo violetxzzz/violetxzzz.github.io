@@ -18,6 +18,7 @@ address {
     text-align: center;
     place-content: center;
 }
+
 poke-dex:defined {
     z-index: 2;
     /* right: -150px; */
@@ -26,26 +27,32 @@ poke-dex:defined {
     /* transform: translate(0, -45px); */
     /* opacity: .6; */
 }
+
 poke-dex:defined:not(.active) {
     cursor: pointer
 }
+
 poke-dex:defined:hover {
-    opacity:1;
+    opacity: 1;
     /* transform:translate(-20px, -70px) */
 }
 
-main.hidden, main.hidden #controls > a {
+main.hidden,
+main.hidden #controls>a {
     opacity: 0;
     visibility: hidden;
 }
+
 main,
 #controls,
 #background {
     contain: size style
 }
-#contrls > a {
+
+#contrls>a {
     padding: 0
 }
+
 .social {
     position: relative;
     display: flow;
@@ -258,6 +265,14 @@ ul {
     background-image: url(./debris.png);
     background-image: image-set(url("debris.avif") type("image/avif"), url("debris.webp") type("image/webp"), url("debris.png") type("image/png"));
     filter: brightness(1.25);
+}
+
+:root[data-format="webp"] .debris {
+    background-image: url(./debris.webp);
+}
+
+:root[data-format="avif"] .debris {
+    background-image: url(./debris.avif);
 }
 
 .asteroid1 {
@@ -509,13 +524,15 @@ body {
     padding: 0;
 
 }
-body.frozen :where(#backdrop, #background > :not(.dialga,.pokeball, .dialga_origin,[data-name="dialga_origin"])) {
-    filter:grayscale(1);
+
+body.frozen :where(#backdrop, #background > :not(.dialga, .pokeball, .dialga_origin, [data-name="dialga_origin"])) {
+    filter: grayscale(1);
     animation-play-state: paused !important;
 }
+
 #backdrop {
     position: absolute;
-    width: 100vw; 
+    width: 100vw;
     height: 100vh;
     background-size: cover;
     animation: drift 150s ease-in-out alternate infinite;
@@ -525,9 +542,31 @@ body.frozen :where(#backdrop, #background > :not(.dialga,.pokeball, .dialga_orig
     will-change: background-position-x;
     transition: filter .7s ease
 }
+
+:root[data-format="heic"] #backdrop {
+    background-image: url(galaxy.heic);
+}
+
+:root[data-format="avif"] #backdrop {
+    background-image: url(galaxy.avif);
+}
+
+:root[data-format="webp"] #backdrop {
+    background-image: url(galaxy.webp);
+}
+
+:root[data-format="png"] #backdrop {
+    background-image: url(galaxy.png);
+}
+
 /*${
 let colors = ['#161811', '#00080f', '#160638','#000e02']
-return Array.from({length: 4}, (_, i) => `#backdrop[data-bg="${++i}"] {background-color:${colors[i-1]};background-image: url("./bg${i}.png"); background-image: image-set(${'avif webp png'.split(' ').map(o=>`url("./bg${i}.${o}") type("image/${o}")`)}) }`).join('')
+return Array.from({length: 4}, (_, i) => 
+`#backdrop[data-bg="${++i}"] {
+background-color: ${colors[i-1]};
+background-image: image-set(${'heic avif webp png'.split(' ').map(o=>`url("./bg${i}.${o}") type("image/${o}")`)}) 
+} ${'heic avif webp png'.split(' ').map(o=>`:root[data-format="${o}"] #backdrop[data-bg="${i}"] {background-image: url("./bg${i}.${o}")}`).join('')}`
+).join('')
 }*/
 *,
 ::before,
@@ -537,6 +576,7 @@ return Array.from({length: 4}, (_, i) => `#backdrop[data-bg="${++i}"] {backgroun
 
 #controls>:where(a, button) {
     flex: 1;
+    overflow:visible
 }
 
 #controls {
@@ -551,6 +591,7 @@ return Array.from({length: 4}, (_, i) => `#backdrop[data-bg="${++i}"] {backgroun
     gap: 10px;
     overflow-x: auto;
     scrollbar-width: none;
+    overflow: visible;
     flex-shrink: 0;
     justify-content: center;
 }
@@ -574,6 +615,7 @@ main {
     place-items: center;
     /* overflow: hidden; */
 }
+
 .container {
     width: 500px;
     height: 500px;
@@ -711,16 +753,18 @@ paper-canvas::part(paper) {
     background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
+
 section:focus {
     outline: none;
 }
+
 .button {
     color: black;
     background: #53e0e0;
     border-radius: 8px;
     justify-content: flex-start;
     line-height: 30px;
-    padding-inline:6px;
+    padding-inline: 6px;
     border: none;
     max-width: 100px;
     font-size: 1.2em;
@@ -817,11 +861,11 @@ section:focus {
 
 
 .icon {
-    left: anchor(right);
-    top: anchor(bottom);
-    position:absolute;
+    left: 100%;
+    position: absolute;
     z-index: 1;
-    transform: scale(1.5) translate(-2px, -2px);
+    image-rendering: auto;
+    transform: scale(1.3) translate(-2px, -2px);
     --user-select: none;
 }
 
@@ -1209,7 +1253,7 @@ section:focus {
     }
 }
 
-.catchable:not(.dialga,.palkia) {
+.catchable:not(.dialga, .palkia) {
     animation: offset 10s linear
 }
 
@@ -1265,34 +1309,50 @@ slide-show {
 .hoopa_unbound_idle {
     scale: 3.3 3.3;
 }
+
 body:has(main:not(.hidden)) poke-dex {
     visibility: hidden;
 }
-.palkia,.dialga,.dialga_idle,.palkia_idle{
+
+.palkia,
+.dialga,
+.dialga_idle,
+.palkia_idle {
     scale: 2.67 2.67;
 }
-.dialga_origin,.dialga_origin_idle{
+
+.dialga_origin,
+.dialga_origin_idle {
     scale: 3.4 3.4
 }
-:is(.palkia,.dialga) {
+
+:is(.palkia, .dialga) {
     animation: aura 1s ease-in-out alternate-reverse infinite
 }
+
 @keyframes aura {
     0% {
         transform: translate(0px, 0px)
     }
+
     100% {
         transform: translate(0px, -4px)
     }
 }
-.palkia,.palkia_idle {
+
+.palkia,
+.palkia_idle {
     filter: drop-shadow(0 0 4px purple);
 }
-.dialga,.palkia {
+
+.dialga,
+.palkia {
     transition: filter 1s ease, scale .8s ease-out .2s;
 }
-.dialga,.dialga_idle {
-        filter: drop-shadow(0 0 4px rgb(0, 204, 255));
+
+.dialga,
+.dialga_idle {
+    filter: drop-shadow(0 0 4px rgb(0, 204, 255));
 }
 
 .jirachi,

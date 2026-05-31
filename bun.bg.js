@@ -31,22 +31,6 @@ function unfreeze() {
     }, 1000)
 }
 function choose(...c) { return c[Math.floor(Math.random() * c.length)] }
-if (CSS.supports('anchor-name', '--a')) {
-    let { controls } = v.id
-    let icons = [].slice.call(document.getElementsByClassName('icon'))
-    controls.delegate({
-        mouseover() {
-            let icon = icons[this.parent.eltIndexOf(this) / 2]
-            icon.play()
-            icon.resume()
-        },
-        mouseout() {
-            let icon = icons[this.parent.eltIndexOf(this) / 2]
-            icon.pause()
-            icon.time = 0
-        }
-    })
-}
 if (typeof CSSPropertyRule !== 'function')
     CSS.registerProperty({
         name: '--asteroid-rotate',
@@ -115,8 +99,9 @@ let p = new Set
 function preloadBg(n) {
     if (n && !p.has(n)) {
         p.add(n)
-        let x = $`<picture><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.webp" decoding="sync" fetchpriority="high"></picture>`
+        let x = $`<picture><source srcset="./bg${n}.heic" type="image/heic"><source srcset="./bg${n}.avif" type="image/avif"><source srcset="./bg${n}.webp" type="image/webp"><img src="./bg${n}.webp" decoding="sync" fetchpriority="high"></picture>`
         x.lastChild.decode()
+        .then(()=>x.destroy())
     }
 }
 // setTimeout(spawnHoopaUnbound, 1000)
@@ -573,7 +558,7 @@ function getHeight() {
     return innerHeight
 }
 function spawnPokemon() {
-    setTimeout(spawnPokemon, (2600 + range(-200, 200)) - getWidth())
+    setTimeout(spawnPokemon, (2600 + range(-200, 200)) - Math.min(getWidth(), 100))
     let regular = mons.filter(o => !special.has(o) && !o.endsWith('_idle') && !legendary.has(o))
     let a = 10
     let pkm = regular[Math.floor(Math.random() * regular.length)]
