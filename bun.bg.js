@@ -52,7 +52,7 @@ background.observe('resize', {
     }
 })
 loadSprite(
-    ...Array.from({ length: 3 }, (_, i) => ({ src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
+    ...Array.from({ length: 3 }, (_, i) => ({ crop:false,src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let name in dex) {
@@ -295,12 +295,12 @@ background.delegate({
         let unown = pkm === 'unown' ? 'hue-rotate(20deg) saturate(5) ' : ''
         n.src = '$catch'
         n.time = 0
+        n.repeatCount = 1
+        console.log(n.repeatCount)
         // n.dur = .07
         catchAnimation(this).finished.then(() => this.destroy(true))
         n.on({
-            _repeatEvent() {
-                this.time = 0
-                this.pause()
+            _endEvent() {
                 this.fadeOut().finished.then(() => {
                     this.destroy(true)
                     if (name === 'lunala') {
@@ -381,7 +381,7 @@ function showMessageBox(shiny) {
 function spawnAsteroid() {
     setTimeout(spawnAsteroid, 4300 + (Math.random() * 1000))
     if (frozen || isHidden()) return
-    let i = choose(4, 4, 4, 4, 4, 4, 3, 3, 3, 1, 1, 1, 2, 2)
+    let i = choose(4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 1, 1, 1, 2, 2)
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
         .setParent(background)
         .on({ _animationend: remove })
