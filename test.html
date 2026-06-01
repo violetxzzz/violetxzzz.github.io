@@ -24,33 +24,32 @@
             outline: 1px solid red;
             /* background: blue */
         }
-        
     </style>
     <script type="module">
-        let {default: p} =await import('../webcomponents/slide-show.js?a='+Date.now())
+        let { default: p } = await import('../webcomponents/slide-show.js?a=' + Date.now())
         let z = {
-        Special0: {
-            padTop: 22,
-            framesY: 2,
-            values: "3;3;3;3;3;3;3;3;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;3;3;3;3;3;3;3;3",
-            frameWidth: 72,
-            frameHeight: 152,
-            src: "./new/hoopa_unbound/hoopa_unbound-Special0.webp"
-        },
-        Walk: {
-            framesY: 2,
-            values: "4;7;7;7;7;7;7;7;7;7;4",
-            frameWidth: 64,
-            frameHeight: 112,
-            src: "./new/hoopa_unbound/hoopa_unbound-Walk.webp"
-        },
-        Idle: {
-            framesY: 2,
-            values: "4;7;7;7;7;7;7;7;7;7;4",
-            frameWidth: 64,
-            frameHeight: 112,
-            src: "./new/hoopa_unbound/hoopa_unbound-Idle.webp"
-        }
+            Special0: {
+                padTop: 22,
+                framesY: 2,
+                values: "3;3;3;3;3;3;3;3;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;5;3;3;3;3;3;3;3;3",
+                frameWidth: 72,
+                frameHeight: 152,
+                src: "./new/hoopa_unbound/hoopa_unbound-Special0.webp"
+            },
+            Walk: {
+                framesY: 2,
+                values: "4;7;7;7;7;7;7;7;7;7;4",
+                frameWidth: 64,
+                frameHeight: 112,
+                src: "./new/hoopa_unbound/hoopa_unbound-Walk.webp"
+            },
+            Idle: {
+                framesY: 2,
+                values: "4;7;7;7;7;7;7;7;7;7;4",
+                frameWidth: 64,
+                frameHeight: 112,
+                src: "./new/hoopa_unbound/hoopa_unbound-Idle.webp"
+            }
         }
         for (let i in z) {
             let l = z[i]
@@ -60,8 +59,13 @@
         }
     </script>
 
-    <slide-show id="a" index="1" style="scale:3" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" crop="40,0" dur=".08"></slide-show>
-<p>animateMotion</p>
+    <slide-show id="a" index="1" repeat="1" style="scale:3" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" crop="40,0"
+        dur=".08"></slide-show>
+    <p>animateMotion</p>
+    <script>
+        ['endEvent', 'repeatEvent']
+            .forEach(n => a.addEventListener(n, () => console.log(n)))</script>
+
 </body>
 
 </html>

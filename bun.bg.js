@@ -52,7 +52,7 @@ background.observe('resize', {
     }
 })
 loadSprite(
-    ...Array.from({ length: 3 }, (_, i) => ({ crop:false,src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
+    ...Array.from({ length: 3 }, (_, i) => ({ crop: false, src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
 !async function () {
     let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let name in dex) {
@@ -296,7 +296,6 @@ background.delegate({
         n.src = '$catch'
         n.time = 0
         n.repeatCount = 1
-        console.log(n.repeatCount)
         // n.dur = .07
         catchAnimation(this).finished.then(() => this.destroy(true))
         n.on({
@@ -337,11 +336,7 @@ background.delegate({
         let boom = $`<slide-show src="./boom${t}-4.webp" dur=".08" repeat="1"></slide-show>`
         this.pushNode(boom)
         let that = this
-        boom.on({
-            _endEvent() {
-                that.destroy()
-            }
-        })
+        boom.addEventListener('animationend', console.log)
         delete this.dataset.type
     }
 }, o => !isNaN(o.dataset.type))
