@@ -888,7 +888,7 @@ section:focus {
 #controls > div a {
   flex: 1;         
   min-width: 0;  
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
   white-space: nowrap
 }
@@ -905,7 +905,7 @@ section:focus {
     }
 
     #controls a {
-        font-size: 75%;
+        font-size: 67%;
     }
 }
 

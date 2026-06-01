@@ -94,7 +94,6 @@ function spawnJirachi() {
             // jirachi.time = 0
         }
     })
-    jirachi.play()
 }
 let p = new Set
 function preloadBg(n) {
@@ -248,7 +247,6 @@ function spawnHoopaUnbound() {
             hoopa.classList.add('hoopa_unbound', 'catchable')
         }
     })
-    hoopa.play()
 }
 // spawnHoopaUnbound()
 // setTimeout(spawnHoopaUnbound, 1000 + Math.random() * 20000)
@@ -338,7 +336,6 @@ background.delegate({
         this.style.animation = ''
         let boom = $`<slide-show src="./boom${t}-4.webp" dur=".08" repeat="1"></slide-show>`
         this.pushNode(boom)
-        boom.play()
         let that = this
         boom.on({
             _endEvent() {
