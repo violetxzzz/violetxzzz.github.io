@@ -600,6 +600,7 @@
                        off()*/
         var xhr = new XMLHttpRequest
         xhr.open("GET", 'https://submissions.addsoupbase1.workers.dev/?user=violet', true)
+        xhr.setRequestHeader('Accept','application/json')
         xhr.responseType = 'json'
         xhr.onerror = function (e) {
             loader.parentNode.textContent = 'Something went wrong!'

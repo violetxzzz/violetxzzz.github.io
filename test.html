@@ -59,13 +59,15 @@
         }
     </script>
 
-    <slide-show id="a" index="1" repeat="1" style="scale:3" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" crop="40,0"
-        dur=".08"></slide-show>
-    <p>animateMotion</p>
+    <slide-show index="1" repeat="1" style="scale:3" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp"
+        crop="40,0" dur=".08"></slide-show>
+    <p>
+        <script>document.write(document.documentElement.outerHTML.length)</script>
+    </p>
     <script>
-        ['endEvent', 'repeatEvent']
-            .forEach(n => a.addEventListener(n, () => console.log(n)))</script>
-
+        window.a=document.querySelector('slide-show');
+                ['endEvent', 'repeatEvent']
+                    .forEach(n => a.addEventListener(n, () => console.log(n)))</script>
 </body>
 
 </html>

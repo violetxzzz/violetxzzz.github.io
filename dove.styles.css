@@ -473,10 +473,29 @@ html {
     --frames: 4 !important;
     scale: 2.5 2.5;
     transform: translate(4px, -2px);
-    animation: slideshow 400ms steps(var(--frames), end)
+    animation: slideshow 400ms steps(var(--frames), end);
 }
 
+/* .sparkle {
+    animation: sparkle 1.0700000429153442s ease-in-out forwards
+}
 
+@keyframes sparkle {
+    0% {
+        transform: scale(0)
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+    80%{
+        opacity:.6
+    }
+    100% {
+        transform:scale(0.5);
+        opacity:0
+    }
+} */
 
 .obj {
     transform-origin: center;
@@ -575,10 +594,10 @@ background-image: image-set(${'heic avif webp png'.split(' ').map(o=>`url("./bg$
 }
 
 #controls :where(a, button) {
-     flex: 0 0 100px;
-     min-width: 0; 
-    overflow:visible;
-    display:block;
+    flex: 0 0 100px;
+    min-width: 0;
+    overflow: visible;
+    display: block;
 }
 
 #controls {
@@ -862,7 +881,7 @@ section:focus {
 
 .icon {
     left: 100%;
-    top:100%;
+    top: 100%;
     position: absolute;
     z-index: 1;
     image-rendering: auto;
@@ -876,21 +895,23 @@ section:focus {
         image-rendering: auto;
     }
 }
-#controls > div {
-      flex: 0 1 100px;   
-  min-width: 0;    
-  display: flex;     
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  gap: 4px
+
+#controls>div {
+    flex: 0 1 100px;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 4px
 }
-#controls > div a {
-  flex: 1;         
-  min-width: 0;  
-  overflow: visible;
-  text-overflow: ellipsis;
-  white-space: nowrap
+
+#controls>div a {
+    flex: 1;
+    min-width: 0;
+    overflow: visible;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 @media screen and (width < 550px) {
@@ -1088,6 +1109,7 @@ section:focus {
     cursor: var(--c-PERSON_SELECT);
     shape-outside: circle(48%);
 }
+
 #intro {
     text-align: right;
     /* white-space: break-spaces; */
@@ -1273,7 +1295,17 @@ section:focus {
     animation: offset 10s linear
 }
 
-
+/* .catchable:not(.dialga, .palkia).cantfloat {
+    animation: offset 10s linear, lost 1s linear infinite
+}
+@keyframes lost {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+} */
 @keyframes glide {
     0% {
         transform: translateY(-100%)

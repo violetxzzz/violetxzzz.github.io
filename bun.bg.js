@@ -62,7 +62,7 @@ loadSprite(
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length, frameWidth: a.frameWidth, frameHeight: a.frameHeight })
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length})
         })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (allMons.add(name), mons.push(name)))
         wait && await wait()
     }
@@ -340,6 +340,31 @@ background.delegate({
         delete this.dataset.type
     }
 }, o => !isNaN(o.dataset.type))
+/*background.on({
+    '@pointerdown'(e) {
+        this.setPointerCapture(e.pointerId)
+    }
+}, new AbortController)
+background.debounce({
+    '@pointermove'(e) {
+        if (this.hasPointerCapture(e.pointerId)) {
+            let { x, y } = e
+            let n = $`<slide-show src="$star" dur="0.12" repeat="1" style="rotate: ${Math.random() * 360}deg;translate: ${x}px ${y}px;filter: brightness(0) invert(1) sepia(1)" class="sparkle"></slide-show>`
+            n.parent = this
+            n.on({
+                _endEvent(){
+                    n.destroy()
+                }
+            })
+        }
+    }
+}, 75)
+{
+    let star = new Image
+    star.src = `data:image/webp;base64,UklGRjABAABXRUJQVlA4TCQBAAAvlQAGEF+gRJLUOI2jcMgbd8VFiSSpcRpH4ZA37oqLEklS4zSOwiFv3BWX+Q8AAADfexBRVWFmIsLdMbPuRkT+/+C21rY1+eJJJ6zAAG49A7gtwKF034DKfQ5nPJL3Rz6oI/rPwG0jRdndYxieP5BnSMRiMETxYgPsbyL+jcSAEPjBF9GEuigsyPreYwFpIjEkiP2RWFPIAKZs+q4TtPBrjlNeJUsGMqWRJQMJrUG5swL7QREE1rQ0wKy0htIZGqKJLROH8igdKMQE6jyqQYFGhJhBOiN0GqqlPTjRQmlwe0wb9UxQflK6VDSPc8PRUm97HJTiUedJuHcbxSWf4wvrYykA5knjteF0mddrX45nVln2wdznVZFY1UlW1fvXe8qfapoE`
+    loadSprite({ src: '$star', image: star, framesX: 6, framesY: 1,duras: '5 1;3 1;4 1;2 1;1 1;0 1;2 1;3 1;5 1;' })
+}
+*/
 //@devwindow.mons = mons
 function spawnSpaceShip() {
     setTimeout(spawnSpaceShip, 60 * 1000 * (Math.random() * 2))
