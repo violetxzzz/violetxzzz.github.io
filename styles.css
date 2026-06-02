@@ -541,7 +541,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-
+    overflow-x:hidden;
 }
 
 body.frozen :where(#backdrop, #background > :not(.dialga, .pokeball, .dialga_origin, [data-name="dialga_origin"])) {
@@ -550,7 +550,7 @@ body.frozen :where(#backdrop, #background > :not(.dialga, .pokeball, .dialga_ori
 }
 
 #backdrop {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background-size: cover;
@@ -630,13 +630,15 @@ main {
     z-index: 10;
     /* border-radius: 10px; */
     /* outline: 2px solid var(--color2); */
-    height: 705px;
-    max-height: 80vh;
-    min-height: 400px;
-    max-height: max(74vh, 280px);
-    max-width: min(90vw, 700px);
+    height: 90vh;
+    /* min-height: 400px; */
+    /* max-height: 80vh; */
+    /* max-height: max(74vh, 280px); */
+    max-width: min(75vw, 700px);
+    height: clamp(270px, 80%, 97vh);
     display: flex;
     flex-direction: column;
+    position:absolute;
     place-items: center;
     /* overflow: hidden; */
 }

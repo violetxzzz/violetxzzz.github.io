@@ -173,7 +173,7 @@ async function spawnPalkia() {
         _transitionend() {
             backdrop.dataset.bg = n
         }
-    })
+    }, new AbortController)
     await h.wait(800)
     backdrop.style.filter = ''
 }
