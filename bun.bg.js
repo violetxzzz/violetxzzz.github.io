@@ -7,7 +7,7 @@ import { isLoaded, loadSprite, loadPokemon, catchAnimation, setField, stopAnims,
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
-loadDexes(dex, 'https://addsoupbase.github.io/')
+loadDexes(dex, 'https://addsoupbase.github.io')
 function freeze() {
     if (frozen) return
     backdrop.style.transition = 'none'
