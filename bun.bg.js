@@ -502,6 +502,10 @@ function configure(pkm) {
         case 'cosmog':
             scale *= 1.5
             break
+        case 'porygon':
+        case 'porygon2':
+            scale *= 2
+            break
         case 'celesteela':
         case 'nihilego':
         case 'dusknoir':

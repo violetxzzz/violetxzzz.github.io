@@ -715,7 +715,7 @@ var dex = {
             src: "./new/palkia/palkia-Walk.webp"
         },
         Walk2: {
-            padLeft:-12,
+            padLeft: -12,
             padTop: 16,
             framesY: 2,
             values: "4;4;4;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3;3",
@@ -896,6 +896,38 @@ var dex = {
             frameWidth: 72,
             frameHeight: 96,
             src: "./new/zekrom/zekrom-Idle2.webp"
+        }
+    },
+    porygon: {
+        "Walk": {
+            "framesY": 2,
+            "values": "10;10;10;10",
+            "frameWidth": 32,
+            "frameHeight": 40,
+            src: "./new/porygon/porygon-Walk.webp"
+        },
+        "Idle": {
+            "framesY": 2,
+            "values": "12;8;12;8",
+            "frameWidth": 32,
+            "frameHeight": 40,
+            src: "./new/porygon/porygon-Idle.webp"
+        }
+    },
+    porygon2: {
+        "Walk": {
+            "framesY": 2,
+            "values": "10;10;10;10",
+            "frameWidth": 32,
+            "frameHeight": 48,
+            src: "./new/porygon2/porygon2-Walk.webp"
+        },
+        "Idle": {
+            "framesY": 2,
+            "values": "12;8;12;8",
+            "frameWidth": 32,
+            "frameHeight": 40,
+            src: "./new/porygon2/porygon2-Idle.webp"
         }
     }
 };

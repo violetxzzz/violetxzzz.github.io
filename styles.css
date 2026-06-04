@@ -287,7 +287,6 @@ ul {
     scale: 2 2;
     filter: brightness(0.5) opacity(90%);
 }
-
 .planet1 {
     --width: 64px;
     --height: 64px;
