@@ -618,7 +618,7 @@ background-image: image-set(${'heic avif webp png'.split(' ').map(o=>`url("./bg$
 }
 
 html {
-    cursor: var(--c-CURSOR)
+    cursor: var(--c-CURSOR);
 }
 
 main {
@@ -630,7 +630,8 @@ main {
     /* min-height: 400px; */
     /* max-height: 80vh; */
     /* max-height: max(74vh, 280px); */
-    max-width: min(90vw, 700px);
+    max-width: 92vw;
+    max-width: min(92vw, 700px);
     height: clamp(270px, 80%, 97vh);
     display: flex;
     flex-direction: column;
@@ -1368,6 +1369,7 @@ body:has(main:not(.hidden)) poke-dex {
 .dialga,
 .dialga_idle,
 .palkia_idle {
+    z-index: 2;
     scale: 2.67 2.67;
 }
 

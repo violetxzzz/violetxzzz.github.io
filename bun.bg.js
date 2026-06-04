@@ -54,7 +54,6 @@ background.observe('resize', {
 loadSprite(
     ...Array.from({ length: 3 }, (_, i) => ({ crop: false, src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
 !async function () {
-    let wait = window.scheduler?.yield && scheduler.yield.bind(scheduler)
     for (let name in dex) {
         let t = dex[name]
         // let name = t[0]
@@ -62,9 +61,9 @@ loadSprite(
         Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
             let src = `./new/${name}/${name}-${anim}.webp`
             let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length})
+            return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length })
         })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (allMons.add(name), mons.push(name)))
-        wait && await wait()
+        await h.wait(15)
     }
 }()
 let mons = []
@@ -120,13 +119,14 @@ async function spawnPalkia() {
         return !palkia.classList.contains('catchable') && !palkia.classList.contains('finished')
     }
     function r() {
-        palkia.style.top = randomX()
-        palkia.style.left = randomY()
-        palkia.style.rotate = range(-45, 45) + 'deg'
-        palkia.style.visibility = 'visible'
+        style.top = randomX()
+        style.left = randomY()
+        style.rotate = range(-45, 45) + 'deg'
+        style.visibility = 'visible'
     }
     let palkia = $`<slide-show autoplay data-name="palkia" src="./new/palkia/palkia-Walk.webp" aria-hidden="true" style="top:${randomY()};left:${randomX()};rotate:${range(-20, 20)}deg" class="catchable palkia" index="${shiny() ? 1 : 0}">`
         .setParent(background)
+    let { style } = palkia
     palkia.on({
         _catch() {
             this.style.rotate = ''
@@ -134,19 +134,19 @@ async function spawnPalkia() {
     })
     await h.wait(300)
     if (caught()) return
-    palkia.style.visibility = 'hidden'
+    style.visibility = 'hidden'
     await h.wait(1300)
     if (caught()) return
     r()
     await h.wait(400 * Math.random())
     if (caught()) return
-    palkia.style.visibility = 'hidden'
+    style.visibility = 'hidden'
     await h.wait(1000)
     if (caught()) return
-    palkia.style.rotate = ''
-    palkia.style.left = `50%`
-    palkia.style.top = `50%`
-    palkia.style.visibility = 'visible'
+    style.rotate = ''
+    style.left = `50%`
+    style.top = `50%`
+    style.visibility = 'visible'
     palkia.src = './new/palkia/palkia-Walk2.webp'
     palkia.time = 0
     palkia.on({
@@ -161,9 +161,9 @@ async function spawnPalkia() {
         palkia.off('repeatEvent')
         return
     }
-    palkia.style.filter = 'drop-shadow(0 0 100px purple) invert(1) brightness(0) opacity(0)'
-    palkia.style.willChange = 'scale, filter'
-    palkia.style.scale = 9 / visualViewport.scale
+    style.filter = 'drop-shadow(0 0 100px purple) brightness(0%) opacity(0)'
+    style.willChange = 'scale, filter'
+    style.scale = 9 / visualViewport.scale
     palkia.classList.replace('catchable', 'finished')
     await h.wait(300)
     let n = ((+(backdrop.dataset.bg ?? 0)) + 1) % 5
