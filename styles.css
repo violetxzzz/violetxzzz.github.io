@@ -1357,7 +1357,9 @@ slide-show {
     pointer-events: none;
     /* transform:translate(20px,20px) */
 }
-
+:where(.hoopa_unbound_intro, .jirachi_intro, .palkia, .dialga):state(--broken) {
+    visibility: hidden;
+}
 .hoopa_unbound,
 .hoopa_unbound_intro,
 .hoopa_unbound_idle {

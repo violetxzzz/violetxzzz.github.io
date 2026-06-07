@@ -3,7 +3,7 @@ return await inline('./dex.js')
 }*/
 import *as v from 'https://addsoupbase.github.io/v4.js'
 const h = window[Symbol.for('[[HModule]]')]
-import { isLoaded, loadSprite, loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
+import { finishLazyLoad, isLoaded, loadSprite, loadPokemon, catchAnimation, setField, stopAnims, MASTER_BALL, ULTRA_BALL, POKE_BALL, GREAT_BALL, loadDexes } from 'https://addsoupbase.github.io/catch.js'
 const { background, backdrop } = v.id
 let frozen = false
 setField(background)
@@ -51,29 +51,29 @@ background.observe('resize', {
         setOffsetPath(`:root{--ltr: path("M -${halfW / 2.1} 0 L ${width + (halfW / 2.1)} 0");--eternatus-ltr: path("M -${width + halfW + 600} 0 L ${width + halfW + 600} 0"); --ttb: path("M 0 0 L 0 ${height + halfH}")}`)
     }
 })
-loadSprite(
-    ...Array.from({ length: 3 }, (_, i) => ({ crop: false, src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
-!async function () {
-    for (let name in dex) {
-        let t = dex[name]
-        // let name = t[0]
-        // let frames = t[1]
-        Promise.all(...Object.entries(t).map(({ 0: anim, 1: a }) => {
-            let src = `./new/${name}/${name}-${anim}.webp`
-            let duras = a.values.split(';').map(Number)
-            return (anim === 'Idle' ? loadPokemon : loadSprite)({ padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length })
-        })).then(() => name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (allMons.add(name), mons.push(name)))
-        await h.wait(15)
-    }
-}()
 let mons = []
 let allMons = new Set
+loadSprite(
+    ...Array.from({ length: 3 }, (_, i) => ({ loading: 'live', crop: false, src: `./boom${i + 1}-4.webp`, framesX: 4, framesY: 1 })))
+for (let name in dex) {
+    let t = dex[name]
+    // let name = t[0]
+    // let frames = t[1]
+    for (let anim in t) {
+        let a = t[anim]
+        let src = `./new/${name}/${name}-${anim}.webp`
+        let duras = a.values.split(';').map(Number)
+        name === 'dialga_origin' || name === 'palkia' || name === 'dialga' || (allMons.add(name), mons.push(name))
+            ; (anim === 'Idle' ? loadPokemon : loadSprite)({ loading: 'live', padLeft: a.padLeft || 0, padTop: a.padTop || 0, name, duras, src, framesY: a.framesY, framesX: duras.length })
+    }
+}
 function shiny(odds = 4000) {
     return Math.random() * odds > odds - 1 ? ' shiny' : ''
 }
 function spawnJirachi() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     if (!allMons.has('jirachi') || isHidden() || document.querySelector('.jirachi, .jirachi_intro')) return
+    finishLazyLoad('./new/jirachi/jirachi-Walk.webp', `./new/jirachi/jirachi-Idle.webp`)
     let jirachi = $`<slide-show repeat="1" src="./new/jirachi/jirachi-Special2.webp" data-name="jirachi" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="jirachi_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     jirachi.on({
@@ -118,6 +118,7 @@ async function spawnPalkia() {
     function caught() {
         return !palkia.classList.contains('catchable') && !palkia.classList.contains('finished')
     }
+    finishLazyLoad(`./new/palkia/palkia-Idle2.webp`, `./new/palkia/palkia-Walk2.webp`, `./new/palkia/palkia-Idle.webp`)
     function r() {
         style.top = randomX()
         style.left = randomY()
@@ -183,6 +184,7 @@ async function spawnDialga() {
     function caught() {
         return !dialga.classList.contains('catchable')
     }
+    finishLazyLoad(`./new/dialga/dialga-Idle2.webp`, `./new/dialga/dialga-Walk2.webp`, `./new/dialga/dialga-Idle.webp`)
     let dialga = $`<slide-show autoplay src="./new/dialga/dialga-Walk.webp" data-name="dialga" aria-hidden="true" style="top:50%;left:50%;" class="catchable dialga" index="${shiny() ? 1 : 0}">`
         .setParent(background)
     dialga.animate([
@@ -227,6 +229,9 @@ setTimeout(spawnExoticPokemon, 10000 + Math.random() * 20000)
 function spawnHoopaUnbound() {
     // setTimeout(spawnJirachi, 40000 + Math.random() * 10000)
     // if (isHidden() || document.querySelector('.hoopa_unbound, .hoopa_unbound_intro')) return
+    finishLazyLoad(`./new/hoopa_unbound/hoopa_unbound-Walk.webp`,
+        `./new/hoopa_unbound/hoopa_unbound-Idle.webp`
+    )
     let hoopa = $`<slide-show dur=".02" repeat="1" src="./new/hoopa_unbound/hoopa_unbound-Special0.webp" data-name="hoopa_unbound" aria-hidden="true" style="top:${randomY()};left:${randomX()};" class="hoopa_unbound_intro" index="${shiny() ? 1 : 0}"></slide-show>`
         .setParent(background)
     hoopa.on({
@@ -315,19 +320,19 @@ background.delegate({
 
     }
 }, null, false, new AbortController)
+function getBoom(t) {
+    switch (t | 0) {
+        case 1: case 3: return 2
+        case 2: return 3
+        case 4: return 1
+        default: debugger
+    }
+}
 background.delegate({
     pointerdown(e) {
         if (frozen) return
         e.stopImmediatePropagation()
-        let t = +this.dataset.type
-        switch (t) {
-            case 1: case 3: t = 2
-                break
-            case 2: t = 3
-                break
-            case 4: t = 1
-                break
-        }
+        let t = getBoom(this.dataset.type)
         let rect = this.getBoundingClientRect()
             , translate = `${rect.x + rect.width / 2}px 0`
         this.className = `boom${t} boom obj`
@@ -405,6 +410,7 @@ function spawnAsteroid() {
     let asteroid = $`<div aria-hidden="true" data-type="${i}" class="asteroid${i} obj debris" style="animation-duration: ${30000 + Math.random() * 10000}ms, ${(60 - (i * 6)) - Math.random() * 20}s;top:${randomY()};animation-direction: ${Math.random() > .5 ? 'normal' : 'reverse'},${Math.random() > .5 ? 'normal' : 'reverse'}"></div>`
         .setParent(background)
         .on({ _animationend: remove })
+    finishLazyLoad(`./boom${getBoom(i)}-4.webp`)
     // if (i === 2 && Math.random() < .2) asteroid.pushNode($`<div class="cleffa obj"></div>`)
 }
 spawnAsteroid()
@@ -603,6 +609,7 @@ function createPkm(scale, speed, index, dur, pkm) {
         else index += 1
     let s = $`<slide-show index="${index}" dur="${dur}ms" data-name="${pkm}" src="./new/${pkm}/${pkm}-Walk.webp" aria-hidden="true" class="${pkm} ${isShiny ? 'isShiny ' : ' '}catchable" style="--offset-path: var(--${pkm === 'eternatus' ? `${pkm}-` : ''}ltr);animation-direction: ${scale > 0 ? 'normal' : 'reverse'};animation-duration: ${((40 + Math.random() * 40) / speed) * 1000}ms;transform: scale(${scale}, ${Math.abs(scale)});top: ${randomY()};"></slide-show>`
     s.setParent(background)
+    finishLazyLoad(`./new/${pkm}/${pkm}-Idle.webp`)
     s.play()
 }
 setTimeout(spawnPokemon, 1000)
