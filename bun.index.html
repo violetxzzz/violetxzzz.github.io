@@ -395,7 +395,7 @@
                                 rika: 'https://rikaaqt.github.io',
                                 doha: 'https://dohaaa0268.github.io'
                             }
-                            let friends = ['ronja','jayden','jonas','hiro','habu',"auzz",'morrfie','lina','cutlass','niko','gen','saenger','lagia','caelix',"gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","doha","rika","alex","juaj","sukuna","mochi"].sort(sort)
+                            let friends = ['ronja','jayden','jonas','hiro','habu',"auzz",'morrfie','lina','cutlass','niko','gen','saenger','lagia','caelix',"gabe","kyuu","mcx","mental","patty","remi","saayda","shon","misha","doha","rika","alex","juaj","sukuna","mochi",'niles'].sort(sort)
                             return friends.map((name, i)=>{
                                 let nn
                                 let site = websites[name] || ''
@@ -478,11 +478,11 @@
         </div>
         <nav id="controls" role="tablist">
             <div><a role="tab" class="button" autofocus href="#home" tabindex="0" id="homebutton">Home</a><slide-show
-                    unique aria-label="Buneary" class="icon" paused style="translate: 0 -6px" src="./buneary.webp" framesx="8"
-                    framesy="2" dur=".2"></slide-show></div>
+                    unique aria-label="Buneary" class="icon" paused style="translate: 0 -6px" src="./buneary.webp"
+                    framesx="8" framesy="2" dur=".2"></slide-show></div>
             <div><a role="tab" class="button" href="#about" id="aboutbutton">About</a><slide-show unique
-                    aria-label="Unown" class="icon" paused style="translate: 0 -6px" src="./unown.webp" framesx="9" framesy="2"
-                    dur=".1"></slide-show></div>
+                    aria-label="Unown" class="icon" paused style="translate: 0 -6px" src="./unown.webp" framesx="9"
+                    framesy="2" dur=".1"></slide-show></div>
             <div><a role="tab" class="button" href="#artists" id="music">Music</a><slide-show unique
                     aria-label="Meloetta" class="icon" paused style="translate:0 -2px" src="./meloetta.webp" framesx="8"
                     framesy="2" dur=".2"></slide-show></div>
@@ -600,7 +600,7 @@
                        off()*/
         var xhr = new XMLHttpRequest
         xhr.open("GET", 'https://submissions.addsoupbase1.workers.dev/?user=violet', true)
-        xhr.setRequestHeader('Accept','application/json')
+        xhr.setRequestHeader('Accept', 'application/json')
         xhr.responseType = 'json'
         xhr.onerror = function (e) {
             loader.parentNode.textContent = 'Something went wrong!'
@@ -797,8 +797,8 @@
                 touchstart: start,
                 touchcancel: end,
                 touchend: end,
-                mouseover:start,
-                mouseout:end,
+                mouseover: start,
+                mouseout: end,
                 // focusin: start,
                 // focusout: end,
             }, o => o.matches('a'), new AbortController)
