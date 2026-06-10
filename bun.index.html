@@ -122,9 +122,79 @@
 
             audio::-webkit-media-controls-panel {
                 place-content: space-between;
-                background-color: cyan;
+                background: #00FFFF;
+                background-position: center;
+                background-size: cover !important;
+                background-position: center !important;
+                background: linear-gradient(180deg, rgba(0, 255, 255, 1) 1%, rgba(0, 128, 128, 1) 99%);
             }
 
+            audio[title="Wet Dreamz"]::-webkit-media-controls-panel {
+                background-image: url(wetdreamz.jpg);
+                background-image: image-set(url(wetdreamz.avif) type("image/avif"), url(wetdreamz.webp) type("image/webp"), url(wetdreamz.jpg) type("image/jpg"))
+            }
+
+            audio[title="Fashion Killa"]::-webkit-media-controls-panel {
+                background-image: url(fashionkilla.jpg);
+                background-image: image-set(url(fashionkilla.avif) type("image/avif"), url(fashionkilla.webp) type("image/webp"), url(fashionkilla.jpg) type("image/jpg"))
+            }
+
+            audio[title="30 for 30"]::-webkit-media-controls-panel {
+                background-image: url(30for30.jpg);
+                background-position: top !important;
+                background-image: image-set(url(30for30.avif) type("image/avif"), url(30for30.webp) type("image/webp"), url(30for30.jpg) type("image/jpg"))
+            }
+
+            audio[title="Apple Cider"]::-webkit-media-controls-panel {
+                background-image: url(applecider.jpg);
+                background-image: image-set(url(applecider.avif) type("image/avif"), url(applecider.webp) type("image/webp"), url(applecider.jpg) type("image/jpg"))
+            }
+
+            audio[title="Best Time"]::-webkit-media-controls-panel {
+                background-image: url(besttime.jpeg);
+                background-image: image-set(url(besttime.avif) type("image/avif"), url(besttime.webp) type("image/webp"), url(besttime.jpeg) type("image/jpg"))
+            }
+
+            audio[title="3005"]::-webkit-media-controls-panel {
+                background-image: url(3005.jpg);
+                background-image: image-set(url(3005.avif) type("image/avif"), url(3005.webp) type("image/webp"), url(3005.jpg) type("image/jpg"))
+            }
+
+            audio[title="Japanese Denim"]::-webkit-media-controls-panel {
+                background-image: url(denim.jpg);
+                background-image: image-set(url(denim.avif) type("image/avif"), url(denim.webp) type("image/webp"), url(denim.jpg) type("image/jpg"))
+            }
+
+            audio[title="American Wedding"]::-webkit-media-controls-panel {
+                background-image: url(wedding.jpg);
+                background-image: image-set(url(wedding.avif) type("image/avif"), url(wedding.webp) type("image/webp"), url(wedding.jpg) type("image/jpg"))
+            }
+
+            audio[title="American Wedding"]::-webkit-media-controls-play-button {
+                filter: invert(1)
+            }
+
+            audio[title="Bound 2"]::-webkit-media-controls-panel {
+                background-image: url(bound2.jpg);
+                background-size: contain !important;
+                background-repeat: no-repeat;
+                background-image: image-set(url(bound2.avif) type("image/avif"), url(bound2.webp) type("image/webp"), url(bound2.jpg) type("image/jpg"))
+            }
+
+            audio[title="Backseat Freestyle"]::-webkit-media-controls-panel {
+                background-image: url(freestyle.jpg);
+                background-image: image-set(url(freestyle.avif) type("image/avif"), url(freestyle.webp) type("image/webp"), url(freestyle.jpg) type("image/jpg"))
+            }
+
+            audio[title="Lover Girl"]::-webkit-media-controls-panel {
+                background-image: url(lovergirl.jpg);
+                background-image: image-set(url(lovergirl.avif) type("image/avif"), url(lovergirl.webp) type("image/webp"), url(lovergirl.jpg) type("image/jpg"))
+            }
+
+            audio[title="Where This Flower Blooms"]::-webkit-media-controls-panel {
+                background-image: url(flower.jpg);
+                background-image: image-set(url(flower.avif) type("image/avif"), url(flower.webp) type("image/webp"), url(flower.jpg) type("image/jpg"))
+            }
             @media screen and (width < 560px) {
                 audio::-webkit-media-controls-timeline {
                     display: none;

@@ -287,6 +287,7 @@ ul {
     scale: 2 2;
     filter: brightness(0.5) opacity(90%);
 }
+
 .planet1 {
     --width: 64px;
     --height: 64px;
@@ -540,7 +541,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 
 body.frozen :where(#backdrop, #background > :not(.dialga, .pokeball, .dialga_origin, [data-name="dialga_origin"])) {
@@ -634,7 +635,7 @@ main {
     height: clamp(270px, 80%, 97vh);
     display: flex;
     flex-direction: column;
-    position:absolute;
+    position: absolute;
     place-items: center;
     /* overflow: hidden; */
 }
@@ -716,6 +717,13 @@ main {
 }
 
 .button[aria-selected="true"] {
+    filter: brightness(60%)
+}
+main:has(#home:target) #homebutton,
+main:has(#about:target) #aboutbutton,
+main:has(#mailbox:target) #mail,
+main:has(#friends:target) #friendsbutton,
+main:has(#artists:target) #music {
     filter: brightness(60%)
 }
 
@@ -1353,9 +1361,11 @@ slide-show {
     pointer-events: none;
     /* transform:translate(20px,20px) */
 }
+
 :where(.hoopa_unbound_intro, .jirachi_intro, .palkia, .dialga):state(--broken) {
     visibility: hidden;
 }
+
 .hoopa_unbound,
 .hoopa_unbound_intro,
 .hoopa_unbound_idle {
