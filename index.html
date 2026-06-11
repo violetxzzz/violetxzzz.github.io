@@ -149,8 +149,8 @@
                     </div>
                     <div id=senddraw class="formdiv needsjs needswebcomponent">
                         <h2>Send Drawing</h2>
-                        <form id=paperform action="https://submissions.addsoupbase1.workers.dev?user=violet" method=POST enctype=multipart/form-data>
-                            <paper-canvas type=file id=PaperField name=drawing required></paper-canvas>
+                        <form id=paperform action="https://submissions.addsoupbase1.workers.dev?user=violet" method=POST>
+                            <paper-canvas id=PaperField name=drawing required></paper-canvas>
                             <div>
                                 <input type=color alpha="" value=#000000 id=color>
                                 <input type=range value=1 min=1 max=30 step=1 id=brushsize>
