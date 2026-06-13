@@ -253,7 +253,11 @@ ul {
     display: none;
     font-size: medium;
 }
-
+.authortitle > cite {
+    display:block;
+    justify-self: center;
+    font-size:larger
+}
 .debris {
     cursor: var(--c-POINTER);
     z-index: 1;

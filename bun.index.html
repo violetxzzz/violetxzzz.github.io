@@ -195,6 +195,7 @@
                 background-image: url(flower.jpg);
                 background-image: image-set(url(flower.avif) type("image/avif"), url(flower.webp) type("image/webp"), url(flower.jpg) type("image/jpg"))
             }
+
             @media screen and (width < 560px) {
                 audio::-webkit-media-controls-timeline {
                     display: none;
@@ -357,71 +358,119 @@
                 <h2 style="display: inline;" class="heading">Favorite Music Artists</h2>
                 <output id="nowplaying" role="status" style="display: block;" aria-live="polite">Click to play!</output>
                 <ul id="musics" style="margin:auto;justify-items:center;grid-template-columns: repeat(2, 1fr);"><!--${ 
-                    function n(a){
-                    let link
-                    let title = 'unknown'
-                    switch(a) {
-                    case 'kendrick_lamar':
-                    title = 'Backseat Freestyle'
-                    link =
-                    'l4jvdg4k7utckf3yhz74d/Backseat-Freestyle-wgonDvgVIhQ.m4a?rlkey=x1yi17mkvqva4s2o25bf680am&st=xtwzpt3a'
-                    break
-                    case 'frank_ocean':
-                    title = 'American Wedding'
-                    link =
-                    `i1n34sifuiz2thn4p2lup/Frank-Ocean-American-Wedding-11qF7ftAokw.mp3?rlkey=i9vhf3669y6ericx5oe4iaqsw&st=ez1hjjk8`
-                    break
-                    case 'daniel_caeser':
-                    title = 'Japanese Denim'
-                    link = `pmmksffvrjwzy4ju1mvde/Japanese-Denim.m4a?rlkey=hafjahw72fdh8lqucqnpl8atq&st=kmp6jioc`
-                    break
-                    case 'brent_faiyaz':
-                    title = 'Best Time'
-                    link =
-                    `3jbrbjahsdplvaahjnpeu/Brent-Faiyaz-Best-Time.mp3?rlkey=p1ne3czzitd1vidf81ffh4owg&st=kud27s56`
-                    break
-                    case 'tyler,_the_creator':
-                    title = 'Where This Flower Blooms'
-                    link =
-                    `0tl53184fzmj9wz39g2m4/Where-This-Flower-Blooms.m4a?rlkey=xxhplxpufhsbl9sgb22qond17&st=401j8msk`
-                    break
-                    case 'childish_gambino':
-                    title = '3005'
-                    link = `jicd794m323ch5ddkmnwu/3005.m4a?rlkey=aqfrs79dk1ggrpy45ygzg8o9d&st=bk3cibwy`
-                    break
-                    case 'beabadoobee':
-                    title = 'Apple Cider'
-                    link = `52fff4xgvvih82dmqbies/Apple-Cider.m4a?rlkey=zbu0ap9dnmpsg19uxt7gz64yg&st=d7lddvp4`
-                    break
-                    case 'laufey':
-                    title = 'Lover Girl'
-                    link = 'fabmq2zwj597eniad83ag/Lover-Girl.m4a?rlkey=bgtjqjtxp95tjvai8yt1aebwv&st=783g8bi2'
-                    break
-                    case 'SZA':
-                    title = '30 for 30'
-                    link = 'qtuxfwvy2zy7bfen7wi3o/30-for-30.m4a?rlkey=rp4tpocfpsohv9zbi0w89s84y&st=udpjhng4'
-                    break
-                    case 'kanye_west':
-                    title = 'Bound 2'
-                    link = `a9iruyzfjowczmlytz9w2/Bound-2.m4a?rlkey=utcpxg6nm2fj5ga84n76m7f9b&st=tc81fkk6`
-                    break
-                    case 'A$AP_rocky':
-                    title = 'Fashion Killa'
-                    link = `giufeufznk8c8w2ptn3tn/Fashion-Killa.m4a?rlkey=4yvs2suimfekzq3w25g4ex70o&st=u9kuuzzo`
-                    break
-                    case 'J._cole':
-                    title = 'Wet Dreamz'
-                    link = '3ieqevys4jsmb7nw2vxg1/Wet-Dreamz.m4a?rlkey=kt18twkr7mviqhnzhxqe1fscp&st=gbmaqd0k'
-                    break
-                    }
-                    return {src: 'https://www.dropbox.com/scl/fi/' + link + '&dl=0&raw=1', title}
-                    }
-                    return(await inline('./artists/')
-                    ).filter(o=>o.endsWith('.avif')).map(o=>o.split('.avif')[0])
-                    .map(o=>{
-                    let {title, src} = n(o)
-                    let artist = o.split('_').join(' ')
-                    return`<li>
+                    function n(name) {
+      let link
+      let title = 'unknown'
+      const songMap = {
+          'kendrick_lamar': [
+              'Backseat Freestyle',
+              'backseat.ogg'
+          ],
+          'frank_ocean': [
+              'American Wedding',
+              'americanwedding.ogg'
+          ],
+          'daniel_caeser': [
+              'Japanese Denim',
+              'denim.m4a'
+          ],
+          'brent_faiyaz': [
+              'Best Time',
+              'besttime.ogg'
+          ],
+          'tyler,_the_creator': [
+              'Where This Flower Blooms',
+              'flower.m4a'
+          ],
+          'childish_gambino': [
+              '3005',
+              '3005.m4a'
+          ],
+          'beabadoobee': [
+              'Apple Cider',
+              'Apple%20Cider.m4a'
+          ],
+          'laufey': [
+              'Lover Girl',
+              'Lover%20Girl.m4a'
+          ],
+          'SZA': [
+              '30 for 30',
+              '30%20for%2030.m4a'
+          ],
+          'kanye_west': [
+              'Bound 2',
+              'Bound%202.m4a'
+          ],
+          'A$AP_rocky': [
+              'Fashion Killa',
+              'Fashion%20Killa.m4a'
+          ],
+          'J._cole': [
+              'Wet Dreamz',
+              'Wet%20Dreamz.m4a'
+          ],
+          'Lana_del_ray': [
+              'Young and Beautiful',
+              'youngandbeautiful.ogg'
+          ],
+          'TV_girl': [
+              'Natalie Wood',
+              'nat.ogg'
+          ],
+          'Playboi_carti': [
+            'Shoota',
+            'shoota.ogg'
+          ],
+          'Lil_uzi_vert': [
+            'The Way Life Goes',
+            'waylifegoes.ogg'
+          ],
+          'Malcolm_todd':[
+            'Earrings',
+            'earrings.ogg'
+          ],
+          'artemas': [
+            'Me n My Girl',
+            'meandmygirl.ogg'
+          ],
+          'LUCKI': [
+            'rip',
+            'rip.ogg'
+          ],
+          'Michael_jackson': [
+            'Heaven Can Wait',
+            'heavencanwait.ogg'
+          ],
+          'hotel_ugly': [
+            'Shut Up My Mom Is Calling',
+            'shutup.ogg'
+          ],
+          'arctic_monkeys': [
+            "Why'd You Only Call Me When You're High?",
+            'why.ogg'
+          ],
+          'beyonce': [
+            'Déjà Vu',
+            'dejavu.ogg'
+          ],
+          'lund': [
+            'Broken',
+            'broken.ogg'
+          ]
+      }
+      let out = songMap[name]
+      if (out) {
+        out[1] = 'https://pub-da40b1e2ea8a4045ac4563eba2a001ee.r2.dev/' + out[1]
+          return out
+    }
+      throw Error(`Invalid title ${name}`)
+  }
+  return (await inline('./artists/')).filter(o => o.endsWith('.avif')).map(o => o.split('.avif')[0])
+      .map(o => {
+          let [title, src] = n(o)
+          let artist = o.split('_').join(' ')
+          return `<li>
                     <figure class="msc">
                         <picture>
                             <source srcset="./artists/${o}.avif" type="image/avif">
@@ -430,12 +479,13 @@
                                 draggable="false" role="button" title="Click to play ${title} by ${artist}"
                                 class="artist avatar" src="./artists/${o}.jpg" alt="${artist}">
                         </picture>
-                        <figcaption class="capt" aria-hidden="true"><span class="authortitle"><cite translate="no">${title}</cite> by </span><cite translate="no">${artist}</cite></figcaption>
+                        <figcaption class="capt" aria-hidden="true"><span class="authortitle"><cite translate="no">${title}</cite> <span style="text-transform:lowercase;margin-inline:2px">by</span> </span><cite translate="no">${artist}</cite></figcaption>
                         <audio controls controlslist="nofullscreen nodownload noremoteplayback noplaybackrate"
                             src="${src}" preload="none" title="${title}"></audio>
                     </figure>
-                    </li>`.replaceAll('\n','')})
-                    .join('')
+                    </li>`.replaceAll('\n', '')
+      })
+      .join('')
                 }--></ul>
             </section>
             <section class="sect" id="friends" aria-hidden="true">
@@ -807,10 +857,10 @@
                 var hash = location.hash.substring(1)
                 switch (hash) {
                     case 'artists':
-                        createPreload('https://www.dropbox.com', 'dns-prefetch')
+                        createPreload('https://pub-da40b1e2ea8a4045ac4563eba2a001ee.r2.dev', 'preconnect')
                         break
                     case 'mailbox':
-                        createPreload('https://images.weserv.nl')
+                        createPreload('https://images.weserv.nl','preconnect')
                         break
                 }
                 var d = D.getElementById(hash)
