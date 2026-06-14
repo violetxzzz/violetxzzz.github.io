@@ -978,7 +978,11 @@ section:focus {
     transition: transform 0.3s ease-out, box-shadow 0.3s ease;
     /* will-change: transform; */
 }
-
+@supports not (corner-shape: squircle) {
+    .avatar {
+        border-radius: 20%;
+    }
+}
 .avatar:hover {
     transform: scale(1.07);
     box-shadow: rgba(43, 5, 103, 0.144) 12px 12px 8px;
@@ -1231,7 +1235,7 @@ section:focus {
     overflow: hidden;
     overflow: clip;
     contain: paint;
-    pointer-events: none;
+    /* pointer-events: none; */
     position: absolute;
     /* image-rendering: pixelated; */
     object-fit: none;
